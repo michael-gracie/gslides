@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from .utils import json_val_extract
+
 
 """Module to render the addChart Google API calll"""
 """
@@ -6,7 +8,7 @@ TODO:
 - create pallette functionality
 - validate args structure!!!!!
 
-- UPDATE start_row_index!!!!!
+- UPDATE start_row_index!!!!! -- check if we are doing it write - what happens for nulls?
 """
 
 
@@ -44,6 +46,7 @@ class Chart:
         self.legend_position = legend_position
         self.header_count = 1
         self.executed = False
+        self.ch_id = None
 
     def _determine_chart_type(self, series):
         chart_types = set([serie.__class__.__name__ for serie in series])
@@ -199,8 +202,18 @@ class Chart:
             )
             .execute()
         )
+        self.ch_id = json_val_extract(output, "chartId")
         self.executed = True
         return output
+
+    @property
+    def chart_id(self):
+        if self.executed:
+            return self.ch_id
+        else:
+            raise RuntimeError(
+                "Must run the execute method before passing the chart id"
+            )
 
 
 class Series:
