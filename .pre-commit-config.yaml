@@ -1,31 +1,34 @@
 repos:
   - repo: https://github.com/ambv/black
-    rev: stable
+    rev: 20.8b1
     hooks:
       - id: black
         types: [file, python]
         language_version: python3.7
   - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v4.3.18
+    rev: v5.8.0
     hooks:
       - id: isort
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.0.0
+    rev: v3.4.0
     hooks:
       - id: trailing-whitespace
       - id: debug-statements
       - id: end-of-file-fixer
-      - id: flake8
         files: ^gslides/
         language_version: python3.7
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.782
+    rev: v0.812
     hooks:
       - id: mypy
         exclude: (^tests/|^docs/)
         language_version: python3.7
   - repo: https://github.com/mgedmin/check-manifest
-    rev: "0.42"
+    rev: "0.46"
     hooks:
       - id: check-manifest
         language_version: python3.7
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.1
+    hooks:
+    -   id: flake8
