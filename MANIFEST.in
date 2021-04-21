@@ -2,6 +2,7 @@ include AUTHORS.rst
 include LICENSE
 include README.rst
 include *.txt
+include gslides/config/*.yaml
 
 recursive-include tests *
 recursive-exclude * __pycache__

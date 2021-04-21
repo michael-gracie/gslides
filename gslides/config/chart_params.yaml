@@ -1,0 +1,48 @@
+stacking:
+  url: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#basicchartstackedtype
+  params:
+    - STACKED
+    - PERCENT_STACKED
+
+legend_position:
+  url: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#basicchartlegendposition
+  params:
+    - BOTTOM_LEGEND
+    - LEFT_LEGEND
+    - RIGHT_LEGEND
+    - TOP_LEGEND
+    - NO_LEGEND
+
+line_style:
+  url: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#linedashtype
+  params:
+    - SOLID
+    - DOTTED
+    - MEDIUM_DASHED
+    - MEDIUM_DASHED_DOTTED
+    - LONG_DASHED
+    - LONG_DASHED_DOTTED
+
+point_shape:
+  url: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#pointshape
+  params:
+    - CIRCLE
+    - DIAMOND
+    - HEXAGON
+    - PENTAGON
+    - SQUARE
+    - STAR
+    - TRIANGLE
+    - X_MARK
+
+data_label_placement:
+  url: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#datalabelplacement
+  params:
+    - CENTER
+    - LEFT
+    - RIGHT
+    - ABOVE
+    - BELOW
+    - INSIDE_END
+    - INSIDE_BASE
+    - OUTSIDE_END

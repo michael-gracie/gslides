@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from .utils import json_val_extract
+from .colors import Palette, translate_color
+from .utils import hex_to_rgb, json_val_extract
 
 
 """Module to render the addChart Google API calll"""
@@ -28,6 +29,7 @@ class Chart:
         y_max=None,
         palette=None,
         legend_position=None,
+        size=(600, 371),
     ):
         self.type = self._determine_chart_type(series)
         self._check_stacking(series, stacking)
@@ -44,6 +46,7 @@ class Chart:
         self.y_max = y_max
         self.palette = palette
         self.legend_position = legend_position
+        self.size = size
         self.header_count = 1
         self.executed = False
         self.ch_id = None
@@ -122,11 +125,12 @@ class Chart:
                         "anchorCell": {
                             "sheetId": self.data.sheet_id,
                             "rowIndex": self.data.start_row_index,
+                            "columnIndex": self.data.start_column_index,
                         },
-                        "offsetXPixels": 100,
-                        "offsetYPixels": 9,
-                        "widthPixels": 600,
-                        "heightPixels": 371,
+                        "offsetXPixels": 0,
+                        "offsetYPixels": 0,
+                        "widthPixels": self.size[0],
+                        "heightPixels": self.size[1],
                     }
                 },
             }
@@ -146,13 +150,17 @@ class Chart:
             "sources"
         ].append(domain_json)
         series_mapping = self._resolve_series()
+        if self.palette:
+            p = Palette(self.palette)
+        else:
+            p = None
         for key, val in series_mapping.items():
             serie_col_num = (
                 self.data.start_column_index + self.data.df.columns.to_list().index(key)
             )
             if self.type == "COMBO":
                 series_json = val.render_basic_chart_json(
-                    None,
+                    p,
                     self.data.sheet_id,
                     self.data.start_row_index - 1,
                     self.data.end_row_index,
@@ -162,7 +170,7 @@ class Chart:
                 )
             else:
                 series_json = val.render_basic_chart_json(
-                    None,
+                    p,
                     self.data.sheet_id,
                     self.data.start_row_index - 1,
                     self.data.end_row_index,
@@ -300,6 +308,14 @@ class Series:
                 }
         if type:
             json["type"] = type
+        if self.color:
+            r, g, b = hex_to_rgb(translate_color(self.color))
+            json["color"] = {"red": r, "green": g, "blue": b}
+            json["colorStyle"] = {"rgbColor": {"red": r, "green": g, "blue": b}}
+        elif palette:
+            r, g, b = next(palette)
+            json["color"] = {"red": r, "green": g, "blue": b}
+            json["colorStyle"] = {"rgbColor": {"red": r, "green": g, "blue": b}}
         return json
 
     def render_histogram_chart_json(

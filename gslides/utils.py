@@ -60,3 +60,25 @@ def cell_to_num(x):
     column = regex.search(x).group(1)
     row = int(regex.search(x).group(2))
     return (row, char_to_num(column))
+
+
+def validate_hex_color_code(x):
+    match = re.search("^#(?:[0-9a-fA-F]{3}){1,2}$", x)
+    if match:
+        return x
+    else:
+        raise ValueError("Input a hexadecimal color code")
+
+
+def hex_to_rgb(x):
+    x = x[1:]
+    return tuple(int(x[i : i + 2], 16) / 255 for i in (0, 2, 4))  # noqa
+
+
+def emu_to_px(x):
+    return int(x * 220 / (914400))
+
+
+def optimize_size(y_scale, area=222600):
+    x_length = (area / (y_scale)) ** 0.5
+    return (x_length, x_length * y_scale)
