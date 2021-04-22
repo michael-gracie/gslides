@@ -6,6 +6,8 @@ from decimal import Decimal
 import numpy as np
 import pandas as pd
 
+from .config import CHART_PARAMS
+
 
 def json_val_extract(obj, key):
     """Recursively fetch chunks from nested JSON."""
@@ -110,6 +112,47 @@ def clean_dtypes(x):
         return x
     else:
         raise TypeError(
-            f"{type(x)} is not an accepted datatype\n Type must conform to "
+            f"{type(x)} is not an accepted datatype. Type must conform to "
             "str, int, float, NoneType, decimal.Decimal, pd.Timestamp, datetime.date"
         )
+
+
+def validate_params_list(params):
+    for key, val in CHART_PARAMS.items():
+        if key in params.keys() and params[key]:
+            if params[key] not in val["params"]:
+                raise ValueError(
+                    f"{ params[key]} is not a valid parameter for {key}. "
+                    f"Accepted parameters include {', '.join(val['params'])}. See "
+                    f"{val['url']} for further documentation."
+                )
+
+
+def validate_params_int(params):
+    variables = ["line_width", "point_size", "bucket_size"]
+    for var in variables:
+        if var in params.keys() and params[var]:
+            if type(params[var]) != int or params[var] < 0:
+                raise ValueError(
+                    f"{params[var]} is not a valid parameter for {var}. "
+                    f"Accepted values are any integer greater than 0"
+                )
+
+
+def validate_params_float(params):
+    variables = ["outlier_percentage", "x_border", "y_border", "spacing"]
+    for var in variables:
+        if var in params.keys() and params[var]:
+            if params[var] >= 1 or params[var] < 0:
+                raise ValueError(
+                    f"{params[var]} is not a valid parameter for {var}. "
+                    f"Accepted values are any float between 0 and 1"
+                )
+
+
+def validate_cell_name(x):
+    pattern = re.compile("([A-Z]{1,2})([0-9]+)")
+    if pattern.search(x)[0] == x:
+        return x
+    else:
+        raise ValueError("Invalid cell name.")

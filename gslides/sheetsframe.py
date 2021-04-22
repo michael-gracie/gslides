@@ -8,6 +8,7 @@ from .utils import (
     json_chunk_extract,
     json_val_extract,
     num_to_char,
+    validate_cell_name,
 )
 
 
@@ -57,14 +58,11 @@ class CreateFrame(SheetsFrame):
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
         self.overwrite_data = overwrite_data
-        self.anchor_cell = anchor_cell.upper()
+        self.anchor_cell = validate_cell_name(anchor_cell.upper())
         self.start_row_index, self.start_column_index = cell_to_num(self.anchor_cell)
         self.end_row_index, self.end_column_index = self._calc_end_index()
         self._clean_df()
         super().__init__()
-
-    def _validate_anchor(self):
-        pass
 
     def _calc_end_index(self):
         end_row_index = self.start_row_index + self.df.shape[0] + 1
@@ -115,8 +113,8 @@ class GetFrame(SheetsFrame):
     def __init__(self, spreadsheet_id, sheet_id, anchor_cell, bottom_right_cell):
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
-        self.anchor_cell = anchor_cell.upper()
-        self.bottom_right_cell = bottom_right_cell.upper()
+        self.anchor_cell = validate_cell_name(anchor_cell.upper())
+        self.bottom_right_cell = validate_cell_name(bottom_right_cell.upper())
         self.start_row_index, self.start_column_index = cell_to_num(self.anchor_cell)
         self.end_row_index, self.end_column_index = cell_to_num(self.bottom_right_cell)
         self.df = None

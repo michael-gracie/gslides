@@ -1,4 +1,4 @@
-from .utils import optimize_size
+from .utils import optimize_size, validate_params_float
 
 
 class CreatePresentation:
@@ -42,6 +42,7 @@ class Layout:
         self.spacing = spacing
         self.index = 0
         self.object_size = self._calc_size()
+        validate_params_float(self.__dict__)
 
     def _calc_size(self):
         x_size = (
@@ -96,7 +97,7 @@ class CreateSlide:
     ):
         self.presentation_id = presentation_id
         self.charts = charts
-        self.layout = layout
+        self.layout = self._validate_layout(layout)
         self.insertion_index = insertion_index
         self.sl_id = None
         self.sheet_executed = False
@@ -110,6 +111,23 @@ class CreateSlide:
             5143500 - self.top_margin - self.bottom_margin,
             layout,
         )
+
+    def _validate_layout(self, layout):
+        if type(layout) != tuple:
+            raise ValueError(
+                "Provide tuple where the first index is the number of rows and "
+                "the second index is the number of columns"
+            )
+        elif layout[0] < 1:
+            raise ValueError(
+                "Provide tuple where each value is an integer greater than 0"
+            )
+        elif layout[1] < 1:
+            raise ValueError(
+                "Provide tuple where each value is an integer greater than 0"
+            )
+        else:
+            return layout
 
     def render_json_create_slide(self):
         json = {

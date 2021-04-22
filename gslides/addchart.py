@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
 from .colors import Palette, translate_color
-from .utils import hex_to_rgb, json_val_extract
+from .utils import (
+    hex_to_rgb,
+    json_val_extract,
+    validate_params_float,
+    validate_params_int,
+    validate_params_list,
+)
 
 
 """Module to render the addChart Google API call"""
 """
 TODO:
-- validate args structure!!!!!
 - formatting config file
 - finish pytest
 - copy slide
-
 - mypy
-- histogram no labels
 - check for continuous series in date axis
 """
 
@@ -50,12 +53,13 @@ class Chart:
         self.y_max = y_max
         self.palette = palette
         self.legend_position = legend_position
-        self.size = size
+        self.size = (int(size[0]), int(size[1]))
         self.header_count = 1
         self.executed = False
         self.ch_id = None
         self.bucket_size = None
         self.outlier_percentage = None
+        validate_params_list(self.__dict__)
 
     def _determine_chart_type(self, series):
         chart_types = set([serie.__class__.__name__ for serie in series])
@@ -335,6 +339,9 @@ class Series:
         self._check_point_args(kwargs)
         self._check_data_label_args(kwargs)
         self.__dict__.update(kwargs)
+        validate_params_list(kwargs)
+        validate_params_int(kwargs)
+        validate_params_float(kwargs)
 
     def __repr__(self):
         output = f"Series Type: {self.__class__.__name__}"
