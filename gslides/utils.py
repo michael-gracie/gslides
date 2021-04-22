@@ -1,4 +1,10 @@
+import datetime
 import re
+
+from decimal import Decimal
+
+import numpy as np
+import pandas as pd
 
 
 def json_val_extract(obj, key):
@@ -18,14 +24,14 @@ def json_val_extract(obj, key):
         return None
 
 
-def json_chunk_extract(obj, val):
+def json_chunk_extract(obj, key, val):
     """Recursively fetch chunks from nested JSON."""
     arr = []
 
     def extract(obj, arr, val):
         """Recursively search for keys in JSON tree."""
         if isinstance(obj, dict):
-            if val in obj.values():
+            if (key, val) in obj.items():
                 arr.append(obj)
             else:
                 for k, v in obj.items():
@@ -82,3 +88,28 @@ def emu_to_px(x):
 def optimize_size(y_scale, area=222600):
     x_length = (area / (y_scale)) ** 0.5
     return (x_length, x_length * y_scale)
+
+
+def clean_list_of_list(x):
+    max_len = max([len(i) for i in x])
+    for i in x:
+        i.extend([None] * (max_len - len(i)))
+    return x
+
+
+def clean_nan(df):
+    return df.replace({np.nan: None})
+
+
+def clean_dtypes(x):
+    if type(x) in [pd._libs.tslibs.timestamps.Timestamp, datetime.date]:
+        return str(x)
+    elif type(x) in [Decimal]:
+        return float(str(x))
+    elif type(x) in [str, int, float, np.int64, np.float64, type(None)]:
+        return x
+    else:
+        raise TypeError(
+            f"{type(x)} is not an accepted datatype\n Type must conform to "
+            "str, int, float, NoneType, decimal.Decimal, pd.Timestamp, datetime.date"
+        )

@@ -3,13 +3,17 @@ from .colors import Palette, translate_color
 from .utils import hex_to_rgb, json_val_extract
 
 
-"""Module to render the addChart Google API calll"""
+"""Module to render the addChart Google API call"""
 """
 TODO:
-- create pallette functionality
 - validate args structure!!!!!
+- formatting config file
+- finish pytest
+- copy slide
 
-- UPDATE start_row_index!!!!! -- check if we are doing it write - what happens for nulls?
+- mypy
+- histogram no labels
+- check for continuous series in date axis
 """
 
 
@@ -50,6 +54,8 @@ class Chart:
         self.header_count = 1
         self.executed = False
         self.ch_id = None
+        self.bucket_size = None
+        self.outlier_percentage = None
 
     def _determine_chart_type(self, series):
         chart_types = set([serie.__class__.__name__ for serie in series])
@@ -80,7 +86,7 @@ class Chart:
     def _resolve_series(self):
         series_mapping = dict()
         for serie in self.series:
-            if serie.y_columns is None:
+            if not serie.y_columns:
                 for column in self.data.df.columns.to_list():
                     if column != self.x_column:
                         series_mapping[column] = serie
@@ -88,6 +94,13 @@ class Chart:
                 for column in serie.y_columns:
                     if column in self.data.df.columns.to_list():
                         series_mapping[column] = serie
+            if (
+                "outlier_percentage" in serie.__dict__.keys()
+                and serie.outlier_percentage
+            ):
+                self.outlier_percentage = serie.outlier_percentage
+            if "bucket_size" in serie.__dict__.keys() and serie.bucket_size:
+                self.bucket_size = serie.bucket_size
         return series_mapping
 
     def render_basic_chart_json(self):
@@ -95,19 +108,53 @@ class Chart:
             "chart": {
                 "spec": {
                     "title": self.title,
+                    "titleTextPosition": {"horizontalAlignment": "CENTER"},
+                    "titleTextFormat": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 16,
+                        "bold": True,
+                        "foregroundColor": {"red": 0, "green": 0, "blue": 0},
+                        "foregroundColorStyle": {
+                            "rgbColor": {"red": 0, "green": 0, "blue": 0}
+                        },
+                    },
                     "basicChart": {
                         "chartType": self.type,
                         "axis": [
                             {
                                 "position": "BOTTOM_AXIS",
                                 "title": self.x_axis_label,
-                                "format": {"fontFamily": "Roboto"},
+                                "format": {
+                                    "fontFamily": "Roboto",
+                                    "fontSize": 14,
+                                    "bold": True,
+                                    "foregroundColor": {
+                                        "red": 0,
+                                        "green": 0,
+                                        "blue": 0,
+                                    },
+                                    "foregroundColorStyle": {
+                                        "rgbColor": {"red": 0, "green": 0, "blue": 0}
+                                    },
+                                },
                                 "viewWindowOptions": {},
                             },
                             {
                                 "position": "LEFT_AXIS",
                                 "title": self.y_axis_label,
-                                "format": {"fontFamily": "Roboto"},
+                                "format": {
+                                    "fontFamily": "Roboto",
+                                    "fontSize": 14,
+                                    "bold": True,
+                                    "foregroundColor": {
+                                        "red": 0,
+                                        "green": 0,
+                                        "blue": 0,
+                                    },
+                                    "foregroundColorStyle": {
+                                        "rgbColor": {"red": 0, "green": 0, "blue": 0}
+                                    },
+                                },
                                 "viewWindowOptions": {},
                             },
                         ],
@@ -117,7 +164,6 @@ class Chart:
                         "headerCount": self.header_count,
                     },
                     "hiddenDimensionStrategy": "SKIP_HIDDEN_ROWS_AND_COLUMNS",
-                    "titleTextFormat": {"fontFamily": "Roboto"},
                     "fontName": "Roboto",
                 },
                 "position": {
@@ -199,14 +245,74 @@ class Chart:
         return json
 
     def render_histogram_chart_json(self):
-        pass
+        series_mapping = self._resolve_series()  # figure out
+        json = {
+            "chart": {
+                "spec": {
+                    "title": self.title,
+                    "titleTextPosition": {"horizontalAlignment": "CENTER"},
+                    "titleTextFormat": {
+                        "fontFamily": "Roboto",
+                        "fontSize": 16,
+                        "bold": True,
+                        "foregroundColor": {"red": 0, "green": 0, "blue": 0},
+                        "foregroundColorStyle": {
+                            "rgbColor": {"red": 0, "green": 0, "blue": 0}
+                        },
+                    },
+                    "histogramChart": {
+                        "series": [],
+                        "legendPosition": self.legend_position,
+                        "bucketSize": self.bucket_size,
+                        "outlierPercentile": self.outlier_percentage,
+                    },
+                    "hiddenDimensionStrategy": "SKIP_HIDDEN_ROWS_AND_COLUMNS",
+                    "fontName": "Roboto",
+                },
+                "position": {
+                    "overlayPosition": {
+                        "anchorCell": {
+                            "sheetId": self.data.sheet_id,
+                            "rowIndex": self.data.start_row_index - 1,
+                            "columnIndex": self.data.start_column_index - 1,
+                        },
+                        "offsetXPixels": 0,
+                        "offsetYPixels": 0,
+                        "widthPixels": self.size[0],
+                        "heightPixels": self.size[1],
+                    }
+                },
+            }
+        }
+        if self.palette:
+            p = Palette(self.palette)
+        else:
+            p = None
+        for key, val in series_mapping.items():
+            serie_col_num = (
+                self.data.start_column_index + self.data.df.columns.to_list().index(key)
+            )
+            series_json = val.render_histogram_chart_json(
+                p,
+                self.data.sheet_id,
+                self.data.start_row_index - 1,
+                self.data.end_row_index,
+                serie_col_num - 1,
+                serie_col_num,
+            )
+            json["chart"]["spec"]["histogramChart"]["series"].append(series_json)
+        return json
 
     def execute(self, service):
+        if self.type == "HISTOGRAM":
+            json = self.render_histogram_chart_json()
+        else:
+            json = self.render_basic_chart_json()
         output = (
             service.spreadsheets()
             .batchUpdate(
                 spreadsheetId=self.data.spreadsheet_id,
-                body={"requests": [{"addChart": self.render_basic_chart_json()}]},
+                body={"requests": [{"addChart": json}]},
             )
             .execute()
         )
@@ -328,7 +434,7 @@ class Series:
         endColumnIndex,
     ):
         json = {
-            "series": {
+            "data": {
                 "sourceRange": {
                     "sources": [
                         {
@@ -342,6 +448,14 @@ class Series:
                 }
             }
         }
+        if self.color:
+            r, g, b = hex_to_rgb(translate_color(self.color))
+            json["barColor"] = {"red": r, "green": g, "blue": b}
+            json["barColorStyle"] = {"rgbColor": {"red": r, "green": g, "blue": b}}
+        elif palette:
+            r, g, b = next(palette)
+            json["barColor"] = {"red": r, "green": g, "blue": b}
+            json["barColorStyle"] = {"rgbColor": {"red": r, "green": g, "blue": b}}
         return json
 
 
@@ -416,8 +530,6 @@ class Histogram(Series):
         y_columns=None,
         bucket_size=None,
         outlier_percentage=None,
-        data_label_enabled=False,
-        data_label_placement=None,
         color=None,
     ):
         kwargs = locals().copy()

@@ -2,6 +2,9 @@ import pandas as pd
 
 from .utils import (
     cell_to_num,
+    clean_dtypes,
+    clean_list_of_list,
+    clean_nan,
     json_chunk_extract,
     json_val_extract,
     num_to_char,
@@ -23,7 +26,9 @@ class SheetsFrame:
         get_output = (
             service.spreadsheets().get(spreadsheetId=self.spreadsheet_id).execute()
         )
-        sheet_name = json_chunk_extract(get_output, self.sheet_id)[0]["title"]
+        sheet_name = json_chunk_extract(get_output, "sheetId", self.sheet_id)[0][
+            "title"
+        ]
         return sheet_name
 
     def get_sheet_data(self, service, sheet_name):
@@ -55,6 +60,7 @@ class CreateFrame(SheetsFrame):
         self.anchor_cell = anchor_cell.upper()
         self.start_row_index, self.start_column_index = cell_to_num(self.anchor_cell)
         self.end_row_index, self.end_column_index = self._calc_end_index()
+        self._clean_df()
         super().__init__()
 
     def _validate_anchor(self):
@@ -64,6 +70,10 @@ class CreateFrame(SheetsFrame):
         end_row_index = self.start_row_index + self.df.shape[0] + 1
         end_column_index = self.start_column_index + self.df.shape[1]
         return (end_row_index, end_column_index)
+
+    def _clean_df(self):
+        self.df = clean_nan(self.df)
+        self.df = self.df.applymap(clean_dtypes)
 
     def render_update_json(self, sheet_name):
         col_range = (
@@ -115,7 +125,9 @@ class GetFrame(SheetsFrame):
     def execute(self, service):
         sheet_name = self.get_sheet_name(service)
         output = self.get_sheet_data(service, sheet_name)
+        output = clean_list_of_list(output)
         self.df = pd.DataFrame(data=output[1:], columns=output[0])
+        self.df = self.df.replace("", None)
         self.executed = True
 
 

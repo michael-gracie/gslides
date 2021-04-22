@@ -1,3 +1,7 @@
+from decimal import Decimal
+
+import numpy as np
+import pandas as pd
 import pytest
 
 import gslides.utils as utils
@@ -126,7 +130,7 @@ def test_json_val_extract(key, expected):
 
 
 def test_json_chunk_extract():
-    assert utils.json_chunk_extract(json, "pytest")[0]["fontName"] == "Roboto"
+    assert utils.json_chunk_extract(json, "title", "pytest")[0]["fontName"] == "Roboto"
 
 
 @pytest.mark.parametrize(
@@ -168,3 +172,62 @@ def test_char_to_num(input, expected):
 )
 def test_cell_to_num(input, expected):
     assert utils.cell_to_num(input) == expected
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("#66ff66", "#66ff66"),
+        pytest.param("#61ab6", None, marks=pytest.mark.xfail(reason=ValueError)),
+    ],
+)
+def test_validate_hex_color_code(input, expected):
+    assert utils.validate_hex_color_code(input) == expected
+
+
+def test_hex_to_rgb():
+    assert utils.hex_to_rgb("#61ab96") == (
+        0.3803921568627451,
+        0.6705882352941176,
+        0.5882352941176471,
+    )
+
+
+def test_emu_to_px():
+    assert utils.emu_to_px(914400) == 220
+
+
+def test_optimize_size():
+    assert utils.optimize_size(2) == (333.61654635224556, 667.2330927044911)
+
+
+def test_clean_list_of_list():
+    data = [
+        ["Object", "Blue", "Red", "Grand Total"],
+        ["Ball", "6"],
+        ["Cube", "6", "4", "10"],
+        ["Stick", "7", "5", "12"],
+    ]
+    data = utils.clean_list_of_list(data)
+    assert data[1][3] == None
+
+
+def test_clean_nan():
+    df = pd.DataFrame({"test": [np.nan, 1]})
+    df = utils.clean_nan(df)
+    assert df["test"][0] == None
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        (1, 1),
+        ("string", "string"),
+        (0.1, 0.1),
+        (Decimal(0.1), 0.1),
+        (pd.Timestamp("2020-01-01"), "2020-01-01 00:00:00"),
+        (pd.Timestamp("2020-01-01").date(), "2020-01-01"),
+    ],
+)
+def test_clean_dtypes(input, expected):
+    assert utils.clean_dtypes(input) == expected

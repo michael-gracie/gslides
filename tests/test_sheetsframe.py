@@ -200,3 +200,11 @@ class TestSheetsFrame:
     @pytest.mark.xfail(reason=RuntimeError)
     def test_data(self):
         assert self.object.data == None
+
+
+[
+    ["Object", "Blue", "Red", "Grand Total"],
+    ["Ball", "6"],
+    ["Cube", "6", "", "4"],
+    ["Stick", "7", "", "5"],
+]
