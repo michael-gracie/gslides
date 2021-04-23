@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from typing import TYPE_CHECKING, List, Optional, Tuple, cast
+from typing import List, Optional, Tuple, TypeVar, cast
 
 import pandas as pd
+
+from googleapiclient.discovery import Resource
 
 from .utils import (
     cell_to_num,
@@ -15,8 +17,7 @@ from .utils import (
 )
 
 
-if TYPE_CHECKING:
-    from googleapiclient.discovery import Resource
+TSheetsFrame = TypeVar("TSheetsFrame", bound="SheetsFrame")
 
 
 class SheetsFrame:
@@ -28,6 +29,7 @@ class SheetsFrame:
         start_column_index: int,
         end_row_index: int,
         end_column_index: int,
+        df: pd.DataFrame,
     ) -> None:
         self.executed = False
         self.spreadsheet_id = spreadsheet_id
@@ -36,9 +38,10 @@ class SheetsFrame:
         self.start_column_index = start_column_index
         self.end_row_index = end_row_index
         self.end_column_index = end_column_index
+        self.df = df
 
     @property
-    def data(self) -> SheetsFrame:  # noqa
+    def data(self: TSheetsFrame) -> TSheetsFrame:
         if self.executed:
             return self
         else:
@@ -95,6 +98,7 @@ class CreateFrame(SheetsFrame):
             self.start_column_index,
             self.end_row_index,
             self.end_column_index,
+            self.df,
         )
 
     def _calc_end_index(self) -> Tuple[int, int]:
@@ -156,7 +160,7 @@ class GetFrame(SheetsFrame):
         self.bottom_right_cell = validate_cell_name(bottom_right_cell.upper())
         self.start_row_index, self.start_column_index = cell_to_num(self.anchor_cell)
         self.end_row_index, self.end_column_index = cell_to_num(self.bottom_right_cell)
-        self.df: Optional[pd.DataFrame] = None
+        self.df: pd.DataFrame = pd.DataFrame()
         super().__init__(
             spreadsheet_id,
             sheet_id,
@@ -164,6 +168,7 @@ class GetFrame(SheetsFrame):
             self.start_column_index,
             self.end_row_index,
             self.end_column_index,
+            self.df,
         )
 
     def execute(self, service: Resource) -> None:
@@ -196,8 +201,8 @@ class CreateSheet:
 
     def execute(self, service: Resource) -> None:
         output = service.spreadsheets().create(body=self.render_json()).execute()
-        self.sp_id = json_val_extract(output, "spreadsheetId")
-        self.sh_id = json_val_extract(output, "sheetId")
+        self.sp_id = cast(Optional[str], json_val_extract(output, "spreadsheetId"))
+        self.sh_id = cast(Optional[int], json_val_extract(output, "sheetId"))
         self.executed = True
 
     @property

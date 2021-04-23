@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, TypeVar
 
+from googleapiclient.discovery import Resource
+
+from .addchart import Chart
 from .utils import optimize_size, validate_params_float
-
-
-if TYPE_CHECKING:
-    from addchart import Chart
-    from googleapiclient.discovery import Resource
 
 
 class CreatePresentation:
@@ -35,6 +33,9 @@ class CreatePresentation:
             raise RuntimeError(
                 "Must run the execute method before passing the presentation id"
             )
+
+
+TLayout = TypeVar("TLayout", bound="Layout")
 
 
 class Layout:
@@ -69,7 +70,7 @@ class Layout:
         ) / self.x_objects
         return (x_size, y_size)
 
-    def __iter__(self) -> Layout:  # noqa
+    def __iter__(self: TLayout) -> TLayout:
         return self
 
     @property

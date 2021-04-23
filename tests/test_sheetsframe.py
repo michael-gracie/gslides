@@ -173,17 +173,11 @@ class TestCreateFrame:
 
 class TestSheetsFrame:
     def setup(self):
-        self.object = SheetsFrame()
-        self.object.sheet_id = 1234
-        self.object.spreadsheet_id = "abc123"
-        self.object.start_column_index = 1
-        self.object.start_row_index = 1
-        self.object.end_column_index = 2
-        self.object.end_row_index = 2
+        self.object = SheetsFrame("abc123", 1234, 1, 1, 2, 2, pd.DataFrame())
 
     def test_get_sheet_name(self, monkeypatch):
         def mock_return(self):
-            return [{"title": "first", "sheet_id": 1234}]
+            return [{"title": "first", "sheetId": 1234}]
 
         monkeypatch.setattr(MockService, "execute", mock_return)
         service = MockService()

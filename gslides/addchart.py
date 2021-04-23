@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Dict,
-    List,
-    Optional,
-    Sequence,
-    Tuple,
-    cast,
-)
+from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
+
+from googleapiclient.discovery import Resource
 
 from .colors import Palette, translate_color
+from .sheetsframe import SheetsFrame
 from .utils import (
     hex_to_rgb,
     json_val_extract,
@@ -19,10 +13,6 @@ from .utils import (
     validate_params_list,
 )
 
-
-if TYPE_CHECKING:
-    from googleapiclient.discovery import Resource
-    from sheetsframe import SheetsFrame
 
 """Module to render the addChart Google API call"""
 """
@@ -132,7 +122,8 @@ class Series:
         if type:
             json["type"] = type
         if self.params_dict["color"]:
-            r, g, b = hex_to_rgb(translate_color(self.params_dict["color"]))
+            col = cast(str, self.params_dict["color"])
+            r, g, b = hex_to_rgb(translate_color(col))
             json["color"] = {"red": r, "green": g, "blue": b}
             json["colorStyle"] = {"rgbColor": {"red": r, "green": g, "blue": b}}
         elif palette:
@@ -150,7 +141,7 @@ class Series:
         start_column_index: int,
         end_column_index: int,
     ) -> dict:
-        json = {
+        json: Dict[str, Any] = {
             "data": {
                 "sourceRange": {
                     "sources": [
@@ -166,7 +157,8 @@ class Series:
             }
         }
         if self.params_dict["color"]:
-            r, g, b = hex_to_rgb(translate_color(self.params_dict["color"]))
+            col = cast(str, self.params_dict["color"])
+            r, g, b = hex_to_rgb(translate_color(col))
             json["barColor"] = {"red": r, "green": g, "blue": b}
             json["barColorStyle"] = {"rgbColor": {"red": r, "green": g, "blue": b}}
         elif palette:
@@ -268,7 +260,7 @@ class Chart:
         x_max: Optional[float] = None,
         y_min: Optional[float] = None,
         y_max: Optional[float] = None,
-        palette: Optional[Palette] = None,
+        palette: Optional[str] = None,
         legend_position: Optional[str] = None,
         size: Tuple[int, int] = (600, 371),
     ) -> None:

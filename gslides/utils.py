@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 import datetime
 import re
 
 from decimal import Decimal
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -9,7 +11,7 @@ import pandas as pd
 from .config import CHART_PARAMS
 
 
-def json_val_extract(obj, key):
+def json_val_extract(obj: Dict[str, Any], key: str) -> Optional[Any]:
     """Recursively fetch chunks from nested JSON."""
     if isinstance(obj, dict):
         for k, v in obj.items():
@@ -18,19 +20,23 @@ def json_val_extract(obj, key):
             else:
                 if json_val_extract(v, key):
                     return json_val_extract(v, key)
+        return None
     elif isinstance(obj, list):
         for item in obj:
             if json_val_extract(item, key):
                 return json_val_extract(item, key)
+        return None
     else:
         return None
 
 
-def json_chunk_extract(obj, key, val):
+def json_chunk_extract(
+    obj: Dict[str, Any], key: str, val: Union[str, int, float]
+) -> List:
     """Recursively fetch chunks from nested JSON."""
-    arr = []
+    arr: List = []
 
-    def extract(obj, arr, val):
+    def extract(obj: Dict[str, Any], arr: List, val: Union[str, int, float]) -> List:
         """Recursively search for keys in JSON tree."""
         if isinstance(obj, dict):
             if (key, val) in obj.items():
@@ -47,7 +53,7 @@ def json_chunk_extract(obj, key, val):
     return values
 
 
-def num_to_char(x):
+def num_to_char(x: int) -> str:
     if x <= 26:
         return chr(x + 64).upper()
     elif x <= 26 * 26:
@@ -56,21 +62,25 @@ def num_to_char(x):
         raise ValueError("Integer too high to be converted")
 
 
-def char_to_num(x):
+def char_to_num(x: str) -> int:
     total = 0
     for i in range(len(x)):
         total += (ord(x[::-1][i]) - 64) * (26 ** i)
     return total
 
 
-def cell_to_num(x):
+def cell_to_num(x: str) -> Tuple[int, int]:
     regex = re.compile("([A-Z]*)([0-9]*)")
-    column = regex.search(x).group(1)
-    row = int(regex.search(x).group(2))
-    return (row, char_to_num(column))
+    output = regex.search(x)
+    if output:
+        column = output.group(1)
+        row = int(output.group(2))
+        return (row, char_to_num(column))
+    else:
+        raise ValueError("Invalid cell format")
 
 
-def validate_hex_color_code(x):
+def validate_hex_color_code(x: str) -> str:
     match = re.search("^#(?:[0-9a-fA-F]{3}){1,2}$", x)
     if match:
         return x
@@ -78,32 +88,32 @@ def validate_hex_color_code(x):
         raise ValueError("Input a hexadecimal color code")
 
 
-def hex_to_rgb(x):
+def hex_to_rgb(x: str) -> Tuple[float, ...]:
     x = x[1:]
     return tuple(int(x[i : i + 2], 16) / 255 for i in (0, 2, 4))  # noqa
 
 
-def emu_to_px(x):
+def emu_to_px(x: int) -> int:
     return int(x * 220 / (914400))
 
 
-def optimize_size(y_scale, area=222600):
+def optimize_size(y_scale: float, area: float = 222600) -> Tuple[float, float]:
     x_length = (area / (y_scale)) ** 0.5
     return (x_length, x_length * y_scale)
 
 
-def clean_list_of_list(x):
+def clean_list_of_list(x: List[List]) -> List[List]:
     max_len = max([len(i) for i in x])
     for i in x:
         i.extend([None] * (max_len - len(i)))
     return x
 
 
-def clean_nan(df):
+def clean_nan(df: pd.DataFrame) -> pd.DataFrame:
     return df.replace({np.nan: None})
 
 
-def clean_dtypes(x):
+def clean_dtypes(x: Any) -> Union[str, float, int, np.int64, np.float64, None]:
     if type(x) in [pd._libs.tslibs.timestamps.Timestamp, datetime.date]:
         return str(x)
     elif type(x) in [Decimal]:
@@ -117,7 +127,7 @@ def clean_dtypes(x):
         )
 
 
-def validate_params_list(params):
+def validate_params_list(params: dict) -> None:
     for key, val in CHART_PARAMS.items():
         if key in params.keys() and params[key]:
             if params[key] not in val["params"]:
@@ -128,7 +138,7 @@ def validate_params_list(params):
                 )
 
 
-def validate_params_int(params):
+def validate_params_int(params: dict) -> None:
     variables = ["line_width", "point_size", "bucket_size"]
     for var in variables:
         if var in params.keys() and params[var]:
@@ -139,7 +149,7 @@ def validate_params_int(params):
                 )
 
 
-def validate_params_float(params):
+def validate_params_float(params: dict) -> None:
     variables = ["outlier_percentage", "x_border", "y_border", "spacing"]
     for var in variables:
         if var in params.keys() and params[var]:
@@ -150,9 +160,13 @@ def validate_params_float(params):
                 )
 
 
-def validate_cell_name(x):
+def validate_cell_name(x: str) -> str:
     pattern = re.compile("([A-Z]{1,2})([0-9]+)")
-    if pattern.search(x)[0] == x:
-        return x
+    output = pattern.search(x)
+    if output:
+        if output[0] == x:
+            return x
+        else:
+            raise ValueError("Invalid cell name.")
     else:
         raise ValueError("Invalid cell name.")

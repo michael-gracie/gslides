@@ -96,8 +96,8 @@ class TestChart:
 
         self.object = Chart(
             frame,
+            "Object",
             [l],
-            x_column="Object",
             stacking=False,
             title="pytest",
             x_axis_label="X LABEL",
