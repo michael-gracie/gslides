@@ -182,10 +182,10 @@ class Line(Series):
         y_columns: Optional[List[str]] = None,
         line_style: Optional[str] = None,
         line_width: Optional[int] = None,
-        point_enabled: Optional[bool] = False,
+        point_enabled: bool = False,
         point_shape: Optional[str] = None,
         point_size: Optional[int] = None,
-        data_label_enabled: Optional[bool] = False,
+        data_label_enabled: bool = False,
         data_label_placement: Optional[str] = None,
         color: Optional[str] = None,
     ) -> None:
@@ -198,7 +198,7 @@ class Column(Series):
     def __init__(
         self,
         y_columns: Optional[List[str]] = None,
-        data_label_enabled: Optional[bool] = False,
+        data_label_enabled: bool = False,
         data_label_placement: Optional[str] = None,
         color: Optional[str] = None,
     ) -> None:
@@ -213,10 +213,10 @@ class Area(Series):
         y_columns: Optional[List[str]] = None,
         line_style: Optional[str] = None,
         line_width: Optional[int] = None,
-        point_enabled: Optional[bool] = False,
+        point_enabled: bool = False,
         point_shape: Optional[str] = None,
         point_size: Optional[int] = None,
-        data_label_enabled: Optional[bool] = False,
+        data_label_enabled: bool = False,
         data_label_placement: Optional[str] = None,
         color: Optional[str] = None,
     ) -> None:
@@ -231,7 +231,7 @@ class Scatter(Series):
         y_columns: Optional[List[str]] = None,
         point_shape: Optional[str] = None,
         point_size: Optional[int] = None,
-        data_label_enabled: Optional[bool] = False,
+        data_label_enabled: bool = False,
         data_label_placement: Optional[str] = None,
         color: Optional[str] = None,
     ) -> None:

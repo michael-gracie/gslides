@@ -1,16 +1,24 @@
+# -*- coding: utf-8 -*-
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
+
 from .utils import optimize_size, validate_params_float
+
+
+if TYPE_CHECKING:
+    from addchart import Chart
+    from googleapiclient.discovery import Resource
 
 
 class CreatePresentation:
     def __init__(
         self,
-        name="Untitled",
-    ):
+        name: str = "Untitled",
+    ) -> None:
         self.name = name
         self.executed = False
-        self.pr_id = None
+        self.pr_id: Optional[str] = None
 
-    def execute(self, service):
+    def execute(self, service: Resource) -> None:
         output = service.presentations().create(body={"title": self.name}).execute()
         self.pr_id = output["presentationId"]
         service.presentations().batchUpdate(
@@ -20,7 +28,7 @@ class CreatePresentation:
         self.executed = True
 
     @property
-    def presentation_id(self):
+    def presentation_id(self) -> Optional[str]:
         if self.executed:
             return self.pr_id
         else:
@@ -31,7 +39,13 @@ class CreatePresentation:
 
 class Layout:
     def __init__(
-        self, x_length, y_length, layout, x_border=0.05, y_border=0.01, spacing=0.02
+        self,
+        x_length: float,
+        y_length: float,
+        layout: Tuple[int, int],
+        x_border: float = 0.05,
+        y_border: float = 0.01,
+        spacing: float = 0.02,
     ):
         self.x_length = x_length
         self.y_length = y_length
@@ -44,7 +58,7 @@ class Layout:
         self.object_size = self._calc_size()
         validate_params_float(self.__dict__)
 
-    def _calc_size(self):
+    def _calc_size(self) -> Tuple[float, float]:
         x_size = (
             self.x_length
             - self.x_length * ((self.y_objects - 1) * self.spacing + self.x_border * 2)
@@ -55,16 +69,16 @@ class Layout:
         ) / self.x_objects
         return (x_size, y_size)
 
-    def __iter__(self):
+    def __iter__(self) -> Layout:  # noqa
         return self
 
     @property
-    def coord(self):
+    def coord(self) -> Tuple[int, int]:
         x_coord = self.index // self.y_objects
         y_coord = self.index % self.y_objects
         return (x_coord, y_coord)
 
-    def __next__(self):
+    def __next__(self) -> Tuple[float, float]:
         coord = self.coord
         translate_x = (
             self.x_length * self.x_border
@@ -86,20 +100,20 @@ class Layout:
 class CreateSlide:
     def __init__(
         self,
-        presentation_id,
-        charts=None,
-        layout=None,
-        insertion_index=None,
-        top_margin=1017724,
-        bottom_margin=420575,
-        left_margin=0,
-        right_margin=0,
-    ):
+        presentation_id: str,
+        charts: List[Chart],
+        layout: Tuple[int, int],
+        insertion_index: Optional[int] = None,
+        top_margin: int = 1017724,
+        bottom_margin: int = 420575,
+        left_margin: int = 0,
+        right_margin: int = 0,
+    ) -> None:
         self.presentation_id = presentation_id
         self.charts = charts
         self.layout = self._validate_layout(layout)
         self.insertion_index = insertion_index
-        self.sl_id = None
+        self.sl_id: Optional[int] = None
         self.sheet_executed = False
         self.slide_executed = False
         self.top_margin = top_margin
@@ -112,7 +126,7 @@ class CreateSlide:
             layout,
         )
 
-    def _validate_layout(self, layout):
+    def _validate_layout(self, layout: Tuple[int, int]) -> Tuple[int, int]:
         if type(layout) != tuple:
             raise ValueError(
                 "Provide tuple where the first index is the number of rows and "
@@ -129,8 +143,8 @@ class CreateSlide:
         else:
             return layout
 
-    def render_json_create_slide(self):
-        json = {
+    def render_json_create_slide(self) -> Dict[str, Any]:
+        json: Dict[str, Any] = {
             "requests": [
                 {"createSlide": {}},
             ]
@@ -139,7 +153,7 @@ class CreateSlide:
             json["requests"][0]["createSlide"]["insertionIndex"] = self.insertion_index
         return json
 
-    def render_json_create_textboxes(self, slide_id):
+    def render_json_create_textboxes(self, slide_id: Optional[int]) -> dict:
         json = {
             "requests": [
                 {
@@ -184,7 +198,9 @@ class CreateSlide:
         }
         return json
 
-    def render_json_format_textboxes(self, title_box_id, notes_box_id):
+    def render_json_format_textboxes(
+        self, title_box_id: int, notes_box_id: int
+    ) -> dict:
         json = {
             "requests": [
                 {
@@ -236,7 +252,13 @@ class CreateSlide:
         }
         return json
 
-    def render_json_copy_chart(self, chart, size, translate_x, translate_y):
+    def render_json_copy_chart(
+        self,
+        chart: Chart,
+        size: Tuple[float, float],
+        translate_x: float,
+        translate_y: float,
+    ) -> dict:
         json = {
             "createSheetsChart": {
                 "spreadsheetId": chart.data.spreadsheet_id,
@@ -260,7 +282,7 @@ class CreateSlide:
         }
         return json
 
-    def execute_slide(self, service):
+    def execute_slide(self, service: Resource) -> None:
         if self.sheet_executed is False:
             raise RuntimeError(
                 "Must run the execute sheet method before running the execute slide method"
@@ -294,7 +316,7 @@ class CreateSlide:
             )
             .execute()
         )
-        json = {"requests": []}
+        json: Dict[str, Any] = {"requests": []}
         for ch in self.charts:
             translate_x, translate_y = next(self.layout_obj)
             json["requests"].append(
@@ -309,7 +331,7 @@ class CreateSlide:
         )
         self.slide_executed = True
 
-    def execute_sheet(self, service):
+    def execute_sheet(self, service: Resource) -> None:
         x_len, y_len = optimize_size(
             self.layout_obj.object_size[1] / self.layout_obj.object_size[0],
             area=222600 / (self.layout[0] * self.layout[1]),
