@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from typing import TYPE_CHECKING, List, Optional, Tuple, cast
+
 import pandas as pd
 
 from .utils import (
@@ -12,27 +15,45 @@ from .utils import (
 )
 
 
+if TYPE_CHECKING:
+    from googleapiclient.discovery import Resource
+
+
 class SheetsFrame:
-    def __init__(self):
+    def __init__(
+        self,
+        spreadsheet_id: str,
+        sheet_id: int,
+        start_row_index: int,
+        start_column_index: int,
+        end_row_index: int,
+        end_column_index: int,
+    ) -> None:
         self.executed = False
+        self.spreadsheet_id = spreadsheet_id
+        self.sheet_id = sheet_id
+        self.start_row_index = start_row_index
+        self.start_column_index = start_column_index
+        self.end_row_index = end_row_index
+        self.end_column_index = end_column_index
 
     @property
-    def data(self):
+    def data(self) -> SheetsFrame:  # noqa
         if self.executed:
             return self
         else:
             raise RuntimeError("Must run the execute method before passing the data")
 
-    def get_sheet_name(self, service):
+    def get_sheet_name(self, service: Resource) -> str:
         get_output = (
             service.spreadsheets().get(spreadsheetId=self.spreadsheet_id).execute()
         )
-        sheet_name = json_chunk_extract(get_output, "sheetId", self.sheet_id)[0][
-            "title"
-        ]
+        sheet_name = cast(
+            str, json_chunk_extract(get_output, "sheetId", self.sheet_id)[0]["title"]
+        )
         return sheet_name
 
-    def get_sheet_data(self, service, sheet_name):
+    def get_sheet_data(self, service: Resource, sheet_name: str) -> List[List]:
         rng = (
             f"{sheet_name}!{num_to_char(self.start_column_index)}"
             f"{self.start_row_index}:"
@@ -45,15 +66,20 @@ class SheetsFrame:
             .execute()
         )
         if "values" in output.keys():
-            return output["values"]
+            return cast(List[List], output["values"])
         else:
-            return None
+            return [[]]
 
 
 class CreateFrame(SheetsFrame):
     def __init__(
-        self, df, spreadsheet_id, sheet_id, overwrite_data=False, anchor_cell="A1"
-    ):
+        self,
+        df: pd.DataFrame,
+        spreadsheet_id: str,
+        sheet_id: int,
+        overwrite_data: bool = False,
+        anchor_cell: str = "A1",
+    ) -> None:
         self.df = df
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
@@ -62,18 +88,25 @@ class CreateFrame(SheetsFrame):
         self.start_row_index, self.start_column_index = cell_to_num(self.anchor_cell)
         self.end_row_index, self.end_column_index = self._calc_end_index()
         self._clean_df()
-        super().__init__()
+        super().__init__(
+            spreadsheet_id,
+            sheet_id,
+            self.start_row_index,
+            self.start_column_index,
+            self.end_row_index,
+            self.end_column_index,
+        )
 
-    def _calc_end_index(self):
+    def _calc_end_index(self) -> Tuple[int, int]:
         end_row_index = self.start_row_index + self.df.shape[0] + 1
         end_column_index = self.start_column_index + self.df.shape[1]
         return (end_row_index, end_column_index)
 
-    def _clean_df(self):
+    def _clean_df(self) -> None:
         self.df = clean_nan(self.df)
         self.df = self.df.applymap(clean_dtypes)
 
-    def render_update_json(self, sheet_name):
+    def render_update_json(self, sheet_name: str) -> dict:
         col_range = (
             f"{sheet_name}!{num_to_char(self.start_column_index)}"
             f"{self.start_row_index}:"
@@ -93,7 +126,7 @@ class CreateFrame(SheetsFrame):
         }
         return json
 
-    def execute(self, service):
+    def execute(self, service: Resource) -> None:
         sheet_name = self.get_sheet_name(service)
         json = self.render_update_json(sheet_name)
         if self.overwrite_data is False:
@@ -110,17 +143,30 @@ class CreateFrame(SheetsFrame):
 
 
 class GetFrame(SheetsFrame):
-    def __init__(self, spreadsheet_id, sheet_id, anchor_cell, bottom_right_cell):
+    def __init__(
+        self,
+        spreadsheet_id: str,
+        sheet_id: int,
+        anchor_cell: str,
+        bottom_right_cell: str,
+    ) -> None:
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
         self.anchor_cell = validate_cell_name(anchor_cell.upper())
         self.bottom_right_cell = validate_cell_name(bottom_right_cell.upper())
         self.start_row_index, self.start_column_index = cell_to_num(self.anchor_cell)
         self.end_row_index, self.end_column_index = cell_to_num(self.bottom_right_cell)
-        self.df = None
-        super().__init__()
+        self.df: Optional[pd.DataFrame] = None
+        super().__init__(
+            spreadsheet_id,
+            sheet_id,
+            self.start_row_index,
+            self.start_column_index,
+            self.end_row_index,
+            self.end_column_index,
+        )
 
-    def execute(self, service):
+    def execute(self, service: Resource) -> None:
         sheet_name = self.get_sheet_name(service)
         output = self.get_sheet_data(service, sheet_name)
         output = clean_list_of_list(output)
@@ -130,14 +176,14 @@ class GetFrame(SheetsFrame):
 
 
 class CreateSheet:
-    def __init__(self, title="Untitled", tab_name="Sheet1"):
+    def __init__(self, title: str = "Untitled", tab_name: str = "Sheet1") -> None:
         self.title = title
         self.tab_name = tab_name
         self.executed = False
-        self.sp_id = None
-        self.sh_id = None
+        self.sp_id: Optional[str] = None
+        self.sh_id: Optional[int] = None
 
-    def render_json(self):
+    def render_json(self) -> dict:
         json = {
             "properties": {
                 "title": self.title,
@@ -148,21 +194,21 @@ class CreateSheet:
         }
         return json
 
-    def execute(self, service):
+    def execute(self, service: Resource) -> None:
         output = service.spreadsheets().create(body=self.render_json()).execute()
         self.sp_id = json_val_extract(output, "spreadsheetId")
         self.sh_id = json_val_extract(output, "sheetId")
         self.executed = True
 
     @property
-    def spreadsheet_id(self):
+    def spreadsheet_id(self) -> Optional[str]:
         if self.executed:
             return self.sp_id
         else:
             raise RuntimeError("Must run the execute method before obtaining the id")
 
     @property
-    def sheet_id(self):
+    def sheet_id(self) -> Optional[int]:
         if self.executed:
             return self.sh_id
         else:
@@ -170,17 +216,17 @@ class CreateSheet:
 
 
 class CreateTab:
-    def __init__(self, spreadsheet_id, tab_name):
+    def __init__(self, spreadsheet_id: str, tab_name: str):
         self.spreadsheet_id = spreadsheet_id
         self.tab_name = tab_name
         self.executed = False
-        self.sh_id = None
+        self.sh_id: Optional[int] = None
 
-    def render_json(self):
+    def render_json(self) -> dict:
         json = {"requests": [{"addSheet": {"properties": {"title": self.tab_name}}}]}
         return json
 
-    def execute(self, service):
+    def execute(self, service: Resource) -> None:
         output = (
             service.spreadsheets()
             .batchUpdate(spreadsheetId=self.spreadsheet_id, body=self.render_json())
@@ -190,7 +236,7 @@ class CreateTab:
         self.executed = True
 
     @property
-    def sheet_id(self):
+    def sheet_id(self) -> Optional[int]:
         if self.executed:
             return self.sh_id
         else:

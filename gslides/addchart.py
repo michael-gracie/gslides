@@ -10,8 +10,6 @@ from typing import (
     cast,
 )
 
-from sheetsframe import SheetsFrame
-
 from .colors import Palette, translate_color
 from .utils import (
     hex_to_rgb,
@@ -24,6 +22,7 @@ from .utils import (
 
 if TYPE_CHECKING:
     from googleapiclient.discovery import Resource
+    from sheetsframe import SheetsFrame
 
 """Module to render the addChart Google API call"""
 """
