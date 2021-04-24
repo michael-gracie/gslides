@@ -283,7 +283,7 @@ class CreateSlide:
         }
         return json
 
-    def execute_slide(self, service: Resource) -> None:
+    def _execute_create_slide(self, service: Resource) -> None:
         if self.sheet_executed is False:
             raise RuntimeError(
                 "Must run the execute sheet method before running the execute slide method"
@@ -297,6 +297,8 @@ class CreateSlide:
             .execute()
         )
         self.sl_id = output["replies"][0]["createSlide"]["objectId"]
+
+    def _execute_create_format_textboxes(self, service: Resource) -> None:
         output = (
             service.presentations()
             .batchUpdate(
@@ -317,6 +319,10 @@ class CreateSlide:
             )
             .execute()
         )
+
+    def execute_slide(self, service: Resource) -> None:
+        self._execute_create_slide(service)
+        self._execute_create_format_textboxes(service)
         json: Dict[str, Any] = {"requests": []}
         for ch in self.charts:
             translate_x, translate_y = next(self.layout_obj)
@@ -325,7 +331,7 @@ class CreateSlide:
                     ch, self.layout_obj.object_size, translate_x, translate_y
                 )
             )
-        output = (
+        (
             service.presentations()
             .batchUpdate(presentationId=self.presentation_id, body=json)
             .execute()
