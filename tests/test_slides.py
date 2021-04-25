@@ -29,12 +29,18 @@ class TestCreatePresentation:
         self.object = CreatePresentation(name="pytest")
 
     def test_execute(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+
         def mock_return(self):
             return {"presentationId": "abcd"}
 
         monkeypatch.setattr(MockService, "execute", mock_return)
-        service = MockService()
-        self.object.execute(service)
+        self.object.execute()
         assert self.object.executed == True
 
     @pytest.mark.xfail(reason=RuntimeError)
@@ -133,28 +139,27 @@ class TestCreateSlide:
         )
 
     def test_execute_create_slide(self, monkeypatch):
-        self.object.sheet_executed = True
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
 
         def mock_return(self):
             return {"replies": [{"createSlide": {"objectId": 1111}}]}
 
         monkeypatch.setattr(MockService, "execute", mock_return)
-        service = MockService()
-        self.object._execute_create_slide(service)
-        assert self.object.sl_id == 1111
-
-    def test_execute_create_slide(self, monkeypatch):
-        self.object.sheet_executed = True
-
-        def mock_return(self):
-            return {"replies": [{"createSlide": {"objectId": 1111}}]}
-
-        monkeypatch.setattr(MockService, "execute", mock_return)
-        service = MockService()
-        self.object._execute_create_slide(service)
+        self.object._execute_create_slide()
         assert self.object.sl_id == 1111
 
     def test_execute_create_format_textboxes(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
         self.object.sl_id == 1111
 
         def mock_return(self):
@@ -166,28 +171,54 @@ class TestCreateSlide:
             }
 
         monkeypatch.setattr(MockService, "execute", mock_return)
-        service = MockService()
-        self.object._execute_create_format_textboxes(service)
+        self.object._execute_create_format_textboxes()
         assert self.object.title_bx_id == 2222
         assert self.object.notes_bx_id == 3333
 
+    def test_execute_copy_charts(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+        self.object._execute_copy_charts()
+        assert True
+
     def test_execute_slide(self, monkeypatch):
-        def mock_return(self):
+        self.object.sheet_executed = True
+
+        def mock_return():
             return None
 
         monkeypatch.setattr(self.object, "_execute_create_slide", mock_return)
         monkeypatch.setattr(
             self.object, "_execute_create_format_textboxes", mock_return
         )
-        service = MockService()
-        self.object.execute_slide(service)
+        monkeypatch.setattr(self.object, "_execute_copy_charts", mock_return)
+        self.object.execute_slide()
         assert self.object.slide_executed
 
     def test_execute_sheet(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.sheet_service", property(mock_service)
+        )
+
         def mock_return(self):
             return None
 
         monkeypatch.setattr(MockService, "execute", mock_return)
-        service = MockService()
-        self.object.execute_sheet(service)
+        self.object.execute_sheet()
         assert self.object.sheet_executed
+
+    def test_execute(self, monkeypatch):
+        def mock_return():
+            return None
+
+        monkeypatch.setattr(self.object, "execute_sheet", mock_return)
+        monkeypatch.setattr(self.object, "execute_slide", mock_return)
+        self.object.execute()
+        assert True

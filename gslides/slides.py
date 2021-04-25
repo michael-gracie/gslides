@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from typing import Any, Dict, List, Optional, Tuple, TypeVar
 
-from googleapiclient.discovery import Resource
-
+from . import creds
 from .addchart import Chart
 from .utils import optimize_size, validate_params_float
 
@@ -16,7 +15,8 @@ class CreatePresentation:
         self.executed = False
         self.pr_id: Optional[str] = None
 
-    def execute(self, service: Resource) -> None:
+    def execute(self) -> None:
+        service: Any = creds.slide_service
         output = service.presentations().create(body={"title": self.name}).execute()
         self.pr_id = output["presentationId"]
         service.presentations().batchUpdate(
@@ -283,11 +283,8 @@ class CreateSlide:
         }
         return json
 
-    def _execute_create_slide(self, service: Resource) -> None:
-        if self.sheet_executed is False:
-            raise RuntimeError(
-                "Must run the execute sheet method before running the execute slide method"
-            )
+    def _execute_create_slide(self) -> None:
+        service: Any = creds.slide_service
         output = (
             service.presentations()
             .batchUpdate(
@@ -298,7 +295,8 @@ class CreateSlide:
         )
         self.sl_id = output["replies"][0]["createSlide"]["objectId"]
 
-    def _execute_create_format_textboxes(self, service: Resource) -> None:
+    def _execute_create_format_textboxes(self) -> None:
+        service: Any = creds.slide_service
         output = (
             service.presentations()
             .batchUpdate(
@@ -320,10 +318,9 @@ class CreateSlide:
             .execute()
         )
 
-    def execute_slide(self, service: Resource) -> None:
-        self._execute_create_slide(service)
-        self._execute_create_format_textboxes(service)
+    def _execute_copy_charts(self):
         json: Dict[str, Any] = {"requests": []}
+        service = creds.slide_service
         for ch in self.charts:
             translate_x, translate_y = next(self.layout_obj)
             json["requests"].append(
@@ -336,14 +333,27 @@ class CreateSlide:
             .batchUpdate(presentationId=self.presentation_id, body=json)
             .execute()
         )
+
+    def execute_slide(self) -> None:
+        if self.sheet_executed is False:
+            raise RuntimeError(
+                "Must run the execute sheet method before running the execute slide method"
+            )
+        self._execute_create_slide()
+        self._execute_create_format_textboxes()
+        self._execute_copy_charts()
         self.slide_executed = True
 
-    def execute_sheet(self, service: Resource) -> None:
+    def execute_sheet(self) -> None:
         x_len, y_len = optimize_size(
             self.layout_obj.object_size[1] / self.layout_obj.object_size[0],
             area=222600 / (self.layout[0] * self.layout[1]),
         )
         for ch in self.charts:
             ch.size = (int(x_len), int(y_len))
-            ch.execute(service)
+            ch.execute()
         self.sheet_executed = True
+
+    def execute(self) -> None:
+        self.execute_sheet()
+        self.execute_slide()

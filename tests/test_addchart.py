@@ -1,7 +1,15 @@
 import pandas as pd
 import pytest
 
-from gslides.addchart import Area, Chart, Column, Histogram, Line, Scatter
+from gslides.addchart import (
+    Area,
+    Chart,
+    Column,
+    Histogram,
+    Line,
+    Scatter,
+    creds,
+)
 from gslides.sheetsframe import GetFrame
 
 
@@ -72,6 +80,19 @@ class TestLine:
         assert output["type"] == "Line"
 
 
+class TestHistogram:
+    def setup(self):
+        self.object = Histogram(
+            y_columns=["a", "b", "c"],
+            bucket_size=10,
+            outlier_percentage=0.5,
+        )
+
+    def test_render_histogram_chart_json(self):
+        output = self.object.render_histogram_chart_json(None, 1234, 1, 1, 2, 2)
+        assert output["data"]["sourceRange"]["sources"][0]["sheetId"] == 1234
+
+
 class TestChart:
     def setup(self):
         l = Line(
@@ -131,11 +152,17 @@ class TestChart:
         )
 
     def test_execute(self, monkeypatch):
-        def mock_return(self):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.sheet_service", property(mock_service)
+        )
+
+        def mock_execute(self):
             return {"chartId": 11111}
 
-        monkeypatch.setattr(MockService, "execute", mock_return)
-        service = MockService()
-        self.object.execute(service)
+        monkeypatch.setattr(MockService, "execute", mock_execute)
+        self.object.execute()
         assert self.object.ch_id == 11111
         assert self.object.executed

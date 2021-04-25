@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from typing import List, Optional, Tuple, TypeVar, cast
+from typing import Any, List, Optional, Tuple, TypeVar, cast
 
 import pandas as pd
 
-from googleapiclient.discovery import Resource
-
+from . import creds
 from .utils import (
     cell_to_num,
     clean_dtypes,
@@ -47,7 +46,8 @@ class SheetsFrame:
         else:
             raise RuntimeError("Must run the execute method before passing the data")
 
-    def get_sheet_name(self, service: Resource) -> str:
+    def _get_sheet_name(self) -> str:
+        service: Any = creds.sheet_service
         get_output = (
             service.spreadsheets().get(spreadsheetId=self.spreadsheet_id).execute()
         )
@@ -56,7 +56,8 @@ class SheetsFrame:
         )
         return sheet_name
 
-    def get_sheet_data(self, service: Resource, sheet_name: str) -> List[List]:
+    def _get_sheet_data(self, sheet_name: str) -> List[List]:
+        service: Any = creds.sheet_service
         rng = (
             f"{sheet_name}!{num_to_char(self.start_column_index)}"
             f"{self.start_row_index}:"
@@ -130,11 +131,12 @@ class CreateFrame(SheetsFrame):
         }
         return json
 
-    def execute(self, service: Resource) -> None:
-        sheet_name = self.get_sheet_name(service)
+    def execute(self) -> None:
+        service: Any = creds.sheet_service
+        sheet_name = self._get_sheet_name()
         json = self.render_update_json(sheet_name)
         if self.overwrite_data is False:
-            existing_data = self.get_sheet_data(service, sheet_name)
+            existing_data = self._get_sheet_data(sheet_name)
             if existing_data:
                 raise RuntimeError("Create table will overwrite existing data")
         (
@@ -171,9 +173,9 @@ class GetFrame(SheetsFrame):
             self.df,
         )
 
-    def execute(self, service: Resource) -> None:
-        sheet_name = self.get_sheet_name(service)
-        output = self.get_sheet_data(service, sheet_name)
+    def execute(self) -> None:
+        sheet_name = self._get_sheet_name()
+        output = self._get_sheet_data(sheet_name)
         output = clean_list_of_list(output)
         self.df = pd.DataFrame(data=output[1:], columns=output[0])
         self.df = self.df.replace("", None)
@@ -199,7 +201,8 @@ class CreateSheet:
         }
         return json
 
-    def execute(self, service: Resource) -> None:
+    def execute(self) -> None:
+        service: Any = creds.sheet_service
         output = service.spreadsheets().create(body=self.render_json()).execute()
         self.sp_id = cast(Optional[str], json_val_extract(output, "spreadsheetId"))
         self.sh_id = cast(Optional[int], json_val_extract(output, "sheetId"))
@@ -231,7 +234,8 @@ class CreateTab:
         json = {"requests": [{"addSheet": {"properties": {"title": self.tab_name}}}]}
         return json
 
-    def execute(self, service: Resource) -> None:
+    def execute(self) -> None:
+        service: Any = creds.sheet_service
         output = (
             service.spreadsheets()
             .batchUpdate(spreadsheetId=self.spreadsheet_id, body=self.render_json())

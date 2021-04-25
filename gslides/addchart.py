@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
 
-from googleapiclient.discovery import Resource
-
+from . import creds
 from .colors import Palette, translate_color
 from .sheetsframe import SheetsFrame
 from .utils import (
@@ -18,9 +17,9 @@ from .utils import (
 """
 TODO:
 - formatting config file
-- finish pytest
+- finish pytest -- update for new credentials
 - copy slide
-- mypy
+- mypy update
 - check for continuous series in date axis
 """
 
@@ -540,7 +539,8 @@ class Chart:
             json["chart"]["spec"]["histogramChart"]["series"].append(series_json)
         return json
 
-    def execute(self, service: Resource) -> dict:
+    def execute(self) -> dict:
+        service: Any = creds.sheet_service
         if self.type == "HISTOGRAM":
             json = self.render_histogram_chart_json()
         else:
