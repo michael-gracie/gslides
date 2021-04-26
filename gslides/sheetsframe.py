@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+Manipulates data in google sheets
+"""
+
 from typing import Any, List, Optional, Tuple, TypeVar, cast
 
 import pandas as pd
@@ -20,6 +24,24 @@ TSheetsFrame = TypeVar("TSheetsFrame", bound="SheetsFrame")
 
 
 class SheetsFrame:
+    """A table of data in Google sheets
+
+    :param spreadsheet_id: The id associated with the spreadsheet
+    :type spreadsheet_id: str
+    :param sheet_id: The id associated with the sheet
+    :type sheet_id: int
+    :param start_row_index: The starting index of the row
+    :type start_row_index: int
+    :param end_row_index: The ending index of the row
+    :type end_row_index: int
+    :param start_column_index: The starting index of the column
+    :type start_column_index: int
+    :param end_column_index: The ending index of the column
+    :type end_column_index: int
+    :param df: Dataframe representation of the data
+    :type df: :class:`pandas.DataFrame`
+    """
+
     def __init__(
         self,
         spreadsheet_id: str,
@@ -30,6 +52,7 @@ class SheetsFrame:
         end_column_index: int,
         df: pd.DataFrame,
     ) -> None:
+        """Constructor method"""
         self.executed = False
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
@@ -41,12 +64,23 @@ class SheetsFrame:
 
     @property
     def data(self: TSheetsFrame) -> TSheetsFrame:
+        """Returns the :class:`SheetsFrame` object of the data
+
+        :raises RuntimeError: Must run the execute method before passing the data
+        :return: The :class:`SheetsFrame` object
+        :rtype: :class:`SheetsFrame`
+        """
         if self.executed:
             return self
         else:
             raise RuntimeError("Must run the execute method before passing the data")
 
     def _get_sheet_name(self) -> str:
+        """Gets the name of a sheet
+
+        :return: The name associated with the sheet
+        :rtype: str
+        """
         service: Any = creds.sheet_service
         get_output = (
             service.spreadsheets().get(spreadsheetId=self.spreadsheet_id).execute()
@@ -57,6 +91,11 @@ class SheetsFrame:
         return sheet_name
 
     def _get_sheet_data(self, sheet_name: str) -> List[List]:
+        """Gets the data from a given groups of cells in a sheet
+
+        :return: A list of lists capturing the data
+        :rtype: list
+        """
         service: Any = creds.sheet_service
         rng = (
             f"{sheet_name}!{num_to_char(self.start_column_index)}"
@@ -76,6 +115,22 @@ class SheetsFrame:
 
 
 class CreateFrame(SheetsFrame):
+    """Class to create data in Google sheets.
+
+    :param df: Data to be created in Google sheets
+    :type df: :class:`pandas.DataFrame`
+    :param spreadsheet_id: The id associated with the spreadsheet
+    :type spreadsheet_id: str
+    :param sheet_id: The id associated with the sheet
+    :type sheet_id: int
+    :param start_row_index: The starting index of the row
+    :param overwrite_data: Whether to overwrite the existing data
+    :type overwrite_data: bool, optional
+    :param anchor_cell: The cell name (e.g. `A5`) that will correspond to the
+    top left observation in the dataframe
+    :type anchor_cell: str, optional
+    """
+
     def __init__(
         self,
         df: pd.DataFrame,
@@ -84,6 +139,7 @@ class CreateFrame(SheetsFrame):
         overwrite_data: bool = False,
         anchor_cell: str = "A1",
     ) -> None:
+        """Constructor method"""
         self.df = df
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
@@ -103,15 +159,34 @@ class CreateFrame(SheetsFrame):
         )
 
     def _calc_end_index(self) -> Tuple[int, int]:
+        """Calculates the ending row and column index based on the anchor cell
+        and dataframe size
+
+        :return: Tuple of the ending row and column inde
+        :rtype: tuple
+        """
         end_row_index = self.start_row_index + self.df.shape[0] + 1
         end_column_index = self.start_column_index + self.df.shape[1]
         return (end_row_index, end_column_index)
 
     def _clean_df(self) -> None:
+        """Cleans the dataframe to convert datatypes into acceptable values for
+        the Google Sheets API
+
+        :return: Cleaned :class:`pandas.DataFrame`
+        :type df: :class:`pandas.DataFrame`
+        """
         self.df = clean_nan(self.df)
         self.df = self.df.applymap(clean_dtypes)
 
     def render_update_json(self, sheet_name: str) -> dict:
+        """Renders the json to update the data in Google sheets
+
+        :param sheet_name: The name of the sheet
+        :type sheet_name: str
+        :return: The json to do the update
+        :rtype: dict
+        """
         col_range = (
             f"{sheet_name}!{num_to_char(self.start_column_index)}"
             f"{self.start_row_index}:"
@@ -132,6 +207,12 @@ class CreateFrame(SheetsFrame):
         return json
 
     def execute(self) -> None:
+        """Executes the API call
+
+        :return: The json returned by the call
+        :rtype: dict
+
+        """
         service: Any = creds.sheet_service
         sheet_name = self._get_sheet_name()
         json = self.render_update_json(sheet_name)
@@ -149,6 +230,20 @@ class CreateFrame(SheetsFrame):
 
 
 class GetFrame(SheetsFrame):
+    """Class to get data from Google sheets.
+
+    :param spreadsheet_id: The id associated with the spreadsheet
+    :type spreadsheet_id: str
+    :param sheet_id: The id associated with the sheet
+    :type sheet_id: int
+    :param anchor_cell: The cell name (e.g. `A5`) that will correspond to the
+    top left observation in the dataframe
+    :type anchor_cell: str
+    :param bottom_right_cell: The cell name (e.g. `B10`) that will correspond to the
+    bottom right observation in the dataframe
+    :type bottom_right_cell: str
+    """
+
     def __init__(
         self,
         spreadsheet_id: str,
@@ -156,6 +251,7 @@ class GetFrame(SheetsFrame):
         anchor_cell: str,
         bottom_right_cell: str,
     ) -> None:
+        """Constructor method"""
         self.spreadsheet_id = spreadsheet_id
         self.sheet_id = sheet_id
         self.anchor_cell = validate_cell_name(anchor_cell.upper())
@@ -174,6 +270,12 @@ class GetFrame(SheetsFrame):
         )
 
     def execute(self) -> None:
+        """Executes the API call
+
+        :return: The json returned by the call
+        :rtype: dict
+
+        """
         sheet_name = self._get_sheet_name()
         output = self._get_sheet_data(sheet_name)
         output = clean_list_of_list(output)
@@ -183,7 +285,16 @@ class GetFrame(SheetsFrame):
 
 
 class CreateSheet:
+    """An object to create a spreadsheet in Google sheets
+
+    :param title: The title of the spreadsheet
+    :type title: str, optional
+    :param tab_name: The name of the sheet
+    :type title: str, optional
+    """
+
     def __init__(self, title: str = "Untitled", tab_name: str = "Sheet1") -> None:
+        """Constructor method"""
         self.title = title
         self.tab_name = tab_name
         self.executed = False
@@ -191,6 +302,11 @@ class CreateSheet:
         self.sh_id: Optional[int] = None
 
     def render_json(self) -> dict:
+        """Renders the json to create the spreadsheet in Google sheets
+
+        :return: The json to do the update
+        :rtype: dict
+        """
         json = {
             "properties": {
                 "title": self.title,
@@ -202,6 +318,12 @@ class CreateSheet:
         return json
 
     def execute(self) -> None:
+        """Executes the API call
+
+        :return: The json returned by the call
+        :rtype: dict
+
+        """
         service: Any = creds.sheet_service
         output = service.spreadsheets().create(body=self.render_json()).execute()
         self.sp_id = cast(Optional[str], json_val_extract(output, "spreadsheetId"))
@@ -210,6 +332,12 @@ class CreateSheet:
 
     @property
     def spreadsheet_id(self) -> Optional[str]:
+        """Returns the spreadsheet_id of the created spreadhseet.
+
+        :raises RuntimeError: Must run the execute method before obtaining the id
+        :return: The spreadsheet_id of the created spreadsheet.
+        :rtype: str
+        """
         if self.executed:
             return self.sp_id
         else:
@@ -217,6 +345,12 @@ class CreateSheet:
 
     @property
     def sheet_id(self) -> Optional[int]:
+        """Returns the sheet_id of the created spreadhseet.
+
+        :raises RuntimeError: Must run the execute method before obtaining the id
+        :return: The sheet_id of the created sheet.
+        :rtype: int
+        """
         if self.executed:
             return self.sh_id
         else:
@@ -224,17 +358,32 @@ class CreateSheet:
 
 
 class CreateTab:
+    """Creates a new sheet in an existing spreadsheet
+
+    :param title: The title of the spreadsheet
+    :type title: str, optional
+    :param tab_name: The name of the sheet
+    :type title: str, optional
+    """
+
     def __init__(self, spreadsheet_id: str, tab_name: str):
+        """Constructor method"""
         self.spreadsheet_id = spreadsheet_id
         self.tab_name = tab_name
         self.executed = False
         self.sh_id: Optional[int] = None
 
     def render_json(self) -> dict:
+        """Renders the json to create the sheet in Google sheets
+
+        :return: The json to do the update
+        :rtype: dict
+        """
         json = {"requests": [{"addSheet": {"properties": {"title": self.tab_name}}}]}
         return json
 
     def execute(self) -> None:
+        """Executes the API call"""
         service: Any = creds.sheet_service
         output = (
             service.spreadsheets()
@@ -246,6 +395,12 @@ class CreateTab:
 
     @property
     def sheet_id(self) -> Optional[int]:
+        """Returns the sheet_id of the created spreadhseet.
+
+        :raises RuntimeError: Must run the execute method before obtaining the id
+        :return: The sheet_id of the created sheet.
+        :rtype: int
+        """
         if self.executed:
             return self.sh_id
         else:

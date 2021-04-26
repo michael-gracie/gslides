@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+Creates the slides and charts in Google slides
+"""
+
 from typing import Any, Dict, List, Optional, Tuple, TypeVar
 
 from . import creds
@@ -7,15 +11,23 @@ from .utils import optimize_size, validate_params_float
 
 
 class CreatePresentation:
+    """The class that creates the presentation.
+
+    :param name: Name of the presentation
+    :type name: str
+    """
+
     def __init__(
         self,
         name: str = "Untitled",
     ) -> None:
+        """Constructor method"""
         self.name = name
         self.executed = False
         self.pr_id: Optional[str] = None
 
     def execute(self) -> None:
+        """Executes the create presentation slides API call."""
         service: Any = creds.slide_service
         output = service.presentations().create(body={"title": self.name}).execute()
         self.pr_id = output["presentationId"]
@@ -27,6 +39,12 @@ class CreatePresentation:
 
     @property
     def presentation_id(self) -> Optional[str]:
+        """Returns the presentation_id of the created presentation.
+
+        :raises RuntimeError: Must run the execute method before passing the presentation id
+        :return: The presentation_id of the created presentation
+        :rtype: str
+        """
         if self.executed:
             return self.pr_id
         else:
@@ -48,6 +66,7 @@ class Layout:
         y_border: float = 0.01,
         spacing: float = 0.02,
     ):
+        """Constructor method"""
         self.x_length = x_length
         self.y_length = y_length
         self.x_objects = layout[0]
@@ -60,6 +79,12 @@ class Layout:
         validate_params_float(self.__dict__)
 
     def _calc_size(self) -> Tuple[float, float]:
+        """Calculates the appropriate size of the chart given dimensions.
+
+        :return: The x and y length of a chart
+        :rtype: tuple
+
+        """
         x_size = (
             self.x_length
             - self.x_length * ((self.y_objects - 1) * self.spacing + self.x_border * 2)
@@ -71,15 +96,32 @@ class Layout:
         return (x_size, y_size)
 
     def __iter__(self: TLayout) -> TLayout:
+        """Iterator function
+
+        :return: :class:`Layout`
+        :rtype: :class:`Layout`
+        """
         return self
 
     @property
     def coord(self) -> Tuple[int, int]:
+        """Calculates the row and column of the given index.
+
+        :return: Row index and column index
+        :rtype: tuple
+
+        """
         x_coord = self.index // self.y_objects
         y_coord = self.index % self.y_objects
         return (x_coord, y_coord)
 
     def __next__(self) -> Tuple[float, float]:
+        """Next function
+
+        :return: A tuple for the translate x and translate y value
+        :rtype: tuple
+        """
+
         coord = self.coord
         translate_x = (
             self.x_length * self.x_border
@@ -99,6 +141,27 @@ class Layout:
 
 
 class CreateSlide:
+    """The class that creates the presentation.
+
+    :param presentation_id: The presentation_id of the created presentation
+    :type presentation_id: str
+    :param charts: :class:`Chart` objects that will be created
+    :type charts: list
+    :param layout: The layout of the chart objects in # of rows by # of columns
+    :type layout: tuple
+    :param insertion_index: The slide index to insert new slide to.
+    The lack of a parameter will insert the slide to the end of the presentation
+    :type insertion_index: int, optional
+    :param top_margin: The top margin of the presentation in EMU
+    :type top_margin: int, optional
+    :param bottom_margin: The bottom margin of the presentation in EMU
+    :type bottom_margin: int, optional
+    :param left_margin: The left margin of the presentation in EMU
+    :type left_margin: int, optional
+    :param right_margin: The right margin of the presentation in EMU
+    :type right_margin: int, optional
+    """
+
     def __init__(
         self,
         presentation_id: str,
@@ -110,6 +173,7 @@ class CreateSlide:
         left_margin: int = 0,
         right_margin: int = 0,
     ) -> None:
+        """Constructor method"""
         self.presentation_id = presentation_id
         self.charts = charts
         self.layout = self._validate_layout(layout)
@@ -128,6 +192,15 @@ class CreateSlide:
         )
 
     def _validate_layout(self, layout: Tuple[int, int]) -> Tuple[int, int]:
+        """Validates that the layout of charts is a valide layout.
+
+        :param layout: The layout of the chart objects in # of rows by # of columns
+        :type layout: tuple
+        :raises ValueError:
+        :return: The layout
+        :rtype: tuple
+
+        """
         if type(layout) != tuple:
             raise ValueError(
                 "Provide tuple where the first index is the number of rows and "
@@ -145,6 +218,11 @@ class CreateSlide:
             return layout
 
     def render_json_create_slide(self) -> Dict[str, Any]:
+        """Renders the json to create the slide in Google slides.
+
+        :return: The json to do the update
+        :rtype: dict
+        """
         json: Dict[str, Any] = {
             "requests": [
                 {"createSlide": {}},
@@ -155,6 +233,11 @@ class CreateSlide:
         return json
 
     def render_json_create_textboxes(self, slide_id: Optional[int]) -> dict:
+        """Renders the json to create the textboxes in Google slides.
+
+        :return: The json to do the update
+        :rtype: dict
+        """
         json = {
             "requests": [
                 {
@@ -202,6 +285,11 @@ class CreateSlide:
     def render_json_format_textboxes(
         self, title_box_id: int, notes_box_id: int
     ) -> dict:
+        """Renders the json to format the textboxes in Google slides.
+
+        :return: The json to do the update
+        :rtype: dict
+        """
         json = {
             "requests": [
                 {
@@ -260,6 +348,11 @@ class CreateSlide:
         translate_x: float,
         translate_y: float,
     ) -> dict:
+        """Renders the json to copy the charts in Google slides.
+
+        :return: The json to do the update
+        :rtype: dict
+        """
         json = {
             "createSheetsChart": {
                 "spreadsheetId": chart.data.spreadsheet_id,
@@ -284,6 +377,7 @@ class CreateSlide:
         return json
 
     def _execute_create_slide(self) -> None:
+        """Executes the create slides API call."""
         service: Any = creds.slide_service
         output = (
             service.presentations()
@@ -296,6 +390,7 @@ class CreateSlide:
         self.sl_id = output["replies"][0]["createSlide"]["objectId"]
 
     def _execute_create_format_textboxes(self) -> None:
+        """Executes the create & format textboxes slides API call."""
         service: Any = creds.slide_service
         output = (
             service.presentations()
@@ -319,6 +414,7 @@ class CreateSlide:
         )
 
     def _execute_copy_charts(self):
+        """Executes the copy of sheets charts to slides API call."""
         json: Dict[str, Any] = {"requests": []}
         service = creds.slide_service
         for ch in self.charts:
@@ -335,6 +431,7 @@ class CreateSlide:
         )
 
     def execute_slide(self) -> None:
+        """Executes the slides API call."""
         if self.sheet_executed is False:
             raise RuntimeError(
                 "Must run the execute sheet method before running the execute slide method"
@@ -345,6 +442,7 @@ class CreateSlide:
         self.slide_executed = True
 
     def execute_sheet(self) -> None:
+        """Executes the sheets API call."""
         x_len, y_len = optimize_size(
             self.layout_obj.object_size[1] / self.layout_obj.object_size[0],
             area=222600 / (self.layout[0] * self.layout[1]),
@@ -355,5 +453,6 @@ class CreateSlide:
         self.sheet_executed = True
 
     def execute(self) -> None:
+        """Executes the sheets & slides API call."""
         self.execute_sheet()
         self.execute_slide()

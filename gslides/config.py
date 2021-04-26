@@ -16,18 +16,33 @@ with open(os.path.join(CURR_DIR, "config/chart_params.yaml"), "r") as f:
 
 
 class Creds:
+    """The credentials object to build the connections to the APIs"""
+
     def __init__(self) -> None:
+        """Constructor method"""
         self.crdtls: Optional[Credentials] = None
         self.sht_srvc: Optional[Resource] = None
         self.sld_srvc: Optional[Resource] = None
 
     def set_credentials(self, credentials: Optional[Credentials]) -> None:
+        """Sets the credentials
+
+        :param credentials: :class:`google.oauth2.credentials.Credentials`
+        :type credentials: :class:`google.oauth2.credentials.Credentials`
+
+        """
         self.crdtls = credentials
         self.sht_srvc = build("sheets", "v4", credentials=credentials)
         self.sld_srvc = build("slides", "v1", credentials=credentials)
 
     @property
     def sheet_service(self) -> Optional[Resource]:
+        """Returns the connects to the sheets API
+
+        :raises RuntimeError: Must run set_credentials before executing method
+        :return: API connection
+        :rtype: :class:`googleapiclient.discovery.Resource`
+        """
         if self.sht_srvc:
             return self.sht_srvc
         else:
@@ -35,6 +50,12 @@ class Creds:
 
     @property
     def slide_service(self) -> Optional[Resource]:
+        """Returns the connects to the slides API
+
+        :raises RuntimeError: Must run set_credentials before executing method
+        :return: API connection
+        :rtype: :class:`googleapiclient.discovery.Resource`
+        """
         if self.sht_srvc:
             return self.sld_srvc
         else:
