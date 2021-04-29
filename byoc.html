@@ -1,0 +1,263 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Basic Usage" href="basic.html" /><link rel="prev" title="Welcome to gslides’s documentation!" href="index.html" />
+
+    <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Bring Your Own Credentials - gslides 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Bring Your Own Credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="bring-your-own-credentials">
+<h1>Bring Your Own Credentials<a class="headerlink" href="#bring-your-own-credentials" title="Permalink to this headline">¶</a></h1>
+<p>In order to start using <code class="docutils literal notranslate"><span class="pre">gslides</span></code> you need to supply the package with Google API credentials. To set up a connection to a Google API, one must register an application with Google and make a decision whether they wish to utilize API keys, OAuth 2.0 client ID’s or service accounts.</p>
+<p>Below will walk you through how to set up a connection using OAuth 2.0 on local in a Jupyter Notebook.</p>
+<div class="section" id="running-on-local-with-a-jupyter-notebook">
+<h2>Running on local with a Jupyter notebook<a class="headerlink" href="#running-on-local-with-a-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>This documentation follow roughly the steps laid out by Google <a class="reference external" href="https://developers.google.com/slides/quickstart/python">here</a>.</p>
+<p><strong>1. Create a project and enable the APIs</strong></p>
+<p>You’ll need enable a google developer account to access the Google Cloud Platform. From there you can follow this <a class="reference external" href="https://developers.google.com/workspace/guides/create-project">guide</a> to create a project and enable an API.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need to create a project with the Google Slides and Sheets API enabled</p>
+</div>
+<p><strong>2. Create credentials</strong></p>
+<p>Again consult Google and follow this <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#configure_the_oauth_consent_screen">guide</a> to configure the OAuth consent screen.</p>
+<p>And create your credentials from the instructions <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#create_a_credential">here</a>. You’ll need to download the credentials <code class="docutils literal notranslate"><span class="pre">.json</span></code> file onto your local. <em>Be sure not share these credentials with anyone, the file should not be shared on Github</em>.</p>
+<p><strong>3. Update the URIs</strong></p>
+<p>The URI are the endpoints where the OAuth 2.0 server can send responses. In this case because we are utilizing a jupyter notebook we must allow responses to <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. Update the values like so, selecting a port which you are going to use.</p>
+<img alt="_images/uri.png" src="_images/uri.png"/>
+<p><strong>4. Launch a Jupyter notebook, get the token and load credentials</strong></p>
+<p>Run the code below, replacing the necessary values to obtain the <code class="docutils literal notranslate"><span class="pre">creds</span></code> object. These are the credentials you pass to <code class="docutils literal notranslate"><span class="pre">gslides</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">from</span> <span class="nn">googleapiclient.discovery</span> <span class="kn">import</span> <span class="n">build</span>
+<span class="kn">from</span> <span class="nn">google_auth_oauthlib.flow</span> <span class="kn">import</span> <span class="n">InstalledAppFlow</span>
+<span class="kn">from</span> <span class="nn">google.auth.transport.requests</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">google.oauth2.credentials</span> <span class="kn">import</span> <span class="n">Credentials</span>
+
+<span class="c1"># These scopes are read &amp; write permissions. Necessary to run gslides</span>
+<span class="n">SCOPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'https://www.googleapis.com/auth/presentations'</span><span class="p">,</span>
+         <span class="s1">'https://www.googleapis.com/auth/spreadsheets'</span><span class="p">]</span>
+
+<span class="n">creds</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># The file token.json stores the user's access and refresh tokens, and is</span>
+<span class="c1"># created automatically when the authorization flow completes for the first</span>
+<span class="c1"># time.</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">'token.json'</span><span class="p">):</span>
+    <span class="n">creds</span> <span class="o">=</span> <span class="n">Credentials</span><span class="o">.</span><span class="n">from_authorized_user_file</span><span class="p">(</span><span class="s1">'token.json'</span><span class="p">,</span> <span class="n">SCOPES</span><span class="p">)</span>
+<span class="c1"># If there are no (valid) credentials available, let the user log in.</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">creds</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">creds</span><span class="o">.</span><span class="n">valid</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">creds</span> <span class="ow">and</span> <span class="n">creds</span><span class="o">.</span><span class="n">expired</span> <span class="ow">and</span> <span class="n">creds</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">:</span>
+        <span class="n">creds</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">Request</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">flow</span> <span class="o">=</span> <span class="n">InstalledAppFlow</span><span class="o">.</span><span class="n">from_client_secrets_file</span><span class="p">(</span>
+            <span class="s1">'&lt;PATH_TO_CREDS&gt;'</span><span class="p">,</span> <span class="n">SCOPES</span><span class="p">)</span>
+        <span class="n">creds</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">run_local_server</span><span class="p">(</span><span class="n">port</span><span class="o">=&lt;</span><span class="n">PORT</span><span class="o">&gt;</span><span class="p">)</span>
+    <span class="c1"># Save the credentials for the next run</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'token.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">token</span><span class="p">:</span>
+        <span class="n">token</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">creds</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>5. Initialize the credentials with gslides</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gslides</span><span class="o">.</span><span class="n">intialize_credentials</span><span class="p">(</span><span class="n">creds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="basic.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Basic Usage</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Michael Gracie
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/byoc.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Bring Your Own Credentials</a><ul>
+<li><a class="reference internal" href="#running-on-local-with-a-jupyter-notebook">Running on local with a Jupyter notebook</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

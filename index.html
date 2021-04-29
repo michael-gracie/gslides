@@ -1,0 +1,332 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Bring Your Own Credentials" href="byoc.html" />
+
+    <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Home - gslides 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">gslides 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="welcome-to-gslides-s-documentation">
+<h1>Welcome to gslides’s documentation!<a class="headerlink" href="#welcome-to-gslides-s-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gslides-creating-charts-in-google-slides">
+<h1>gslides: Creating charts in Google slides<a class="headerlink" href="#gslides-creating-charts-in-google-slides" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">gslides</span></code> is a Python package that helps analysts turn <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframes into Google slides &amp; sheets charts by configuring and executing Google API calls.</p>
+<p>The package provides a set of classes that enable the user full control over the creation of new visualizations through configurable parameters while eliminating the complexity of working directly with the Google API.</p>
+<div class="section" id="quick-installation">
+<h2>Quick Installation<a class="headerlink" href="#quick-installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/michael-gracie/gslides.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Below is an example that only showcases a simple workflow. Full discussion around features can be found in the docs.</p>
+<p><strong>1. Initialize package and connection</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gslides</span>
+<span class="kn">from</span> <span class="nn">gslides</span> <span class="kn">import</span> <span class="p">(</span>
+  <span class="n">CreatePresentation</span><span class="p">,</span>
+  <span class="n">CreateSpreadsheet</span><span class="p">,</span>
+  <span class="n">CreateFrame</span><span class="p">,</span>
+  <span class="n">Chart</span><span class="p">,</span>
+  <span class="n">Scatter</span><span class="p">,</span>
+  <span class="n">CreateSlide</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="n">gslides</span><span class="o">.</span><span class="n">intialize_credentials</span><span class="p">(</span><span class="n">creds</span><span class="p">)</span> <span class="c1">#BringYourOwnCredentials</span>
+</pre></div>
+</div>
+<p><strong>2. Create a presentation</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prs</span> <span class="o">=</span> <span class="n">CreatePresentation</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'demo pres'</span><span class="p">)</span>
+<span class="n">prs</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>3. Create a spreadsheet</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spreadsheet</span> <span class="o">=</span> <span class="n">CreateSpreadsheet</span><span class="p">(</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s1">'demo spreadsheet'</span><span class="p">,</span>
+  <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">'demo sheet'</span><span class="p">)</span>
+<span class="n">spreadsheet</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>4. Load the data to the spreadsheet</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">'data'</span><span class="p">]</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">CreateFrame</span><span class="p">(</span><span class="n">df</span> <span class="o">=</span> <span class="n">iris</span><span class="p">,</span>
+            <span class="n">spreadsheet_id</span> <span class="o">=</span> <span class="n">spreadsheet</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
+            <span class="n">sheet_id</span> <span class="o">=</span> <span class="n">spreadsheet</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+            <span class="n">overwrite_data</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>5. Create a scatterplot</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">Scatter</span><span class="p">(</span><span class="n">y_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sepal width (cm)'</span><span class="p">])</span>
+<span class="n">ch</span> <span class="o">=</span> <span class="n">Chart</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">x_column</span> <span class="o">=</span> <span class="s1">'sepal length (cm)'</span><span class="p">,</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span><span class="p">],</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Demo Chart'</span><span class="p">,</span>
+    <span class="n">x_axis_label</span> <span class="o">=</span> <span class="s1">'Sepal Length'</span><span class="p">,</span>
+    <span class="n">y_axis_label</span> <span class="o">=</span> <span class="s1">'Sepal Width'</span><span class="p">,</span>
+    <span class="n">legend_position</span> <span class="o">=</span> <span class="s1">'NO_LEGEND'</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>6. Create a slide with the scatterplot</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sld</span> <span class="o">=</span> <span class="n">CreateSlide</span><span class="p">(</span>
+    <span class="n">presentation_id</span> <span class="o">=</span> <span class="n">prs</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span>
+    <span class="n">charts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span><span class="p">],</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">"Investigation into Fischer's Iris dataset"</span><span class="p">,</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="s2">"Data from 1936"</span>
+<span class="p">)</span>
+<span class="n">sld</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>7. Navigate to the presentation</strong></p>
+<img alt="_images/usage.png" src="_images/usage.png"/>
+</div>
+<div class="section" id="developer-instructions">
+<h2>Developer Instructions<a class="headerlink" href="#developer-instructions" title="Permalink to this headline">¶</a></h2>
+<p>To install the package with development dependencies run the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -e .<span class="o">[</span>dev<span class="o">]</span>
+</pre></div>
+</div>
+<p>This will enable the following</p>
+<ul class="simple">
+<li><p>Unit testing using <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a>
+- Run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> in root package directory</p></li>
+<li><p>Pre commit hooks ensuring codes style using <a class="reference external" href="https://github.com/ambv/black">black</a> and <a class="reference external" href="https://github.com/pre-commit/mirrors-isort">isort</a></p></li>
+<li><p>Sphinx documentation
+- To create sphinx run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> in package docs folder
+- To view locally run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">http.server</span></code></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="byoc.html#running-on-local-with-a-jupyter-notebook">Running on local with a Jupyter notebook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic.html#user-supplied-id-s">User supplied ID’s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic.html#executing-classes">Executing classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chart.html#ensuring-your-data-is-pivoted">Ensuring your data is pivoted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html#utilizing-the-y-columns-parameter">Utilizing the <code class="docutils literal notranslate"><span class="pre">y_columns</span></code> parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html#series-parameters">Series parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html#stacking">Stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html#histogram">Histogram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="byoc.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Bring Your Own Credentials</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Michael Gracie
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/index.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to gslides’s documentation!</a></li>
+<li><a class="reference internal" href="#gslides-creating-charts-in-google-slides">gslides: Creating charts in Google slides</a><ul>
+<li><a class="reference internal" href="#quick-installation">Quick Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#developer-instructions">Developer Instructions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

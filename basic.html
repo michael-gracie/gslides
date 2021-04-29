@@ -1,0 +1,240 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Charts &amp; Series" href="chart.html" /><link rel="prev" title="Bring Your Own Credentials" href="byoc.html" />
+
+    <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Basic Usage - gslides 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="basic-usage">
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
+<p>The following page will provide an understanding around the class structure for <code class="docutils literal notranslate"><span class="pre">gslides</span></code>. To accompany this documentation, see an example of the usage of <code class="docutils literal notranslate"><span class="pre">gslides</span></code> in this <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/poc/notebooks/usage.ipynb">notebook</a>.</p>
+<div class="section" id="data-flow">
+<h2>Data Flow<a class="headerlink" href="#data-flow" title="Permalink to this headline">¶</a></h2>
+<p>Taking an object oriented approach, <code class="docutils literal notranslate"><span class="pre">gslides</span></code> provides classes that represent objects in either Google sheets or Google slides to enable the user flexibility in terms of how there are creating their pipeline and executing their dependencies.</p>
+<p>The diagram below shows how data flows through the pipeline.</p>
+<img alt="_images/uml.png" src="_images/uml.png"/>
+<p>The modularization of the pipeline allows the user to create new spreadsheets, sheets and presentations or simply use existing sheets and presentations. Additionally, if the user wants to only use a portion of the pipeline they can choose so.</p>
+</div>
+<div class="section" id="user-supplied-id-s">
+<h2>User supplied ID’s<a class="headerlink" href="#user-supplied-id-s" title="Permalink to this headline">¶</a></h2>
+<p>From existing spreadsheets and presentations it is possible to retrieve <code class="docutils literal notranslate"><span class="pre">spreadsheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">sheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">presentation_id</span></code> through simply looking at a URL.</p>
+<img alt="_images/user_id.png" src="_images/user_id.png"/>
+</div>
+<div class="section" id="executing-classes">
+<h2>Executing classes<a class="headerlink" href="#executing-classes" title="Permalink to this headline">¶</a></h2>
+<p>Each class, except the <code class="docutils literal notranslate"><span class="pre">series</span></code> class, have their own <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method. The <code class="docutils literal notranslate"><span class="pre">execute</span></code> method will call the Google API to complete a given action. The attributes that are generated by Google through the <code class="docutils literal notranslate"><span class="pre">execute</span></code> method are <code class="docutils literal notranslate"><span class="pre">spreadsheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">sheet_id</span></code> and <code class="docutils literal notranslate"><span class="pre">presentation_id</span></code>. These parameters and <code class="docutils literal notranslate"><span class="pre">data</span></code> cannot be passed to other objects unless the <code class="docutils literal notranslate"><span class="pre">execute</span></code> method has ran.</p>
+<div class="section" id="passing-chart-objects-to-createslide">
+<h3>Passing <code class="docutils literal notranslate"><span class="pre">Chart</span></code> objects to <code class="docutils literal notranslate"><span class="pre">CreateSlide</span></code><a class="headerlink" href="#passing-chart-objects-to-createslide" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Chart</span></code> class is unique in the fact that it doesn’t need to be executed to be passed to the <code class="docutils literal notranslate"><span class="pre">CreateSlide</span></code> object. The layout and slide margin parameters set in the <code class="docutils literal notranslate"><span class="pre">CreateSlide</span></code> class will optimize the size of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> objects that are to be created. For this reason, the <code class="docutils literal notranslate"><span class="pre">execute</span></code> method of <code class="docutils literal notranslate"><span class="pre">CreateSlide</span></code> both execute the chart creation in Google sheets, the creation of the slide and the copy of those charts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no restriction on utilizing the <code class="docutils literal notranslate"><span class="pre">execute</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> class. It will simply create a chart in Google sheets without optimizing the sizing of that chart for it’s destination slide.</p>
+</div>
+</div>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="chart.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Charts &amp; Series</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="byoc.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Bring Your Own Credentials</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Michael Gracie
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/basic.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Basic Usage</a><ul>
+<li><a class="reference internal" href="#data-flow">Data Flow</a></li>
+<li><a class="reference internal" href="#user-supplied-id-s">User supplied ID’s</a></li>
+<li><a class="reference internal" href="#executing-classes">Executing classes</a><ul>
+<li><a class="reference internal" href="#passing-chart-objects-to-createslide">Passing <code class="docutils literal notranslate"><span class="pre">Chart</span></code> objects to <code class="docutils literal notranslate"><span class="pre">CreateSlide</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>
