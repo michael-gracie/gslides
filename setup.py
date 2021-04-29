@@ -7,8 +7,6 @@
 import os
 import sys
 
-from typing import List
-
 from setuptools import find_packages, setup
 
 
@@ -41,11 +39,8 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.7",
 ]
 
-INSTALL_REQUIRES = []  # type: List[str]
-
-if not INSTALL_REQUIRES:
-    with open("requirements.txt", "r") as f:
-        INSTALL_REQUIRES = f.read().split("\n")
+with open("requirements.txt", "r") as f:
+    INSTALL_REQUIRES = f.read().split("\n")
 
 EXTRAS_REQUIRE = {
     "docs": ["sphinx", "sphinx_rtd_theme"],
