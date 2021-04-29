@@ -1,0 +1,8 @@
+google-api-core>=1.26.2
+google-api-python-client>=2.0.2
+google-auth>=1.28.0
+google-auth-httplib2>=0.1.0
+google-auth-oauthlib>=0.4.3
+googleapis-common-protos>=1.53.0
+pandas>=1.1.5
+numpy>=1.19.5
