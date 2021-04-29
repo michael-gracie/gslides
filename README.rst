@@ -1,12 +1,9 @@
-gslides
-===============================
-.. image:: https://img.shields.io/badge/python-3.7-green.svg
-  :target: https://www.python.org/downloads/release/python-370/
-.. image:: https://img.shields.io/badge/code%20style_black-000000.svg
-  :target: https://github.com/amvb/black
+gslides: Creating charts in Google slides
+=========================================
 
+``gslides`` is a Python package that helps analysts turn ``pandas`` dataframes into Google slides & sheets charts by configuring and executing Google API calls.
 
-Full sphix documentation can be found `here <https://michael-gracie.github.io/gslides/>`_
+The package provides a set of classes that enable the user full control over the creation of new visualizations through configurable parameters while eliminating the complexity of working directly with the Google API.
 
 Quick Installation
 ------------------
@@ -14,6 +11,90 @@ Quick Installation
 .. code-block:: bash
 
   pip install git+https://github.com/michael-gracie/gslides.git
+
+
+Usage
+------------------
+
+Below is an example that only showcases a simple workflow. Full discussion around features can be found in the docs.
+
+**1. Initialize package and connection**
+
+.. code-block:: python
+
+  import gslides
+  from gslides import (
+    CreatePresentation,
+    CreateSpreadsheet,
+    CreateFrame,
+    Chart,
+    Scatter,
+    CreateSlide
+  )
+  from sklearn import datasets
+  gslides.intialize_credentials(creds) #BringYourOwnCredentials
+
+
+**2. Create a presentation**
+
+.. code-block:: python
+
+  prs = CreatePresentation(name = 'demo pres')
+  prs.execute()
+
+
+**3. Create a spreadsheet**
+
+.. code-block:: python
+
+  spreadsheet = CreateSpreadsheet(
+    title = 'demo spreadsheet',
+    sheet_name = 'demo sheet')
+  spreadsheet.execute()
+
+**4. Load the data to the spreadsheet**
+
+.. code-block:: python
+
+  iris = datasets.load_iris(as_frame = True)['data']
+  frame = CreateFrame(df = iris,
+              spreadsheet_id = spreadsheet.spreadsheet_id,
+              sheet_id = spreadsheet.sheet_id,
+              overwrite_data = True
+              )
+  frame.execute()
+
+**5. Create a scatterplot**
+
+.. code-block:: python
+
+  sc = Scatter(y_columns = ['sepal width (cm)'])
+  ch = Chart(
+      data = frame.data,
+      x_column = 'sepal length (cm)',
+      series = [sc],
+      title = f'Demo Chart',
+      x_axis_label = 'Sepal Length',
+      y_axis_label = 'Sepal Width',
+      legend_position = 'NO_LEGEND',
+  )
+
+**6. Create a slide with the scatterplot**
+
+.. code-block:: python
+
+  sld = CreateSlide(
+      presentation_id = prs.presentation_id,
+      charts = [ch],
+      layout = (1,1),
+      title = "Investigation into Fischer's Iris dataset",
+      notes = "Data from 1936"
+  )
+  sld.execute()
+
+**7. Navigate to the presentation**
+
+.. image:: img/usage.png
 
 Developer Instructions
 ----------------------

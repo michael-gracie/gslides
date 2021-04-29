@@ -2,9 +2,11 @@ include AUTHORS.rst
 include LICENSE
 include README.rst
 include *.txt
+include gslides/config/*.yaml
 
 recursive-include tests *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
+recursive-exclude img *.png
 
 recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif

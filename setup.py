@@ -4,15 +4,9 @@
 
     $ python setup.py lint
 """
-import codecs
-import distutils.cmd
-import distutils.log
 import os
-import re
-import subprocess
 import sys
 
-from pathlib import Path
 from typing import List
 
 from setuptools import find_packages, setup
@@ -77,8 +71,8 @@ with open(os.path.join(HERE, "LICENSE"), encoding="utf-8") as file_open:
 
 
 def version_check():
-    if sys.version_info < (3, 7):
-        sys.exit("Python 3.7 required.")
+    if sys.version_info < (3, 6):
+        sys.exit("Python 3.6 required.")
 
 
 def install_pkg():
