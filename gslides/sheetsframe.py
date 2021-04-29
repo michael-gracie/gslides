@@ -127,7 +127,7 @@ class CreateFrame(SheetsFrame):
     :param overwrite_data: Whether to overwrite the existing data
     :type overwrite_data: bool, optional
     :param anchor_cell: The cell name (e.g. `A5`) that will correspond to the
-    top left observation in the dataframe
+        top left observation in the dataframe
     :type anchor_cell: str, optional
     """
 
@@ -237,10 +237,10 @@ class GetFrame(SheetsFrame):
     :param sheet_id: The id associated with the sheet
     :type sheet_id: int
     :param anchor_cell: The cell name (e.g. `A5`) that will correspond to the
-    top left observation in the dataframe
+        top left observation in the dataframe
     :type anchor_cell: str
     :param bottom_right_cell: The cell name (e.g. `B10`) that will correspond to the
-    bottom right observation in the dataframe
+        bottom right observation in the dataframe
     :type bottom_right_cell: str
     """
 
@@ -284,19 +284,19 @@ class GetFrame(SheetsFrame):
         self.executed = True
 
 
-class CreateSheet:
+class CreateSpreadsheet:
     """An object to create a spreadsheet in Google sheets
 
     :param title: The title of the spreadsheet
     :type title: str, optional
-    :param tab_name: The name of the sheet
+    :param sheet_name: The name of the sheet
     :type title: str, optional
     """
 
-    def __init__(self, title: str = "Untitled", tab_name: str = "Sheet1") -> None:
+    def __init__(self, title: str = "Untitled", sheet_name: str = "Sheet1") -> None:
         """Constructor method"""
         self.title = title
-        self.tab_name = tab_name
+        self.sheet_name = sheet_name
         self.executed = False
         self.sp_id: Optional[str] = None
         self.sh_id: Optional[int] = None
@@ -313,7 +313,7 @@ class CreateSheet:
                 "locale": "en_US",
                 "autoRecalc": "HOUR",
             },
-            "sheets": [{"properties": {"title": self.tab_name}}],
+            "sheets": [{"properties": {"title": self.sheet_name}}],
         }
         return json
 
@@ -357,19 +357,19 @@ class CreateSheet:
             raise RuntimeError("Must run the execute method before passing the id")
 
 
-class CreateTab:
+class CreateSheet:
     """Creates a new sheet in an existing spreadsheet
 
     :param title: The title of the spreadsheet
     :type title: str, optional
-    :param tab_name: The name of the sheet
+    :param sheet_name: The name of the sheet
     :type title: str, optional
     """
 
-    def __init__(self, spreadsheet_id: str, tab_name: str):
+    def __init__(self, spreadsheet_id: str, sheet_name: str):
         """Constructor method"""
         self.spreadsheet_id = spreadsheet_id
-        self.tab_name = tab_name
+        self.sheet_name = sheet_name
         self.executed = False
         self.sh_id: Optional[int] = None
 
@@ -379,7 +379,7 @@ class CreateTab:
         :return: The json to do the update
         :rtype: dict
         """
-        json = {"requests": [{"addSheet": {"properties": {"title": self.tab_name}}}]}
+        json = {"requests": [{"addSheet": {"properties": {"title": self.sheet_name}}}]}
         return json
 
     def execute(self) -> None:

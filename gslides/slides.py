@@ -150,7 +150,7 @@ class CreateSlide:
     :param layout: The layout of the chart objects in # of rows by # of columns
     :type layout: tuple
     :param insertion_index: The slide index to insert new slide to.
-    The lack of a parameter will insert the slide to the end of the presentation
+        The lack of a parameter will insert the slide to the end of the presentation
     :type insertion_index: int, optional
     :param top_margin: The top margin of the presentation in EMU
     :type top_margin: int, optional
@@ -172,6 +172,8 @@ class CreateSlide:
         bottom_margin: int = 420575,
         left_margin: int = 0,
         right_margin: int = 0,
+        title: str = "Title placeholder",
+        notes: str = "Notes placeholder",
     ) -> None:
         """Constructor method"""
         self.presentation_id = presentation_id
@@ -190,6 +192,8 @@ class CreateSlide:
             5143500 - self.top_margin - self.bottom_margin,
             layout,
         )
+        self.title = title
+        self.notes = notes
 
     def _validate_layout(self, layout: Tuple[int, int]) -> Tuple[int, int]:
         """Validates that the layout of charts is a valide layout.
@@ -296,7 +300,7 @@ class CreateSlide:
                     "insertText": {
                         "objectId": title_box_id,
                         "insertionIndex": 0,
-                        "text": "Title Placeholder",
+                        "text": self.title,
                     }
                 },
                 {
@@ -322,7 +326,7 @@ class CreateSlide:
                     "insertText": {
                         "objectId": notes_box_id,
                         "insertionIndex": 0,
-                        "text": "Notes Placeholder",
+                        "text": self.notes,
                     }
                 },
                 {

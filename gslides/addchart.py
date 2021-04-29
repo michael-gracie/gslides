@@ -31,10 +31,10 @@ Update create sheet and create tab
 
 
 class Series:
-    """Parent class for all series configurations.
+    r"""Parent class for all series configurations.
 
-    :param **kwargs: Dictionary of keyword arguments
-    :type **kwargs: dict
+    :param \*\*kwargs: Dictionary of keyword arguments
+    :type \*\*kwargs: dict
     """
 
     def __init__(self, **kwargs: dict) -> None:
@@ -250,25 +250,25 @@ class Line(Series):
     :param y_columns: The columns to plot. None or an empty list will plot all columns
     :type y_columns: list, optional
     :param line_style: The style of line to plot, see
-    gslides.config.CHART_PARAMS['line_style'] for accepted parameters
+        gslides.config.CHART_PARAMS['line_style'] for accepted parameters
     :type line_style: str, optional
     :param line_width: The width of line to plot
     :type line_width: int, optional
     :param point_enabled: Boolean for whether the plot should include points
     :type point_enabled: bool, optional
     :param point_shape: The shape of point to plot,
-    see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
+        see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
     :type point_shape: str, optional
     :param point_size: The size of point to plot
     :type point_size: int, optional
     :param data_label_enabled: Boolean for whether the plot should include data labels
     :type data_label_enabled: bool, optional
     :param data_label_placement: The placement of the data label to plot,
-    see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
     :type data_label_placement: str, optional
     :param color: A color to override the existing palette. Parameters can either
-    be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-    for accepted named colors
+        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+        for accepted named colors
     :type color: str, optional
     """
 
@@ -298,11 +298,11 @@ class Column(Series):
     :param data_label_enabled: Boolean for whether the plot should include data labels
     :type data_label_enabled: bool, optional
     :param data_label_placement: The placement of the data label to plot,
-    see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
     :type data_label_placement: str, optional
     :param color: A color to override the existing palette. Parameters can either
-    be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-    for accepted named colors
+        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+        for accepted named colors
     :type color: str, optional
     """
 
@@ -325,25 +325,25 @@ class Area(Series):
     :param y_columns: The columns to plot. None or an empty list will plot all columns
     :type y_columns: list, optional
     :param line_style: The style of line to plot,
-    see gslides.config.CHART_PARAMS['line_style'] for accepted parameters
+        see gslides.config.CHART_PARAMS['line_style'] for accepted parameters
     :type line_style: str, optional
     :param line_width: The width of line to plot
     :type line_width: int, optional
     :param point_enabled: Boolean for whether the plot should include points
     :type point_enabled: bool, optional
     :param point_shape: The shape of point to plot,
-    see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
+        see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
     :type point_shape: str, optional
     :param point_size: The size of point to plot
     :type point_size: int, optional
     :param data_label_enabled: Boolean for whether the plot should include data labels
     :type data_label_enabled: bool, optional
     :param data_label_placement: The placement of the data label to plot,
-    see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
     :type data_label_placement: str, optional
     :param color: A color to override the existing palette. Parameters can either
-    be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-    for accepted named colors
+        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+        for accepted named colors
     :type color: str, optional
     """
 
@@ -371,18 +371,18 @@ class Scatter(Series):
     :param y_columns: The columns to plot. None or an empty list will plot all columns
     :type y_columns: list, optional
     :param point_shape: The shape of point to plot,
-    see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
+        see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
     :type point_shape: str, optional
     :param point_size: The size of point to plot
     :type point_size: int, optional
     :param data_label_enabled: Boolean for whether the plot should include data labels
     :type data_label_enabled: bool, optional
     :param data_label_placement: The placement of the data label to plot,
-    see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
     :type data_label_placement: str, optional
     :param color: A color to override the existing palette. Parameters can either
-    be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-    for accepted named colors
+        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+        for accepted named colors
     :type color: str, optional
     """
 
@@ -414,8 +414,8 @@ class Histogram(Series):
     :param outlier_percentage: The percentile at which oberservations should be excluded
     :type outlier_percentage: float, optional
     :param color: A color to override the existing palette. Parameters can either
-    be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-    for accepted named colors
+        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+        for accepted named colors
     :type color: str, optional
     """
 
@@ -436,15 +436,15 @@ class Chart:
     """An object that configures the creation of a chart in Google sheets.
 
     :param data: The data in Google sheets that will be plotted, either
-    a GetFrame or CreateFrame object
+        a GetFrame or CreateFrame object
     :type data: :class:`gslides.SheetsFrame`
     :param x_column: The name column that corresponds to the x-values.
-    No parameter needed for a histogram.
+        No parameter needed for a histogram.
     :type x_column: str
     :param series: The :class:`gslides.addchart.series` objects to plot
     :type series: list[:class:`gslides.addchart.series`]
     :param stacking: The type of stacking to plot,
-    see gslides.config.CHART_PARAMS['stacking'] for accepted parameters
+        see gslides.config.CHART_PARAMS['stacking'] for accepted parameters
     :type stacking: str, optional
     :param title: The title for the plot
     :type title: str, optional
@@ -461,13 +461,13 @@ class Chart:
     :param y_max: The maximum value for the y axis
     :type y_max: float, optional
     :param palette: The palette to use to plot,
-    see gslides.colors.base_palettes for accepted parameters
+        see gslides.colors.base_palettes for accepted parameters
     :type palette: str, optional
     :param legend_position: The position of the legend to plot,
-    see gslides.config.CHART_PARAMS['stacking'] for accepted parameters
+        see gslides.config.CHART_PARAMS['stacking'] for accepted parameters
     :type legend_position: str, optional
     :param size: A tuple for the width and length of the plot in pixels.
-    The Google suggested size is 600 by 371 pixels.
+        The Google suggested size is 600 by 371 pixels.
     :type size: tuple, optional
     """
 

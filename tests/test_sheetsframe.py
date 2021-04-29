@@ -4,7 +4,7 @@ import pytest
 from gslides.sheetsframe import (
     CreateFrame,
     CreateSheet,
-    CreateTab,
+    CreateSpreadsheet,
     GetFrame,
     SheetsFrame,
 )
@@ -40,11 +40,11 @@ class MockService:
         return self
 
 
-class TestCreateTab:
+class TestCreateSheet:
     def setup(self):
-        self.object = CreateTab(
+        self.object = CreateSheet(
             spreadsheet_id="abc123",
-            tab_name="Test",
+            sheet_name="Test",
         )
 
     def test_render_json(self):
@@ -73,11 +73,11 @@ class TestCreateTab:
         assert self.object.executed
 
 
-class TestCreateSheet:
+class TestCreateSpreadsheet:
     def setup(self):
-        self.object = CreateSheet(
+        self.object = CreateSpreadsheet(
             title="Test",
-            tab_name="first",
+            sheet_name="first",
         )
 
     def test_render_json(self):
