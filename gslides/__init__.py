@@ -33,4 +33,4 @@ from .sheetsframe import (  # noqa
     CreateSpreadsheet,
     GetFrame,
 )
-from .slides import CreatePresentation, CreateSlide  # noqa
+from .slides import CreatePresentation, CreateSlide, Table  # noqa

@@ -304,3 +304,18 @@ def validate_cell_name(x: str) -> str:
             raise ValueError("Invalid cell name.")
     else:
         raise ValueError("Invalid cell name.")
+
+
+def determine_col_proportion(df):
+    col_size = df.apply(
+        lambda x: max(x.astype("str").apply(lambda y: len(y))), axis=0
+    ).values
+    per_col_size = col_size / sum(col_size)
+    return per_col_size
+
+
+def black_or_white(rgb):
+    if rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722 > 0.5:
+        return (0, 0, 0)
+    else:
+        return (1, 1, 1)
