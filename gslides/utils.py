@@ -306,7 +306,15 @@ def validate_cell_name(x: str) -> str:
         raise ValueError("Invalid cell name.")
 
 
-def determine_col_proportion(df):
+def determine_col_proportion(df: pd.DataFrame) -> np.ndarray:
+    """Determines the percent size of a column based on the length of observiations
+
+    :param type df: Dataframe that will become a table
+    :type df: pd.DataFrame
+    :return: An array of proportions
+    :rtype: np.ndarray
+
+    """
     col_size = df.apply(
         lambda x: max(x.astype("str").apply(lambda y: len(y))), axis=0
     ).values
@@ -314,7 +322,17 @@ def determine_col_proportion(df):
     return per_col_size
 
 
-def black_or_white(rgb):
+def black_or_white(rgb: Tuple[float, ...]) -> Tuple[float, ...]:
+    """Determines based on the luminosity of a color wether the text on top of
+    that color should be black or white. See the following:
+    https://en.wikipedia.org/wiki/Luminance_%28relative%29
+
+    :param rgb: The rgb values of the color
+    :type rgb: tuple
+    :return: Black or white rgb
+    :rtype: tuple
+
+    """
     if rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722 > 0.5:
         return (0, 0, 0)
     else:
