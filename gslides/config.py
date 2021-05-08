@@ -36,7 +36,7 @@ class Creds:
         self.sld_srvc = build("slides", "v1", credentials=credentials)
 
     @property
-    def sheet_service(self) -> Optional[Resource]:
+    def sheet_service(self) -> Resource:
         """Returns the connects to the sheets API
 
         :raises RuntimeError: Must run set_credentials before executing method
@@ -49,7 +49,7 @@ class Creds:
             raise RuntimeError("Must run set_credentials before executing method")
 
     @property
-    def slide_service(self) -> Optional[Resource]:
+    def slide_service(self) -> Resource:
         """Returns the connects to the slides API
 
         :raises RuntimeError: Must run set_credentials before executing method

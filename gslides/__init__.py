@@ -25,12 +25,9 @@ def intialize_credentials(credentials: Optional[Credentials]) -> None:
     creds.set_credentials(credentials)
 
 
-from .addchart import Area, Chart, Column, Histogram, Line, Scatter  # noqa
+from .chart import Chart, Series  # noqa
 from .colors import Palette  # noqa
-from .sheetsframe import (  # noqa
-    CreateFrame,
-    CreateSheet,
-    CreateSpreadsheet,
-    GetFrame,
-)
-from .slides import CreatePresentation, CreateSlide, Table  # noqa
+from .frame import Frame  # noqa
+from .presentation import Presentation  # noqa
+from .spreadsheet import Spreadsheet  # noqa
+from .table import Table  # noqa
