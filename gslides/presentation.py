@@ -10,7 +10,6 @@ from .chart import Chart
 from .table import Table
 from .utils import optimize_size, validate_params_float
 
-
 TLayout = TypeVar("TLayout", bound="Layout")
 TPresentation = TypeVar("TPresentation", bound="Presentation")
 
@@ -459,10 +458,11 @@ class AddSlide:
                 obj.create((int(x_len), int(y_len)))
         self.sheet_executed = True
 
-    def execute(self) -> None:
+    def execute(self) -> str:
         """Executes the sheets & slides API call."""
         self.execute_sheet()
         self.execute_slide()
+        return self.sl_id
 
 
 class Presentation:
@@ -577,11 +577,11 @@ class Presentation:
             title,
             notes,
         )
-        sl.execute()
+        output = sl.execute()
         if insertion_index is None:
-            self.sl_ids.append(sl.sl_id)
+            self.sl_ids.append(output)
         else:
-            self.sl_ids.insert(insertion_index, sl.sl_id)
+            self.sl_ids.insert(insertion_index, output)
 
     def rm_slide(self, slide_id: str) -> None:
         """Removes a slide based on a slide id.

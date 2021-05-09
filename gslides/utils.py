@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
 import re
-
 from decimal import Decimal
 from typing import Any, Dict, List, Tuple, Union
 
@@ -77,7 +76,7 @@ def json_chunk_extract(
 
 def json_dict_extract(
     obj: Dict[str, Any],
-    keys,
+    keys: Tuple,
 ) -> Dict:
     """Recursively fetch chunks from nested JSON based on a given key, value pair.
 
