@@ -481,7 +481,6 @@ class Chart:
         y_max: Optional[float] = None,
         palette: Optional[str] = None,
         legend_position: Optional[str] = None,
-        size: Tuple[int, int] = (600, 371),
     ) -> None:
         """Constructor method"""
         self.type = self._determine_chart_type(series)
@@ -499,7 +498,6 @@ class Chart:
         self.y_max = y_max
         self.palette = palette
         self.legend_position = legend_position
-        self.size = (int(size[0]), int(size[1]))
         self.header_count = 1
         self.executed = False
         self.ch_id: Optional[str] = None
@@ -585,11 +583,13 @@ class Chart:
                 self.bucket_size = cast(Optional[int], serie.params_dict["bucket_size"])
         return series_mapping
 
-    def render_basic_chart_json(self) -> dict:
+    def render_basic_chart_json(self, size: Tuple[int, int]) -> dict:
         """Renders the json for the creation of a basic chart. See here
         https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec
         for information about basic charts.
 
+        :param size: Tuple of width and height in PX
+        :type size: tuple
         :return: json for the API call
         :rtype: dict
         """
@@ -664,8 +664,8 @@ class Chart:
                         },
                         "offsetXPixels": 0,
                         "offsetYPixels": 0,
-                        "widthPixels": self.size[0],
-                        "heightPixels": self.size[1],
+                        "widthPixels": size[0],
+                        "heightPixels": size[1],
                     }
                 },
             }
@@ -733,11 +733,13 @@ class Chart:
             ] = self.y_max
         return json
 
-    def render_histogram_chart_json(self) -> dict:
+    def render_histogram_chart_json(self, size: Tuple[int, int]) -> dict:
         """Renders the json for the creation of a basic chart. See here
         https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec
         for information about basic charts.
 
+        :param size: Tuple of width and height in PX
+        :type size: tuple
         :return: json for the API call
         :rtype: dict
         """
@@ -774,8 +776,8 @@ class Chart:
                         },
                         "offsetXPixels": 0,
                         "offsetYPixels": 0,
-                        "widthPixels": self.size[0],
-                        "heightPixels": self.size[1],
+                        "widthPixels": size[0],
+                        "heightPixels": size[1],
                     }
                 },
             }
@@ -799,18 +801,21 @@ class Chart:
             json["chart"]["spec"]["histogramChart"]["series"].append(series_json)
         return json
 
-    def create(self) -> dict:
+    def create(self, size: Tuple[int, int] = (600, 371)) -> dict:
         """Creates the chart in Googe sheets
 
+        :param size: Tuple of width and height in PX
+        :type size: tuple
         :return: The json returned by the call
         :rtype: dict
 
         """
+        size = (int(size[0]), int(size[1]))
         service: Any = creds.sheet_service
         if self.type == "HISTOGRAM":
-            json = self.render_histogram_chart_json()
+            json = self.render_histogram_chart_json(size)
         else:
-            json = self.render_basic_chart_json()
+            json = self.render_basic_chart_json(size)
         output: dict = (
             service.spreadsheets()
             .batchUpdate(

@@ -60,11 +60,6 @@ class Table:
         self.stub_background_color = hex_to_rgb(translate_color(stub_background_color))
         self.header_font_color = black_or_white(self.header_background_color)
         self.stub_font_color = black_or_white(self.stub_background_color)
-        self.presentation_id = ""
-        self.sl_id = ""
-        self.translate_x = 0
-        self.translate_y = 0
-        self.size = (3000000, 3000000)
 
     def _resolve_df(self, data: Union[Frame, pd.DataFrame]):
         """Outputs a cleaned dataframe
@@ -419,20 +414,32 @@ class Table:
             )
         return requests
 
-    def render_update_table_json(self, tbl_id: str) -> dict:
+    def render_update_table_json(
+        self,
+        tbl_id: str,
+        size: Tuple[float, float],
+        translate_x: float,
+        translate_y: float,
+    ) -> dict:
         """Renders the json for the update of table properties.
 
         :param tbl_id: Table id
         :type tbl_id: str
+        :param size: Tuple of width and height in EMU
+        :type size: tuple
+        :param translate_x: The number of EMU to translate the object by
+        :type translate_x: float
+        :param translate_y: The number of EMU to translate the object by
+        :type translate_y: float
         :return: json for the API call
         :rtype: dict
 
         """
         json: Dict[str, Any] = {"requests": []}
-        col_widths = self.size[0] * determine_col_proportion(self.df)
-        row_height = self.size[1] / (self.df.shape[0])
+        col_widths = size[0] * determine_col_proportion(self.df)
+        row_height = size[1] / (self.df.shape[0])
         json["requests"].extend(
-            self._table_move_request(tbl_id, self.translate_x, self.translate_y)
+            self._table_move_request(tbl_id, translate_x, translate_y)
         )
         json["requests"].extend(self._table_add_text_request(tbl_id))
         json["requests"].extend(
@@ -459,23 +466,46 @@ class Table:
         json["requests"].extend(self._table_update_column(tbl_id, col_widths))
         return json
 
-    def create(self) -> None:
-        """Creates the table in Google slides"""
+    def create(
+        self,
+        presentation_id: str,
+        slide_id: str,
+        size: Tuple[float, float] = (3000000, 3000000),
+        translate_x: float = 0,
+        translate_y: float = 0,
+    ) -> None:
+        """Creates the table in Google slides
+
+        :param presentation_id: The presentation_id of the presentation to create
+            to create table in
+        :type presentation_id: str
+        :param slide_id: The slide_id of the slide to create table in
+        :type slide_id: str
+        :param size: Tuple of width and height in EMU
+        :type size: tuple
+        :param translate_x: The number of EMU to translate the object by
+        :type translate_x: float
+        :param translate_y: The number of EMU to translate the object by
+        :type translate_y: float
+        """
         service = creds.slide_service
         output = (
             service.presentations()
             .batchUpdate(
-                presentationId=self.presentation_id,
-                body=self.render_create_table_json(self.sl_id),
+                presentationId=presentation_id,
+                body=self.render_create_table_json(slide_id),
             )
             .execute()
         )
         (
             service.presentations()
             .batchUpdate(
-                presentationId=self.presentation_id,
+                presentationId=presentation_id,
                 body=self.render_update_table_json(
-                    output["replies"][0]["createTable"]["objectId"]
+                    output["replies"][0]["createTable"]["objectId"],
+                    size,
+                    translate_x,
+                    translate_y,
                 ),
             )
             .execute()

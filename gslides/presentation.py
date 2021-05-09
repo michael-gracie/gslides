@@ -3,7 +3,7 @@
 Creates the slides and charts in Google slides
 """
 
-from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar
+from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
 from . import creds
 from .chart import Chart
@@ -16,6 +16,23 @@ TPresentation = TypeVar("TPresentation", bound="Presentation")
 
 
 class Layout:
+    """A class that manages the layout of objects on a canvas
+
+    :param float x_length: The width of the canvase
+    :type x_length: float
+    :param float y_length: The height of the canvase
+    :type y_length: float
+    :param layout: The grid layout of objects on the canvase (rows x columns)
+    :type layout: tuple
+    :param float x_border: The % margin for the x border
+    :type x_border: float
+    :param float y_border: The % margin for the y border
+    :type y_border: float
+    :param float spacing: The % spacing between objects
+    :type spacing: float
+
+    """
+
     def __init__(
         self,
         x_length: float,
@@ -104,8 +121,8 @@ class AddSlide:
 
     :param presentation_id: The presentation_id of the created presentation
     :type presentation_id: str
-    :param charts: :class:`Chart` objects that will be created
-    :type charts: list
+    :param objects: List of :class:`Chart` or :class:`Table` objects
+    :type objects: list
     :param layout: The layout of the chart objects in # of rows by # of columns
     :type layout: tuple
     :param insertion_index: The slide index to insert new slide to.
@@ -119,12 +136,16 @@ class AddSlide:
     :type left_margin: int, optional
     :param right_margin: The right margin of the presentation in EMU
     :type right_margin: int, optional
+    :param title: The text for the title textbox
+    :type title: str, optional
+    :param notes: The text for the notes textbox
+    :type notes: str, optional
     """
 
     def __init__(
         self,
         presentation_id: str,
-        objects: List[Chart],
+        objects: List[Union[Chart, Table]],
         layout: Tuple[int, int],
         insertion_index: Optional[int] = None,
         top_margin: int = 1017724,
@@ -198,6 +219,8 @@ class AddSlide:
     def render_json_create_textboxes(self, slide_id: str) -> dict:
         """Renders the json to create the textboxes in Google slides.
 
+        :param slide_id: The slide_id of the slide to create textbox in
+        :type slide_id: str
         :return: The json to do the update
         :rtype: dict
         """
@@ -250,6 +273,10 @@ class AddSlide:
     ) -> dict:
         """Renders the json to format the textboxes in Google slides.
 
+        :param title_box_id: The id of the title box
+        :type title_box_id: int
+        :param notes_box_id: The id of the notes box
+        :type notes_box_id: int
         :return: The json to do the update
         :rtype: dict
         """
@@ -313,6 +340,14 @@ class AddSlide:
     ) -> dict:
         """Renders the json to copy the charts in Google slides.
 
+        :param chart: The chart to copy
+        :type chart: :class:`Chart`
+        :param size: Tuple of width and height in EMU
+        :type size: tuple
+        :param translate_x: The number of EMU to translate the object by
+        :type translate_x: float
+        :param translate_y: The number of EMU to translate the object by
+        :type translate_y: float
         :return: The json to do the update
         :rtype: dict
         """
@@ -394,12 +429,13 @@ class AddSlide:
                     .execute()
                 )
             elif isinstance(obj, Table):
-                obj.presentation_id = self.presentation_id
-                obj.sl_id = self.sl_id
-                obj.size = self.layout_obj.object_size
-                obj.translate_x = self.left_margin + translate_x
-                obj.translate_y = self.top_margin + translate_y
-                obj.create()
+                obj.create(
+                    self.presentation_id,
+                    self.sl_id,
+                    self.layout_obj.object_size,
+                    self.left_margin + translate_x,
+                    self.top_margin + translate_y,
+                )
 
     def execute_slide(self) -> None:
         """Executes the slides API call."""
@@ -420,8 +456,7 @@ class AddSlide:
         )
         for obj in self.objects:
             if isinstance(obj, Chart):
-                obj.size = (int(x_len), int(y_len))
-                obj.create()
+                obj.create((int(x_len), int(y_len)))
         self.sheet_executed = True
 
     def execute(self) -> None:
@@ -431,10 +466,18 @@ class AddSlide:
 
 
 class Presentation:
-    """An object that represents a presentation in Google slides
+    """An object that represents a presentation in Google slides. Initialize the
+    object through either the :class:`Presentation.get` or
+    :class:`Presentation.create` class method.
 
     :param name: Name of the presentation
     :type name: str
+    :param pr_id: The id of the presentation
+    :type pr_id: str
+    :param sl_ids: A list of the slide ids
+    :type sl_ids: list
+    :param initialized: Whether to object has been initialized
+    :type initialized: bool
     """
 
     def __init__(
@@ -452,6 +495,14 @@ class Presentation:
 
     @classmethod
     def create(cls: Type[TPresentation], name: str = "Untitled") -> TPresentation:
+        """Class method that creates a new presentation.
+
+        :param name: Name of the presentation
+        :type name: str
+        :return: A presentation object
+        :rtype: :class:`Presentation`
+
+        """
         service: Any = creds.slide_service
         output = service.presentations().create(body={"title": name}).execute()
         pr_id = output["presentationId"]
@@ -463,6 +514,14 @@ class Presentation:
 
     @classmethod
     def get(cls: Type[TPresentation], presentation_id: str) -> TPresentation:
+        """Class method that gets a presentation.
+
+        :param presentation_id: Id of the presentation
+        :type presentation_id: str
+        :return: A presentation object
+        :rtype: :class:`Presentation`
+
+        """
         service: Any = creds.slide_service
         output = service.presentations().get(presentationId=presentation_id).execute()
         name = output["title"]
@@ -474,7 +533,7 @@ class Presentation:
 
     def add_slide(
         self,
-        objects: List[Chart],
+        objects: List[Union[Chart, Table]],
         layout: Tuple[int, int],
         insertion_index: Optional[int] = None,
         top_margin: int = 1017724,
@@ -484,6 +543,28 @@ class Presentation:
         title: str = "Title placeholder",
         notes: str = "Notes placeholder",
     ) -> None:
+        """Add a slide to the presentation.
+
+        :param objects: List of :class:`Chart` or :class:`Table` objects
+        :type objects: list
+        :param layout: The layout of the chart objects in # of rows by # of columns
+        :type layout: tuple
+        :param insertion_index: The slide index to insert new slide to.
+            The lack of a parameter will insert the slide to the end of the presentation
+        :type insertion_index: int, optional
+        :param top_margin: The top margin of the presentation in EMU
+        :type top_margin: int, optional
+        :param bottom_margin: The bottom margin of the presentation in EMU
+        :type bottom_margin: int, optional
+        :param left_margin: The left margin of the presentation in EMU
+        :type left_margin: int, optional
+        :param right_margin: The right margin of the presentation in EMU
+        :type right_margin: int, optional
+        :param title: The text for the title textbox
+        :type title: str, optional
+        :param notes: The text for the notes textbox
+        :type notes: str, optional
+        """
         sl = AddSlide(
             self.presentation_id,
             objects,
@@ -502,13 +583,18 @@ class Presentation:
         else:
             self.sl_ids.insert(insertion_index, sl.sl_id)
 
-    def rm_slide(self, sl_id: str) -> None:
+    def rm_slide(self, slide_id: str) -> None:
+        """Removes a slide based on a slide id.
+
+        :param slide_id: The slide_id of the slide to delete
+        :type slide_id: str
+        """
         service: Any = creds.slide_service
         service.presentations().batchUpdate(
             presentationId=self.presentation_id,
-            body={"requests": [{"deleteObject": {"objectId": sl_id}}]},
+            body={"requests": [{"deleteObject": {"objectId": slide_id}}]},
         ).execute()
-        self.sl_ids.remove(sl_id)
+        self.sl_ids.remove(slide_id)
 
     @property
     def presentation_id(self) -> str:
