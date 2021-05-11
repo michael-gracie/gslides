@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from gslides.slides import CreatePresentation, CreateSlide, Layout
+from gslides.presentation import AddSlide, Layout, Presentation
 
 
 class MockService:
@@ -24,30 +24,6 @@ class MockService:
         return self
 
 
-class TestCreatePresentation:
-    def setup(self):
-        self.object = CreatePresentation(name="pytest")
-
-    def test_execute(self, monkeypatch):
-        def mock_service(self):
-            return MockService()
-
-        monkeypatch.setattr(
-            "gslides.config.Creds.slide_service", property(mock_service)
-        )
-
-        def mock_return(self):
-            return {"presentationId": "abcd"}
-
-        monkeypatch.setattr(MockService, "execute", mock_return)
-        self.object.execute()
-        assert self.object.executed == True
-
-    @pytest.mark.xfail(reason=RuntimeError)
-    def test_presentation_id(self):
-        assert self.object.presentation_id == None
-
-
 class TestLayout:
     def setup(self):
         self.object = Layout(x_length=10, y_length=10, layout=(1, 2))
@@ -68,7 +44,7 @@ class TestLayout:
         np.testing.assert_allclose(self.object.__next__(), (5.1, 0.1))
 
 
-class MockSheetsFrame:
+class MockFrame:
     def __init__(self, spreadsheet_id):
         self.spreadsheet_id = spreadsheet_id
 
@@ -79,17 +55,17 @@ class MockChart:
         self.chart_id = chart_id
         self.size = size
 
-    def execute(self, *args, **kwargs):
+    def create(self, *args, **kwargs):
         return None
 
 
-class TestCreateSlide:
+class TestAddSlide:
     def setup(self):
-        sh = MockSheetsFrame("zyxw")
+        sh = MockFrame("zyxw")
         self.ch = MockChart(sh, 1234, (4.4, 9.8))
-        self.object = CreateSlide(
+        self.object = AddSlide(
             presentation_id="abcd",
-            charts=[self.ch, self.ch],
+            objects=[self.ch, self.ch],
             layout=(1, 2),
             insertion_index=2,
         )
@@ -175,14 +151,14 @@ class TestCreateSlide:
         assert self.object.title_bx_id == 2222
         assert self.object.notes_bx_id == 3333
 
-    def test_execute_copy_charts(self, monkeypatch):
+    def test_execute_populate_objects(self, monkeypatch):
         def mock_service(self):
             return MockService()
 
         monkeypatch.setattr(
             "gslides.config.Creds.slide_service", property(mock_service)
         )
-        self.object._execute_copy_charts()
+        self.object._execute_populate_objects()
         assert True
 
     def test_execute_slide(self, monkeypatch):
@@ -195,7 +171,7 @@ class TestCreateSlide:
         monkeypatch.setattr(
             self.object, "_execute_create_format_textboxes", mock_return
         )
-        monkeypatch.setattr(self.object, "_execute_copy_charts", mock_return)
+        monkeypatch.setattr(self.object, "_execute_populate_objects", mock_return)
         self.object.execute_slide()
         assert self.object.slide_executed
 
@@ -222,3 +198,73 @@ class TestCreateSlide:
         monkeypatch.setattr(self.object, "execute_slide", mock_return)
         self.object.execute()
         assert True
+
+
+class TestPresentation:
+    def setup(self):
+        self.object = Presentation(
+            name="test",
+            pr_id="abcd",
+            sl_ids=[1111, 2222, 3333],
+            initialized=True,
+        )
+
+    def test_create(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+
+        def mock_return(self):
+            return {"presentationId": "abcd"}
+
+        monkeypatch.setattr(MockService, "execute", mock_return)
+        assert Presentation.create(name="test").pr_id == "abcd"
+
+    def test_get(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+
+        def mock_return(self):
+            return {
+                "slides": [{"objectId": 1111}, {"objectId": 2222}, {"objectId": 3333}],
+                "title": "test",
+            }
+
+        monkeypatch.setattr(MockService, "execute", mock_return)
+        assert Presentation.get(presentation_id="abcd").sl_ids == [1111, 2222, 3333]
+
+    def test_add_slide(self, monkeypatch):
+        def mock_return(self):
+            return 4444
+
+        monkeypatch.setattr(AddSlide, "execute", mock_return)
+        self.object.add_slide(objects=[], layout=(1, 1))
+        assert self.object.sl_ids[-1] == 4444
+
+    def test_rm_slide(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+
+        def mock_return(self):
+            return None
+
+        monkeypatch.setattr(MockService, "execute", mock_return)
+        self.object.rm_slide(slide_id=3333)
+        assert self.object.sl_ids == [1111, 2222]
+
+    def test_presentation_id(self):
+        assert self.object.presentation_id == "abcd"
+
+    def test_spreadsheet_id(self):
+        assert self.object.slide_ids == [1111, 2222, 3333]

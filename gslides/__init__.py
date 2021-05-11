@@ -10,10 +10,11 @@ from typing import Optional
 
 from google.oauth2.credentials import Credentials
 
-from .config import CHART_PARAMS, Creds
-
+from .config import CHART_PARAMS, Creds, Font, PackagePalette
 
 creds = Creds()
+package_font = Font()
+package_palette = PackagePalette()
 
 
 def intialize_credentials(credentials: Optional[Credentials]) -> None:
@@ -25,12 +26,27 @@ def intialize_credentials(credentials: Optional[Credentials]) -> None:
     creds.set_credentials(credentials)
 
 
-from .addchart import Area, Chart, Column, Histogram, Line, Scatter  # noqa
+def set_font(font: str) -> None:
+    """Sets the font for all objects
+
+    :param font: Font
+    :type font: str
+    """
+    package_font.set_font(font)
+
+
+def set_palette(palette: str) -> None:
+    """Sets the palette for all charts
+
+    :param palette: The palette to use
+    :type palette: str
+    """
+    package_palette.set_palette(palette)
+
+
+from .chart import Chart, Series  # noqa
 from .colors import Palette  # noqa
-from .sheetsframe import (  # noqa
-    CreateFrame,
-    CreateSheet,
-    CreateSpreadsheet,
-    GetFrame,
-)
-from .slides import CreatePresentation, CreateSlide, Table  # noqa
+from .frame import Frame  # noqa
+from .presentation import Presentation  # noqa
+from .spreadsheet import Spreadsheet  # noqa
+from .table import Table  # noqa

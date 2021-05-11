@@ -1,16 +1,8 @@
 import pandas as pd
 import pytest
 
-from gslides.addchart import (
-    Area,
-    Chart,
-    Column,
-    Histogram,
-    Line,
-    Scatter,
-    creds,
-)
-from gslides.sheetsframe import GetFrame
+from gslides.chart import Chart, Series
+from gslides.frame import Frame
 
 
 def test_df():
@@ -44,17 +36,17 @@ class MockService:
 
 
 def test_series_inits():
-    assert Line().__class__.__name__ == "Line"
-    assert Column().__class__.__name__ == "Column"
-    assert Area().__class__.__name__ == "Area"
-    assert Scatter().__class__.__name__ == "Scatter"
-    assert Histogram().__class__.__name__ == "Histogram"
+    assert Series.line().type == "Line"
+    assert Series.column().type == "Column"
+    assert Series.area().type == "Area"
+    assert Series.scatter().type == "Scatter"
+    assert Series.histogram().type == "Histogram"
 
 
 class TestLine:
     def setup(self):
-        self.object = Line(
-            y_columns=["a", "b", "c"],
+        self.object = Series.line(
+            series_columns=["a", "b", "c"],
             line_style="MEDIUM_DASHED",
             line_width=1,
             point_enabled=True,
@@ -82,8 +74,8 @@ class TestLine:
 
 class TestHistogram:
     def setup(self):
-        self.object = Histogram(
-            y_columns=["a", "b", "c"],
+        self.object = Series.histogram(
+            series_columns=["a", "b", "c"],
             bucket_size=10,
             outlier_percentage=0.5,
         )
@@ -95,8 +87,8 @@ class TestHistogram:
 
 class TestChart:
     def setup(self):
-        l = Line(
-            y_columns=["Blue"],
+        l = Series.line(
+            series_columns=["Blue"],
             line_style="MEDIUM_DASHED",
             line_width=1,
             point_enabled=True,
@@ -106,14 +98,17 @@ class TestChart:
             data_label_placement="BELOW",
         )
 
-        frame = GetFrame(
+        frame = Frame(
+            df=test_df(),
             spreadsheet_id="abc123",
             sheet_id=1234,
-            anchor_cell="A1",
-            bottom_right_cell="B4",
+            sheet_name="first",
+            start_column_index=1,
+            start_row_index=1,
+            end_column_index=5,
+            end_row_index=5,
+            initialized=True,
         )
-
-        frame.df = test_df()
 
         self.object = Chart(
             frame,
@@ -132,26 +127,40 @@ class TestChart:
         )
 
     @pytest.mark.xfail(reason=RuntimeError)
-    def test_sheet_id(self):
+    def test_chart_id(self):
         assert self.object.chart_id == None
 
     def test_determine_chart_type(self):
-        assert self.object._determine_chart_type([Line()]) == "LINE"
-        assert self.object._determine_chart_type([Line(), Column()]) == "COMBO"
+        assert self.object._determine_chart_type([Series.line()]) == "LINE"
+        assert (
+            self.object._determine_chart_type([Series.line(), Series.column()])
+            == "COMBO"
+        )
 
     def test_check_stacking(self):
-        assert self.object._check_stacking([Line()], False) == None
-        assert self.object._check_stacking([Column(), Line()], True) == None
+        assert self.object._check_stacking([Series.line()], False) == None
+        assert (
+            self.object._check_stacking([Series.line(), Series.column()], True) == None
+        )
 
     def test_resolve_series(self):
-        assert self.object._resolve_series()["Blue"].__class__.__name__ == "Line"
+        assert self.object._resolve_series()["Blue"].type == "Line"
 
     def test_render_basic_chart_json(self):
         assert (
-            self.object.render_basic_chart_json()["chart"]["spec"]["title"] == "pytest"
+            self.object.render_basic_chart_json((600, 371))["chart"]["spec"]["title"]
+            == "pytest"
         )
 
-    def test_execute(self, monkeypatch):
+    def test_render_histogram_chart_json(self):
+        assert (
+            self.object.render_histogram_chart_json((600, 371))["chart"]["spec"][
+                "title"
+            ]
+            == "pytest"
+        )
+
+    def test_create(self, monkeypatch):
         def mock_service(self):
             return MockService()
 
@@ -163,6 +172,5 @@ class TestChart:
             return {"chartId": 11111}
 
         monkeypatch.setattr(MockService, "execute", mock_execute)
-        self.object.execute()
+        self.object.create()
         assert self.object.ch_id == 11111
-        assert self.object.executed
