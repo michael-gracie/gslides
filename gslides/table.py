@@ -7,7 +7,7 @@ from typing import Any, Dict, List, Tuple, Union
 
 import pandas as pd
 
-from . import creds
+from . import creds, package_font
 from .colors import translate_color
 from .frame import Frame
 from .utils import (
@@ -231,7 +231,7 @@ class Table:
                                     }
                                 },
                                 "bold": bold,
-                                "fontFamily": "Arial",
+                                "fontFamily": package_font.font,
                                 "fontSize": {"magnitude": font_size, "unit": "PT"},
                             },
                             "textRange": {"type": "ALL"},

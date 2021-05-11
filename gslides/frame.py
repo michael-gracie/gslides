@@ -17,7 +17,6 @@ from .utils import (
     validate_cell_name,
 )
 
-
 TFrame = TypeVar("TFrame", bound="Frame")
 
 
@@ -118,8 +117,8 @@ class CreateFrame:
         :return: Cleaned :class:`pandas.DataFrame`
         :type df: :class:`pandas.DataFrame`
         """
-        self.df = clean_nan(self.df)
         self.df = self.df.applymap(clean_dtypes)
+        self.df = clean_nan(self.df)
 
     def render_update_json(self) -> dict:
         """Renders the json to update the data in Google sheets

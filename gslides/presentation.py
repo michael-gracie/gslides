@@ -5,7 +5,7 @@ Creates the slides and charts in Google slides
 
 from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
-from . import creds
+from . import creds, package_font
 from .chart import Chart
 from .table import Table
 from .utils import optimize_size, validate_params_float
@@ -294,7 +294,7 @@ class AddSlide:
                         "textRange": {"type": "ALL"},
                         "style": {
                             "bold": True,
-                            "fontFamily": "Arial",
+                            "fontFamily": package_font.font,
                             "fontSize": {"magnitude": 24, "unit": "PT"},
                         },
                         "fields": "bold,fontFamily,fontSize",
@@ -320,7 +320,7 @@ class AddSlide:
                         "textRange": {"type": "ALL"},
                         "style": {
                             "bold": True,
-                            "fontFamily": "Arial",
+                            "fontFamily": package_font.font,
                             "fontSize": {"magnitude": 7, "unit": "PT"},
                         },
                         "fields": "bold,fontFamily,fontSize",

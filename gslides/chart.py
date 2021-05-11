@@ -2,10 +2,10 @@
 """
 Charts & series class
 """
-# fmt: off
+
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, TypeVar, cast
 
-from . import creds
+from . import creds, package_font, package_palette
 from .colors import Palette, translate_color
 from .frame import Frame
 from .utils import (
@@ -15,9 +15,6 @@ from .utils import (
     validate_params_int,
     validate_params_list,
 )
-
-
-# fmt: on
 
 TSeries = TypeVar("TSeries", bound="Series")
 
@@ -355,7 +352,7 @@ class Series:
                     "placement": self.params_dict["data_label_placement"],
                     "type": "DATA",
                     "textFormat": {
-                        "fontFamily": "Roboto",  # TODO figure out what to do
+                        "fontFamily": package_font.font,
                         "fontSize": 12,
                     },
                 }
@@ -599,7 +596,7 @@ class Chart:
                     "title": self.title,
                     "titleTextPosition": {"horizontalAlignment": "CENTER"},
                     "titleTextFormat": {
-                        "fontFamily": "Roboto",
+                        "fontFamily": package_font.font,
                         "fontSize": 16,
                         "bold": True,
                         "foregroundColor": {"red": 0, "green": 0, "blue": 0},
@@ -614,7 +611,7 @@ class Chart:
                                 "position": "BOTTOM_AXIS",
                                 "title": self.x_axis_label,
                                 "format": {
-                                    "fontFamily": "Roboto",
+                                    "fontFamily": package_font.font,
                                     "fontSize": 14,
                                     "bold": True,
                                     "foregroundColor": {
@@ -632,7 +629,7 @@ class Chart:
                                 "position": "LEFT_AXIS",
                                 "title": self.y_axis_label,
                                 "format": {
-                                    "fontFamily": "Roboto",
+                                    "fontFamily": package_font.font,
                                     "fontSize": 14,
                                     "bold": True,
                                     "foregroundColor": {
@@ -653,7 +650,7 @@ class Chart:
                         "headerCount": self.header_count,
                     },
                     "hiddenDimensionStrategy": "SKIP_HIDDEN_ROWS_AND_COLUMNS",
-                    "fontName": "Roboto",
+                    "fontName": package_font.font,
                 },
                 "position": {
                     "overlayPosition": {
@@ -687,6 +684,8 @@ class Chart:
         series_mapping = self._resolve_series()
         if self.palette:
             p: Optional[Palette] = Palette(self.palette)
+        elif package_palette.palette:
+            p = Palette(package_palette.palette)
         else:
             p = None
         for key, val in series_mapping.items():
@@ -750,7 +749,7 @@ class Chart:
                     "title": self.title,
                     "titleTextPosition": {"horizontalAlignment": "CENTER"},
                     "titleTextFormat": {
-                        "fontFamily": "Roboto",
+                        "fontFamily": package_font.font,
                         "fontSize": 16,
                         "bold": True,
                         "foregroundColor": {"red": 0, "green": 0, "blue": 0},
@@ -765,7 +764,7 @@ class Chart:
                         "outlierPercentile": self.outlier_percentage,
                     },
                     "hiddenDimensionStrategy": "SKIP_HIDDEN_ROWS_AND_COLUMNS",
-                    "fontName": "Roboto",
+                    "fontName": package_font.font,
                 },
                 "position": {
                     "overlayPosition": {

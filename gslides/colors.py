@@ -4,13 +4,11 @@ Manages the color configuration
 """
 
 import os
-
 from typing import Dict, List, Optional, Tuple, TypeVar
 
 import yaml
 
 from .utils import hex_to_rgb, validate_hex_color_code
-
 
 CURR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,6 +17,13 @@ with open(os.path.join(CURR_DIR, "config/color_mapping.yaml"), "r") as f:
 
 with open(os.path.join(CURR_DIR, "config/base_palettes.yaml"), "r") as f:
     base_palettes: Dict[str, List[str]] = yaml.safe_load(f)
+
+custom_palettes_path = os.path.join(
+    os.path.expanduser("~"), ".gslides/custom_palettes.yaml"
+)
+if os.path.isfile(custom_palettes_path):
+    with open(custom_palettes_path, "r") as f:
+        base_palettes.update(yaml.safe_load(f))
 
 
 def translate_color(color: str) -> str:
