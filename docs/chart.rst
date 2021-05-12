@@ -28,14 +28,14 @@ Needs to be manipulated like so:
 
 This can be done through `df.pivot() <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html>`_.
 
-Utilizing the ``y_columns`` parameter
+Utilizing the ``series_columns`` parameter
 ------------------------------------------
 
 Each series in a chart can be formatted in a unique way. For this reason, users are able to pass multiple ``Series`` objects into a ``Chart`` object such that they have full control over the display for a given chart. In fact, it is possible to pass different ``Series`` types into the same chart.
 
-- If ``y_columns`` is ``None`` or ``[]``, the chart will plot all columns in the ``SheetFrame`` except the ``x_column``.
+- If ``series_columns`` is ``None`` or ``[]``, the chart will plot all columns in the ``Frame`` object except the ``x_column``.
 - If different ``Series`` types are passed into the same chart, the chart is considered a ``COMBO`` chart. Only combinations of ``Area``, ``Columns`` and ``Line`` series are allowed.
-- If the same ``y_column`` is set in multiple ``Series`` objects, the latter most configuration of that column will be used.
+- If the same ``series_column`` is set in multiple ``Series`` objects, the latter most configuration of that column will be used.
 
 This provides great flexibility. A common pattern is to set all columns to a base configuration by passing ``None``. Then, creating another ``Series`` object to override that configuration for a single column to set an alternative color or style, highlighting that particular series.
 
@@ -47,7 +47,7 @@ Various parameters can be set based on the type of series.
 .. csv-table::
    :header: "Parameter", "Line", "Area", "Column", "Scatter", "Histogram"
 
-   "y_columns","Y","Y","Y","Y","Y"
+   "series_columns","Y","Y","Y","Y","Y"
    "line_style","Y","Y",,,
    "line_width","Y","Y",,,
    "point_enabled","Y","Y",,,
@@ -77,4 +77,4 @@ See the ``CHART_PARAMS`` dictionary for valid stacking types.
 Histogram
 ------------------------------------------
 
-Histograms are unique in that Google will perform the bucketing of values before plotting. In this way ``x_column`` for Histogram charts can simply be set to a dummy string.
+Histograms are unique in that Google will perform the bucketing of values before plotting. In this way ``x_axis_column`` for Histogram charts can simply be set to a dummy string.

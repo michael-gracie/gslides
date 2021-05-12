@@ -10,6 +10,8 @@ Welcome to gslides's documentation!
    Bring Your Own Credentials <byoc>
    Basic Usage <basic>
    Chart <chart>
+   Tables <table>
+   Styling <styling>
    API Reference <modules>
 
 Indices and tables
