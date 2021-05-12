@@ -112,6 +112,8 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Bring Your Own Credentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
 </ul>
@@ -144,12 +146,13 @@
 <p>You will need to create a project with the Google Slides and Sheets API enabled</p>
 </div>
 <p><strong>2. Create credentials</strong></p>
-<p>Again consult Google and follow this <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#configure_the_oauth_consent_screen">guide</a> to configure the OAuth consent screen.</p>
-<p>And create your credentials from the instructions <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#create_a_credential">here</a>. You’ll need to download the credentials <code class="docutils literal notranslate"><span class="pre">.json</span></code> file onto your local. <em>Be sure not share these credentials with anyone, the file should not be shared on Github</em>.</p>
-<p><strong>3. Update the URIs</strong></p>
-<p>The URI are the endpoints where the OAuth 2.0 server can send responses. In this case because we are utilizing a jupyter notebook we must allow responses to <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. Update the values like so, selecting a port which you are going to use.</p>
-<img alt="_images/uri.png" src="_images/uri.png"/>
-<p><strong>4. Launch a Jupyter notebook, get the token and load credentials</strong></p>
+<p>Consult Google and follow this <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#configure_the_oauth_consent_screen">guide</a> to configure the OAuth consent screen. This is the screen that will appear when you attempt to use your credentials to retrieve a token.</p>
+<p>Next, create your credentials from the instructions <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#create_a_credential">here</a>. For simplicity, create a desktop application. Once finished, you’ll need to download the credentials <code class="docutils literal notranslate"><span class="pre">.json</span></code> file onto your local.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be sure not share your credentials with anyone. The file should not be pushed to Github.</p>
+</div>
+<p><strong>3. Launch a Jupyter notebook, get the token and load credentials</strong></p>
 <p>Run the code below, replacing the necessary values to obtain the <code class="docutils literal notranslate"><span class="pre">creds</span></code> object. These are the credentials you pass to <code class="docutils literal notranslate"><span class="pre">gslides</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">from</span> <span class="nn">googleapiclient.discovery</span> <span class="kn">import</span> <span class="n">build</span>
@@ -174,13 +177,14 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">flow</span> <span class="o">=</span> <span class="n">InstalledAppFlow</span><span class="o">.</span><span class="n">from_client_secrets_file</span><span class="p">(</span>
             <span class="s1">'&lt;PATH_TO_CREDS&gt;'</span><span class="p">,</span> <span class="n">SCOPES</span><span class="p">)</span>
-        <span class="n">creds</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">run_local_server</span><span class="p">(</span><span class="n">port</span><span class="o">=&lt;</span><span class="n">PORT</span><span class="o">&gt;</span><span class="p">)</span>
+        <span class="n">creds</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">run_local_server</span><span class="p">()</span>
     <span class="c1"># Save the credentials for the next run</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'token.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">token</span><span class="p">:</span>
         <span class="n">token</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">creds</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><strong>5. Initialize the credentials with gslides</strong></p>
+<p>The first time you run this block, you will be prompted to allow access to Google slides &amp; sheets through your Google account.</p>
+<p><strong>4. Initialize the credentials with gslides</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gslides</span><span class="o">.</span><span class="n">intialize_credentials</span><span class="p">(</span><span class="n">creds</span><span class="p">)</span>
 </pre></div>
 </div>

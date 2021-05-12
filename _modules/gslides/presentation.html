@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>gslides.slides - gslides 0.1.0 documentation</title>
+        <title>gslides.presentation - gslides 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../_static/pygments_dark.css">
@@ -112,6 +112,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../byoc.html">Bring Your Own Credentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../basic.html">Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../gslides.html">gslides package</a></li>
 </ul>
@@ -130,66 +132,41 @@
         <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <h1>Source code for gslides.slides</h1><div class="highlight"><pre>
+        <h1>Source code for gslides.presentation</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">"""</span>
 <span class="sd">Creates the slides and charts in Google slides</span>
 <span class="sd">"""</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">creds</span>
-<span class="kn">from</span> <span class="nn">.addchart</span> <span class="kn">import</span> <span class="n">Chart</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">creds</span><span class="p">,</span> <span class="n">package_font</span>
+<span class="kn">from</span> <span class="nn">.chart</span> <span class="kn">import</span> <span class="n">Chart</span>
+<span class="kn">from</span> <span class="nn">.table</span> <span class="kn">import</span> <span class="n">Table</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">optimize_size</span><span class="p">,</span> <span class="n">validate_params_float</span>
 
+<span class="n">TLayout</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TLayout"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Layout"</span><span class="p">)</span>
+<span class="n">TPresentation</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TPresentation"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Presentation"</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CreatePresentation"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreatePresentation">[docs]</a><span class="k">class</span> <span class="nc">CreatePresentation</span><span class="p">:</span>
-    <span class="sd">"""The class that creates the presentation.</span>
 
-<span class="sd">    :param name: Name of the presentation</span>
-<span class="sd">    :type name: str</span>
+<div class="viewcode-block" id="Layout"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Layout">[docs]</a><span class="k">class</span> <span class="nc">Layout</span><span class="p">:</span>
+    <span class="sd">"""A class that manages the layout of objects on a canvas</span>
+
+<span class="sd">    :param float x_length: The width of the canvase</span>
+<span class="sd">    :type x_length: float</span>
+<span class="sd">    :param float y_length: The height of the canvase</span>
+<span class="sd">    :type y_length: float</span>
+<span class="sd">    :param layout: The grid layout of objects on the canvase (rows x columns)</span>
+<span class="sd">    :type layout: tuple</span>
+<span class="sd">    :param float x_border: The % margin for the x border</span>
+<span class="sd">    :type x_border: float</span>
+<span class="sd">    :param float y_border: The % margin for the y border</span>
+<span class="sd">    :type y_border: float</span>
+<span class="sd">    :param float spacing: The % spacing between objects</span>
+<span class="sd">    :type spacing: float</span>
+
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Untitled"</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">"""Constructor method"""</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pr_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-<div class="viewcode-block" id="CreatePresentation.execute"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreatePresentation.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">"""Executes the create presentation slides API call."""</span>
-        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">})</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pr_id</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"presentationId"</span><span class="p">]</span>
-        <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
-            <span class="n">presentationId</span><span class="o">=</span><span class="n">output</span><span class="p">[</span><span class="s2">"presentationId"</span><span class="p">],</span>
-            <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"deleteObject"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"objectId"</span><span class="p">:</span> <span class="s2">"p"</span><span class="p">}}]},</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="kc">True</span></div>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">presentation_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">"""Returns the presentation_id of the created presentation.</span>
-
-<span class="sd">        :raises RuntimeError: Must run the execute method before passing the presentation id</span>
-<span class="sd">        :return: The presentation_id of the created presentation</span>
-<span class="sd">        :rtype: str</span>
-<span class="sd">        """</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">executed</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pr_id</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="s2">"Must run the execute method before passing the presentation id"</span>
-            <span class="p">)</span></div>
-
-
-<span class="n">TLayout</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TLayout"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Layout"</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="Layout"><a class="viewcode-back" href="../../gslides.html#gslides.slides.Layout">[docs]</a><span class="k">class</span> <span class="nc">Layout</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">x_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -273,13 +250,13 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">translate_x</span><span class="p">,</span> <span class="n">translate_y</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="CreateSlide"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide">[docs]</a><span class="k">class</span> <span class="nc">CreateSlide</span><span class="p">:</span>
-    <span class="sd">"""The class that creates the presentation.</span>
+<div class="viewcode-block" id="AddSlide"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide">[docs]</a><span class="k">class</span> <span class="nc">AddSlide</span><span class="p">:</span>
+    <span class="sd">"""The class that adds a slide to the presentation.</span>
 
 <span class="sd">    :param presentation_id: The presentation_id of the created presentation</span>
 <span class="sd">    :type presentation_id: str</span>
-<span class="sd">    :param charts: :class:`Chart` objects that will be created</span>
-<span class="sd">    :type charts: list</span>
+<span class="sd">    :param objects: List of :class:`Chart` or :class:`Table` objects</span>
+<span class="sd">    :type objects: list</span>
 <span class="sd">    :param layout: The layout of the chart objects in # of rows by # of columns</span>
 <span class="sd">    :type layout: tuple</span>
 <span class="sd">    :param insertion_index: The slide index to insert new slide to.</span>
@@ -293,12 +270,16 @@
 <span class="sd">    :type left_margin: int, optional</span>
 <span class="sd">    :param right_margin: The right margin of the presentation in EMU</span>
 <span class="sd">    :type right_margin: int, optional</span>
+<span class="sd">    :param title: The text for the title textbox</span>
+<span class="sd">    :type title: str, optional</span>
+<span class="sd">    :param notes: The text for the notes textbox</span>
+<span class="sd">    :type notes: str, optional</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">presentation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">charts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chart</span><span class="p">],</span>
+        <span class="n">objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Chart</span><span class="p">,</span> <span class="n">Table</span><span class="p">]],</span>
         <span class="n">layout</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
         <span class="n">insertion_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">top_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1017724</span><span class="p">,</span>
@@ -310,10 +291,10 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Constructor method"""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span> <span class="o">=</span> <span class="n">presentation_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">charts</span> <span class="o">=</span> <span class="n">charts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">objects</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_layout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">insertion_index</span> <span class="o">=</span> <span class="n">insertion_index</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sl_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sl_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sheet_executed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slide_executed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span> <span class="o">=</span> <span class="n">top_margin</span>
@@ -354,7 +335,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">layout</span>
 
-<div class="viewcode-block" id="CreateSlide.render_json_create_slide"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.render_json_create_slide">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_create_slide</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<div class="viewcode-block" id="AddSlide.render_json_create_slide"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.render_json_create_slide">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_create_slide</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">"""Renders the json to create the slide in Google slides.</span>
 
 <span class="sd">        :return: The json to do the update</span>
@@ -369,9 +350,11 @@
             <span class="n">json</span><span class="p">[</span><span class="s2">"requests"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"createSlide"</span><span class="p">][</span><span class="s2">"insertionIndex"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">insertion_index</span>
         <span class="k">return</span> <span class="n">json</span></div>
 
-<div class="viewcode-block" id="CreateSlide.render_json_create_textboxes"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.render_json_create_textboxes">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_create_textboxes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slide_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="AddSlide.render_json_create_textboxes"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.render_json_create_textboxes">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_create_textboxes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slide_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">"""Renders the json to create the textboxes in Google slides.</span>
 
+<span class="sd">        :param slide_id: The slide_id of the slide to create textbox in</span>
+<span class="sd">        :type slide_id: str</span>
 <span class="sd">        :return: The json to do the update</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        """</span>
@@ -419,11 +402,15 @@
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">json</span></div>
 
-<div class="viewcode-block" id="CreateSlide.render_json_format_textboxes"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.render_json_format_textboxes">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_format_textboxes</span><span class="p">(</span>
+<div class="viewcode-block" id="AddSlide.render_json_format_textboxes"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.render_json_format_textboxes">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_format_textboxes</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">title_box_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">notes_box_id</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">"""Renders the json to format the textboxes in Google slides.</span>
 
+<span class="sd">        :param title_box_id: The id of the title box</span>
+<span class="sd">        :type title_box_id: int</span>
+<span class="sd">        :param notes_box_id: The id of the notes box</span>
+<span class="sd">        :type notes_box_id: int</span>
 <span class="sd">        :return: The json to do the update</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        """</span>
@@ -442,7 +429,7 @@
                         <span class="s2">"textRange"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ALL"</span><span class="p">},</span>
                         <span class="s2">"style"</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">"bold"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                            <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="s2">"Arial"</span><span class="p">,</span>
+                            <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
                             <span class="s2">"fontSize"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"magnitude"</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"PT"</span><span class="p">},</span>
                         <span class="p">},</span>
                         <span class="s2">"fields"</span><span class="p">:</span> <span class="s2">"bold,fontFamily,fontSize"</span><span class="p">,</span>
@@ -468,7 +455,7 @@
                         <span class="s2">"textRange"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ALL"</span><span class="p">},</span>
                         <span class="s2">"style"</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">"bold"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                            <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="s2">"Arial"</span><span class="p">,</span>
+                            <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
                             <span class="s2">"fontSize"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"magnitude"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"PT"</span><span class="p">},</span>
                         <span class="p">},</span>
                         <span class="s2">"fields"</span><span class="p">:</span> <span class="s2">"bold,fontFamily,fontSize"</span><span class="p">,</span>
@@ -478,7 +465,7 @@
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">json</span></div>
 
-<div class="viewcode-block" id="CreateSlide.render_json_copy_chart"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.render_json_copy_chart">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_copy_chart</span><span class="p">(</span>
+<div class="viewcode-block" id="AddSlide.render_json_copy_chart"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.render_json_copy_chart">[docs]</a>    <span class="k">def</span> <span class="nf">render_json_copy_chart</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">chart</span><span class="p">:</span> <span class="n">Chart</span><span class="p">,</span>
         <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
@@ -487,6 +474,14 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">"""Renders the json to copy the charts in Google slides.</span>
 
+<span class="sd">        :param chart: The chart to copy</span>
+<span class="sd">        :type chart: :class:`Chart`</span>
+<span class="sd">        :param size: Tuple of width and height in EMU</span>
+<span class="sd">        :type size: tuple</span>
+<span class="sd">        :param translate_x: The number of EMU to translate the object by</span>
+<span class="sd">        :type translate_x: float</span>
+<span class="sd">        :param translate_y: The number of EMU to translate the object by</span>
+<span class="sd">        :type translate_y: float</span>
 <span class="sd">        :return: The json to do the update</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        """</span>
@@ -550,24 +545,33 @@
             <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_execute_copy_charts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">"""Executes the copy of sheets charts to slides API call."""</span>
+    <span class="k">def</span> <span class="nf">_execute_populate_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Executes the population of objects on the slide"""</span>
         <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[]}</span>
         <span class="n">service</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
-        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">charts</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">:</span>
             <span class="n">translate_x</span><span class="p">,</span> <span class="n">translate_y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span><span class="p">)</span>
-            <span class="n">json</span><span class="p">[</span><span class="s2">"requests"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">render_json_copy_chart</span><span class="p">(</span>
-                    <span class="n">ch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span><span class="o">.</span><span class="n">object_size</span><span class="p">,</span> <span class="n">translate_x</span><span class="p">,</span> <span class="n">translate_y</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Chart</span><span class="p">):</span>
+                <span class="n">json</span><span class="p">[</span><span class="s2">"requests"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">render_json_copy_chart</span><span class="p">(</span>
+                        <span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span><span class="o">.</span><span class="n">object_size</span><span class="p">,</span> <span class="n">translate_x</span><span class="p">,</span> <span class="n">translate_y</span>
+                    <span class="p">)</span>
                 <span class="p">)</span>
-            <span class="p">)</span>
-        <span class="p">(</span>
-            <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span>
-            <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span><span class="n">presentationId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-        <span class="p">)</span>
+                <span class="p">(</span>
+                    <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span>
+                    <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span><span class="n">presentationId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="p">)</span>
+                    <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Table</span><span class="p">):</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sl_id</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span><span class="o">.</span><span class="n">object_size</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">+</span> <span class="n">translate_x</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span> <span class="o">+</span> <span class="n">translate_y</span><span class="p">,</span>
+                <span class="p">)</span>
 
-<div class="viewcode-block" id="CreateSlide.execute_slide"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.execute_slide">[docs]</a>    <span class="k">def</span> <span class="nf">execute_slide</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="AddSlide.execute_slide"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.execute_slide">[docs]</a>    <span class="k">def</span> <span class="nf">execute_slide</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Executes the slides API call."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sheet_executed</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
@@ -575,24 +579,187 @@
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_execute_create_slide</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_execute_create_format_textboxes</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_execute_copy_charts</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute_populate_objects</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slide_executed</span> <span class="o">=</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="CreateSlide.execute_sheet"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.execute_sheet">[docs]</a>    <span class="k">def</span> <span class="nf">execute_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="AddSlide.execute_sheet"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.execute_sheet">[docs]</a>    <span class="k">def</span> <span class="nf">execute_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Executes the sheets API call."""</span>
         <span class="n">x_len</span><span class="p">,</span> <span class="n">y_len</span> <span class="o">=</span> <span class="n">optimize_size</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span><span class="o">.</span><span class="n">object_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span><span class="o">.</span><span class="n">object_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
             <span class="n">area</span><span class="o">=</span><span class="mi">222600</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
         <span class="p">)</span>
-        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">charts</span><span class="p">:</span>
-            <span class="n">ch</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x_len</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y_len</span><span class="p">))</span>
-            <span class="n">ch</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Chart</span><span class="p">):</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">create</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">x_len</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y_len</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sheet_executed</span> <span class="o">=</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="CreateSlide.execute"><a class="viewcode-back" href="../../gslides.html#gslides.slides.CreateSlide.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="AddSlide.execute"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.AddSlide.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">"""Executes the sheets &amp; slides API call."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">execute_sheet</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">execute_slide</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute_slide</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl_id</span></div></div>
+
+
+<div class="viewcode-block" id="Presentation"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation">[docs]</a><span class="k">class</span> <span class="nc">Presentation</span><span class="p">:</span>
+    <span class="sd">"""An object that represents a presentation in Google slides. Initialize the</span>
+<span class="sd">    object through either the :class:`Presentation.get` or</span>
+<span class="sd">    :class:`Presentation.create` class method.</span>
+
+<span class="sd">    :param name: Name of the presentation</span>
+<span class="sd">    :type name: str</span>
+<span class="sd">    :param pr_id: The id of the presentation</span>
+<span class="sd">    :type pr_id: str</span>
+<span class="sd">    :param sl_ids: A list of the slide ids</span>
+<span class="sd">    :type sl_ids: list</span>
+<span class="sd">    :param initialized: Whether to object has been initialized</span>
+<span class="sd">    :type initialized: bool</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">pr_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">sl_ids</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">initialized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Constructor method"""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pr_id</span> <span class="o">=</span> <span class="n">pr_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span> <span class="o">=</span> <span class="n">sl_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="n">initialized</span>
+
+<div class="viewcode-block" id="Presentation.create"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.create">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TPresentation</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Untitled"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TPresentation</span><span class="p">:</span>
+        <span class="sd">"""Class method that creates a new presentation.</span>
+
+<span class="sd">        :param name: Name of the presentation</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :return: A presentation object</span>
+<span class="sd">        :rtype: :class:`Presentation`</span>
+
+<span class="sd">        """</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="n">pr_id</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"presentationId"</span><span class="p">]</span>
+        <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
+            <span class="n">presentationId</span><span class="o">=</span><span class="n">output</span><span class="p">[</span><span class="s2">"presentationId"</span><span class="p">],</span>
+            <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"deleteObject"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"objectId"</span><span class="p">:</span> <span class="s2">"p"</span><span class="p">}}]},</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pr_id</span><span class="p">,</span> <span class="p">[],</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Presentation.get"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.get">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TPresentation</span><span class="p">],</span> <span class="n">presentation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TPresentation</span><span class="p">:</span>
+        <span class="sd">"""Class method that gets a presentation.</span>
+
+<span class="sd">        :param presentation_id: Id of the presentation</span>
+<span class="sd">        :type presentation_id: str</span>
+<span class="sd">        :return: A presentation object</span>
+<span class="sd">        :rtype: :class:`Presentation`</span>
+
+<span class="sd">        """</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">presentationId</span><span class="o">=</span><span class="n">presentation_id</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">"slides"</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">sl_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">sl</span><span class="p">[</span><span class="s2">"objectId"</span><span class="p">]</span> <span class="k">for</span> <span class="n">sl</span> <span class="ow">in</span> <span class="n">output</span><span class="p">[</span><span class="s2">"slides"</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sl_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">presentation_id</span><span class="p">,</span> <span class="n">sl_ids</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Presentation.add_slide"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.add_slide">[docs]</a>    <span class="k">def</span> <span class="nf">add_slide</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Chart</span><span class="p">,</span> <span class="n">Table</span><span class="p">]],</span>
+        <span class="n">layout</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">insertion_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">top_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1017724</span><span class="p">,</span>
+        <span class="n">bottom_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">420575</span><span class="p">,</span>
+        <span class="n">left_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">right_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Title placeholder"</span><span class="p">,</span>
+        <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Notes placeholder"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Add a slide to the presentation.</span>
+
+<span class="sd">        :param objects: List of :class:`Chart` or :class:`Table` objects</span>
+<span class="sd">        :type objects: list</span>
+<span class="sd">        :param layout: The layout of the chart objects in # of rows by # of columns</span>
+<span class="sd">        :type layout: tuple</span>
+<span class="sd">        :param insertion_index: The slide index to insert new slide to.</span>
+<span class="sd">            The lack of a parameter will insert the slide to the end of the presentation</span>
+<span class="sd">        :type insertion_index: int, optional</span>
+<span class="sd">        :param top_margin: The top margin of the presentation in EMU</span>
+<span class="sd">        :type top_margin: int, optional</span>
+<span class="sd">        :param bottom_margin: The bottom margin of the presentation in EMU</span>
+<span class="sd">        :type bottom_margin: int, optional</span>
+<span class="sd">        :param left_margin: The left margin of the presentation in EMU</span>
+<span class="sd">        :type left_margin: int, optional</span>
+<span class="sd">        :param right_margin: The right margin of the presentation in EMU</span>
+<span class="sd">        :type right_margin: int, optional</span>
+<span class="sd">        :param title: The text for the title textbox</span>
+<span class="sd">        :type title: str, optional</span>
+<span class="sd">        :param notes: The text for the notes textbox</span>
+<span class="sd">        :type notes: str, optional</span>
+<span class="sd">        """</span>
+        <span class="n">sl</span> <span class="o">=</span> <span class="n">AddSlide</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span>
+            <span class="n">objects</span><span class="p">,</span>
+            <span class="n">layout</span><span class="p">,</span>
+            <span class="n">insertion_index</span><span class="p">,</span>
+            <span class="n">top_margin</span><span class="p">,</span>
+            <span class="n">bottom_margin</span><span class="p">,</span>
+            <span class="n">left_margin</span><span class="p">,</span>
+            <span class="n">right_margin</span><span class="p">,</span>
+            <span class="n">title</span><span class="p">,</span>
+            <span class="n">notes</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">insertion_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">insertion_index</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Presentation.rm_slide"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.rm_slide">[docs]</a>    <span class="k">def</span> <span class="nf">rm_slide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slide_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Removes a slide based on a slide id.</span>
+
+<span class="sd">        :param slide_id: The slide_id of the slide to delete</span>
+<span class="sd">        :type slide_id: str</span>
+<span class="sd">        """</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
+        <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
+            <span class="n">presentationId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"deleteObject"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"objectId"</span><span class="p">:</span> <span class="n">slide_id</span><span class="p">}}]},</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">slide_id</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">presentation_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Returns the presentation_id of the created presentation.</span>
+
+<span class="sd">        :raises RuntimeError: Must run the create or get method before passing the presentation id</span>
+<span class="sd">        :return: The presentation_id of the created presentation</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pr_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">"Must run the create or get method before passing the presentation id"</span>
+            <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">slide_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">"""Returns the slide_ids of the created presentation.</span>
+
+<span class="sd">        :raises RuntimeError: Must run the create or get method before passing the slides ids</span>
+<span class="sd">        :return: The presentation_id of the created presentation</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">"Must run the create or get method before passing the slide ids"</span>
+            <span class="p">)</span></div>
 </pre></div>
       </article>
       <footer>

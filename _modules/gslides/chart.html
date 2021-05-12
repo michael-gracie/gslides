@@ -1,0 +1,1012 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>gslides.chart - gslides 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="../../_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../byoc.html">Bring Your Own Credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basic.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../styling.html">Styling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gslides.html">gslides package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for gslides.chart</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">"""</span>
+<span class="sd">Charts &amp; series class</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">creds</span><span class="p">,</span> <span class="n">package_font</span><span class="p">,</span> <span class="n">package_palette</span>
+<span class="kn">from</span> <span class="nn">.colors</span> <span class="kn">import</span> <span class="n">Palette</span><span class="p">,</span> <span class="n">translate_color</span>
+<span class="kn">from</span> <span class="nn">.frame</span> <span class="kn">import</span> <span class="n">Frame</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">hex_to_rgb</span><span class="p">,</span>
+    <span class="n">json_val_extract</span><span class="p">,</span>
+    <span class="n">validate_params_float</span><span class="p">,</span>
+    <span class="n">validate_params_int</span><span class="p">,</span>
+    <span class="n">validate_params_list</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">TSeries</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TSeries"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Series"</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Series"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series">[docs]</a><span class="k">class</span> <span class="nc">Series</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">"""Parent class for all series configurations.</span>
+
+<span class="sd">    :param type: Type of series</span>
+<span class="sd">    :type type: str</span>
+<span class="sd">    :param \*\*kwargs: Dictionary of keyword arguments</span>
+<span class="sd">    :type \*\*kwargs: dict</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Constructor method"""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_point_args</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_data_label_args</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">validate_params_list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">validate_params_int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">validate_params_float</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+<div class="viewcode-block" id="Series.line"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.line">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">line</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TSeries</span><span class="p">],</span>
+        <span class="n">series_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_width</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">point_shape</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">data_label_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">data_label_placement</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TSeries</span><span class="p">:</span>
+        <span class="sd">"""A line plot</span>
+
+<span class="sd">        :param series_columns: The columns to plot. None or an empty list will</span>
+<span class="sd">            plot all columns</span>
+<span class="sd">        :type series_columns: list, optional</span>
+<span class="sd">        :param line_style: The style of line to plot, see</span>
+<span class="sd">            gslides.config.CHART_PARAMS['line_style'] for accepted parameters</span>
+<span class="sd">        :type line_style: str, optional</span>
+<span class="sd">        :param line_width: The width of line to plot</span>
+<span class="sd">        :type line_width: int, optional</span>
+<span class="sd">        :param point_enabled: Boolean for whether the plot should include points</span>
+<span class="sd">        :type point_enabled: bool, optional</span>
+<span class="sd">        :param point_shape: The shape of point to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters</span>
+<span class="sd">        :type point_shape: str, optional</span>
+<span class="sd">        :param point_size: The size of point to plot</span>
+<span class="sd">        :type point_size: int, optional</span>
+<span class="sd">        :param data_label_enabled: Boolean for whether the plot should include data labels</span>
+<span class="sd">        :type data_label_enabled: bool, optional</span>
+<span class="sd">        :param data_label_placement: The placement of the data label to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters</span>
+<span class="sd">        :type data_label_placement: str, optional</span>
+<span class="sd">        :param color: A color to override the existing palette. Parameters can either</span>
+<span class="sd">            be a hex-code or a named colored. see gslides.config.color_mapping.keys()</span>
+<span class="sd">            for accepted named colors</span>
+<span class="sd">        :type color: str, optional</span>
+<span class="sd">        :return: A :class:`Series` object</span>
+<span class="sd">        :rtype: :class:`Series`</span>
+<span class="sd">        """</span>
+
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"cls"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">"Line"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Series.area"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.area">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TSeries</span><span class="p">],</span>
+        <span class="n">series_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_width</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">point_shape</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">data_label_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">data_label_placement</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TSeries</span><span class="p">:</span>
+        <span class="sd">"""A area plot</span>
+
+<span class="sd">        :param series_columns: The columns to plot. None or an empty list will</span>
+<span class="sd">            plot all columns</span>
+<span class="sd">        :type series_columns: list, optional</span>
+<span class="sd">        :param line_style: The style of line to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['line_style'] for accepted parameters</span>
+<span class="sd">        :type line_style: str, optional</span>
+<span class="sd">        :param line_width: The width of line to plot</span>
+<span class="sd">        :type line_width: int, optional</span>
+<span class="sd">        :param point_enabled: Boolean for whether the plot should include points</span>
+<span class="sd">        :type point_enabled: bool, optional</span>
+<span class="sd">        :param point_shape: The shape of point to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters</span>
+<span class="sd">        :type point_shape: str, optional</span>
+<span class="sd">        :param point_size: The size of point to plot</span>
+<span class="sd">        :type point_size: int, optional</span>
+<span class="sd">        :param data_label_enabled: Boolean for whether the plot should include data labels</span>
+<span class="sd">        :type data_label_enabled: bool, optional</span>
+<span class="sd">        :param data_label_placement: The placement of the data label to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters</span>
+<span class="sd">        :type data_label_placement: str, optional</span>
+<span class="sd">        :param color: A color to override the existing palette. Parameters can either</span>
+<span class="sd">            be a hex-code or a named colored. see gslides.config.color_mapping.keys()</span>
+<span class="sd">            for accepted named colors</span>
+<span class="sd">        :type color: str, optional</span>
+<span class="sd">        :return: A :class:`Series` object</span>
+<span class="sd">        :rtype: :class:`Series`</span>
+<span class="sd">        """</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"cls"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">"Area"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Series.scatter"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.scatter">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">scatter</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TSeries</span><span class="p">],</span>
+        <span class="n">series_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_shape</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">data_label_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">data_label_placement</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TSeries</span><span class="p">:</span>
+        <span class="sd">"""A scatter plot</span>
+
+<span class="sd">        :param series_columns: The columns to plot. None or an empty list will</span>
+<span class="sd">            plot all columns</span>
+<span class="sd">        :type series_columns: list, optional</span>
+<span class="sd">        :param point_shape: The shape of point to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters</span>
+<span class="sd">        :type point_shape: str, optional</span>
+<span class="sd">        :param point_size: The size of point to plot</span>
+<span class="sd">        :type point_size: int, optional</span>
+<span class="sd">        :param data_label_enabled: Boolean for whether the plot should include data labels</span>
+<span class="sd">        :type data_label_enabled: bool, optional</span>
+<span class="sd">        :param data_label_placement: The placement of the data label to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters</span>
+<span class="sd">        :type data_label_placement: str, optional</span>
+<span class="sd">        :param color: A color to override the existing palette. Parameters can either</span>
+<span class="sd">            be a hex-code or a named colored. see gslides.config.color_mapping.keys()</span>
+<span class="sd">            for accepted named colors</span>
+<span class="sd">        :type color: str, optional</span>
+<span class="sd">        :return: A :class:`Series` object</span>
+<span class="sd">        :rtype: :class:`Series`</span>
+<span class="sd">        """</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"cls"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">"Scatter"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Series.column"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.column">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">column</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TSeries</span><span class="p">],</span>
+        <span class="n">series_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">data_label_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">data_label_placement</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TSeries</span><span class="p">:</span>
+        <span class="sd">"""A column plot</span>
+
+<span class="sd">        :param series_columns: The columns to plot. None or an empty list will</span>
+<span class="sd">            plot all columns</span>
+<span class="sd">        :type series_columns: list, optional</span>
+<span class="sd">        :param data_label_enabled: Boolean for whether the plot should include</span>
+<span class="sd">            data labels</span>
+<span class="sd">        :type data_label_enabled: bool, optional</span>
+<span class="sd">        :param data_label_placement: The placement of the data label to plot,</span>
+<span class="sd">            see gslides.config.CHART_PARAMS['data_label_placement'] for</span>
+<span class="sd">            accepted parameters</span>
+<span class="sd">        :type data_label_placement: str, optional</span>
+<span class="sd">        :param color: A color to override the existing palette. Parameters can either</span>
+<span class="sd">            be a hex-code or a named colored. see gslides.config.color_mapping.keys()</span>
+<span class="sd">            for accepted named colors</span>
+<span class="sd">        :type color: str, optional</span>
+<span class="sd">        :return: A :class:`Series` object</span>
+<span class="sd">        :rtype: :class:`Series`</span>
+<span class="sd">        """</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"cls"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">"Column"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Series.histogram"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.histogram">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">histogram</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TSeries</span><span class="p">],</span>
+        <span class="n">series_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bucket_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">outlier_percentage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TSeries</span><span class="p">:</span>
+        <span class="sd">"""A histogram plot</span>
+
+<span class="sd">        :param series_columns: The columns to plot. None or an empty list will</span>
+<span class="sd">            plot all columns</span>
+<span class="sd">        :type series_columns: list, optional</span>
+<span class="sd">        :param bucket_size: The size of the bucket</span>
+<span class="sd">        :type bucket_size: int, optional</span>
+<span class="sd">        :param outlier_percentage: The percentile at which oberservations should</span>
+<span class="sd">            be excluded</span>
+<span class="sd">        :type outlier_percentage: float, optional</span>
+<span class="sd">        :param color: A color to override the existing palette. Parameters can either</span>
+<span class="sd">            be a hex-code or a named colored. see gslides.config.color_mapping.keys()</span>
+<span class="sd">            for accepted named colors</span>
+<span class="sd">        :type color: str, optional</span>
+<span class="sd">        :return: A :class:`Series` object</span>
+<span class="sd">        :rtype: :class:`Series`</span>
+<span class="sd">        """</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"cls"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">"Histogram"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Prints class information.</span>
+
+<span class="sd">        :return: String with helpful class infromation</span>
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        """</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Series Type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> - </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span> <span class="nf">_check_point_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Checks the args `point_shape`, `point_enabled` and `point_size` to ensure</span>
+<span class="sd">        that `point_enabled` is set to `True` when utilizing the `point_size` and</span>
+<span class="sd">        `point_shape` parameter.</span>
+
+<span class="sd">        :param kwargs: Dictionary of keyword arguments</span>
+<span class="sd">        :type kwargs: dict</span>
+<span class="sd">        :raises ValueError:</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="s2">"point_enabled"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"point_shape"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"point_enabled"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"point_enabled must be True if point_shape is specified"</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"point_size"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"point_enabled"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"point_enabled must be True if point_size is specified"</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">_check_data_label_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Checks the args `data_label_placement`, `data_label_enabled` to ensure</span>
+<span class="sd">        that `point_enabled` is set to `True` when utilizing the `data_label_placement`</span>
+<span class="sd">        parameter.</span>
+
+<span class="sd">        :param kwargs: Dictionary of keyword arguments</span>
+<span class="sd">        :type kwargs: dict</span>
+<span class="sd">        :raises ValueError:</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="s2">"data_label_enabled"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"data_label_placement"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"data_label_enabled"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"data_label_enabled must be True if point_shape is specified"</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+
+<div class="viewcode-block" id="Series.render_basic_chart_json"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.render_basic_chart_json">[docs]</a>    <span class="k">def</span> <span class="nf">render_basic_chart_json</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">palette</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Palette</span><span class="p">],</span>
+        <span class="n">sheet_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">start_row_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">end_row_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">start_column_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">end_column_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">"""Renders the json for the creation of a basic chart. See here</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#BasicChartSpec</span>
+<span class="sd">        for information about basic charts.</span>
+
+<span class="sd">        :param palette: :class:`Palette` object to control colors</span>
+<span class="sd">        :type palette: :class:`Palette`</span>
+<span class="sd">        :param sheet_id: ID for the Google sheet.</span>
+<span class="sd">        :type sheet_id: str</span>
+<span class="sd">        :param start_row_index: The starting index of the row</span>
+<span class="sd">        :type start_row_index: int</span>
+<span class="sd">        :param end_row_index: The ending index of the row</span>
+<span class="sd">        :type end_row_index: int</span>
+<span class="sd">        :param start_column_index: The starting index of the column</span>
+<span class="sd">        :type start_column_index: int</span>
+<span class="sd">        :param end_column_index: The ending index of the column</span>
+<span class="sd">        :type end_column_index: int</span>
+<span class="sd">        :param type: Type of series</span>
+<span class="sd">        :type type: str, optional</span>
+<span class="sd">        :return: json for the API call</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        """</span>
+
+        <span class="n">json</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"target_axis"</span><span class="p">:</span> <span class="s2">"LEFT_AXIS"</span><span class="p">,</span>
+            <span class="s2">"series"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"sourceRange"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"sources"</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">"sheetId"</span><span class="p">:</span> <span class="n">sheet_id</span><span class="p">,</span>
+                            <span class="s2">"startRowIndex"</span><span class="p">:</span> <span class="n">start_row_index</span><span class="p">,</span>
+                            <span class="s2">"endRowIndex"</span><span class="p">:</span> <span class="n">end_row_index</span><span class="p">,</span>
+                            <span class="s2">"startColumnIndex"</span><span class="p">:</span> <span class="n">start_column_index</span><span class="p">,</span>
+                            <span class="s2">"endColumnIndex"</span><span class="p">:</span> <span class="n">end_column_index</span><span class="p">,</span>
+                        <span class="p">}</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="s2">"line_width"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"lineStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"line_style"</span><span class="p">],</span>
+                <span class="s2">"width"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"line_width"</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="s2">"point_enabled"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"point_enabled"</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"pointStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"shape"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"point_shape"</span><span class="p">],</span>
+                <span class="s2">"size"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"point_size"</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="k">if</span> <span class="s2">"data_label_enabled"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"data_label_enabled"</span><span class="p">]:</span>
+                <span class="n">json</span><span class="p">[</span><span class="s2">"dataLabel"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">"placement"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"data_label_placement"</span><span class="p">],</span>
+                    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"DATA"</span><span class="p">,</span>
+                    <span class="s2">"textFormat"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                        <span class="s2">"fontSize"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">}</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">:</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"color"</span><span class="p">]:</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"color"</span><span class="p">])</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">hex_to_rgb</span><span class="p">(</span><span class="n">translate_color</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"color"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"colorStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}}</span>
+        <span class="k">elif</span> <span class="n">palette</span><span class="p">:</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"color"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"colorStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}}</span>
+        <span class="k">return</span> <span class="n">json</span></div>
+
+<div class="viewcode-block" id="Series.render_histogram_chart_json"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Series.render_histogram_chart_json">[docs]</a>    <span class="k">def</span> <span class="nf">render_histogram_chart_json</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">palette</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Palette</span><span class="p">],</span>
+        <span class="n">sheet_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">start_row_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">end_row_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">start_column_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">end_column_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">"""Renders the json for the creation of a basic chart. See here</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec</span>
+<span class="sd">        for information about basic charts.</span>
+
+<span class="sd">        :param palette: :class:`Palette` object to control colors</span>
+<span class="sd">        :type palette: :class:`Palette`</span>
+<span class="sd">        :param sheet_id: ID for the Google sheet.</span>
+<span class="sd">        :type sheet_id: str</span>
+<span class="sd">        :param start_row_index: The starting index of the row</span>
+<span class="sd">        :type start_row_index: int</span>
+<span class="sd">        :param end_row_index: The ending index of the row</span>
+<span class="sd">        :type end_row_index: int</span>
+<span class="sd">        :param start_column_index: The starting index of the column</span>
+<span class="sd">        :type start_column_index: int</span>
+<span class="sd">        :param end_column_index: The ending index of the column</span>
+<span class="sd">        :type end_column_index: int</span>
+<span class="sd">        :return: json for the API call</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        """</span>
+        <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"sourceRange"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"sources"</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">"sheetId"</span><span class="p">:</span> <span class="n">sheet_id</span><span class="p">,</span>
+                            <span class="s2">"startRowIndex"</span><span class="p">:</span> <span class="n">start_row_index</span><span class="p">,</span>
+                            <span class="s2">"endRowIndex"</span><span class="p">:</span> <span class="n">end_row_index</span><span class="p">,</span>
+                            <span class="s2">"startColumnIndex"</span><span class="p">:</span> <span class="n">start_column_index</span><span class="p">,</span>
+                            <span class="s2">"endColumnIndex"</span><span class="p">:</span> <span class="n">end_column_index</span><span class="p">,</span>
+                        <span class="p">}</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"color"</span><span class="p">]:</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"color"</span><span class="p">])</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">hex_to_rgb</span><span class="p">(</span><span class="n">translate_color</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"barColor"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"barColorStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}}</span>
+        <span class="k">elif</span> <span class="n">palette</span><span class="p">:</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"barColor"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"barColorStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="n">b</span><span class="p">}}</span>
+        <span class="k">return</span> <span class="n">json</span></div></div>
+
+
+<div class="viewcode-block" id="Chart"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Chart">[docs]</a><span class="k">class</span> <span class="nc">Chart</span><span class="p">:</span>
+    <span class="sd">"""An object that configures the creation of a chart in Google sheets.</span>
+
+<span class="sd">    :param data: The data in Google sheets that will be plotted, a frame object</span>
+<span class="sd">    :type data: :class:`gslides.Frame`</span>
+<span class="sd">    :param x_axis_column: The name column that corresponds to the x-values.</span>
+<span class="sd">        No parameter needed for a histogram.</span>
+<span class="sd">    :type x_axis_column: str</span>
+<span class="sd">    :param series: The :class:`gslides.addchart.series` objects to plot</span>
+<span class="sd">    :type series: list[:class:`gslides.addchart.series`]</span>
+<span class="sd">    :param stacking: The type of stacking to plot,</span>
+<span class="sd">        see gslides.config.CHART_PARAMS['stacking'] for accepted parameters</span>
+<span class="sd">    :type stacking: str, optional</span>
+<span class="sd">    :param title: The title for the plot</span>
+<span class="sd">    :type title: str, optional</span>
+<span class="sd">    :param x_axis_label: The x_axis_label for the plot</span>
+<span class="sd">    :type x_axis_label: str, optional</span>
+<span class="sd">    :param y_axis_label: The y_axis_label for the plot</span>
+<span class="sd">    :type y_axis_label: str, optional</span>
+<span class="sd">    :param x_min: The minimum value for the x axis</span>
+<span class="sd">    :type x_min: float, optional</span>
+<span class="sd">    :param x_max: The maximum value for the x axis</span>
+<span class="sd">    :type x_max: float, optional</span>
+<span class="sd">    :param y_min: The minimum value for the y axis</span>
+<span class="sd">    :type y_min: float, optional</span>
+<span class="sd">    :param y_max: The maximum value for the y axis</span>
+<span class="sd">    :type y_max: float, optional</span>
+<span class="sd">    :param palette: The palette to use to plot,</span>
+<span class="sd">        see gslides.colors.base_palettes for accepted parameters</span>
+<span class="sd">    :type palette: str, optional</span>
+<span class="sd">    :param legend_position: The position of the legend to plot,</span>
+<span class="sd">        see gslides.config.CHART_PARAMS['stacking'] for accepted parameters</span>
+<span class="sd">    :type legend_position: str, optional</span>
+<span class="sd">    :param size: A tuple for the width and length of the plot in pixels.</span>
+<span class="sd">        The Google suggested size is 600 by 371 pixels.</span>
+<span class="sd">    :type size: tuple, optional</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Frame</span><span class="p">,</span>
+        <span class="n">x_axis_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">series</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Series</span><span class="p">],</span>
+        <span class="n">stacking</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">x_axis_label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y_axis_label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">palette</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">legend_position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Constructor method"""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_determine_chart_type</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_stacking</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">stacking</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span> <span class="o">=</span> <span class="n">series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stacking</span> <span class="o">=</span> <span class="n">stacking</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_column</span> <span class="o">=</span> <span class="n">x_axis_column</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_label</span> <span class="o">=</span> <span class="n">x_axis_label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_axis_label</span> <span class="o">=</span> <span class="n">y_axis_label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_min</span> <span class="o">=</span> <span class="n">x_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_max</span> <span class="o">=</span> <span class="n">x_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_min</span> <span class="o">=</span> <span class="n">y_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_max</span> <span class="o">=</span> <span class="n">y_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span> <span class="o">=</span> <span class="n">legend_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ch_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bucket_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outlier_percentage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">validate_params_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_determine_chart_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Series</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Determines the type of chart based on the class of series passed</span>
+
+<span class="sd">        :param series: The :class:`gslides.addchart.series` objects to plot</span>
+<span class="sd">        :type series: list[:class:`gslides.addchart.series`]</span>
+<span class="sd">        :raises ValueError: Only Line, Area and Column series can be used in combination</span>
+<span class="sd">        :return: The type of plot to create</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        """</span>
+        <span class="n">chart_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">serie</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">serie</span> <span class="ow">in</span> <span class="n">series</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chart_types</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">chart_types</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">allowable_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Line"</span><span class="p">,</span> <span class="s2">"Area"</span><span class="p">,</span> <span class="s2">"Column"</span><span class="p">}</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chart_types</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">allowable_types</span><span class="p">))</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">chart_types</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s2">"COMBO"</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"Only Line, Area and Column series can be used in combination"</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_stacking</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Series</span><span class="p">],</span> <span class="n">stacking</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Checks the `stacking` argument to ensure that a stackable series is</span>
+<span class="sd">        included. Stackable series include `Area` and `Column`.</span>
+
+<span class="sd">        :param series: The :class:`gslides.addchart.series` objects to plot</span>
+<span class="sd">        :type series: list[:class:`gslides.addchart.series`]</span>
+<span class="sd">        :param series: The series objects to plot</span>
+<span class="sd">        :type series: Sequence[Series]</span>
+<span class="sd">        :raises ValueError: Stacking can only be enabled for Area and Column charts</span>
+<span class="sd">        """</span>
+        <span class="n">chart_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">serie</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">serie</span> <span class="ow">in</span> <span class="n">series</span><span class="p">])</span>
+        <span class="n">stacking_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Area"</span><span class="p">,</span> <span class="s2">"Column"</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">stacking</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chart_types</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">stacking_types</span><span class="p">):</span>
+                <span class="k">return</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"Stacking can only be enabled for Area and Column charts"</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">_resolve_series</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">"""Resolves the series to determine which column get which configuration.</span>
+<span class="sd">        Order in the list of series matters where if a column is set by 2 series</span>
+<span class="sd">        classes the last series class will determine the configuration for the</span>
+<span class="sd">        column</span>
+
+<span class="sd">        :return: The column to plot and their corresponding configuration</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        """</span>
+        <span class="n">series_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">serie</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"series_columns"</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">column</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_column</span><span class="p">:</span>
+                        <span class="n">series_mapping</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">serie</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"series_columns"</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">():</span>
+                        <span class="n">series_mapping</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">serie</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="s2">"outlier_percentage"</span> <span class="ow">in</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"outlier_percentage"</span><span class="p">]</span>
+            <span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">outlier_percentage</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+                    <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"outlier_percentage"</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="s2">"bucket_size"</span> <span class="ow">in</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"bucket_size"</span><span class="p">]</span>
+            <span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bucket_size</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">serie</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"bucket_size"</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">series_mapping</span>
+
+<div class="viewcode-block" id="Chart.render_basic_chart_json"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Chart.render_basic_chart_json">[docs]</a>    <span class="k">def</span> <span class="nf">render_basic_chart_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">"""Renders the json for the creation of a basic chart. See here</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec</span>
+<span class="sd">        for information about basic charts.</span>
+
+<span class="sd">        :param size: Tuple of width and height in PX</span>
+<span class="sd">        :type size: tuple</span>
+<span class="sd">        :return: json for the API call</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        """</span>
+        <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"chart"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"spec"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"title"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                    <span class="s2">"titleTextPosition"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"horizontalAlignment"</span><span class="p">:</span> <span class="s2">"CENTER"</span><span class="p">},</span>
+                    <span class="s2">"titleTextFormat"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                        <span class="s2">"fontSize"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+                        <span class="s2">"bold"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s2">"foregroundColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                        <span class="s2">"foregroundColorStyle"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="s2">"basicChart"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"chartType"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                        <span class="s2">"axis"</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="p">{</span>
+                                <span class="s2">"position"</span><span class="p">:</span> <span class="s2">"BOTTOM_AXIS"</span><span class="p">,</span>
+                                <span class="s2">"title"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_label</span><span class="p">,</span>
+                                <span class="s2">"format"</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                                    <span class="s2">"fontSize"</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+                                    <span class="s2">"bold"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                                    <span class="s2">"foregroundColor"</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                        <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                        <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="p">},</span>
+                                    <span class="s2">"foregroundColorStyle"</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                                    <span class="p">},</span>
+                                <span class="p">},</span>
+                                <span class="s2">"viewWindowOptions"</span><span class="p">:</span> <span class="p">{},</span>
+                            <span class="p">},</span>
+                            <span class="p">{</span>
+                                <span class="s2">"position"</span><span class="p">:</span> <span class="s2">"LEFT_AXIS"</span><span class="p">,</span>
+                                <span class="s2">"title"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis_label</span><span class="p">,</span>
+                                <span class="s2">"format"</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                                    <span class="s2">"fontSize"</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+                                    <span class="s2">"bold"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                                    <span class="s2">"foregroundColor"</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                        <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                        <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="p">},</span>
+                                    <span class="s2">"foregroundColorStyle"</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                                    <span class="p">},</span>
+                                <span class="p">},</span>
+                                <span class="s2">"viewWindowOptions"</span><span class="p">:</span> <span class="p">{},</span>
+                            <span class="p">},</span>
+                        <span class="p">],</span>
+                        <span class="s2">"domains"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"domain"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"sourceRange"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"sources"</span><span class="p">:</span> <span class="p">[]}}}],</span>
+                        <span class="s2">"series"</span><span class="p">:</span> <span class="p">[],</span>
+                        <span class="s2">"legendPosition"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span><span class="p">,</span>
+                        <span class="s2">"headerCount"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">header_count</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">"hiddenDimensionStrategy"</span><span class="p">:</span> <span class="s2">"SKIP_HIDDEN_ROWS_AND_COLUMNS"</span><span class="p">,</span>
+                    <span class="s2">"fontName"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">"position"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"overlayPosition"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"anchorCell"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">"sheetId"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                            <span class="s2">"rowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_row_index</span><span class="p">,</span>
+                            <span class="s2">"columnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_column_index</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">"offsetXPixels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">"offsetYPixels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">"widthPixels"</span><span class="p">:</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s2">"heightPixels"</span><span class="p">:</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">domain_col_num</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_column_index</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_axis_column</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">domain_json</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"sheetId"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+            <span class="s2">"startRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"endRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
+            <span class="s2">"startColumnIndex"</span><span class="p">:</span> <span class="n">domain_col_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"endColumnIndex"</span><span class="p">:</span> <span class="n">domain_col_num</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"domains"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"domain"</span><span class="p">][</span><span class="s2">"sourceRange"</span><span class="p">][</span>
+            <span class="s2">"sources"</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">domain_json</span><span class="p">)</span>
+        <span class="n">series_mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_series</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Palette</span><span class="p">]</span> <span class="o">=</span> <span class="n">Palette</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">package_palette</span><span class="o">.</span><span class="n">palette</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">Palette</span><span class="p">(</span><span class="n">package_palette</span><span class="o">.</span><span class="n">palette</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">series_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">serie_col_num</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"COMBO"</span><span class="p">:</span>
+                <span class="n">series_json</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">render_basic_chart_json</span><span class="p">(</span>
+                    <span class="n">p</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
+                    <span class="n">serie_col_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">serie_col_num</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">series_json</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">render_basic_chart_json</span><span class="p">(</span>
+                    <span class="n">p</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
+                    <span class="n">serie_col_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">serie_col_num</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"series"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">series_json</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stacking</span><span class="p">:</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"stackedType"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"STACKED"</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"axis"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"viewWindowOptions"</span><span class="p">][</span>
+                <span class="s2">"viewWindowMin"</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_min</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"axis"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"viewWindowOptions"</span><span class="p">][</span>
+                <span class="s2">"viewWindowMax"</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_max</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"axis"</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">"viewWindowOptions"</span><span class="p">][</span>
+                <span class="s2">"viewWindowMin"</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_min</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"basicChart"</span><span class="p">][</span><span class="s2">"axis"</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">"viewWindowOptions"</span><span class="p">][</span>
+                <span class="s2">"viewWindowMax"</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_max</span>
+        <span class="k">return</span> <span class="n">json</span></div>
+
+<div class="viewcode-block" id="Chart.render_histogram_chart_json"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Chart.render_histogram_chart_json">[docs]</a>    <span class="k">def</span> <span class="nf">render_histogram_chart_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">"""Renders the json for the creation of a basic chart. See here</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec</span>
+<span class="sd">        for information about basic charts.</span>
+
+<span class="sd">        :param size: Tuple of width and height in PX</span>
+<span class="sd">        :type size: tuple</span>
+<span class="sd">        :return: json for the API call</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        """</span>
+        <span class="n">series_mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_series</span><span class="p">()</span>
+        <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"chart"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"spec"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"title"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                    <span class="s2">"titleTextPosition"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"horizontalAlignment"</span><span class="p">:</span> <span class="s2">"CENTER"</span><span class="p">},</span>
+                    <span class="s2">"titleTextFormat"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"fontFamily"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                        <span class="s2">"fontSize"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+                        <span class="s2">"bold"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s2">"foregroundColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                        <span class="s2">"foregroundColorStyle"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">"rgbColor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="s2">"histogramChart"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"series"</span><span class="p">:</span> <span class="p">[],</span>
+                        <span class="s2">"legendPosition"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span><span class="p">,</span>
+                        <span class="s2">"bucketSize"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bucket_size</span><span class="p">,</span>
+                        <span class="s2">"outlierPercentile"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">outlier_percentage</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">"hiddenDimensionStrategy"</span><span class="p">:</span> <span class="s2">"SKIP_HIDDEN_ROWS_AND_COLUMNS"</span><span class="p">,</span>
+                    <span class="s2">"fontName"</span><span class="p">:</span> <span class="n">package_font</span><span class="o">.</span><span class="n">font</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">"position"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"overlayPosition"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"anchorCell"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">"sheetId"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                            <span class="s2">"rowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="s2">"columnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">"offsetXPixels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">"offsetYPixels"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">"widthPixels"</span><span class="p">:</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s2">"heightPixels"</span><span class="p">:</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Palette</span><span class="p">]</span> <span class="o">=</span> <span class="n">Palette</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">series_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">serie_col_num</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">series_json</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">render_histogram_chart_json</span><span class="p">(</span>
+                <span class="n">p</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
+                <span class="n">serie_col_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">serie_col_num</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"chart"</span><span class="p">][</span><span class="s2">"spec"</span><span class="p">][</span><span class="s2">"histogramChart"</span><span class="p">][</span><span class="s2">"series"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">series_json</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json</span></div>
+
+<div class="viewcode-block" id="Chart.create"><a class="viewcode-back" href="../../gslides.html#gslides.chart.Chart.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">371</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">"""Creates the chart in Googe sheets</span>
+
+<span class="sd">        :param size: Tuple of width and height in PX</span>
+<span class="sd">        :type size: tuple</span>
+<span class="sd">        :return: The json returned by the call</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        """</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">sheet_service</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"HISTOGRAM"</span><span class="p">:</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_histogram_chart_json</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_basic_chart_json</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">output</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
+                <span class="n">spreadsheetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
+                <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"addChart"</span><span class="p">:</span> <span class="n">json</span><span class="p">}]},</span>
+            <span class="p">)</span>
+            <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ch_id</span> <span class="o">=</span> <span class="n">json_val_extract</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">"chartId"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">chart_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">"""Returns the chart_id of the created chart.</span>
+
+<span class="sd">        :raises RuntimeError: Must run the execute method before passing the chart id</span>
+<span class="sd">        :return: The chart_id of the created chart.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        """</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">executed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">"Must run the execute method before passing the chart id"</span>
+            <span class="p">)</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Michael Gracie
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

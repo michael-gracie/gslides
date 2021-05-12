@@ -2,7 +2,7 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="gslides" href="modules.html" /><link rel="prev" title="Basic Usage" href="basic.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Tables" href="table.html" /><link rel="prev" title="Basic Usage" href="basic.html" />
 
     <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
         <title>Charts &amp; Series - gslides 0.1.0 documentation</title>
@@ -112,6 +112,8 @@
 <li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
 </ul>
@@ -194,13 +196,13 @@
 </table></div>
 <p>This can be done through <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html">df.pivot()</a>.</p>
 </div>
-<div class="section" id="utilizing-the-y-columns-parameter">
-<h2>Utilizing the <code class="docutils literal notranslate"><span class="pre">y_columns</span></code> parameter<a class="headerlink" href="#utilizing-the-y-columns-parameter" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="utilizing-the-series-columns-parameter">
+<h2>Utilizing the <code class="docutils literal notranslate"><span class="pre">series_columns</span></code> parameter<a class="headerlink" href="#utilizing-the-series-columns-parameter" title="Permalink to this headline">¶</a></h2>
 <p>Each series in a chart can be formatted in a unique way. For this reason, users are able to pass multiple <code class="docutils literal notranslate"><span class="pre">Series</span></code> objects into a <code class="docutils literal notranslate"><span class="pre">Chart</span></code> object such that they have full control over the display for a given chart. In fact, it is possible to pass different <code class="docutils literal notranslate"><span class="pre">Series</span></code> types into the same chart.</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">y_columns</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code>, the chart will plot all columns in the <code class="docutils literal notranslate"><span class="pre">SheetFrame</span></code> except the <code class="docutils literal notranslate"><span class="pre">x_column</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">series_columns</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code>, the chart will plot all columns in the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object except the <code class="docutils literal notranslate"><span class="pre">x_column</span></code>.</p></li>
 <li><p>If different <code class="docutils literal notranslate"><span class="pre">Series</span></code> types are passed into the same chart, the chart is considered a <code class="docutils literal notranslate"><span class="pre">COMBO</span></code> chart. Only combinations of <code class="docutils literal notranslate"><span class="pre">Area</span></code>, <code class="docutils literal notranslate"><span class="pre">Columns</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> series are allowed.</p></li>
-<li><p>If the same <code class="docutils literal notranslate"><span class="pre">y_column</span></code> is set in multiple <code class="docutils literal notranslate"><span class="pre">Series</span></code> objects, the latter most configuration of that column will be used.</p></li>
+<li><p>If the same <code class="docutils literal notranslate"><span class="pre">series_column</span></code> is set in multiple <code class="docutils literal notranslate"><span class="pre">Series</span></code> objects, the latter most configuration of that column will be used.</p></li>
 </ul>
 <p>This provides great flexibility. A common pattern is to set all columns to a base configuration by passing <code class="docutils literal notranslate"><span class="pre">None</span></code>. Then, creating another <code class="docutils literal notranslate"><span class="pre">Series</span></code> object to override that configuration for a single column to set an alternative color or style, highlighting that particular series.</p>
 </div>
@@ -226,7 +228,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>y_columns</p></td>
+<tr class="row-even"><td><p>series_columns</p></td>
 <td><p>Y</p></td>
 <td><p>Y</p></td>
 <td><p>Y</p></td>
@@ -319,7 +321,7 @@
 </div>
 <div class="section" id="histogram">
 <h2>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">¶</a></h2>
-<p>Histograms are unique in that Google will perform the bucketing of values before plotting. In this way <code class="docutils literal notranslate"><span class="pre">x_column</span></code> for Histogram charts can simply be set to a dummy string.</p>
+<p>Histograms are unique in that Google will perform the bucketing of values before plotting. In this way <code class="docutils literal notranslate"><span class="pre">x_axis_column</span></code> for Histogram charts can simply be set to a dummy string.</p>
 </div>
 </div>
 
@@ -327,12 +329,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="modules.html">
+          <a class="next-page" href="table.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">gslides</div>
+                <div class="title">Tables</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -379,7 +381,7 @@
             <ul>
 <li><a class="reference internal" href="#">Charts &amp; Series</a><ul>
 <li><a class="reference internal" href="#ensuring-your-data-is-pivoted">Ensuring your data is pivoted</a></li>
-<li><a class="reference internal" href="#utilizing-the-y-columns-parameter">Utilizing the <code class="docutils literal notranslate"><span class="pre">y_columns</span></code> parameter</a></li>
+<li><a class="reference internal" href="#utilizing-the-series-columns-parameter">Utilizing the <code class="docutils literal notranslate"><span class="pre">series_columns</span></code> parameter</a></li>
 <li><a class="reference internal" href="#series-parameters">Series parameters</a></li>
 <li><a class="reference internal" href="#stacking">Stacking</a></li>
 <li><a class="reference internal" href="#histogram">Histogram</a></li>

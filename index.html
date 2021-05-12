@@ -112,6 +112,8 @@
 <li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
 </ul>
@@ -149,64 +151,66 @@
 <p><strong>1. Initialize package and connection</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gslides</span>
 <span class="kn">from</span> <span class="nn">gslides</span> <span class="kn">import</span> <span class="p">(</span>
-  <span class="n">CreatePresentation</span><span class="p">,</span>
-  <span class="n">CreateSpreadsheet</span><span class="p">,</span>
-  <span class="n">CreateFrame</span><span class="p">,</span>
-  <span class="n">Chart</span><span class="p">,</span>
-  <span class="n">Scatter</span><span class="p">,</span>
-  <span class="n">CreateSlide</span>
+    <span class="n">Frame</span><span class="p">,</span>
+    <span class="n">Presentation</span><span class="p">,</span>
+    <span class="n">Spreadsheet</span><span class="p">,</span>
+    <span class="n">Table</span><span class="p">,</span>
+    <span class="n">Series</span><span class="p">,</span> <span class="n">Chart</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="n">gslides</span><span class="o">.</span><span class="n">intialize_credentials</span><span class="p">(</span><span class="n">creds</span><span class="p">)</span> <span class="c1">#BringYourOwnCredentials</span>
 </pre></div>
 </div>
 <p><strong>2. Create a presentation</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prs</span> <span class="o">=</span> <span class="n">CreatePresentation</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'demo pres'</span><span class="p">)</span>
-<span class="n">prs</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prs</span> <span class="o">=</span> <span class="n">Presentation</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'demo pres'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>3. Create a spreadsheet</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spreadsheet</span> <span class="o">=</span> <span class="n">CreateSpreadsheet</span><span class="p">(</span>
-  <span class="n">title</span> <span class="o">=</span> <span class="s1">'demo spreadsheet'</span><span class="p">,</span>
-  <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">'demo sheet'</span><span class="p">)</span>
-<span class="n">spreadsheet</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spr</span> <span class="o">=</span> <span class="n">Spreadsheet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">'demo spreadsheet'</span><span class="p">,</span>
+    <span class="n">sheet_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'demo sheet'</span><span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>4. Load the data to the spreadsheet</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">'data'</span><span class="p">]</span>
-<span class="n">frame</span> <span class="o">=</span> <span class="n">CreateFrame</span><span class="p">(</span><span class="n">df</span> <span class="o">=</span> <span class="n">iris</span><span class="p">,</span>
-            <span class="n">spreadsheet_id</span> <span class="o">=</span> <span class="n">spreadsheet</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
-            <span class="n">sheet_id</span> <span class="o">=</span> <span class="n">spreadsheet</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
-            <span class="n">overwrite_data</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="p">)</span>
-<span class="n">frame</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt_df</span> <span class="o">=</span> <span class="c1">#Iris data</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">Frame</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">df</span> <span class="o">=</span> <span class="n">plt_df</span><span class="p">,</span>
+          <span class="n">spreadsheet_id</span> <span class="o">=</span> <span class="n">spr</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
+          <span class="n">sheet_id</span> <span class="o">=</span> <span class="n">spr</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">[</span><span class="s1">'demo sheet'</span><span class="p">],</span>
+          <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">'demo sheet'</span><span class="p">,</span>
+          <span class="n">overwrite_data</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>5. Create a scatterplot</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">Scatter</span><span class="p">(</span><span class="n">y_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sepal width (cm)'</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">Series</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">series_columns</span> <span class="o">=</span> <span class="n">target_names</span><span class="p">)</span>
 <span class="n">ch</span> <span class="o">=</span> <span class="n">Chart</span><span class="p">(</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
-    <span class="n">x_column</span> <span class="o">=</span> <span class="s1">'sepal length (cm)'</span><span class="p">,</span>
+    <span class="n">x_axis_column</span> <span class="o">=</span> <span class="s1">'sepal length (cm)'</span><span class="p">,</span>
     <span class="n">series</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span><span class="p">],</span>
     <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Demo Chart'</span><span class="p">,</span>
     <span class="n">x_axis_label</span> <span class="o">=</span> <span class="s1">'Sepal Length'</span><span class="p">,</span>
-    <span class="n">y_axis_label</span> <span class="o">=</span> <span class="s1">'Sepal Width'</span><span class="p">,</span>
-    <span class="n">legend_position</span> <span class="o">=</span> <span class="s1">'NO_LEGEND'</span><span class="p">,</span>
+    <span class="n">y_axis_label</span> <span class="o">=</span> <span class="s1">'Petal Width'</span><span class="p">,</span>
+    <span class="n">legend_position</span> <span class="o">=</span> <span class="s1">'RIGHT_LEGEND'</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>6. Create a slide with the scatterplot</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sld</span> <span class="o">=</span> <span class="n">CreateSlide</span><span class="p">(</span>
-    <span class="n">presentation_id</span> <span class="o">=</span> <span class="n">prs</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span>
-    <span class="n">charts</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span><span class="p">],</span>
-    <span class="n">layout</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="s2">"Investigation into Fischer's Iris dataset"</span><span class="p">,</span>
-    <span class="n">notes</span> <span class="o">=</span> <span class="s2">"Data from 1936"</span>
+<p><strong>6. Create a table</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">plt_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="p">)</span>
-<span class="n">sld</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>7. Navigate to the presentation</strong></p>
+<p><strong>7. Create a slide with the scatterplot</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prs</span><span class="o">.</span><span class="n">add_slide</span><span class="p">(</span>
+  <span class="n">objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span><span class="p">,</span> <span class="n">tbl</span><span class="p">],</span>
+  <span class="n">layout</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s2">"Investigation into Fischer's Iris dataset"</span><span class="p">,</span>
+  <span class="n">notes</span> <span class="o">=</span> <span class="s2">"Data from 1936"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>8. Navigate to the presentation</strong></p>
 <img alt="_images/usage.png" src="_images/usage.png"/>
 </div>
 <div class="section" id="developer-instructions">
@@ -234,15 +238,26 @@
 <li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic.html#data-flow">Data Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic.html#user-supplied-id-s">User supplied ID’s</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic.html#executing-classes">Executing classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic.html#initializing-classes">Initializing classes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="chart.html#ensuring-your-data-is-pivoted">Ensuring your data is pivoted</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chart.html#utilizing-the-y-columns-parameter">Utilizing the <code class="docutils literal notranslate"><span class="pre">y_columns</span></code> parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html#utilizing-the-series-columns-parameter">Utilizing the <code class="docutils literal notranslate"><span class="pre">series_columns</span></code> parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chart.html#series-parameters">Series parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chart.html#stacking">Stacking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chart.html#histogram">Histogram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="table.html#styling">Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#sizing">Sizing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="styling.html#setting-font-palette">Setting font &amp; palette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="styling.html#available-palettes">Available palettes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="styling.html#using-custom-palettes">Using custom palettes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a><ul>

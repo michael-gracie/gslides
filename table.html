@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Charts &amp; Series" href="chart.html" /><link rel="prev" title="Bring Your Own Credentials" href="byoc.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Styling" href="styling.html" /><link rel="prev" title="Charts &amp; Series" href="chart.html" />
 
     <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>Basic Usage - gslides 0.1.0 documentation</title>
+        <title>Tables - gslides 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
@@ -110,9 +110,9 @@
   <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
@@ -132,32 +132,24 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="basic-usage">
-<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
-<p>The following page will provide an understanding around the class structure for <code class="docutils literal notranslate"><span class="pre">gslides</span></code>. To accompany this documentation, see an example of the usage of <code class="docutils literal notranslate"><span class="pre">gslides</span></code> in this <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/notebooks/usage.ipynb">notebook</a>.</p>
-<div class="section" id="data-flow">
-<h2>Data Flow<a class="headerlink" href="#data-flow" title="Permalink to this headline">¶</a></h2>
-<p>Taking an object oriented approach, <code class="docutils literal notranslate"><span class="pre">gslides</span></code> provides classes that represent objects in either Google sheets or Google slides to enable the user flexibility in terms of how there are creating their pipeline and executing their dependencies.</p>
-<p>The diagram provides a visual representation of the objects and methods available.</p>
-<img alt="_images/uml.png" src="_images/uml.png"/>
-<p>The modularization of the pipeline allows the user to create new spreadsheets, sheets and presentations or simply get existing sheets and presentations. Additionally, if the user wants to only use a portion of the pipeline they can choose so.</p>
-</div>
-<div class="section" id="user-supplied-id-s">
-<h2>User supplied ID’s<a class="headerlink" href="#user-supplied-id-s" title="Permalink to this headline">¶</a></h2>
-<p>From existing spreadsheets and presentations it is possible to retrieve <code class="docutils literal notranslate"><span class="pre">spreadsheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">sheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">presentation_id</span></code> through simply looking at a URL.</p>
-<img alt="_images/user_id.png" src="_images/user_id.png"/>
-</div>
-<div class="section" id="initializing-classes">
-<h2>Initializing classes<a class="headerlink" href="#initializing-classes" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">Spreadsheet</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span></code> and <code class="docutils literal notranslate"><span class="pre">Presentation</span></code> objects are all initialized through either the <code class="docutils literal notranslate"><span class="pre">create()</span></code> or <code class="docutils literal notranslate"><span class="pre">get()</span></code> class method.</p>
-<div class="section" id="passing-chart-and-table-objects-to-presentation-add-slide">
-<h3>Passing <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects to <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code><a class="headerlink" href="#passing-chart-and-table-objects-to-presentation-add-slide" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects are unique in the fact that they don’t need to be created to be passed to the <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code> method. The layout and slide margin parameters set in the <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code> method will optimize the size of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects that are to be created. The <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code> method handles both the creation of the objects, creation of the slide and the copy of the objects all in one.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>There is no restriction on utilizing the <code class="docutils literal notranslate"><span class="pre">create()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> classes. For <code class="docutils literal notranslate"><span class="pre">Chart</span></code>, the method will simply create a chart in Google sheets without optimizing the sizing of that chart for it’s destination slide. For <code class="docutils literal notranslate"><span class="pre">Table</span></code> it will create a table in Google slides.</p>
+        <div class="section" id="tables">
+<h1>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h1>
+<p>With <code class="docutils literal notranslate"><span class="pre">gslides</span></code> it’s possible to take either existing data in Google sheets or a pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and visualize it in Google slides.</p>
+<div class="section" id="styling">
+<h2>Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h2>
+<p>The package allows the user to style the header row background and the stub column background as well.</p>
+<img alt="_images/table.png" src="_images/table.png"/>
+<p>To enable a background on the stub column and header row while setting the color find the following parameters below and their corresponding default configurations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">stub</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">header_background_color</span> <span class="o">=</span> <span class="s2">"black"</span>
+<span class="n">stub_background_color</span><span class="o">=</span> <span class="s2">"black"</span>
+</pre></div>
 </div>
 </div>
+<div class="section" id="sizing">
+<h2>Sizing<a class="headerlink" href="#sizing" title="Permalink to this headline">¶</a></h2>
+<p>Sizing is particularly difficult with tables and one needs to be thoughtful about the number of rows and width of columns that will be created. If the Google API returns an error around the minimum row / column width you can either reduce amount of data you are attempting to capture in the table or change the <code class="docutils literal notranslate"><span class="pre">font_size</span></code> setting.</p>
 </div>
 </div>
 
@@ -165,23 +157,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="chart.html">
+          <a class="next-page" href="styling.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Charts &amp; Series</div>
+                <div class="title">Styling</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="byoc.html">
+          <a class="prev-page" href="chart.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Bring Your Own Credentials</div>
+                <div class="title">Charts &amp; Series</div>
                 
               </div>
             </a>
@@ -195,7 +187,7 @@
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="_sources/basic.rst.txt"
+            <a class="muted-link" href="_sources/table.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -215,13 +207,9 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Basic Usage</a><ul>
-<li><a class="reference internal" href="#data-flow">Data Flow</a></li>
-<li><a class="reference internal" href="#user-supplied-id-s">User supplied ID’s</a></li>
-<li><a class="reference internal" href="#initializing-classes">Initializing classes</a><ul>
-<li><a class="reference internal" href="#passing-chart-and-table-objects-to-presentation-add-slide">Passing <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects to <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Tables</a><ul>
+<li><a class="reference internal" href="#styling">Styling</a></li>
+<li><a class="reference internal" href="#sizing">Sizing</a></li>
 </ul>
 </li>
 </ul>

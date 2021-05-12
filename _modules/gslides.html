@@ -112,6 +112,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../byoc.html">Bring Your Own Credentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic.html">Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../gslides.html">gslides package</a></li>
 </ul>
@@ -143,10 +145,11 @@
 
 <span class="kn">from</span> <span class="nn">google.oauth2.credentials</span> <span class="kn">import</span> <span class="n">Credentials</span>
 
-<span class="kn">from</span> <span class="nn">.config</span> <span class="kn">import</span> <span class="n">CHART_PARAMS</span><span class="p">,</span> <span class="n">Creds</span>
-
+<span class="kn">from</span> <span class="nn">.config</span> <span class="kn">import</span> <span class="n">CHART_PARAMS</span><span class="p">,</span> <span class="n">Creds</span><span class="p">,</span> <span class="n">Font</span><span class="p">,</span> <span class="n">PackagePalette</span>
 
 <span class="n">creds</span> <span class="o">=</span> <span class="n">Creds</span><span class="p">()</span>
+<span class="n">package_font</span> <span class="o">=</span> <span class="n">Font</span><span class="p">()</span>
+<span class="n">package_palette</span> <span class="o">=</span> <span class="n">PackagePalette</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="intialize_credentials"><a class="viewcode-back" href="../gslides.html#gslides.intialize_credentials">[docs]</a><span class="k">def</span> <span class="nf">intialize_credentials</span><span class="p">(</span><span class="n">credentials</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Credentials</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -158,15 +161,30 @@
     <span class="n">creds</span><span class="o">.</span><span class="n">set_credentials</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span></div>
 
 
-<span class="kn">from</span> <span class="nn">.addchart</span> <span class="kn">import</span> <span class="n">Area</span><span class="p">,</span> <span class="n">Chart</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Scatter</span>  <span class="c1"># noqa</span>
+<div class="viewcode-block" id="set_font"><a class="viewcode-back" href="../gslides.html#gslides.set_font">[docs]</a><span class="k">def</span> <span class="nf">set_font</span><span class="p">(</span><span class="n">font</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Sets the font for all objects</span>
+
+<span class="sd">    :param font: Font</span>
+<span class="sd">    :type font: str</span>
+<span class="sd">    """</span>
+    <span class="n">package_font</span><span class="o">.</span><span class="n">set_font</span><span class="p">(</span><span class="n">font</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_palette"><a class="viewcode-back" href="../gslides.html#gslides.set_palette">[docs]</a><span class="k">def</span> <span class="nf">set_palette</span><span class="p">(</span><span class="n">palette</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Sets the palette for all charts</span>
+
+<span class="sd">    :param palette: The palette to use</span>
+<span class="sd">    :type palette: str</span>
+<span class="sd">    """</span>
+    <span class="n">package_palette</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span></div>
+
+
+<span class="kn">from</span> <span class="nn">.chart</span> <span class="kn">import</span> <span class="n">Chart</span><span class="p">,</span> <span class="n">Series</span>  <span class="c1"># noqa</span>
 <span class="kn">from</span> <span class="nn">.colors</span> <span class="kn">import</span> <span class="n">Palette</span>  <span class="c1"># noqa</span>
-<span class="kn">from</span> <span class="nn">.sheetsframe</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa</span>
-    <span class="n">CreateFrame</span><span class="p">,</span>
-    <span class="n">CreateSheet</span><span class="p">,</span>
-    <span class="n">CreateSpreadsheet</span><span class="p">,</span>
-    <span class="n">GetFrame</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.slides</span> <span class="kn">import</span> <span class="n">CreatePresentation</span><span class="p">,</span> <span class="n">CreateSlide</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.frame</span> <span class="kn">import</span> <span class="n">Frame</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.presentation</span> <span class="kn">import</span> <span class="n">Presentation</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.spreadsheet</span> <span class="kn">import</span> <span class="n">Spreadsheet</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.table</span> <span class="kn">import</span> <span class="n">Table</span>  <span class="c1"># noqa</span>
 </pre></div>
       </article>
       <footer>

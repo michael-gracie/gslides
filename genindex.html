@@ -111,6 +111,8 @@
 <li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="gslides.html">gslides package</a></li>
 </ul>
@@ -132,13 +134,29 @@
         
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#V"><strong>V</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#V"><strong>V</strong></a></div>
 </section>
 <section id="A" class="genindex-section">
   <h2>A</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.addchart.Area">Area (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.presentation.Presentation.add_slide">add_slide() (gslides.presentation.Presentation method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.presentation.AddSlide">AddSlide (class in gslides.presentation)</a>
+</li>
+        <li><a href="gslides.html#gslides.chart.Series.area">area() (gslides.chart.Series class method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.utils.black_or_white">black_or_white() (in module gslides.utils)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -152,9 +170,9 @@
 </li>
         <li><a href="gslides.html#gslides.utils.char_to_num">char_to_num() (in module gslides.utils)</a>
 </li>
-        <li><a href="gslides.html#gslides.addchart.Chart">Chart (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.chart.Chart">Chart (class in gslides.chart)</a>
 </li>
-        <li><a href="gslides.html#gslides.addchart.Chart.chart_id">chart_id() (gslides.addchart.Chart property)</a>
+        <li><a href="gslides.html#gslides.chart.Chart.chart_id">chart_id() (gslides.chart.Chart property)</a>
 </li>
         <li><a href="gslides.html#gslides.utils.clean_dtypes">clean_dtypes() (in module gslides.utils)</a>
 </li>
@@ -164,19 +182,21 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.addchart.Column">Column (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.chart.Series.column">column() (gslides.chart.Series class method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.Layout.coord">coord() (gslides.slides.Layout property)</a>
+        <li><a href="gslides.html#gslides.presentation.Layout.coord">coord() (gslides.presentation.Layout property)</a>
 </li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateFrame">CreateFrame (class in gslides.sheetsframe)</a>
+        <li><a href="gslides.html#gslides.chart.Chart.create">create() (gslides.chart.Chart method)</a>
+
+        <ul>
+          <li><a href="gslides.html#gslides.frame.Frame.create">(gslides.frame.Frame class method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.CreatePresentation">CreatePresentation (class in gslides.slides)</a>
+          <li><a href="gslides.html#gslides.presentation.Presentation.create">(gslides.presentation.Presentation class method)</a>
 </li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateSheet">CreateSheet (class in gslides.sheetsframe)</a>
+          <li><a href="gslides.html#gslides.table.Table.create">(gslides.table.Table method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.CreateSlide">CreateSlide (class in gslides.slides)</a>
-</li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateSpreadsheet">CreateSpreadsheet (class in gslides.sheetsframe)</a>
+        </ul></li>
+        <li><a href="gslides.html#gslides.frame.CreateFrame">CreateFrame (class in gslides.frame)</a>
 </li>
         <li><a href="gslides.html#gslides.config.Creds">Creds (class in gslides.config)</a>
 </li>
@@ -188,7 +208,11 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.sheetsframe.SheetsFrame.data">data() (gslides.sheetsframe.SheetsFrame property)</a>
+        <li><a href="gslides.html#gslides.frame.Frame.data">data() (gslides.frame.Frame property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.utils.determine_col_proportion">determine_col_proportion() (in module gslides.utils)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -200,27 +224,33 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="gslides.html#gslides.utils.emu_to_px">emu_to_px() (in module gslides.utils)</a>
 </li>
-        <li><a href="gslides.html#gslides.addchart.Chart.execute">execute() (gslides.addchart.Chart method)</a>
+        <li><a href="gslides.html#gslides.frame.CreateFrame.execute">execute() (gslides.frame.CreateFrame method)</a>
 
         <ul>
-          <li><a href="gslides.html#gslides.sheetsframe.CreateFrame.execute">(gslides.sheetsframe.CreateFrame method)</a>
+          <li><a href="gslides.html#gslides.frame.GetFrame.execute">(gslides.frame.GetFrame method)</a>
 </li>
-          <li><a href="gslides.html#gslides.sheetsframe.CreateSheet.execute">(gslides.sheetsframe.CreateSheet method)</a>
-</li>
-          <li><a href="gslides.html#gslides.sheetsframe.CreateSpreadsheet.execute">(gslides.sheetsframe.CreateSpreadsheet method)</a>
-</li>
-          <li><a href="gslides.html#gslides.sheetsframe.GetFrame.execute">(gslides.sheetsframe.GetFrame method)</a>
-</li>
-          <li><a href="gslides.html#gslides.slides.CreatePresentation.execute">(gslides.slides.CreatePresentation method)</a>
-</li>
-          <li><a href="gslides.html#gslides.slides.CreateSlide.execute">(gslides.slides.CreateSlide method)</a>
+          <li><a href="gslides.html#gslides.presentation.AddSlide.execute">(gslides.presentation.AddSlide method)</a>
 </li>
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.slides.CreateSlide.execute_sheet">execute_sheet() (gslides.slides.CreateSlide method)</a>
+        <li><a href="gslides.html#gslides.presentation.AddSlide.execute_sheet">execute_sheet() (gslides.presentation.AddSlide method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.CreateSlide.execute_slide">execute_slide() (gslides.slides.CreateSlide method)</a>
+        <li><a href="gslides.html#gslides.presentation.AddSlide.execute_slide">execute_slide() (gslides.presentation.AddSlide method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.config.Font">Font (class in gslides.config)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.frame.Frame">Frame (class in gslides.frame)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -230,7 +260,15 @@
   <h2>G</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.sheetsframe.GetFrame">GetFrame (class in gslides.sheetsframe)</a>
+        <li><a href="gslides.html#gslides.frame.Frame.get">get() (gslides.frame.Frame class method)</a>
+
+        <ul>
+          <li><a href="gslides.html#gslides.presentation.Presentation.get">(gslides.presentation.Presentation class method)</a>
+</li>
+        </ul></li>
+        <li><a href="gslides.html#gslides.frame.get_sheet_data">get_sheet_data() (in module gslides.frame)</a>
+</li>
+        <li><a href="gslides.html#gslides.frame.GetFrame">GetFrame (class in gslides.frame)</a>
 </li>
         <li>
     gslides
@@ -240,10 +278,10 @@
 </li>
         </ul></li>
         <li>
-    gslides.addchart
+    gslides.chart
 
         <ul>
-          <li><a href="gslides.html#module-gslides.addchart">module</a>
+          <li><a href="gslides.html#module-gslides.chart">module</a>
 </li>
         </ul></li>
         <li>
@@ -263,17 +301,24 @@
 </li>
         </ul></li>
         <li>
-    gslides.sheetsframe
+    gslides.frame
 
         <ul>
-          <li><a href="gslides.html#module-gslides.sheetsframe">module</a>
+          <li><a href="gslides.html#module-gslides.frame">module</a>
 </li>
         </ul></li>
         <li>
-    gslides.slides
+    gslides.presentation
 
         <ul>
-          <li><a href="gslides.html#module-gslides.slides">module</a>
+          <li><a href="gslides.html#module-gslides.presentation">module</a>
+</li>
+        </ul></li>
+        <li>
+    gslides.table
+
+        <ul>
+          <li><a href="gslides.html#module-gslides.table">module</a>
 </li>
         </ul></li>
         <li>
@@ -295,7 +340,7 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.addchart.Histogram">Histogram (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.chart.Series.histogram">histogram() (gslides.chart.Series class method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -319,6 +364,8 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.utils.json_dict_extract">json_dict_extract() (in module gslides.utils)</a>
+</li>
         <li><a href="gslides.html#gslides.utils.json_val_extract">json_val_extract() (in module gslides.utils)</a>
 </li>
     </ul></td>
@@ -329,11 +376,11 @@
   <h2>L</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.slides.Layout">Layout (class in gslides.slides)</a>
+        <li><a href="gslides.html#gslides.presentation.Layout">Layout (class in gslides.presentation)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.addchart.Line">Line (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.chart.Series.line">line() (gslides.chart.Series class method)</a>
 </li>
         <li><a href="gslides.html#gslides.colors.Palette.load_palette">load_palette() (gslides.colors.Palette method)</a>
 </li>
@@ -351,15 +398,17 @@
         <ul>
           <li><a href="gslides.html#module-gslides">gslides</a>
 </li>
-          <li><a href="gslides.html#module-gslides.addchart">gslides.addchart</a>
+          <li><a href="gslides.html#module-gslides.chart">gslides.chart</a>
 </li>
           <li><a href="gslides.html#module-gslides.colors">gslides.colors</a>
 </li>
           <li><a href="gslides.html#module-gslides.config">gslides.config</a>
 </li>
-          <li><a href="gslides.html#module-gslides.sheetsframe">gslides.sheetsframe</a>
+          <li><a href="gslides.html#module-gslides.frame">gslides.frame</a>
 </li>
-          <li><a href="gslides.html#module-gslides.slides">gslides.slides</a>
+          <li><a href="gslides.html#module-gslides.presentation">gslides.presentation</a>
+</li>
+          <li><a href="gslides.html#module-gslides.table">gslides.table</a>
 </li>
           <li><a href="gslides.html#module-gslides.utils">gslides.utils</a>
 </li>
@@ -392,11 +441,15 @@
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.config.PackagePalette">PackagePalette (class in gslides.config)</a>
+</li>
         <li><a href="gslides.html#gslides.colors.Palette">Palette (class in gslides.colors)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.slides.CreatePresentation.presentation_id">presentation_id() (gslides.slides.CreatePresentation property)</a>
+        <li><a href="gslides.html#gslides.presentation.Presentation">Presentation (class in gslides.presentation)</a>
+</li>
+        <li><a href="gslides.html#gslides.presentation.Presentation.presentation_id">presentation_id() (gslides.presentation.Presentation property)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -406,35 +459,35 @@
   <h2>R</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.addchart.Chart.render_basic_chart_json">render_basic_chart_json() (gslides.addchart.Chart method)</a>
+        <li><a href="gslides.html#gslides.chart.Chart.render_basic_chart_json">render_basic_chart_json() (gslides.chart.Chart method)</a>
 
         <ul>
-          <li><a href="gslides.html#gslides.addchart.Series.render_basic_chart_json">(gslides.addchart.Series method)</a>
+          <li><a href="gslides.html#gslides.chart.Series.render_basic_chart_json">(gslides.chart.Series method)</a>
 </li>
         </ul></li>
-        <li><a href="gslides.html#gslides.addchart.Chart.render_histogram_chart_json">render_histogram_chart_json() (gslides.addchart.Chart method)</a>
+        <li><a href="gslides.html#gslides.table.Table.render_create_table_json">render_create_table_json() (gslides.table.Table method)</a>
+</li>
+        <li><a href="gslides.html#gslides.chart.Chart.render_histogram_chart_json">render_histogram_chart_json() (gslides.chart.Chart method)</a>
 
         <ul>
-          <li><a href="gslides.html#gslides.addchart.Series.render_histogram_chart_json">(gslides.addchart.Series method)</a>
+          <li><a href="gslides.html#gslides.chart.Series.render_histogram_chart_json">(gslides.chart.Series method)</a>
 </li>
         </ul></li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateSheet.render_json">render_json() (gslides.sheetsframe.CreateSheet method)</a>
-
-        <ul>
-          <li><a href="gslides.html#gslides.sheetsframe.CreateSpreadsheet.render_json">(gslides.sheetsframe.CreateSpreadsheet method)</a>
+        <li><a href="gslides.html#gslides.presentation.AddSlide.render_json_copy_chart">render_json_copy_chart() (gslides.presentation.AddSlide method)</a>
 </li>
-        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.slides.CreateSlide.render_json_copy_chart">render_json_copy_chart() (gslides.slides.CreateSlide method)</a>
+        <li><a href="gslides.html#gslides.presentation.AddSlide.render_json_create_slide">render_json_create_slide() (gslides.presentation.AddSlide method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.CreateSlide.render_json_create_slide">render_json_create_slide() (gslides.slides.CreateSlide method)</a>
+        <li><a href="gslides.html#gslides.presentation.AddSlide.render_json_create_textboxes">render_json_create_textboxes() (gslides.presentation.AddSlide method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.CreateSlide.render_json_create_textboxes">render_json_create_textboxes() (gslides.slides.CreateSlide method)</a>
+        <li><a href="gslides.html#gslides.presentation.AddSlide.render_json_format_textboxes">render_json_format_textboxes() (gslides.presentation.AddSlide method)</a>
 </li>
-        <li><a href="gslides.html#gslides.slides.CreateSlide.render_json_format_textboxes">render_json_format_textboxes() (gslides.slides.CreateSlide method)</a>
+        <li><a href="gslides.html#gslides.frame.CreateFrame.render_update_json">render_update_json() (gslides.frame.CreateFrame method)</a>
 </li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateFrame.render_update_json">render_update_json() (gslides.sheetsframe.CreateFrame method)</a>
+        <li><a href="gslides.html#gslides.table.Table.render_update_table_json">render_update_table_json() (gslides.table.Table method)</a>
+</li>
+        <li><a href="gslides.html#gslides.presentation.Presentation.rm_slide">rm_slide() (gslides.presentation.Presentation method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -444,27 +497,31 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="gslides.html#gslides.addchart.Scatter">Scatter (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.chart.Series.scatter">scatter() (gslides.chart.Series class method)</a>
 </li>
-        <li><a href="gslides.html#gslides.addchart.Series">Series (class in gslides.addchart)</a>
+        <li><a href="gslides.html#gslides.chart.Series">Series (class in gslides.chart)</a>
 </li>
         <li><a href="gslides.html#gslides.config.Creds.set_credentials">set_credentials() (gslides.config.Creds method)</a>
 </li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateSheet.sheet_id">sheet_id() (gslides.sheetsframe.CreateSheet property)</a>
+        <li><a href="gslides.html#gslides.config.Font.set_font">set_font() (gslides.config.Font method)</a>
 
         <ul>
-          <li><a href="gslides.html#gslides.sheetsframe.CreateSpreadsheet.sheet_id">(gslides.sheetsframe.CreateSpreadsheet property)</a>
+          <li><a href="gslides.html#gslides.set_font">(in module gslides)</a>
 </li>
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.config.PackagePalette.set_palette">set_palette() (gslides.config.PackagePalette method)</a>
+
+        <ul>
+          <li><a href="gslides.html#gslides.set_palette">(in module gslides)</a>
+</li>
+        </ul></li>
         <li><a href="gslides.html#gslides.config.Creds.sheet_service">sheet_service() (gslides.config.Creds property)</a>
 </li>
-        <li><a href="gslides.html#gslides.sheetsframe.SheetsFrame">SheetsFrame (class in gslides.sheetsframe)</a>
+        <li><a href="gslides.html#gslides.presentation.Presentation.slide_ids">slide_ids() (gslides.presentation.Presentation property)</a>
 </li>
         <li><a href="gslides.html#gslides.config.Creds.slide_service">slide_service() (gslides.config.Creds property)</a>
-</li>
-        <li><a href="gslides.html#gslides.sheetsframe.CreateSpreadsheet.spreadsheet_id">spreadsheet_id() (gslides.sheetsframe.CreateSpreadsheet property)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -473,6 +530,10 @@
 <section id="T" class="genindex-section">
   <h2>T</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="gslides.html#gslides.table.Table">Table (class in gslides.table)</a>
+</li>
+    </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="gslides.html#gslides.colors.translate_color">translate_color() (in module gslides.colors)</a>
 </li>
