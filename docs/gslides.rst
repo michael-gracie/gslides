@@ -4,10 +4,10 @@ gslides package
 Submodules
 ----------
 
-gslides.addchart module
+gslides.chart module
 ------------------------
 
-.. automodule:: gslides.addchart
+.. automodule:: gslides.chart
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,30 +28,37 @@ gslides.config module
    :undoc-members:
    :show-inheritance:
 
-gslides.sheetsframe module
---------------------------
-
-.. automodule:: gslides.sheetsframe
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-gslides.slides module
--------------------------
-
-.. automodule:: gslides.slides
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 gslides.utils module
-------------------------
+--------------------------
 
 .. automodule:: gslides.utils
    :members:
    :undoc-members:
    :show-inheritance:
 
+gslides.frame module
+-------------------------
+
+.. automodule:: gslides.frame
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+gslides.presentation module
+---------------------------
+
+.. automodule:: gslides.presentation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+gslides.table module
+------------------------
+
+.. automodule:: gslides.table
+  :members:
+  :undoc-members:
+  :show-inheritance:
 
 Module contents
 ---------------

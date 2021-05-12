@@ -5,3 +5,13 @@ black:
     - dark_grey_1
     - light_grey_1
     - light_grey_3
+
+prodigy:
+
+    - "#FF5C0B"
+    - "#245353"
+    - "#A9E7F5"
+    - "#6F1F3A"
+    - "#BFAFEF"
+    - "#95C13D"
+    - "#EC008C"

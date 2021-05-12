@@ -6,7 +6,6 @@ import pytest
 
 import gslides.utils as utils
 
-
 json = {
     "chartId": 1234567,
     "spec": {
@@ -123,7 +122,7 @@ json = {
 
 
 @pytest.mark.parametrize(
-    "key,expected", [("heightPixels", 200), ("chartId", 1234567), ("slideId", None)]
+    "key,expected", [("heightPixels", [200]), ("chartId", [1234567]), ("slideId", [])]
 )
 def test_json_val_extract(key, expected):
     assert utils.json_val_extract(json, key) == expected
@@ -131,6 +130,10 @@ def test_json_val_extract(key, expected):
 
 def test_json_chunk_extract():
     assert utils.json_chunk_extract(json, "title", "pytest")[0]["fontName"] == "Roboto"
+
+
+def test_json_dict_extract():
+    assert utils.json_dict_extract(json, ("title", "fontName")) == {"pytest": "Roboto"}
 
 
 @pytest.mark.parametrize(
@@ -231,3 +234,41 @@ def test_clean_nan():
 )
 def test_clean_dtypes(input, expected):
     assert utils.clean_dtypes(input) == expected
+
+
+@pytest.mark.xfail(reason=ValueError)
+def test_validate_params_list():
+    utils.validate_params_list({"legend_position": "outside"})
+
+
+@pytest.mark.xfail(reason=ValueError)
+def test_validate_params_int():
+    utils.validate_params_int({"line_width": -1})
+
+
+@pytest.mark.xfail(reason=ValueError)
+def test_validate_params_int():
+    utils.validate_params_int({"outlier_percentage": 1.5})
+
+
+@pytest.mark.xfail(reason=ValueError)
+def test_validate_cell_name():
+    utils.validate_cell_name("1A:4")
+
+
+def test_df():
+    data = [
+        ["Object", "Blue", "Red", "Grand Total"],
+        ["Ball", "6", "1", "7"],
+        ["Cube", "6", "4", "10"],
+        ["Stik", "7", "5", "12"],
+    ]
+    return pd.DataFrame(columns=data[0], data=data[1:])
+
+
+def test_determine_col_proportion():
+    assert list(utils.determine_col_proportion(test_df())) == [0.5, 0.125, 0.125, 0.25]
+
+
+def test_black_or_white():
+    assert utils.black_or_white((0.9, 0.9, 0.9)) == (0, 0, 0)

@@ -3,6 +3,7 @@ include LICENSE
 include README.rst
 include *.txt
 include gslides/config/*.yaml
+include .isort.cfg
 
 recursive-include tests *
 recursive-exclude * __pycache__

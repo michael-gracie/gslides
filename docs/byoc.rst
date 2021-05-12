@@ -19,17 +19,14 @@ You'll need enable a google developer account to access the Google Cloud Platfor
 
 **2. Create credentials**
 
-Again consult Google and follow this `guide <https://developers.google.com/workspace/guides/create-credentials#configure_the_oauth_consent_screen>`_ to configure the OAuth consent screen.
+Consult Google and follow this `guide <https://developers.google.com/workspace/guides/create-credentials#configure_the_oauth_consent_screen>`_ to configure the OAuth consent screen. This is the screen that will appear when you attempt to use your credentials to retrieve a token.
 
-And create your credentials from the instructions `here <https://developers.google.com/workspace/guides/create-credentials#create_a_credential>`_. You'll need to download the credentials ``.json`` file onto your local. *Be sure not share these credentials with anyone, the file should not be shared on Github*.
+Next, create your credentials from the instructions `here <https://developers.google.com/workspace/guides/create-credentials#create_a_credential>`_. For simplicity, create a desktop application. Once finished, you'll need to download the credentials ``.json`` file onto your local.
 
-**3. Update the URIs**
+.. warning::
+  Be sure not share your credentials with anyone. The file should not be pushed to Github.
 
-The URI are the endpoints where the OAuth 2.0 server can send responses. In this case because we are utilizing a jupyter notebook we must allow responses to ``localhost``. Update the values like so, selecting a port which you are going to use.
-
-.. image:: img/uri.png
-
-**4. Launch a Jupyter notebook, get the token and load credentials**
+**3. Launch a Jupyter notebook, get the token and load credentials**
 
 Run the code below, replacing the necessary values to obtain the ``creds`` object. These are the credentials you pass to ``gslides``.
 
@@ -58,12 +55,14 @@ Run the code below, replacing the necessary values to obtain the ``creds`` objec
       else:
           flow = InstalledAppFlow.from_client_secrets_file(
               '<PATH_TO_CREDS>', SCOPES)
-          creds = flow.run_local_server(port=<PORT>)
+          creds = flow.run_local_server()
       # Save the credentials for the next run
       with open('token.json', 'w') as token:
           token.write(creds.to_json())
 
-**5. Initialize the credentials with gslides**
+The first time you run this block, you will be prompted to allow access to Google slides & sheets through your Google account.
+
+**4. Initialize the credentials with gslides**
 
 .. code-block:: python
 

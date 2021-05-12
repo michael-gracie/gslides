@@ -24,12 +24,11 @@ Below is an example that only showcases a simple workflow. Full discussion aroun
 
   import gslides
   from gslides import (
-    CreatePresentation,
-    CreateSpreadsheet,
-    CreateFrame,
-    Chart,
-    Scatter,
-    CreateSlide
+      Frame,
+      Presentation,
+      Spreadsheet,
+      Table,
+      Series, Chart
   )
   from sklearn import datasets
   gslides.intialize_credentials(creds) #BringYourOwnCredentials
@@ -39,60 +38,64 @@ Below is an example that only showcases a simple workflow. Full discussion aroun
 
 .. code-block:: python
 
-  prs = CreatePresentation(name = 'demo pres')
-  prs.execute()
-
+  prs = Presentation.create(name = 'demo pres')
 
 **3. Create a spreadsheet**
 
 .. code-block:: python
 
-  spreadsheet = CreateSpreadsheet(
-    title = 'demo spreadsheet',
-    sheet_name = 'demo sheet')
-  spreadsheet.execute()
+  spr = Spreadsheet.create(
+      title = 'demo spreadsheet',
+      sheet_names = ['demo sheet']
+  )
 
 **4. Load the data to the spreadsheet**
 
 .. code-block:: python
 
-  iris = datasets.load_iris(as_frame = True)['data']
-  frame = CreateFrame(df = iris,
-              spreadsheet_id = spreadsheet.spreadsheet_id,
-              sheet_id = spreadsheet.sheet_id,
-              overwrite_data = True
-              )
-  frame.execute()
+  plt_df = #Iris data
+  frame = Frame.create(df = plt_df,
+            spreadsheet_id = spr.spreadsheet_id,
+            sheet_id = spr.sheet_names['demo sheet'],
+            sheet_name = 'demo sheet',
+            overwrite_data = True
+  )
 
 **5. Create a scatterplot**
 
 .. code-block:: python
 
-  sc = Scatter(y_columns = ['sepal width (cm)'])
+  sc = Series.scatter(series_columns = target_names)
   ch = Chart(
       data = frame.data,
-      x_column = 'sepal length (cm)',
+      x_axis_column = 'sepal length (cm)',
       series = [sc],
       title = f'Demo Chart',
       x_axis_label = 'Sepal Length',
-      y_axis_label = 'Sepal Width',
-      legend_position = 'NO_LEGEND',
+      y_axis_label = 'Petal Width',
+      legend_position = 'RIGHT_LEGEND',
   )
 
-**6. Create a slide with the scatterplot**
+**6. Create a table**
 
 .. code-block:: python
 
-  sld = CreateSlide(
-      presentation_id = prs.presentation_id,
-      charts = [ch],
-      layout = (1,1),
-      title = "Investigation into Fischer's Iris dataset",
-      notes = "Data from 1936"
+  tbl = Table(
+      data = plt_df.head()
   )
-  sld.execute()
 
-**7. Navigate to the presentation**
+**7. Create a slide with the scatterplot**
+
+.. code-block:: python
+
+  prs.add_slide(
+    objects = [ch, tbl],
+    layout = (1,2),
+    title = "Investigation into Fischer's Iris dataset",
+    notes = "Data from 1936"
+  )
+
+**8. Navigate to the presentation**
 
 .. image:: img/usage.png
 

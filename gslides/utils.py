@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import re
-
 from decimal import Decimal
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -11,8 +10,8 @@ import pandas as pd
 from .config import CHART_PARAMS
 
 
-def json_val_extract(obj: Dict[str, Any], key: str) -> Optional[Any]:
-    """Recursively find value based on a given key
+def json_val_extract(obj: Dict[str, Any], key: str) -> List[Any]:
+    """Recursively find values based on a given key
 
     :param obj: JSON to search
     :type obj: dict
@@ -22,21 +21,23 @@ def json_val_extract(obj: Dict[str, Any], key: str) -> Optional[Any]:
     :rtype: any
 
     """
-    if isinstance(obj, dict):
-        for k, v in obj.items():
-            if k == key:
-                return v
-            else:
-                if json_val_extract(v, key):
-                    return json_val_extract(v, key)
-        return None
-    elif isinstance(obj, list):
-        for item in obj:
-            if json_val_extract(item, key):
-                return json_val_extract(item, key)
-        return None
-    else:
-        return None
+    arr: List = []
+
+    def extract(obj: Dict[str, Any], arr: List, key: str) -> List:
+        """Recursively search for keys in JSON tree."""
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                if k == key:
+                    arr.append(v)
+                else:
+                    extract(v, arr, key)
+        elif isinstance(obj, list):
+            for item in obj:
+                extract(item, arr, key)
+        return arr
+
+    values = extract(obj, arr, key)
+    return values
 
 
 def json_chunk_extract(
@@ -70,6 +71,39 @@ def json_chunk_extract(
         return arr
 
     values = extract(obj, arr, val)
+    return values
+
+
+def json_dict_extract(
+    obj: Dict[str, Any],
+    keys: Tuple,
+) -> Dict:
+    """Recursively fetch chunks from nested JSON based on a given key, value pair.
+
+    :param obj: JSON to search
+    :type obj: dict
+    :param keys: Tuple of multiple keys to search for in dictionary
+    :type keys: tuple
+    :return: Dictionary of values
+    :rtype: dict
+
+    """
+    arr: Dict = {}
+
+    def extract(obj: Dict[str, Any], arr: Dict, keys: Tuple) -> Dict:
+        """Recursively search for keys in JSON tree."""
+        if isinstance(obj, dict):
+            if set(keys) <= set(obj.keys()):
+                arr[obj[keys[0]]] = obj[keys[1]]
+            else:
+                for k, v in obj.items():
+                    extract(v, arr, keys)
+        elif isinstance(obj, list):
+            for item in obj:
+                extract(item, arr, keys)
+        return arr
+
+    values = extract(obj, arr, keys)
     return values
 
 
@@ -304,3 +338,36 @@ def validate_cell_name(x: str) -> str:
             raise ValueError("Invalid cell name.")
     else:
         raise ValueError("Invalid cell name.")
+
+
+def determine_col_proportion(df: pd.DataFrame) -> np.ndarray:
+    """Determines the percent size of a column based on the length of observiations
+
+    :param type df: Dataframe that will become a table
+    :type df: pd.DataFrame
+    :return: An array of proportions
+    :rtype: np.ndarray
+
+    """
+    col_size = df.apply(
+        lambda x: max(x.astype("str").apply(lambda y: len(y))), axis=0
+    ).values
+    per_col_size = col_size / sum(col_size)
+    return per_col_size
+
+
+def black_or_white(rgb: Tuple[float, ...]) -> Tuple[float, ...]:
+    """Determines based on the luminosity of a color wether the text on top of
+    that color should be black or white. See the following:
+    https://en.wikipedia.org/wiki/Luminance_%28relative%29
+
+    :param rgb: The rgb values of the color
+    :type rgb: tuple
+    :return: Black or white rgb
+    :rtype: tuple
+
+    """
+    if rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722 > 0.5:
+        return (0, 0, 0)
+    else:
+        return (1, 1, 1)

@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
-
 from typing import Dict, Optional
 
 import yaml
-
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import Resource, build
-
 
 CURR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -36,7 +33,7 @@ class Creds:
         self.sld_srvc = build("slides", "v1", credentials=credentials)
 
     @property
-    def sheet_service(self) -> Optional[Resource]:
+    def sheet_service(self) -> Resource:
         """Returns the connects to the sheets API
 
         :raises RuntimeError: Must run set_credentials before executing method
@@ -49,7 +46,7 @@ class Creds:
             raise RuntimeError("Must run set_credentials before executing method")
 
     @property
-    def slide_service(self) -> Optional[Resource]:
+    def slide_service(self) -> Resource:
         """Returns the connects to the slides API
 
         :raises RuntimeError: Must run set_credentials before executing method
@@ -60,3 +57,37 @@ class Creds:
             return self.sld_srvc
         else:
             raise RuntimeError("Must run set_credentials before executing method")
+
+
+class Font:
+    """The credentials object to build the connections to the APIs"""
+
+    def __init__(self) -> None:
+        """Constructor method"""
+        self.font: str = "Arial"
+
+    def set_font(self, font: str) -> None:
+        """Sets the font
+
+        :param font: Font
+        :type font: str
+
+        """
+        self.font = font
+
+
+class PackagePalette:
+    """The credentials object to build the connections to the APIs"""
+
+    def __init__(self) -> None:
+        """Constructor method"""
+        self.palette: Optional[str] = None
+
+    def set_palette(self, palette: Optional[str]) -> None:
+        """Sets the palette
+
+        :param palette: Palette
+        :type palette: str
+
+        """
+        self.palette = palette

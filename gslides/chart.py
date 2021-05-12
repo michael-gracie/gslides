@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Adds a chart to Google sheets.
+Charts & series class
 """
 
-from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, TypeVar, cast
 
-from . import creds
+from . import creds, package_font, package_palette
 from .colors import Palette, translate_color
-from .sheetsframe import SheetsFrame
+from .frame import Frame
 from .utils import (
     hex_to_rgb,
     json_val_extract,
@@ -16,35 +16,216 @@ from .utils import (
     validate_params_list,
 )
 
-
-"""Module to render the addChart Google API call"""
-"""
-TODO:
-- formatting config file
-- finish pytest -- update for new credentials
-- copy slide
-- mypy update
-- check for continuous series in date axis
-
-Update create sheet and create tab
-"""
+TSeries = TypeVar("TSeries", bound="Series")
 
 
 class Series:
     r"""Parent class for all series configurations.
 
+    :param type: Type of series
+    :type type: str
     :param \*\*kwargs: Dictionary of keyword arguments
     :type \*\*kwargs: dict
     """
 
-    def __init__(self, **kwargs: dict) -> None:
+    def __init__(self, type: str, **kwargs: Dict[str, Any]) -> None:
         """Constructor method"""
+        self.type = type
         self._check_point_args(kwargs)
         self._check_data_label_args(kwargs)
         validate_params_list(kwargs)
         validate_params_int(kwargs)
         validate_params_float(kwargs)
         self.params_dict = kwargs
+
+    @classmethod
+    def line(
+        cls: Type[TSeries],
+        series_columns: Optional[List[str]] = None,
+        line_style: Optional[str] = None,
+        line_width: Optional[int] = None,
+        point_enabled: bool = False,
+        point_shape: Optional[str] = None,
+        point_size: Optional[int] = None,
+        data_label_enabled: bool = False,
+        data_label_placement: Optional[str] = None,
+        color: Optional[str] = None,
+    ) -> TSeries:
+        """A line plot
+
+        :param series_columns: The columns to plot. None or an empty list will
+            plot all columns
+        :type series_columns: list, optional
+        :param line_style: The style of line to plot, see
+            gslides.config.CHART_PARAMS['line_style'] for accepted parameters
+        :type line_style: str, optional
+        :param line_width: The width of line to plot
+        :type line_width: int, optional
+        :param point_enabled: Boolean for whether the plot should include points
+        :type point_enabled: bool, optional
+        :param point_shape: The shape of point to plot,
+            see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
+        :type point_shape: str, optional
+        :param point_size: The size of point to plot
+        :type point_size: int, optional
+        :param data_label_enabled: Boolean for whether the plot should include data labels
+        :type data_label_enabled: bool, optional
+        :param data_label_placement: The placement of the data label to plot,
+            see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        :type data_label_placement: str, optional
+        :param color: A color to override the existing palette. Parameters can either
+            be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+            for accepted named colors
+        :type color: str, optional
+        :return: A :class:`Series` object
+        :rtype: :class:`Series`
+        """
+
+        kwargs = locals().copy()
+        del kwargs["cls"]
+        return cls("Line", **kwargs)
+
+    @classmethod
+    def area(
+        cls: Type[TSeries],
+        series_columns: Optional[List[str]] = None,
+        line_style: Optional[str] = None,
+        line_width: Optional[int] = None,
+        point_enabled: bool = False,
+        point_shape: Optional[str] = None,
+        point_size: Optional[int] = None,
+        data_label_enabled: bool = False,
+        data_label_placement: Optional[str] = None,
+        color: Optional[str] = None,
+    ) -> TSeries:
+        """A area plot
+
+        :param series_columns: The columns to plot. None or an empty list will
+            plot all columns
+        :type series_columns: list, optional
+        :param line_style: The style of line to plot,
+            see gslides.config.CHART_PARAMS['line_style'] for accepted parameters
+        :type line_style: str, optional
+        :param line_width: The width of line to plot
+        :type line_width: int, optional
+        :param point_enabled: Boolean for whether the plot should include points
+        :type point_enabled: bool, optional
+        :param point_shape: The shape of point to plot,
+            see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
+        :type point_shape: str, optional
+        :param point_size: The size of point to plot
+        :type point_size: int, optional
+        :param data_label_enabled: Boolean for whether the plot should include data labels
+        :type data_label_enabled: bool, optional
+        :param data_label_placement: The placement of the data label to plot,
+            see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        :type data_label_placement: str, optional
+        :param color: A color to override the existing palette. Parameters can either
+            be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+            for accepted named colors
+        :type color: str, optional
+        :return: A :class:`Series` object
+        :rtype: :class:`Series`
+        """
+        kwargs = locals().copy()
+        del kwargs["cls"]
+        return cls("Area", **kwargs)
+
+    @classmethod
+    def scatter(
+        cls: Type[TSeries],
+        series_columns: Optional[List[str]] = None,
+        point_shape: Optional[str] = None,
+        point_size: Optional[int] = None,
+        data_label_enabled: bool = False,
+        data_label_placement: Optional[str] = None,
+        color: Optional[str] = None,
+    ) -> TSeries:
+        """A scatter plot
+
+        :param series_columns: The columns to plot. None or an empty list will
+            plot all columns
+        :type series_columns: list, optional
+        :param point_shape: The shape of point to plot,
+            see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
+        :type point_shape: str, optional
+        :param point_size: The size of point to plot
+        :type point_size: int, optional
+        :param data_label_enabled: Boolean for whether the plot should include data labels
+        :type data_label_enabled: bool, optional
+        :param data_label_placement: The placement of the data label to plot,
+            see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
+        :type data_label_placement: str, optional
+        :param color: A color to override the existing palette. Parameters can either
+            be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+            for accepted named colors
+        :type color: str, optional
+        :return: A :class:`Series` object
+        :rtype: :class:`Series`
+        """
+        kwargs = locals().copy()
+        del kwargs["cls"]
+        return cls("Scatter", **kwargs)
+
+    @classmethod
+    def column(
+        cls: Type[TSeries],
+        series_columns: Optional[List[str]] = None,
+        data_label_enabled: bool = False,
+        data_label_placement: Optional[str] = None,
+        color: Optional[str] = None,
+    ) -> TSeries:
+        """A column plot
+
+        :param series_columns: The columns to plot. None or an empty list will
+            plot all columns
+        :type series_columns: list, optional
+        :param data_label_enabled: Boolean for whether the plot should include
+            data labels
+        :type data_label_enabled: bool, optional
+        :param data_label_placement: The placement of the data label to plot,
+            see gslides.config.CHART_PARAMS['data_label_placement'] for
+            accepted parameters
+        :type data_label_placement: str, optional
+        :param color: A color to override the existing palette. Parameters can either
+            be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+            for accepted named colors
+        :type color: str, optional
+        :return: A :class:`Series` object
+        :rtype: :class:`Series`
+        """
+        kwargs = locals().copy()
+        del kwargs["cls"]
+        return cls("Column", **kwargs)
+
+    @classmethod
+    def histogram(
+        cls: Type[TSeries],
+        series_columns: Optional[List[str]] = None,
+        bucket_size: Optional[int] = None,
+        outlier_percentage: Optional[float] = None,
+        color: Optional[str] = None,
+    ) -> TSeries:
+        """A histogram plot
+
+        :param series_columns: The columns to plot. None or an empty list will
+            plot all columns
+        :type series_columns: list, optional
+        :param bucket_size: The size of the bucket
+        :type bucket_size: int, optional
+        :param outlier_percentage: The percentile at which oberservations should
+            be excluded
+        :type outlier_percentage: float, optional
+        :param color: A color to override the existing palette. Parameters can either
+            be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+            for accepted named colors
+        :type color: str, optional
+        :return: A :class:`Series` object
+        :rtype: :class:`Series`
+        """
+        kwargs = locals().copy()
+        del kwargs["cls"]
+        return cls("Histogram", **kwargs)
 
     def __repr__(self) -> str:
         """Prints class information.
@@ -53,7 +234,7 @@ class Series:
         :rtype: str
 
         """
-        output = f"Series Type: {self.__class__.__name__}"
+        output = f"Series Type: {self.type}"
         for key, val in self.params_dict.items():
             if val is None or val is False:
                 pass
@@ -171,7 +352,7 @@ class Series:
                     "placement": self.params_dict["data_label_placement"],
                     "type": "DATA",
                     "textFormat": {
-                        "fontFamily": "Roboto",  # TODO figure out what to do
+                        "fontFamily": package_font.font,
                         "fontSize": 12,
                     },
                 }
@@ -244,203 +425,14 @@ class Series:
         return json
 
 
-class Line(Series):
-    """Child class for a line chart configuration.
-
-    :param y_columns: The columns to plot. None or an empty list will plot all columns
-    :type y_columns: list, optional
-    :param line_style: The style of line to plot, see
-        gslides.config.CHART_PARAMS['line_style'] for accepted parameters
-    :type line_style: str, optional
-    :param line_width: The width of line to plot
-    :type line_width: int, optional
-    :param point_enabled: Boolean for whether the plot should include points
-    :type point_enabled: bool, optional
-    :param point_shape: The shape of point to plot,
-        see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
-    :type point_shape: str, optional
-    :param point_size: The size of point to plot
-    :type point_size: int, optional
-    :param data_label_enabled: Boolean for whether the plot should include data labels
-    :type data_label_enabled: bool, optional
-    :param data_label_placement: The placement of the data label to plot,
-        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
-    :type data_label_placement: str, optional
-    :param color: A color to override the existing palette. Parameters can either
-        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-        for accepted named colors
-    :type color: str, optional
-    """
-
-    def __init__(
-        self,
-        y_columns: Optional[List[str]] = None,
-        line_style: Optional[str] = None,
-        line_width: Optional[int] = None,
-        point_enabled: bool = False,
-        point_shape: Optional[str] = None,
-        point_size: Optional[int] = None,
-        data_label_enabled: bool = False,
-        data_label_placement: Optional[str] = None,
-        color: Optional[str] = None,
-    ) -> None:
-        """Constructor method"""
-        kwargs = locals().copy()
-        del kwargs["self"], kwargs["__class__"]
-        super().__init__(**kwargs)
-
-
-class Column(Series):
-    """Child class for a column chart configuration.
-
-    :param y_columns: The columns to plot. None or an empty list will plot all columns
-    :type y_columns: list, optional
-    :param data_label_enabled: Boolean for whether the plot should include data labels
-    :type data_label_enabled: bool, optional
-    :param data_label_placement: The placement of the data label to plot,
-        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
-    :type data_label_placement: str, optional
-    :param color: A color to override the existing palette. Parameters can either
-        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-        for accepted named colors
-    :type color: str, optional
-    """
-
-    def __init__(
-        self,
-        y_columns: Optional[List[str]] = None,
-        data_label_enabled: bool = False,
-        data_label_placement: Optional[str] = None,
-        color: Optional[str] = None,
-    ) -> None:
-        """Constructor method"""
-        kwargs = locals().copy()
-        del kwargs["self"], kwargs["__class__"]
-        super().__init__(**kwargs)
-
-
-class Area(Series):
-    """Child class for a area chart configuration.
-
-    :param y_columns: The columns to plot. None or an empty list will plot all columns
-    :type y_columns: list, optional
-    :param line_style: The style of line to plot,
-        see gslides.config.CHART_PARAMS['line_style'] for accepted parameters
-    :type line_style: str, optional
-    :param line_width: The width of line to plot
-    :type line_width: int, optional
-    :param point_enabled: Boolean for whether the plot should include points
-    :type point_enabled: bool, optional
-    :param point_shape: The shape of point to plot,
-        see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
-    :type point_shape: str, optional
-    :param point_size: The size of point to plot
-    :type point_size: int, optional
-    :param data_label_enabled: Boolean for whether the plot should include data labels
-    :type data_label_enabled: bool, optional
-    :param data_label_placement: The placement of the data label to plot,
-        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
-    :type data_label_placement: str, optional
-    :param color: A color to override the existing palette. Parameters can either
-        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-        for accepted named colors
-    :type color: str, optional
-    """
-
-    def __init__(
-        self,
-        y_columns: Optional[List[str]] = None,
-        line_style: Optional[str] = None,
-        line_width: Optional[int] = None,
-        point_enabled: bool = False,
-        point_shape: Optional[str] = None,
-        point_size: Optional[int] = None,
-        data_label_enabled: bool = False,
-        data_label_placement: Optional[str] = None,
-        color: Optional[str] = None,
-    ) -> None:
-        """Constructor method"""
-        kwargs = locals().copy()
-        del kwargs["self"], kwargs["__class__"]
-        super().__init__(**kwargs)
-
-
-class Scatter(Series):
-    """Child class for a scatter chart configuration.
-
-    :param y_columns: The columns to plot. None or an empty list will plot all columns
-    :type y_columns: list, optional
-    :param point_shape: The shape of point to plot,
-        see gslides.config.CHART_PARAMS['point_shape'] for accepted parameters
-    :type point_shape: str, optional
-    :param point_size: The size of point to plot
-    :type point_size: int, optional
-    :param data_label_enabled: Boolean for whether the plot should include data labels
-    :type data_label_enabled: bool, optional
-    :param data_label_placement: The placement of the data label to plot,
-        see gslides.config.CHART_PARAMS['data_label_placement'] for accepted parameters
-    :type data_label_placement: str, optional
-    :param color: A color to override the existing palette. Parameters can either
-        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-        for accepted named colors
-    :type color: str, optional
-    """
-
-    def __init__(
-        self,
-        y_columns: Optional[List[str]] = None,
-        point_shape: Optional[str] = None,
-        point_size: Optional[int] = None,
-        data_label_enabled: bool = False,
-        data_label_placement: Optional[str] = None,
-        color: Optional[str] = None,
-    ) -> None:
-        """Constructor method"""
-        kwargs = locals().copy()
-        del kwargs["self"], kwargs["__class__"]
-        kwargs["point_enabled"] = True
-        super().__init__(**kwargs)
-
-
-class Histogram(Series):
-    """Child class for a hisotgram chart configuration. The Google API will handle the
-    bucketing of data, simply configure which observations to include with the `y_columns`
-    parameter.
-
-    :param y_columns: The columns to plot. None or an empty list will plot all columns
-    :type y_columns: list, optional
-    :param bucket_size: The size of the bucket
-    :type bucket_size: int, optional
-    :param outlier_percentage: The percentile at which oberservations should be excluded
-    :type outlier_percentage: float, optional
-    :param color: A color to override the existing palette. Parameters can either
-        be a hex-code or a named colored. see gslides.config.color_mapping.keys()
-        for accepted named colors
-    :type color: str, optional
-    """
-
-    def __init__(
-        self,
-        y_columns: Optional[List[str]] = None,
-        bucket_size: Optional[int] = None,
-        outlier_percentage: Optional[float] = None,
-        color: Optional[str] = None,
-    ) -> None:
-        """Constructor method"""
-        kwargs = locals().copy()
-        del kwargs["self"], kwargs["__class__"]
-        super().__init__(**kwargs)
-
-
 class Chart:
     """An object that configures the creation of a chart in Google sheets.
 
-    :param data: The data in Google sheets that will be plotted, either
-        a GetFrame or CreateFrame object
-    :type data: :class:`gslides.SheetsFrame`
-    :param x_column: The name column that corresponds to the x-values.
+    :param data: The data in Google sheets that will be plotted, a frame object
+    :type data: :class:`gslides.Frame`
+    :param x_axis_column: The name column that corresponds to the x-values.
         No parameter needed for a histogram.
-    :type x_column: str
+    :type x_axis_column: str
     :param series: The :class:`gslides.addchart.series` objects to plot
     :type series: list[:class:`gslides.addchart.series`]
     :param stacking: The type of stacking to plot,
@@ -473,8 +465,8 @@ class Chart:
 
     def __init__(
         self,
-        data: SheetsFrame,
-        x_column: str,
+        data: Frame,
+        x_axis_column: str,
         series: Sequence[Series],
         stacking: Optional[bool] = None,
         title: Optional[str] = None,
@@ -486,7 +478,6 @@ class Chart:
         y_max: Optional[float] = None,
         palette: Optional[str] = None,
         legend_position: Optional[str] = None,
-        size: Tuple[int, int] = (600, 371),
     ) -> None:
         """Constructor method"""
         self.type = self._determine_chart_type(series)
@@ -494,7 +485,7 @@ class Chart:
         self.data = data
         self.series = series
         self.stacking = stacking
-        self.x_column = x_column
+        self.x_axis_column = x_axis_column
         self.title = title
         self.x_axis_label = x_axis_label
         self.y_axis_label = y_axis_label
@@ -504,7 +495,6 @@ class Chart:
         self.y_max = y_max
         self.palette = palette
         self.legend_position = legend_position
-        self.size = (int(size[0]), int(size[1]))
         self.header_count = 1
         self.executed = False
         self.ch_id: Optional[str] = None
@@ -520,9 +510,8 @@ class Chart:
         :raises ValueError: Only Line, Area and Column series can be used in combination
         :return: The type of plot to create
         :rtype: str
-
         """
-        chart_types = set([serie.__class__.__name__ for serie in series])
+        chart_types = set([serie.type for serie in series])
         if len(chart_types) == 1:
             return chart_types.pop().upper()
         else:
@@ -546,7 +535,7 @@ class Chart:
         :type series: Sequence[Series]
         :raises ValueError: Stacking can only be enabled for Area and Column charts
         """
-        chart_types = set([serie.__class__.__name__ for serie in series])
+        chart_types = set([serie.type for serie in series])
         stacking_types = {"Area", "Column"}
         if stacking:
             if chart_types.intersection(stacking_types):
@@ -569,12 +558,12 @@ class Chart:
         """
         series_mapping = dict()
         for serie in self.series:
-            if not serie.params_dict["y_columns"]:
+            if not serie.params_dict["series_columns"]:
                 for column in self.data.df.columns.to_list():
-                    if column != self.x_column:
+                    if column != self.x_axis_column:
                         series_mapping[column] = serie
             else:
-                for column in serie.params_dict["y_columns"]:
+                for column in serie.params_dict["series_columns"]:
                     if column in self.data.df.columns.to_list():
                         series_mapping[column] = serie
             if (
@@ -591,11 +580,13 @@ class Chart:
                 self.bucket_size = cast(Optional[int], serie.params_dict["bucket_size"])
         return series_mapping
 
-    def render_basic_chart_json(self) -> dict:
+    def render_basic_chart_json(self, size: Tuple[int, int]) -> dict:
         """Renders the json for the creation of a basic chart. See here
         https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec
         for information about basic charts.
 
+        :param size: Tuple of width and height in PX
+        :type size: tuple
         :return: json for the API call
         :rtype: dict
         """
@@ -605,7 +596,7 @@ class Chart:
                     "title": self.title,
                     "titleTextPosition": {"horizontalAlignment": "CENTER"},
                     "titleTextFormat": {
-                        "fontFamily": "Roboto",
+                        "fontFamily": package_font.font,
                         "fontSize": 16,
                         "bold": True,
                         "foregroundColor": {"red": 0, "green": 0, "blue": 0},
@@ -620,7 +611,7 @@ class Chart:
                                 "position": "BOTTOM_AXIS",
                                 "title": self.x_axis_label,
                                 "format": {
-                                    "fontFamily": "Roboto",
+                                    "fontFamily": package_font.font,
                                     "fontSize": 14,
                                     "bold": True,
                                     "foregroundColor": {
@@ -638,7 +629,7 @@ class Chart:
                                 "position": "LEFT_AXIS",
                                 "title": self.y_axis_label,
                                 "format": {
-                                    "fontFamily": "Roboto",
+                                    "fontFamily": package_font.font,
                                     "fontSize": 14,
                                     "bold": True,
                                     "foregroundColor": {
@@ -659,7 +650,7 @@ class Chart:
                         "headerCount": self.header_count,
                     },
                     "hiddenDimensionStrategy": "SKIP_HIDDEN_ROWS_AND_COLUMNS",
-                    "fontName": "Roboto",
+                    "fontName": package_font.font,
                 },
                 "position": {
                     "overlayPosition": {
@@ -670,15 +661,15 @@ class Chart:
                         },
                         "offsetXPixels": 0,
                         "offsetYPixels": 0,
-                        "widthPixels": self.size[0],
-                        "heightPixels": self.size[1],
+                        "widthPixels": size[0],
+                        "heightPixels": size[1],
                     }
                 },
             }
         }
         domain_col_num = (
             self.data.start_column_index
-            + self.data.df.columns.to_list().index(self.x_column)
+            + self.data.df.columns.to_list().index(self.x_axis_column)
         )
         domain_json = {
             "sheetId": self.data.sheet_id,
@@ -693,6 +684,8 @@ class Chart:
         series_mapping = self._resolve_series()
         if self.palette:
             p: Optional[Palette] = Palette(self.palette)
+        elif package_palette.palette:
+            p = Palette(package_palette.palette)
         else:
             p = None
         for key, val in series_mapping.items():
@@ -739,11 +732,13 @@ class Chart:
             ] = self.y_max
         return json
 
-    def render_histogram_chart_json(self) -> dict:
+    def render_histogram_chart_json(self, size: Tuple[int, int]) -> dict:
         """Renders the json for the creation of a basic chart. See here
         https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec
         for information about basic charts.
 
+        :param size: Tuple of width and height in PX
+        :type size: tuple
         :return: json for the API call
         :rtype: dict
         """
@@ -754,7 +749,7 @@ class Chart:
                     "title": self.title,
                     "titleTextPosition": {"horizontalAlignment": "CENTER"},
                     "titleTextFormat": {
-                        "fontFamily": "Roboto",
+                        "fontFamily": package_font.font,
                         "fontSize": 16,
                         "bold": True,
                         "foregroundColor": {"red": 0, "green": 0, "blue": 0},
@@ -769,7 +764,7 @@ class Chart:
                         "outlierPercentile": self.outlier_percentage,
                     },
                     "hiddenDimensionStrategy": "SKIP_HIDDEN_ROWS_AND_COLUMNS",
-                    "fontName": "Roboto",
+                    "fontName": package_font.font,
                 },
                 "position": {
                     "overlayPosition": {
@@ -780,8 +775,8 @@ class Chart:
                         },
                         "offsetXPixels": 0,
                         "offsetYPixels": 0,
-                        "widthPixels": self.size[0],
-                        "heightPixels": self.size[1],
+                        "widthPixels": size[0],
+                        "heightPixels": size[1],
                     }
                 },
             }
@@ -805,18 +800,21 @@ class Chart:
             json["chart"]["spec"]["histogramChart"]["series"].append(series_json)
         return json
 
-    def execute(self) -> dict:
-        """Executes the API call
+    def create(self, size: Tuple[int, int] = (600, 371)) -> dict:
+        """Creates the chart in Googe sheets
 
+        :param size: Tuple of width and height in PX
+        :type size: tuple
         :return: The json returned by the call
         :rtype: dict
 
         """
+        size = (int(size[0]), int(size[1]))
         service: Any = creds.sheet_service
         if self.type == "HISTOGRAM":
-            json = self.render_histogram_chart_json()
+            json = self.render_histogram_chart_json(size)
         else:
-            json = self.render_basic_chart_json()
+            json = self.render_basic_chart_json(size)
         output: dict = (
             service.spreadsheets()
             .batchUpdate(
@@ -825,7 +823,7 @@ class Chart:
             )
             .execute()
         )
-        self.ch_id = json_val_extract(output, "chartId")
+        self.ch_id = json_val_extract(output, "chartId")[0]
         self.executed = True
         return output
 
