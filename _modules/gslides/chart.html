@@ -587,6 +587,16 @@
 <span class="sd">    :type y_min: float, optional</span>
 <span class="sd">    :param y_max: The maximum value for the y axis</span>
 <span class="sd">    :type y_max: float, optional</span>
+<span class="sd">    :param x_axis_format: The format of the x axis labels. Either the values</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType</span>
+<span class="sd">        or patterns here</span>
+<span class="sd">        https://developers.google.com/sheets/api/guides/formats are accepted</span>
+<span class="sd">    :type x_axis_format: str, optional</span>
+<span class="sd">    :param y_axis_format: The format of the y axis labels. Either the values</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType</span>
+<span class="sd">        or patterns here</span>
+<span class="sd">        https://developers.google.com/sheets/api/guides/formats are accepted</span>
+<span class="sd">    :type y_axis_format: str, optional</span>
 <span class="sd">    :param palette: The palette to use to plot,</span>
 <span class="sd">        see gslides.colors.base_palettes for accepted parameters</span>
 <span class="sd">    :type palette: str, optional</span>
@@ -611,6 +621,8 @@
         <span class="n">x_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">y_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">y_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">x_axis_format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y_axis_format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">palette</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">legend_position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -628,6 +640,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">x_max</span> <span class="o">=</span> <span class="n">x_max</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y_min</span> <span class="o">=</span> <span class="n">y_min</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y_max</span> <span class="o">=</span> <span class="n">y_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_format</span> <span class="o">=</span> <span class="n">x_axis_format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_axis_format</span> <span class="o">=</span> <span class="n">y_axis_format</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span> <span class="o">=</span> <span class="n">legend_position</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">header_count</span> <span class="o">=</span> <span class="mi">1</span>
@@ -945,6 +959,15 @@
 
 <span class="sd">        """</span>
         <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">format_columns</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_format</span><span class="p">:</span>
+            <span class="n">format_columns</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">x_axis_column</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_axis_format</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis_format</span><span class="p">:</span>
+            <span class="n">series_mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_series</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">series_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">format_columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_axis_format</span>
+        <span class="k">if</span> <span class="n">format_columns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">format_frame</span><span class="p">(</span><span class="n">format_columns</span><span class="p">)</span>
         <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">sheet_service</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"HISTOGRAM"</span><span class="p">:</span>
             <span class="n">json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_histogram_chart_json</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>

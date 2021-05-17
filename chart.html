@@ -319,6 +319,10 @@
 <p>Stacking can only be enabled at the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> level when at least one of the <code class="docutils literal notranslate"><span class="pre">Series</span></code> is either of type <code class="docutils literal notranslate"><span class="pre">Area</span></code> or <code class="docutils literal notranslate"><span class="pre">Column</span></code>.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">CHART_PARAMS</span></code> dictionary for valid stacking types.</p>
 </div>
+<div class="section" id="axis-formatting">
+<h2>Axis formatting<a class="headerlink" href="#axis-formatting" title="Permalink to this headline">¶</a></h2>
+<p>To change the formatting on a given axis you may set the <code class="docutils literal notranslate"><span class="pre">x_axis_format</span></code> or <code class="docutils literal notranslate"><span class="pre">y_axis_format</span></code> parameter when initializing a <code class="docutils literal notranslate"><span class="pre">Chart</span></code> object. These columns either accept a basic formatting configuration that can be found <a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType">here</a>, or a customized configuration that is explained <a class="reference external" href="https://developers.google.com/sheets/api/guides/formats">here</a>.</p>
+</div>
 <div class="section" id="histogram">
 <h2>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">¶</a></h2>
 <p>Histograms are unique in that Google will perform the bucketing of values before plotting. In this way <code class="docutils literal notranslate"><span class="pre">x_axis_column</span></code> for Histogram charts can simply be set to a dummy string.</p>
@@ -384,6 +388,7 @@
 <li><a class="reference internal" href="#utilizing-the-series-columns-parameter">Utilizing the <code class="docutils literal notranslate"><span class="pre">series_columns</span></code> parameter</a></li>
 <li><a class="reference internal" href="#series-parameters">Series parameters</a></li>
 <li><a class="reference internal" href="#stacking">Stacking</a></li>
+<li><a class="reference internal" href="#axis-formatting">Axis formatting</a></li>
 <li><a class="reference internal" href="#histogram">Histogram</a></li>
 </ul>
 </li>

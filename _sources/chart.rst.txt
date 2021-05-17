@@ -74,6 +74,11 @@ Stacking can only be enabled at the ``Chart`` level when at least one of the ``S
 
 See the ``CHART_PARAMS`` dictionary for valid stacking types.
 
+Axis formatting
+------------------------------------------
+
+To change the formatting on a given axis you may set the ``x_axis_format`` or ``y_axis_format`` parameter when initializing a ``Chart`` object. These columns either accept a basic formatting configuration that can be found `here <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType>`_, or a customized configuration that is explained `here <https://developers.google.com/sheets/api/guides/formats>`_.
+
 Histogram
 ------------------------------------------
 

@@ -138,7 +138,7 @@
 <span class="sd">Frame class</span>
 <span class="sd">"""</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
@@ -153,6 +153,36 @@
 <span class="p">)</span>
 
 <span class="n">TFrame</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TFrame"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Frame"</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="format_type"><a class="viewcode-back" href="../../gslides.html#gslides.frame.format_type">[docs]</a><span class="k">def</span> <span class="nf">format_type</span><span class="p">(</span><span class="n">number_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">"""Takes a specified number type and outputs the necessary json, controlling</span>
+<span class="sd">    for the custom types. See the documentation here</span>
+<span class="sd">    https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat</span>
+<span class="sd">    for more information the formatting available. Either a type or pattern can</span>
+<span class="sd">    be passed.</span>
+
+<span class="sd">    :param number_type: A string specifying the format of the cell</span>
+<span class="sd">    :type number_type: str</span>
+<span class="sd">    :return: A dictionary providing the configuration</span>
+<span class="sd">    :rtype: dict</span>
+
+<span class="sd">    """</span>
+    <span class="n">number_types</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"TEXT"</span><span class="p">,</span>
+        <span class="s2">"NUMBER"</span><span class="p">,</span>
+        <span class="s2">"PERCENT"</span><span class="p">,</span>
+        <span class="s2">"DATE"</span><span class="p">,</span>
+        <span class="s2">"TIME"</span><span class="p">,</span>
+        <span class="s2">"DATE_TIME"</span><span class="p">,</span>
+        <span class="s2">"SCIENTIFIC"</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">number_type</span> <span class="ow">in</span> <span class="n">number_types</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="n">number_type</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="n">number_type</span> <span class="o">==</span> <span class="s2">"CURRENCY"</span><span class="p">:</span>  <span class="c1"># this workaround is necessary to change the y-axis</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"NUMBER"</span><span class="p">,</span> <span class="s2">"pattern"</span><span class="p">:</span> <span class="s2">"$0.00"</span><span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"NUMBER"</span><span class="p">,</span> <span class="s2">"pattern"</span><span class="p">:</span> <span class="n">number_type</span><span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="get_sheet_data"><a class="viewcode-back" href="../../gslides.html#gslides.frame.get_sheet_data">[docs]</a><span class="k">def</span> <span class="nf">get_sheet_data</span><span class="p">(</span>
@@ -508,6 +538,76 @@
             <span class="n">frame</span><span class="o">.</span><span class="n">end_column_index</span><span class="p">,</span>
             <span class="n">frame</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
             <span class="n">initialized</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Frame.render_format_frame"><a class="viewcode-back" href="../../gslides.html#gslides.frame.Frame.render_format_frame">[docs]</a>    <span class="k">def</span> <span class="nf">render_format_frame</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">column_mapping</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="sd">"""Renders the json to format a column in Google slides</span>
+
+<span class="sd">        :param column_mapping: A mapping of column name to number type</span>
+<span class="sd">        :type column_mapping: dict</span>
+<span class="sd">        :return: JSON for the api call</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        """</span>
+        <span class="n">index_mapping</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">column_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="n">index_mapping</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
+
+        <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"updateCells"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">"range"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"sheetId"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                    <span class="s2">"startRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s2">"startColumnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s2">"endRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
+                    <span class="s2">"endColumnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_column_index</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">"fields"</span><span class="p">:</span> <span class="s2">"userEnteredFormat"</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">row_json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"values"</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">row_json</span><span class="p">[</span><span class="s2">"values"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">"userEnteredFormat"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">"numberFormat"</span><span class="p">:</span> <span class="n">format_type</span><span class="p">(</span><span class="n">index_mapping</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row_json</span><span class="p">[</span><span class="s2">"values"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({})</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">json</span><span class="p">[</span><span class="s2">"updateCells"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_json</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json</span></div>
+
+<div class="viewcode-block" id="Frame.format_frame"><a class="viewcode-back" href="../../gslides.html#gslides.frame.Frame.format_frame">[docs]</a>    <span class="k">def</span> <span class="nf">format_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_mapping</span><span class="p">):</span>
+        <span class="sd">"""Formats a column in Google sheets. See</span>
+<span class="sd">        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat</span>
+<span class="sd">        for accepted number types; either a type value or pattern is accepted.</span>
+
+<span class="sd">        :param column_mapping: A mapping of column name to number type</span>
+<span class="sd">        :type column_mapping: dict</span>
+
+<span class="sd">        :example:</span>
+
+<span class="sd">        &gt;&gt;&gt; frame = Frame.get(...)</span>
+<span class="sd">        &gt;&gt;&gt; frame.format_frame({'column1': '0.0%'})</span>
+<span class="sd">        """</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">sheet_service</span>
+        <span class="p">(</span>
+            <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
+                <span class="n">spreadsheetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
+                <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">render_format_frame</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">)]},</span>
+            <span class="p">)</span>
+            <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="p">)</span></div>
 
     <span class="nd">@property</span>
