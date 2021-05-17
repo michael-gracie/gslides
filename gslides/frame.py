@@ -3,7 +3,7 @@
 Frame class
 """
 
-from typing import Any, List, Tuple, Type, TypeVar, cast
+from typing import Any, Dict, List, Tuple, Type, TypeVar, cast
 
 import pandas as pd
 
@@ -18,6 +18,36 @@ from .utils import (
 )
 
 TFrame = TypeVar("TFrame", bound="Frame")
+
+
+def format_type(number_type: str) -> Dict[str, Any]:
+    """Takes a specified number type and outputs the necessary json, controlling
+    for the custom types. See the documentation here
+    https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat
+    for more information the formatting available. Either a type or pattern can
+    be passed.
+
+    :param number_type: A string specifying the format of the cell
+    :type number_type: str
+    :return: A dictionary providing the configuration
+    :rtype: dict
+
+    """
+    number_types = [
+        "TEXT",
+        "NUMBER",
+        "PERCENT",
+        "DATE",
+        "TIME",
+        "DATE_TIME",
+        "SCIENTIFIC",
+    ]
+    if number_type in number_types:
+        return {"type": number_type}
+    elif number_type == "CURRENCY":  # this workaround is necessary to change the y-axis
+        return {"type": "NUMBER", "pattern": "$0.00"}
+    else:
+        return {"type": "NUMBER", "pattern": number_type}
 
 
 def get_sheet_data(
@@ -373,6 +403,76 @@ class Frame:
             frame.end_column_index,
             frame.end_row_index,
             initialized,
+        )
+
+    def render_format_frame(
+        self,
+        column_mapping: Dict[str, str],
+    ):
+        """Renders the json to format a column in Google slides
+
+        :param column_mapping: A mapping of column name to number type
+        :type column_mapping: dict
+        :return: JSON for the api call
+        :rtype: dict
+
+        """
+        index_mapping = {}
+        for key, val in column_mapping.items():
+            if key in list(self.df.columns):
+                index_mapping[list(self.df.columns).index(key)] = val
+
+        json: Dict[str, Any] = {
+            "updateCells": {
+                "rows": [],
+                "range": {
+                    "sheetId": self.sheet_id,
+                    "startRowIndex": self.start_row_index - 1,
+                    "startColumnIndex": self.start_column_index - 1,
+                    "endRowIndex": self.end_row_index,
+                    "endColumnIndex": self.end_column_index,
+                },
+                "fields": "userEnteredFormat",
+            }
+        }
+
+        row_json: Dict[str, Any] = {"values": []}
+        for i in range(self.df.shape[1]):
+            if i in index_mapping.keys():
+                row_json["values"].append(
+                    {
+                        "userEnteredFormat": {
+                            "numberFormat": format_type(index_mapping[i])
+                        }
+                    }
+                )
+            else:
+                row_json["values"].append({})
+        for i in range(self.df.shape[0] + 1):
+            json["updateCells"]["rows"].append(row_json)
+        return json
+
+    def format_frame(self, column_mapping):
+        """Formats a column in Google sheets. See
+        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat
+        for accepted number types; either a type value or pattern is accepted.
+
+        :param column_mapping: A mapping of column name to number type
+        :type column_mapping: dict
+
+        :example:
+
+        >>> frame = Frame.get(...)
+        >>> frame.format_frame({'column1': '0.0%'})
+        """
+        service: Any = creds.sheet_service
+        (
+            service.spreadsheets()
+            .batchUpdate(
+                spreadsheetId=self.spreadsheet_id,
+                body={"requests": [self.render_format_frame(column_mapping)]},
+            )
+            .execute()
         )
 
     @property

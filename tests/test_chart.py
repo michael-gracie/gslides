@@ -122,6 +122,8 @@ class TestChart:
             x_max=100,
             y_min=-10,
             y_max=15,
+            x_axis_format="0.00",
+            y_axis_format="CURRENCY",
             palette=None,
             legend_position="RIGHT_LEGEND",
         )
@@ -172,5 +174,11 @@ class TestChart:
             return {"chartId": 11111}
 
         monkeypatch.setattr(MockService, "execute", mock_execute)
+
+        def mock_format_frame(self, column_mapping):
+            return
+
+        monkeypatch.setattr("gslides.frame.Frame.format_frame", mock_format_frame)
+
         self.object.create()
         assert self.object.ch_id == 11111
