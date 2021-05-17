@@ -452,6 +452,16 @@ class Chart:
     :type y_min: float, optional
     :param y_max: The maximum value for the y axis
     :type y_max: float, optional
+    :param x_axis_format: The format of the x axis labels. Either the values
+        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType
+        or patterns here
+        https://developers.google.com/sheets/api/guides/formats are accepted
+    :type x_axis_format: str, optional
+    :param y_axis_format: The format of the y axis labels. Either the values
+        https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType
+        or patterns here
+        https://developers.google.com/sheets/api/guides/formats are accepted
+    :type y_axis_format: str, optional
     :param palette: The palette to use to plot,
         see gslides.colors.base_palettes for accepted parameters
     :type palette: str, optional
@@ -476,6 +486,8 @@ class Chart:
         x_max: Optional[float] = None,
         y_min: Optional[float] = None,
         y_max: Optional[float] = None,
+        x_axis_format: Optional[str] = None,
+        y_axis_format: Optional[str] = None,
         palette: Optional[str] = None,
         legend_position: Optional[str] = None,
     ) -> None:
@@ -493,6 +505,8 @@ class Chart:
         self.x_max = x_max
         self.y_min = y_min
         self.y_max = y_max
+        self.x_axis_format = x_axis_format
+        self.y_axis_format = y_axis_format
         self.palette = palette
         self.legend_position = legend_position
         self.header_count = 1
@@ -810,6 +824,15 @@ class Chart:
 
         """
         size = (int(size[0]), int(size[1]))
+        format_columns = {}
+        if self.x_axis_format:
+            format_columns[self.x_axis_column] = self.x_axis_format
+        if self.y_axis_format:
+            series_mapping = self._resolve_series()
+            for key in series_mapping.keys():
+                format_columns[key] = self.y_axis_format
+        if format_columns:
+            self.data.format_frame(format_columns)
         service: Any = creds.sheet_service
         if self.type == "HISTOGRAM":
             json = self.render_histogram_chart_json(size)

@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from gslides.frame import CreateFrame, Frame, GetFrame, get_sheet_data
+from gslides.frame import CreateFrame, Frame, GetFrame, format_type, get_sheet_data
 
 
 def test_df():
@@ -45,6 +45,18 @@ def test_get_sheet_data(monkeypatch):
 
     monkeypatch.setattr(MockService, "execute", mock_return)
     assert get_sheet_data("abc123", "first", 0, 0, 2, 0) == [["test"], ["0"], ["1"]]
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("$0.00", {"type": "NUMBER", "pattern": "$0.00"}),
+        ("CURRENCY", {"type": "NUMBER", "pattern": "$0.00"}),
+        ("NUMBER", {"type": "NUMBER"}),
+    ],
+)
+def test_format_type(input, expected):
+    assert format_type(input) == expected
 
 
 class TestGetFrame:
@@ -176,6 +188,15 @@ class TestFrame:
             ).initialized
             == True
         )
+
+    def test_format_frame(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.sheet_service", property(mock_service)
+        )
+        assert True
 
     def test_data(self):
         assert self.object.data == self.object
