@@ -344,7 +344,7 @@ class Series:
         ):
             json["pointStyle"] = {
                 "shape": self.params_dict["point_shape"],
-                "size": self.params_dict["point_size"],
+                "size": self.params_dict["point_size"] or 5,
             }
         if "data_label_enabled" in self.params_dict.keys():
             if self.params_dict["data_label_enabled"]:
