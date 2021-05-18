@@ -8,7 +8,6 @@ from typing import Any, Dict, List, Tuple, Type, TypeVar, cast
 from . import creds
 from .utils import json_dict_extract, json_val_extract
 
-
 TSpreadsheet = TypeVar("TSpreadsheet", bound="Spreadsheet")
 
 
@@ -241,6 +240,16 @@ class Spreadsheet:
         RemoveSheet().execute(self.spreadsheet_id, sht_ids)
         for nm in sheet_names:
             self.sht_nms.pop(nm)
+
+    @property
+    def get_method(self) -> str:
+        """Returns the corresponding get initialization method.
+
+        :return: Get intialization method
+        :rtype: str
+
+        """
+        return f"=Spreadsheet.get(spreadsheet_id='{self.spreadsheet_id}')"
 
     @property
     def spreadsheet_id(self) -> str:

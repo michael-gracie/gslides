@@ -476,6 +476,24 @@ class Frame:
         )
 
     @property
+    def get_method(self) -> str:
+        """Returns the corresponding get initialization method.
+
+        :return: Get intialization method
+        :rtype: str
+
+        """
+        return (
+            "Frame.get(\n"
+            f"\tspreadsheet_id='{self.spreadsheet_id}',\n"
+            f"\tsheet_id={self.sheet_id},\n"
+            f"\tsheet_name='{self.sheet_name}',\n"
+            f"\tanchor_cell='{num_to_char(self.start_column_index)}{self.start_row_index}',\n"
+            f"\tbottom_right_cell='{num_to_char(self.end_column_index-1)}{self.end_row_index-1}'\n"
+            f")"
+        )
+
+    @property
     def data(self: TFrame) -> TFrame:
         """Returns the :class:`Frame` object of the data
 

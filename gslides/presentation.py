@@ -597,6 +597,16 @@ class Presentation:
         self.sl_ids.remove(slide_id)
 
     @property
+    def get_method(self) -> str:
+        """Returns the corresponding get initialization method.
+
+        :return: Get intialization method
+        :rtype: str
+
+        """
+        return f"=Presentation.get(presentation_id='{self.presentation_id}')"
+
+    @property
     def presentation_id(self) -> str:
         """Returns the presentation_id of the created presentation.
 
