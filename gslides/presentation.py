@@ -596,6 +596,32 @@ class Presentation:
         ).execute()
         self.sl_ids.remove(slide_id)
 
+    def template(self, mapping: dict, slide_ids: list = []) -> None:
+        """Replaces all text encaspulated with `{{ <TEXT> }}` with input
+
+        :param mapping: Dictionary mapping old text to new text
+        :type mapping: dict
+        :param slide_ids: The slides to apply template on. If none, then all slides
+            will be considered.
+        :type slide_ids: list, optional
+        """
+
+        requests = []
+        for key, val in mapping.items():
+            json = {
+                "replaceAllText": {
+                    "replaceText": val,
+                    "pageObjectIds": slide_ids,
+                    "containsText": {"text": f"{{{{ {key} }}}}", "matchCase": False},
+                }
+            }
+            requests.append(json)
+        service: Any = creds.slide_service
+        service.presentations().batchUpdate(
+            presentationId=self.presentation_id,
+            body={"requests": requests},
+        ).execute()
+
     @property
     def get_method(self) -> str:
         """Returns the corresponding get initialization method.
