@@ -196,7 +196,16 @@ class TestFrame:
         monkeypatch.setattr(
             "gslides.config.Creds.sheet_service", property(mock_service)
         )
+        self.object.format_frame({"Blue": "CURRENCY"})
         assert True
+
+    def test_render_format_frame(self):
+        assert (
+            self.object.render_format_frame({"Blue": "CURRENCY"})["requests"][0][
+                "updateCells"
+            ]["rows"][0]["values"][0]["userEnteredFormat"]["numberFormat"]["pattern"]
+            == "$0.00"
+        )
 
     def test_data(self):
         assert self.object.data == self.object
