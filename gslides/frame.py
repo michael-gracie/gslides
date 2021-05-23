@@ -432,9 +432,9 @@ class Frame:
                     "range": {
                         "sheetId": self.sheet_id,
                         "startRowIndex": self.start_row_index - 1,
-                        "startColumnIndex": self.start_column_index + int(k) - 1,
+                        "startColumnIndex": self.start_column_index + k - 1,
                         "endRowIndex": self.end_row_index,
-                        "endColumnIndex": self.start_column_index + int(k),
+                        "endColumnIndex": self.start_column_index + k,
                     },
                     "fields": "userEnteredFormat",
                 }
