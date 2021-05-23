@@ -417,40 +417,35 @@ class Frame:
         :rtype: dict
 
         """
-        index_mapping = {}
+        index_mapping: Dict[int, str] = {}
         for key, val in column_mapping.items():
             if key in list(self.df.columns):
-                index_mapping[list(self.df.columns).index(key)] = val
+                col = list(self.df.columns).index(key)
+                index_mapping[col] = val
 
-        json: Dict[str, Any] = {
-            "updateCells": {
-                "rows": [],
-                "range": {
-                    "sheetId": self.sheet_id,
-                    "startRowIndex": self.start_row_index - 1,
-                    "startColumnIndex": self.start_column_index - 1,
-                    "endRowIndex": self.end_row_index,
-                    "endColumnIndex": self.end_column_index,
-                },
-                "fields": "userEnteredFormat",
+        requests = []
+
+        for k, v in index_mapping.items():
+            json: Dict[str, Any] = {
+                "updateCells": {
+                    "rows": [],
+                    "range": {
+                        "sheetId": self.sheet_id,
+                        "startRowIndex": self.start_row_index - 1,
+                        "startColumnIndex": self.start_column_index + int(k) - 1,
+                        "endRowIndex": self.end_row_index,
+                        "endColumnIndex": self.start_column_index + int(k),
+                    },
+                    "fields": "userEnteredFormat",
+                }
             }
-        }
-
-        row_json: Dict[str, Any] = {"values": []}
-        for i in range(self.df.shape[1]):
-            if i in index_mapping.keys():
-                row_json["values"].append(
-                    {
-                        "userEnteredFormat": {
-                            "numberFormat": format_type(index_mapping[i])
-                        }
-                    }
-                )
-            else:
-                row_json["values"].append({})
-        for i in range(self.df.shape[0] + 1):
-            json["updateCells"]["rows"].append(row_json)
-        return json
+            row_json: Dict[str, Any] = {
+                "values": [{"userEnteredFormat": {"numberFormat": format_type(v)}}]
+            }
+            for i in range(self.df.shape[0] + 1):
+                json["updateCells"]["rows"].append(row_json)
+            requests.append(json)
+        return {"requests": requests}
 
     def format_frame(self, column_mapping):
         """Formats a column in Google sheets. See
@@ -470,7 +465,7 @@ class Frame:
             service.spreadsheets()
             .batchUpdate(
                 spreadsheetId=self.spreadsheet_id,
-                body={"requests": [self.render_format_frame(column_mapping)]},
+                body=self.render_format_frame(column_mapping),
             )
             .execute()
         )
