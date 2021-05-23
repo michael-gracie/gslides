@@ -51,7 +51,7 @@ class Table:
     ) -> None:
         """Constructor method"""
         self.df = self._reset_header(self._resolve_df(data))
-        self.font_size = 12
+        self.font_size = font_size
         self.header = header
         self.stub = stub
         self.header_background_color = hex_to_rgb(
