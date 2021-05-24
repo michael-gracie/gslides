@@ -714,7 +714,7 @@ class Chart:
                     self.data.end_row_index,
                     serie_col_num - 1,
                     serie_col_num,
-                    type=val.__class__.__name__.upper(),
+                    type=val.type.upper(),
                 )
             else:
                 series_json = val.render_basic_chart_json(
