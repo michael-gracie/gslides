@@ -33,12 +33,15 @@ def translate_color(color: str) -> str:
     :type color: str
     :return: Hex code corresponding to the color
     :rtype: str
+    :raises ValueError:
 
     """
-    if color in color_mapping.keys():
-        return color_mapping[color]
-    else:
+    if color.lower() in color_mapping.keys():
+        return color_mapping[color.lower()]
+    elif color[0] == "#":
         return color
+    else:
+        raise ValueError(f"{color} is not a valid hex or named color")
 
 
 TPalette = TypeVar("TPalette", bound="Palette")
