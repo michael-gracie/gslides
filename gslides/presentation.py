@@ -135,6 +135,8 @@ class AddSlide:
     :type left_margin: int, optional
     :param right_margin: The right margin of the presentation in EMU
     :type right_margin: int, optional
+    :param page_size: Tuple of the width and height of the presentation in EMU
+    :type page_size: tuple
     :param title: The text for the title textbox
     :type title: str, optional
     :param notes: The text for the notes textbox
@@ -151,6 +153,7 @@ class AddSlide:
         bottom_margin: int = 420575,
         left_margin: int = 0,
         right_margin: int = 0,
+        page_size: Tuple[int, int] = (9144000, 5143500),
         title: str = "Title placeholder",
         notes: str = "Notes placeholder",
     ) -> None:
@@ -166,9 +169,10 @@ class AddSlide:
         self.bottom_margin = bottom_margin
         self.left_margin = left_margin
         self.right_margin = right_margin
+        self.page_size = page_size
         self.layout_obj = Layout(
-            9144000 - self.left_margin - self.right_margin,
-            5143500 - self.top_margin - self.bottom_margin,
+            page_size[0] - self.left_margin - self.right_margin,
+            page_size[1] - self.top_margin - self.bottom_margin,
             layout,
         )
         self.title = title
@@ -223,6 +227,8 @@ class AddSlide:
         :return: The json to do the update
         :rtype: dict
         """
+        start_textbox_x = self.page_size[0] * 0.05
+        scale_textbox_x = self.page_size[0] * 0.9 / 3000000
         json = {
             "requests": [
                 {
@@ -235,9 +241,9 @@ class AddSlide:
                                 "height": {"magnitude": 3000000, "unit": "EMU"},
                             },
                             "transform": {
-                                "scaleX": 2.8402,
+                                "scaleX": scale_textbox_x,
                                 "scaleY": 0.1909,
-                                "translateX": 311700,
+                                "translateX": start_textbox_x,
                                 "translateY": 445025,
                                 "unit": "EMU",
                             },
@@ -254,10 +260,10 @@ class AddSlide:
                                 "height": {"magnitude": 3000000, "unit": "EMU"},
                             },
                             "transform": {
-                                "scaleX": 2.7979,
+                                "scaleX": scale_textbox_x,
                                 "scaleY": 0.0914,
-                                "translateX": 311700,
-                                "translateY": 4722925,
+                                "translateX": start_textbox_x,
+                                "translateY": self.page_size[1] - self.bottom_margin,
                                 "unit": "EMU",
                             },
                         },
@@ -476,6 +482,8 @@ class Presentation:
     :type pr_id: str
     :param sl_ids: A list of the slide ids
     :type sl_ids: list
+    :param page_size: Tuple of the width and height of the presentation in EMU
+    :type page_size: tuple
     :param initialized: Whether to object has been initialized
     :type initialized: bool
     """
@@ -485,17 +493,23 @@ class Presentation:
         name: str = "",
         pr_id: str = "",
         sl_ids: list = [],
+        page_size: Tuple[int, int] = (9144000, 5143500),
         initialized: bool = False,
     ) -> None:
         """Constructor method"""
         self.name = name
         self.pr_id = pr_id
         self.sl_ids = sl_ids
+        self.page_size = page_size
         self.initialized = initialized
 
     @classmethod
-    def create(cls: Type[TPresentation], name: str = "Untitled") -> TPresentation:
-        """Class method that creates a new presentation.
+    def create(
+        cls: Type[TPresentation],
+        name: str = "Untitled",
+    ) -> TPresentation:
+        """Class method that creates a new presentation. To note, due to an issue
+        in the API page size is currently not supported.
 
         :param name: Name of the presentation
         :type name: str
@@ -510,7 +524,7 @@ class Presentation:
             presentationId=output["presentationId"],
             body={"requests": [{"deleteObject": {"objectId": "p"}}]},
         ).execute()
-        return cls(name, pr_id, [], True)
+        return cls(name, pr_id, [], (9144000, 5143500), True)
 
     @classmethod
     def get(cls: Type[TPresentation], presentation_id: str) -> TPresentation:
@@ -525,11 +539,15 @@ class Presentation:
         service: Any = creds.slide_service
         output = service.presentations().get(presentationId=presentation_id).execute()
         name = output["title"]
+        page_size = (
+            output["pageSize"]["width"]["magnitude"],
+            output["pageSize"]["height"]["magnitude"],
+        )
         if "slides" in output.keys():
             sl_ids = [sl["objectId"] for sl in output["slides"]]
         else:
             sl_ids = []
-        return cls(name, presentation_id, sl_ids, True)
+        return cls(name, presentation_id, sl_ids, page_size, True)
 
     def add_slide(
         self,
@@ -574,6 +592,7 @@ class Presentation:
             bottom_margin,
             left_margin,
             right_margin,
+            self.page_size,
             title,
             notes,
         )

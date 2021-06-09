@@ -235,6 +235,10 @@ class TestPresentation:
             return {
                 "slides": [{"objectId": 1111}, {"objectId": 2222}, {"objectId": 3333}],
                 "title": "test",
+                "pageSize": {
+                    "width": {"magnitude": 9144000, "unit": "EMU"},
+                    "height": {"magnitude": 5143500, "unit": "EMU"},
+                },
             }
 
         monkeypatch.setattr(MockService, "execute", mock_return)
