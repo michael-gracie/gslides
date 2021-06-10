@@ -552,40 +552,35 @@
 <span class="sd">        :rtype: dict</span>
 
 <span class="sd">        """</span>
-        <span class="n">index_mapping</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">index_mapping</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">column_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
-                <span class="n">index_mapping</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
+                <span class="n">col</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                <span class="n">index_mapping</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
-        <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">"updateCells"</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[],</span>
-                <span class="s2">"range"</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">"sheetId"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
-                    <span class="s2">"startRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
-                    <span class="s2">"startColumnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
-                    <span class="s2">"endRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
-                    <span class="s2">"endColumnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_column_index</span><span class="p">,</span>
-                <span class="p">},</span>
-                <span class="s2">"fields"</span><span class="p">:</span> <span class="s2">"userEnteredFormat"</span><span class="p">,</span>
+        <span class="n">requests</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">index_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"updateCells"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"rows"</span><span class="p">:</span> <span class="p">[],</span>
+                    <span class="s2">"range"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"sheetId"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sheet_id</span><span class="p">,</span>
+                        <span class="s2">"startRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_row_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">"startColumnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">"endRowIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
+                        <span class="s2">"endColumnIndex"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_column_index</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">"fields"</span><span class="p">:</span> <span class="s2">"userEnteredFormat"</span><span class="p">,</span>
+                <span class="p">}</span>
             <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="n">row_json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"values"</span><span class="p">:</span> <span class="p">[]}</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">row_json</span><span class="p">[</span><span class="s2">"values"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="p">{</span>
-                        <span class="s2">"userEnteredFormat"</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">"numberFormat"</span><span class="p">:</span> <span class="n">format_type</span><span class="p">(</span><span class="n">index_mapping</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                        <span class="p">}</span>
-                    <span class="p">}</span>
-                <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">row_json</span><span class="p">[</span><span class="s2">"values"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({})</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">json</span><span class="p">[</span><span class="s2">"updateCells"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_json</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span></div>
+            <span class="n">row_json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"values"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"userEnteredFormat"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"numberFormat"</span><span class="p">:</span> <span class="n">format_type</span><span class="p">(</span><span class="n">v</span><span class="p">)}}]</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">json</span><span class="p">[</span><span class="s2">"updateCells"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_json</span><span class="p">)</span>
+            <span class="n">requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="n">requests</span><span class="p">}</span></div>
 
 <div class="viewcode-block" id="Frame.format_frame"><a class="viewcode-back" href="../../gslides.html#gslides.frame.Frame.format_frame">[docs]</a>    <span class="k">def</span> <span class="nf">format_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_mapping</span><span class="p">):</span>
         <span class="sd">"""Formats a column in Google sheets. See</span>
@@ -605,10 +600,28 @@
             <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
             <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
                 <span class="n">spreadsheetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
-                <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">render_format_frame</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">)]},</span>
+                <span class="n">body</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">render_format_frame</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">),</span>
             <span class="p">)</span>
             <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Returns the corresponding get initialization method.</span>
+
+<span class="sd">        :return: Get intialization method</span>
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">"Frame.get(</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="s2">spreadsheet_id='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="si">}</span><span class="s2">',</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="s2">sheet_id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sheet_id</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="s2">sheet_name='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sheet_name</span><span class="si">}</span><span class="s2">',</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="s2">anchor_cell='</span><span class="si">{</span><span class="n">num_to_char</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_column_index</span><span class="p">)</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">start_row_index</span><span class="si">}</span><span class="s2">',</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="s2">bottom_right_cell='</span><span class="si">{</span><span class="n">num_to_char</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_column_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">end_row_index</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">'</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">")"</span>
+        <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">TFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TFrame</span><span class="p">:</span>

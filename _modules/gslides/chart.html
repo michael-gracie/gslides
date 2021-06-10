@@ -479,7 +479,7 @@
         <span class="p">):</span>
             <span class="n">json</span><span class="p">[</span><span class="s2">"pointStyle"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s2">"shape"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"point_shape"</span><span class="p">],</span>
-                <span class="s2">"size"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"point_size"</span><span class="p">],</span>
+                <span class="s2">"size"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"point_size"</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">5</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="k">if</span> <span class="s2">"data_label_enabled"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_dict</span><span class="p">[</span><span class="s2">"data_label_enabled"</span><span class="p">]:</span>
@@ -849,7 +849,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">end_row_index</span><span class="p">,</span>
                     <span class="n">serie_col_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
                     <span class="n">serie_col_num</span><span class="p">,</span>
-                    <span class="nb">type</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="n">val</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">series_json</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">render_basic_chart_json</span><span class="p">(</span>

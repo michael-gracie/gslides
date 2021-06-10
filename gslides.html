@@ -495,6 +495,9 @@ for accepted named colors</p></li>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
 </dl>
 </dd></dl>
 </div>
@@ -1047,6 +1050,19 @@ to the bottom right observation in the dataframe</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt id="gslides.frame.Frame.get_method">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">get_method</span></code><a class="headerlink" href="#gslides.frame.Frame.get_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the corresponding get initialization method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Get intialization method</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="gslides.frame.Frame.render_format_frame">
 <code class="sig-name descname"><span class="pre">render_format_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_mapping</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/frame.html#Frame.render_format_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.Frame.render_format_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the json to format a column in Google slides</p>
@@ -1143,7 +1159,7 @@ be passed.</p>
 <p>Creates the slides and charts in Google slides</p>
 <dl class="py class">
 <dt id="gslides.presentation.AddSlide">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">AddSlide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presentation_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.chart.Chart" title="gslides.chart.Chart"><span class="pre">gslides.chart.Chart</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#gslides.table.Table" title="gslides.table.Table"><span class="pre">gslides.table.Table</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1017724</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">420575</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Title</span> <span class="pre">placeholder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Notes</span> <span class="pre">placeholder'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">AddSlide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presentation_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.chart.Chart" title="gslides.chart.Chart"><span class="pre">gslides.chart.Chart</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#gslides.table.Table" title="gslides.table.Table"><span class="pre">gslides.table.Table</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1017724</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">420575</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(9144000,</span> <span class="pre">5143500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Title</span> <span class="pre">placeholder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Notes</span> <span class="pre">placeholder'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The class that adds a slide to the presentation.</p>
 <dl class="field-list simple">
@@ -1158,6 +1174,7 @@ The lack of a parameter will insert the slide to the end of the presentation</p>
 <li><p><strong>bottom_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The bottom margin of the presentation in EMU</p></li>
 <li><p><strong>left_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The left margin of the presentation in EMU</p></li>
 <li><p><strong>right_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The right margin of the presentation in EMU</p></li>
+<li><p><strong>page_size</strong> (<em>tuple</em>) – Tuple of the width and height of the presentation in EMU</p></li>
 <li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – The text for the title textbox</p></li>
 <li><p><strong>notes</strong> (<em>str</em><em>, </em><em>optional</em>) – The text for the notes textbox</p></li>
 </ul>
@@ -1281,7 +1298,7 @@ The lack of a parameter will insert the slide to the end of the presentation</p>
 </dd></dl>
 <dl class="py class">
 <dt id="gslides.presentation.Presentation">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">Presentation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pr_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sl_ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialized</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">Presentation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pr_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sl_ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(9144000,</span> <span class="pre">5143500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialized</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>An object that represents a presentation in Google slides. Initialize the
 object through either the <a class="reference internal" href="#gslides.presentation.Presentation.get" title="gslides.presentation.Presentation.get"><code class="xref py py-class docutils literal notranslate"><span class="pre">Presentation.get</span></code></a> or
@@ -1292,6 +1309,7 @@ object through either the <a class="reference internal" href="#gslides.presentat
 <li><p><strong>name</strong> (<em>str</em>) – Name of the presentation</p></li>
 <li><p><strong>pr_id</strong> (<em>str</em>) – The id of the presentation</p></li>
 <li><p><strong>sl_ids</strong> (<em>list</em>) – A list of the slide ids</p></li>
+<li><p><strong>page_size</strong> (<em>tuple</em>) – Tuple of the width and height of the presentation in EMU</p></li>
 <li><p><strong>initialized</strong> (<em>bool</em>) – Whether to object has been initialized</p></li>
 </ul>
 </dd>
@@ -1320,7 +1338,8 @@ The lack of a parameter will insert the slide to the end of the presentation</p>
 <dl class="py method">
 <dt id="gslides.presentation.Presentation.create">
 <em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Untitled'</span></span></em><span class="sig-paren">)</span> → <span class="pre">TPresentation</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class method that creates a new presentation.</p>
+<dd><p>Class method that creates a new presentation. To note, due to an issue
+in the API page size is currently not supported.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name of the presentation</p>
@@ -1346,6 +1365,19 @@ The lack of a parameter will insert the slide to the end of the presentation</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gslides.presentation.Presentation" title="gslides.presentation.Presentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Presentation</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.get_method">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">get_method</span></code><a class="headerlink" href="#gslides.presentation.Presentation.get_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the corresponding get initialization method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Get intialization method</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1388,6 +1420,20 @@ The lack of a parameter will insert the slide to the end of the presentation</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.template">
+<code class="sig-name descname"><span class="pre">template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slide_ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces all text encaspulated with <cite>{{ &lt;TEXT&gt; }}</cite> with input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mapping</strong> (<em>dict</em>) – Dictionary mapping old text to new text</p></li>
+<li><p><strong>slide_ids</strong> (<em>list</em><em>, </em><em>optional</em>) – The slides to apply template on. If none, then all slides
+will be considered.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

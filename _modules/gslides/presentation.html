@@ -270,6 +270,8 @@
 <span class="sd">    :type left_margin: int, optional</span>
 <span class="sd">    :param right_margin: The right margin of the presentation in EMU</span>
 <span class="sd">    :type right_margin: int, optional</span>
+<span class="sd">    :param page_size: Tuple of the width and height of the presentation in EMU</span>
+<span class="sd">    :type page_size: tuple</span>
 <span class="sd">    :param title: The text for the title textbox</span>
 <span class="sd">    :type title: str, optional</span>
 <span class="sd">    :param notes: The text for the notes textbox</span>
@@ -286,6 +288,7 @@
         <span class="n">bottom_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">420575</span><span class="p">,</span>
         <span class="n">left_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">right_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9144000</span><span class="p">,</span> <span class="mi">5143500</span><span class="p">),</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Title placeholder"</span><span class="p">,</span>
         <span class="n">notes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Notes placeholder"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -301,9 +304,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">=</span> <span class="n">bottom_margin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">=</span> <span class="n">left_margin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span> <span class="o">=</span> <span class="n">right_margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span> <span class="o">=</span> <span class="n">page_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_obj</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span>
-            <span class="mi">9144000</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-            <span class="mi">5143500</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
+            <span class="n">page_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
+            <span class="n">page_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
             <span class="n">layout</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
@@ -358,6 +362,8 @@
 <span class="sd">        :return: The json to do the update</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        """</span>
+        <span class="n">start_textbox_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.05</span>
+        <span class="n">scale_textbox_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="o">/</span> <span class="mi">3000000</span>
         <span class="n">json</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">"requests"</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
@@ -370,9 +376,9 @@
                                 <span class="s2">"height"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"magnitude"</span><span class="p">:</span> <span class="mi">3000000</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EMU"</span><span class="p">},</span>
                             <span class="p">},</span>
                             <span class="s2">"transform"</span><span class="p">:</span> <span class="p">{</span>
-                                <span class="s2">"scaleX"</span><span class="p">:</span> <span class="mf">2.8402</span><span class="p">,</span>
+                                <span class="s2">"scaleX"</span><span class="p">:</span> <span class="n">scale_textbox_x</span><span class="p">,</span>
                                 <span class="s2">"scaleY"</span><span class="p">:</span> <span class="mf">0.1909</span><span class="p">,</span>
-                                <span class="s2">"translateX"</span><span class="p">:</span> <span class="mi">311700</span><span class="p">,</span>
+                                <span class="s2">"translateX"</span><span class="p">:</span> <span class="n">start_textbox_x</span><span class="p">,</span>
                                 <span class="s2">"translateY"</span><span class="p">:</span> <span class="mi">445025</span><span class="p">,</span>
                                 <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EMU"</span><span class="p">,</span>
                             <span class="p">},</span>
@@ -389,10 +395,10 @@
                                 <span class="s2">"height"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"magnitude"</span><span class="p">:</span> <span class="mi">3000000</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EMU"</span><span class="p">},</span>
                             <span class="p">},</span>
                             <span class="s2">"transform"</span><span class="p">:</span> <span class="p">{</span>
-                                <span class="s2">"scaleX"</span><span class="p">:</span> <span class="mf">2.7979</span><span class="p">,</span>
+                                <span class="s2">"scaleX"</span><span class="p">:</span> <span class="n">scale_textbox_x</span><span class="p">,</span>
                                 <span class="s2">"scaleY"</span><span class="p">:</span> <span class="mf">0.0914</span><span class="p">,</span>
-                                <span class="s2">"translateX"</span><span class="p">:</span> <span class="mi">311700</span><span class="p">,</span>
-                                <span class="s2">"translateY"</span><span class="p">:</span> <span class="mi">4722925</span><span class="p">,</span>
+                                <span class="s2">"translateX"</span><span class="p">:</span> <span class="n">start_textbox_x</span><span class="p">,</span>
+                                <span class="s2">"translateY"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
                                 <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"EMU"</span><span class="p">,</span>
                             <span class="p">},</span>
                         <span class="p">},</span>
@@ -611,6 +617,8 @@
 <span class="sd">    :type pr_id: str</span>
 <span class="sd">    :param sl_ids: A list of the slide ids</span>
 <span class="sd">    :type sl_ids: list</span>
+<span class="sd">    :param page_size: Tuple of the width and height of the presentation in EMU</span>
+<span class="sd">    :type page_size: tuple</span>
 <span class="sd">    :param initialized: Whether to object has been initialized</span>
 <span class="sd">    :type initialized: bool</span>
 <span class="sd">    """</span>
@@ -620,17 +628,23 @@
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="n">pr_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="n">sl_ids</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">page_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9144000</span><span class="p">,</span> <span class="mi">5143500</span><span class="p">),</span>
         <span class="n">initialized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Constructor method"""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pr_id</span> <span class="o">=</span> <span class="n">pr_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span> <span class="o">=</span> <span class="n">sl_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span> <span class="o">=</span> <span class="n">page_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="n">initialized</span>
 
 <div class="viewcode-block" id="Presentation.create"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.create">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TPresentation</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Untitled"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TPresentation</span><span class="p">:</span>
-        <span class="sd">"""Class method that creates a new presentation.</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TPresentation</span><span class="p">],</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Untitled"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TPresentation</span><span class="p">:</span>
+        <span class="sd">"""Class method that creates a new presentation. To note, due to an issue</span>
+<span class="sd">        in the API page size is currently not supported.</span>
 
 <span class="sd">        :param name: Name of the presentation</span>
 <span class="sd">        :type name: str</span>
@@ -645,7 +659,7 @@
             <span class="n">presentationId</span><span class="o">=</span><span class="n">output</span><span class="p">[</span><span class="s2">"presentationId"</span><span class="p">],</span>
             <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"deleteObject"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"objectId"</span><span class="p">:</span> <span class="s2">"p"</span><span class="p">}}]},</span>
         <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pr_id</span><span class="p">,</span> <span class="p">[],</span> <span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pr_id</span><span class="p">,</span> <span class="p">[],</span> <span class="p">(</span><span class="mi">9144000</span><span class="p">,</span> <span class="mi">5143500</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Presentation.get"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.get">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">TPresentation</span><span class="p">],</span> <span class="n">presentation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TPresentation</span><span class="p">:</span>
@@ -660,11 +674,15 @@
         <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">presentationId</span><span class="o">=</span><span class="n">presentation_id</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span>
+        <span class="n">page_size</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">output</span><span class="p">[</span><span class="s2">"pageSize"</span><span class="p">][</span><span class="s2">"width"</span><span class="p">][</span><span class="s2">"magnitude"</span><span class="p">],</span>
+            <span class="n">output</span><span class="p">[</span><span class="s2">"pageSize"</span><span class="p">][</span><span class="s2">"height"</span><span class="p">][</span><span class="s2">"magnitude"</span><span class="p">],</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="s2">"slides"</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">sl_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">sl</span><span class="p">[</span><span class="s2">"objectId"</span><span class="p">]</span> <span class="k">for</span> <span class="n">sl</span> <span class="ow">in</span> <span class="n">output</span><span class="p">[</span><span class="s2">"slides"</span><span class="p">]]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sl_ids</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">presentation_id</span><span class="p">,</span> <span class="n">sl_ids</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">presentation_id</span><span class="p">,</span> <span class="n">sl_ids</span><span class="p">,</span> <span class="n">page_size</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Presentation.add_slide"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.add_slide">[docs]</a>    <span class="k">def</span> <span class="nf">add_slide</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -709,6 +727,7 @@
             <span class="n">bottom_margin</span><span class="p">,</span>
             <span class="n">left_margin</span><span class="p">,</span>
             <span class="n">right_margin</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page_size</span><span class="p">,</span>
             <span class="n">title</span><span class="p">,</span>
             <span class="n">notes</span><span class="p">,</span>
         <span class="p">)</span>
@@ -730,6 +749,42 @@
             <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"deleteObject"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"objectId"</span><span class="p">:</span> <span class="n">slide_id</span><span class="p">}}]},</span>
         <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl_ids</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">slide_id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Presentation.template"><a class="viewcode-back" href="../../gslides.html#gslides.presentation.Presentation.template">[docs]</a>    <span class="k">def</span> <span class="nf">template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">slide_ids</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">"""Replaces all text encaspulated with `{{ &lt;TEXT&gt; }}` with input</span>
+
+<span class="sd">        :param mapping: Dictionary mapping old text to new text</span>
+<span class="sd">        :type mapping: dict</span>
+<span class="sd">        :param slide_ids: The slides to apply template on. If none, then all slides</span>
+<span class="sd">            will be considered.</span>
+<span class="sd">        :type slide_ids: list, optional</span>
+<span class="sd">        """</span>
+
+        <span class="n">requests</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"replaceAllText"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"replaceText"</span><span class="p">:</span> <span class="n">val</span><span class="p">,</span>
+                    <span class="s2">"pageObjectIds"</span><span class="p">:</span> <span class="n">slide_ids</span><span class="p">,</span>
+                    <span class="s2">"containsText"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="se">{{{{</span><span class="s2"> </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> </span><span class="se">}}}}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"matchCase"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+        <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">slide_service</span>
+        <span class="n">service</span><span class="o">.</span><span class="n">presentations</span><span class="p">()</span><span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
+            <span class="n">presentationId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">"requests"</span><span class="p">:</span> <span class="n">requests</span><span class="p">},</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Returns the corresponding get initialization method.</span>
+
+<span class="sd">        :return: Get intialization method</span>
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"=Presentation.get(presentation_id='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">presentation_id</span><span class="si">}</span><span class="s2">')"</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">presentation_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

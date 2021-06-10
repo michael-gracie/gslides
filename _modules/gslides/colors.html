@@ -168,12 +168,15 @@
 <span class="sd">    :type color: str</span>
 <span class="sd">    :return: Hex code corresponding to the color</span>
 <span class="sd">    :rtype: str</span>
+<span class="sd">    :raises ValueError:</span>
 
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">color_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">color_mapping</span><span class="p">[</span><span class="n">color</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">color</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">color_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">color_mapping</span><span class="p">[</span><span class="n">color</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+    <span class="k">elif</span> <span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"#"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">color</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">color</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2"> is not a valid hex or named color"</span><span class="p">)</span></div>
 
 
 <span class="n">TPalette</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TPalette"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Palette"</span><span class="p">)</span>
