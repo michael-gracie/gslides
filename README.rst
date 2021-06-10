@@ -99,6 +99,8 @@ Below is an example that only showcases a simple workflow. Full discussion aroun
 
 .. image:: img/usage.png
 
+`gslides` also supports basic templating functionality. See this `notebook <https://github.com/michael-gracie/gslides/blob/main/notebooks/usage.ipynb>`_ for an example.
+
 Developer Instructions
 ----------------------
 
