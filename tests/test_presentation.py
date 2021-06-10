@@ -235,6 +235,10 @@ class TestPresentation:
             return {
                 "slides": [{"objectId": 1111}, {"objectId": 2222}, {"objectId": 3333}],
                 "title": "test",
+                "pageSize": {
+                    "width": {"magnitude": 9144000, "unit": "EMU"},
+                    "height": {"magnitude": 5143500, "unit": "EMU"},
+                },
             }
 
         monkeypatch.setattr(MockService, "execute", mock_return)
@@ -262,6 +266,17 @@ class TestPresentation:
         monkeypatch.setattr(MockService, "execute", mock_return)
         self.object.rm_slide(slide_id=3333)
         assert self.object.sl_ids == [1111, 2222]
+
+    def test_template(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+
+        self.object.template({"old": "new"})
+        assert True
 
     def test_presentation_id(self):
         assert self.object.presentation_id == "abcd"

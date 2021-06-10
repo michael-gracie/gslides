@@ -344,7 +344,7 @@ class Series:
         ):
             json["pointStyle"] = {
                 "shape": self.params_dict["point_shape"],
-                "size": self.params_dict["point_size"],
+                "size": self.params_dict["point_size"] or 5,
             }
         if "data_label_enabled" in self.params_dict.keys():
             if self.params_dict["data_label_enabled"]:
@@ -714,7 +714,7 @@ class Chart:
                     self.data.end_row_index,
                     serie_col_num - 1,
                     serie_col_num,
-                    type=val.__class__.__name__.upper(),
+                    type=val.type.upper(),
                 )
             else:
                 series_json = val.render_basic_chart_json(
