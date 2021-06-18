@@ -2,7 +2,8 @@
 """
 Creates the table in Google slides
 """
-
+import logging
+import pprint
 from typing import Any, Dict, List, Tuple, Union
 
 import pandas as pd
@@ -17,6 +18,8 @@ from .utils import (
     determine_col_proportion,
     hex_to_rgb,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class Table:
@@ -489,24 +492,32 @@ class Table:
         :type translate_y: float
         """
         service = creds.slide_service
+        body = self.render_create_table_json(slide_id)
+        logger.info("Executing table creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.presentations()
             .batchUpdate(
                 presentationId=presentation_id,
-                body=self.render_create_table_json(slide_id),
+                body=body,
             )
             .execute()
         )
+        logger.info("Table created successfully")
+        body = self.render_update_table_json(
+            output["replies"][0]["createTable"]["objectId"],
+            size,
+            translate_x,
+            translate_y,
+        )
+        logger.info("Executing table updates")
+        logger.info(f"Request: {pprint.pformat(body)}")
         (
             service.presentations()
             .batchUpdate(
                 presentationId=presentation_id,
-                body=self.render_update_table_json(
-                    output["replies"][0]["createTable"]["objectId"],
-                    size,
-                    translate_x,
-                    translate_y,
-                ),
+                body=body,
             )
             .execute()
         )
+        logger.info("Table updated successfully")

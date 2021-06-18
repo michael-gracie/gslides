@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+import logging
 import os
 from typing import Dict, Optional
 
 import yaml
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import Resource, build
+
+logger = logging.getLogger(__name__)
 
 CURR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -29,8 +32,12 @@ class Creds:
 
         """
         self.crdtls = credentials
+        logger.info("Building sheets connection")
         self.sht_srvc = build("sheets", "v4", credentials=credentials)
+        logger.info("Built sheets connection")
+        logger.info("Building slides connection")
         self.sld_srvc = build("slides", "v1", credentials=credentials)
+        logger.info("Built slides connection")
 
     @property
     def sheet_service(self) -> Resource:

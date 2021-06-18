@@ -3,6 +3,8 @@
 Frame class
 """
 
+import logging
+import pprint
 from typing import Any, Dict, List, Tuple, Type, TypeVar, cast
 
 import pandas as pd
@@ -16,6 +18,8 @@ from .utils import (
     num_to_char,
     validate_cell_name,
 )
+
+logger = logging.getLogger(__name__)
 
 TFrame = TypeVar("TFrame", bound="Frame")
 
@@ -82,12 +86,15 @@ def get_sheet_data(
         f"{start_row_index}:"
         f"{num_to_char(end_column_index)}{end_row_index}"
     )
+
+    logger.info("Getting data from google sheets")
     output = (
         service.spreadsheets()
         .values()
         .get(spreadsheetId=spreadsheet_id, range=rng)
         .execute()
     )
+    logger.info("Successfully retreived data")
     if "values" in output.keys():
         return cast(List[List], output["values"])
     else:
@@ -195,12 +202,15 @@ class CreateFrame:
             )
             if existing_data:
                 raise RuntimeError("Create table will overwrite existing data")
+        logger.info("Creating data in google sheets")
+        logger.info(f"Request: {pprint.pformat(json)}")
         (
             service.spreadsheets()
             .values()
             .batchUpdate(spreadsheetId=self.spreadsheet_id, body=json)
             .execute()
         )
+        logger.info("Successfully created data")
         return True
 
 
@@ -308,6 +318,23 @@ class Frame:
         self.end_column_index = end_column_index
         self.end_row_index = end_row_index
         self.initialized = initialized
+
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = (
+            f"Frame\n"
+            f" - spreadsheet_id = {self.spreadsheet_id}\n"
+            f" - sheet_id = {self.sheet_id}\n"
+            f" - sheet_name = {self.sheet_name}\n"
+            f" - anchor_cell = {num_to_char(self.start_column_index)}{self.start_row_index}\n"
+            f" - bottom_right_cell = '{num_to_char(self.end_column_index-1)}{self.end_row_index-1}'"
+        )
+        return output
 
     @classmethod
     def create(
@@ -461,14 +488,18 @@ class Frame:
         >>> frame.format_frame({'column1': '0.0%'})
         """
         service: Any = creds.sheet_service
+        body = self.render_format_frame(column_mapping)
+        logger.info("Formatting frame in google sheets")
+        logger.info(f"Request: {pprint.pformat(body)}")
         (
             service.spreadsheets()
             .batchUpdate(
                 spreadsheetId=self.spreadsheet_id,
-                body=self.render_format_frame(column_mapping),
+                body=body,
             )
             .execute()
         )
+        logger.info("Successfully formatted frame")
 
     @property
     def get_method(self) -> str:

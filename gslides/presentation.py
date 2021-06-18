@@ -2,7 +2,8 @@
 """
 Creates the slides and charts in Google slides
 """
-
+import logging
+import pprint
 from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
 from . import creds, package_font
@@ -12,6 +13,8 @@ from .utils import optimize_size, validate_params_float
 
 TLayout = TypeVar("TLayout", bound="Layout")
 TPresentation = TypeVar("TPresentation", bound="Presentation")
+
+logger = logging.getLogger(__name__)
 
 
 class Layout:
@@ -382,6 +385,7 @@ class AddSlide:
     def _execute_create_slide(self) -> None:
         """Executes the create slides API call."""
         service: Any = creds.slide_service
+        logger.info("Creating slide")
         output = (
             service.presentations()
             .batchUpdate(
@@ -390,11 +394,15 @@ class AddSlide:
             )
             .execute()
         )
+        logger.info("Slide created successfully")
         self.sl_id = output["replies"][0]["createSlide"]["objectId"]
 
     def _execute_create_format_textboxes(self) -> None:
         """Executes the create & format textboxes slides API call."""
         service: Any = creds.slide_service
+        body = self.render_json_create_textboxes(self.sl_id)
+        logger.info("Executing textbox creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.presentations()
             .batchUpdate(
@@ -403,18 +411,21 @@ class AddSlide:
             )
             .execute()
         )
+        logger.info("Textboxes created successfully")
         self.title_bx_id = output["replies"][0]["createShape"]["objectId"]
         self.notes_bx_id = output["replies"][1]["createShape"]["objectId"]
+        body = self.render_json_format_textboxes(self.title_bx_id, self.notes_bx_id)
+        logger.info("Executing textbox creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.presentations()
             .batchUpdate(
                 presentationId=self.presentation_id,
-                body=self.render_json_format_textboxes(
-                    self.title_bx_id, self.notes_bx_id
-                ),
+                body=body,
             )
             .execute()
         )
+        logger.info("Textboxes formatted successfully")
 
     def _execute_populate_objects(self) -> None:
         """Executes the population of objects on the slide"""
@@ -428,11 +439,14 @@ class AddSlide:
                         obj, self.layout_obj.object_size, translate_x, translate_y
                     )
                 )
+                logger.info("Populating charts in google slides")
+                logger.info(f"Request: {pprint.pformat(json)}")
                 (
                     service.presentations()
                     .batchUpdate(presentationId=self.presentation_id, body=json)
                     .execute()
                 )
+                logger.info("Charts successfully populated")
             elif isinstance(obj, Table):
                 obj.create(
                     self.presentation_id,
@@ -503,6 +517,16 @@ class Presentation:
         self.page_size = page_size
         self.initialized = initialized
 
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = f"Presentation\n" f" - presentation_id = {self.presentation_id}"
+        return output
+
     @classmethod
     def create(
         cls: Type[TPresentation],
@@ -518,12 +542,14 @@ class Presentation:
 
         """
         service: Any = creds.slide_service
+        logger.info("Creating presentation")
         output = service.presentations().create(body={"title": name}).execute()
         pr_id = output["presentationId"]
         service.presentations().batchUpdate(
             presentationId=output["presentationId"],
             body={"requests": [{"deleteObject": {"objectId": "p"}}]},
         ).execute()
+        logger.info("Presentation successfully created")
         return cls(name, pr_id, [], (9144000, 5143500), True)
 
     @classmethod
@@ -537,7 +563,9 @@ class Presentation:
 
         """
         service: Any = creds.slide_service
+        logger.info("Retreiving presentation")
         output = service.presentations().get(presentationId=presentation_id).execute()
+        logger.info("Presentation successfully retreived")
         name = output["title"]
         page_size = (
             output["pageSize"]["width"]["magnitude"],
@@ -609,10 +637,12 @@ class Presentation:
         :type slide_id: str
         """
         service: Any = creds.slide_service
+        logger.info("Deleting slide")
         service.presentations().batchUpdate(
             presentationId=self.presentation_id,
             body={"requests": [{"deleteObject": {"objectId": slide_id}}]},
         ).execute()
+        logger.info("Slide successfully deleted")
         self.sl_ids.remove(slide_id)
 
     def template(self, mapping: dict, slide_ids: list = []) -> None:
@@ -636,10 +666,12 @@ class Presentation:
             }
             requests.append(json)
         service: Any = creds.slide_service
+        logger.info("Templating data")
         service.presentations().batchUpdate(
             presentationId=self.presentation_id,
             body={"requests": requests},
         ).execute()
+        logger.info("Data successfully templated")
 
     @property
     def get_method(self) -> str:
