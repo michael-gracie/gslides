@@ -252,6 +252,11 @@ def test_validate_params_int():
 
 
 @pytest.mark.xfail(reason=ValueError)
+def test_validate_series_columns():
+    utils.validate_series_columns("col")
+
+
+@pytest.mark.xfail(reason=ValueError)
 def test_validate_cell_name():
     utils.validate_cell_name("1A:4")
 

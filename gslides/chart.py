@@ -16,6 +16,7 @@ from .utils import (
     validate_params_float,
     validate_params_int,
     validate_params_list,
+    validate_series_columns,
 )
 
 logger = logging.getLogger(__name__)
@@ -40,6 +41,7 @@ class Series:
         validate_params_list(kwargs)
         validate_params_int(kwargs)
         validate_params_float(kwargs)
+        validate_series_columns(kwargs)
         self.params_dict = kwargs
 
     @classmethod

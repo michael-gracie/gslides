@@ -64,6 +64,16 @@ class Table:
         self.header_font_color = black_or_white(self.header_background_color)
         self.stub_font_color = black_or_white(self.stub_background_color)
 
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = f"Table\n" f"{self.df.to_markdown(index = False)}"
+        return output
+
     def _resolve_df(self, data: Union[Frame, pd.DataFrame]):
         """Outputs a cleaned dataframe
 

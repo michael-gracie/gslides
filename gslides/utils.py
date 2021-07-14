@@ -319,6 +319,22 @@ def validate_params_float(params: dict) -> None:
                 )
 
 
+def validate_series_columns(params: dict) -> None:
+    """Validates that the series column is None or a list
+
+    :param params: Dictionary of parameters
+    :type params: dict
+    :raises ValueError:
+
+    """
+    if "series_columns" in params.keys() and params["series_columns"]:
+        if type(params["series_columns"]) != list:
+            raise ValueError(
+                f"{params['series_columns']} is not a valid parameter for series_columns."
+                f"Series columns only accepts a list or None."
+            )
+
+
 def validate_cell_name(x: str) -> str:
     """Validates that a cell name is valid
 
