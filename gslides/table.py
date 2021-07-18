@@ -4,8 +4,9 @@ Creates the table in Google slides
 """
 import logging
 import pprint
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
+import numpy as np
 import pandas as pd
 
 from . import creds, package_font
@@ -41,6 +42,9 @@ class Table:
         Parameters can either be a hex-code or a named color.
         See gslides.config.color_mapping.keys() for accepted named colors
     :type stub_background_color: str
+    :param column_proportions: A list of floats representing the proportion of each
+        column
+    :type column_proportions:  list of floats
     """
 
     def __init__(
@@ -51,6 +55,7 @@ class Table:
         stub: bool = False,
         header_background_color: str = "black",
         stub_background_color: str = "black",
+        column_proportions: Optional[List[float]] = None,
     ) -> None:
         """Constructor method"""
         self.df = self._reset_header(self._resolve_df(data))
@@ -63,6 +68,7 @@ class Table:
         self.stub_background_color = hex_to_rgb(translate_color(stub_background_color))
         self.header_font_color = black_or_white(self.header_background_color)
         self.stub_font_color = black_or_white(self.stub_background_color)
+        self.column_proportions = column_proportions
 
     def __repr__(self) -> str:
         """Prints class information.
@@ -449,7 +455,10 @@ class Table:
 
         """
         json: Dict[str, Any] = {"requests": []}
-        col_widths = size[0] * determine_col_proportion(self.df)
+        if self.column_proportions:
+            col_widths = size[0] * np.array(self.column_proportions)
+        else:
+            col_widths = size[0] * determine_col_proportion(self.df)
         row_height = size[1] / (self.df.shape[0])
         json["requests"].extend(
             self._table_move_request(tbl_id, translate_x, translate_y)
