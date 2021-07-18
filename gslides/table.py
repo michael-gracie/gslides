@@ -2,7 +2,8 @@
 """
 Creates the table in Google slides
 """
-
+import logging
+import pprint
 from typing import Any, Dict, List, Tuple, Union
 
 import pandas as pd
@@ -17,6 +18,8 @@ from .utils import (
     determine_col_proportion,
     hex_to_rgb,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class Table:
@@ -60,6 +63,16 @@ class Table:
         self.stub_background_color = hex_to_rgb(translate_color(stub_background_color))
         self.header_font_color = black_or_white(self.header_background_color)
         self.stub_font_color = black_or_white(self.stub_background_color)
+
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = f"Table\n" f"{self.df.to_markdown(index = False)}"
+        return output
 
     def _resolve_df(self, data: Union[Frame, pd.DataFrame]):
         """Outputs a cleaned dataframe
@@ -489,24 +502,32 @@ class Table:
         :type translate_y: float
         """
         service = creds.slide_service
+        body = self.render_create_table_json(slide_id)
+        logger.info("Executing table creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.presentations()
             .batchUpdate(
                 presentationId=presentation_id,
-                body=self.render_create_table_json(slide_id),
+                body=body,
             )
             .execute()
         )
+        logger.info("Table created successfully")
+        body = self.render_update_table_json(
+            output["replies"][0]["createTable"]["objectId"],
+            size,
+            translate_x,
+            translate_y,
+        )
+        logger.info("Executing table updates")
+        logger.info(f"Request: {pprint.pformat(body)}")
         (
             service.presentations()
             .batchUpdate(
                 presentationId=presentation_id,
-                body=self.render_update_table_json(
-                    output["replies"][0]["createTable"]["objectId"],
-                    size,
-                    translate_x,
-                    translate_y,
-                ),
+                body=body,
             )
             .execute()
         )
+        logger.info("Table updated successfully")

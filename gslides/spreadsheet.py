@@ -3,12 +3,16 @@
 Spreadsheet class
 """
 
+import logging
+import pprint
 from typing import Any, Dict, List, Tuple, Type, TypeVar, cast
 
 from . import creds
 from .utils import json_dict_extract, json_val_extract
 
 TSpreadsheet = TypeVar("TSpreadsheet", bound="Spreadsheet")
+
+logger = logging.getLogger(__name__)
 
 
 class CreateSpreadsheet:
@@ -49,11 +53,11 @@ class CreateSpreadsheet:
 
         """
         service: Any = creds.sheet_service
-        output = (
-            service.spreadsheets()
-            .create(body=self.render_json(title, sheet_names))
-            .execute()
-        )
+        body = self.render_json(title, sheet_names)
+        logger.info("Creating the spreadsheet")
+        logger.info(f"Request: {pprint.pformat(body)}")
+        output = service.spreadsheets().create(body=body).execute()
+        logger.info("Spreadsheet created successfully")
         sp_id = cast(str, json_val_extract(output, "spreadsheetId")[0])
         sht_ids = cast(List[int], json_val_extract(output, "sheetId"))
         return (sp_id, sht_ids, True)
@@ -72,7 +76,9 @@ class GetSpreadsheet:
 
         """
         service: Any = creds.sheet_service
+        logger.info("Retreiving spreadsheet")
         output = service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
+        logger.info("Spreadsheet successfully retreived")
         title = output["properties"]["title"]
         sht_ids = cast(Dict[str, int], json_dict_extract(output, ("title", "sheetId")))
         return (title, sht_ids, True)
@@ -106,13 +112,15 @@ class AddSheet:
 
         """
         service: Any = creds.sheet_service
+        body = self.render_json(sheet_names)
+        logger.info("Executing sheet creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.spreadsheets()
-            .batchUpdate(
-                spreadsheetId=spreadsheet_id, body=self.render_json(sheet_names)
-            )
+            .batchUpdate(spreadsheetId=spreadsheet_id, body=body)
             .execute()
         )
+        logger.info("Sheet created successfully")
         sht = cast(List[int], json_val_extract(output, "sheetId"))
         sht_ids = dict(zip(sheet_names, sht))
         return sht_ids
@@ -146,11 +154,15 @@ class RemoveSheet:
 
         """
         service: Any = creds.sheet_service
+        body = self.render_json(sheet_ids)
+        logger.info("Deleting sheet")
+        logger.info(f"Request: {pprint.pformat(body)}")
         (
             service.spreadsheets()
-            .batchUpdate(spreadsheetId=spreadsheet_id, body=self.render_json(sheet_ids))
+            .batchUpdate(spreadsheetId=spreadsheet_id, body=body)
             .execute()
         )
+        logger.info("Sheet deleted successfully")
         return sheet_ids
 
 
@@ -181,6 +193,20 @@ class Spreadsheet:
         self.title = title
         self.sht_nms = sht_ids
         self.initialized = initialized
+
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = (
+            f"Spreadsheet\n"
+            f" - spreadsheet_id = {self.spreadsheet_id}\n"
+            f" - title = {self.title}"
+        )
+        return output
 
     @classmethod
     def create(

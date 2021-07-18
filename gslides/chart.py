@@ -3,6 +3,8 @@
 Charts & series class
 """
 
+import logging
+import pprint
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, TypeVar, cast
 
 from . import creds, package_font, package_palette
@@ -14,7 +16,10 @@ from .utils import (
     validate_params_float,
     validate_params_int,
     validate_params_list,
+    validate_series_columns,
 )
+
+logger = logging.getLogger(__name__)
 
 TSeries = TypeVar("TSeries", bound="Series")
 
@@ -36,6 +41,7 @@ class Series:
         validate_params_list(kwargs)
         validate_params_int(kwargs)
         validate_params_float(kwargs)
+        validate_series_columns(kwargs)
         self.params_dict = kwargs
 
     @classmethod
@@ -516,6 +522,16 @@ class Chart:
         self.outlier_percentage: Optional[float] = None
         validate_params_list(self.__dict__)
 
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = f"Chart\n" f" - title = {self.title}"
+        return output
+
     def _determine_chart_type(self, series: Sequence[Series]) -> str:
         """Determines the type of chart based on the class of series passed
 
@@ -838,14 +854,18 @@ class Chart:
             json = self.render_histogram_chart_json(size)
         else:
             json = self.render_basic_chart_json(size)
+        body = {"requests": [{"addChart": json}]}
+        logger.info("Executing chart creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output: dict = (
             service.spreadsheets()
             .batchUpdate(
                 spreadsheetId=self.data.spreadsheet_id,
-                body={"requests": [{"addChart": json}]},
+                body=body,
             )
             .execute()
         )
+        logger.info("Chart created successfully")
         self.ch_id = json_val_extract(output, "chartId")[0]
         self.executed = True
         return output

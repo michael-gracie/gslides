@@ -57,7 +57,12 @@ class Palette:
     def __init__(self, palette: Optional[str] = None) -> None:
         """Constructor method"""
         if palette:
-            self.colors = base_palettes[palette]
+            if palette in base_palettes.keys():
+                self.colors = base_palettes[palette]
+            else:
+                raise ValueError(
+                    f'{palette} is not in available palettes: {", .".join(base_palettes.keys())}'
+                )
         else:
             self.colors = base_palettes["black"]
         self._clean_palette()
