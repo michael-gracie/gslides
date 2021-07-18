@@ -244,7 +244,7 @@ def clean_nan(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def clean_dtypes(x: Any) -> Union[str, float, int, np.int64, np.float64, None]:
-    """Cleans the datatypes of an obersevation to either int, float or string
+    """Cleans the datatypes of an obersevation to either int, float or string or None
 
     :param x: Observation to clean
     :type x: any
@@ -258,6 +258,8 @@ def clean_dtypes(x: Any) -> Union[str, float, int, np.int64, np.float64, None]:
         return float(str(x))
     elif type(x) in [str, int, float, np.int64, np.float64, type(None)]:
         return x
+    elif type(x) in [pd._libs.missing.NAType, pd._libs.tslibs.nattype.NaTType]:
+        return None
     else:
         raise TypeError(
             f"{type(x)} is not an accepted datatype. Type must conform to "
