@@ -49,8 +49,8 @@ def json_chunk_extract(
     :type obj: dict
     :param key: Key that corresponds to the dictionary to chunk
     :type key: str
-    :param key: Val that corresponds to the dictionary to chunk
-    :type key: str, int, float
+    :param val: Val that corresponds to the dictionary to chunk
+    :type val: str, int, float
     :return: List of chunks
     :rtype: list
 
@@ -71,6 +71,36 @@ def json_chunk_extract(
         return arr
 
     values = extract(obj, arr, val)
+    return values
+
+
+def json_chunk_key_extract(obj: Dict[str, Any], key: str) -> List:
+    """Recursively fetch chunks from nested JSON based on a given key.
+
+    :param obj: JSON to search
+    :type obj: dict
+    :param key: Key that corresponds to the dictionary to chunk
+    :type key: str
+    :return: List of chunks
+    :rtype: list
+
+    """
+    arr: List = []
+
+    def extract(obj: Dict[str, Any], arr: List) -> List:
+        """Recursively search for keys in JSON tree."""
+        if isinstance(obj, dict):
+            if key in obj.keys():
+                arr.append(obj)
+            else:
+                for k, v in obj.items():
+                    extract(v, arr)
+        elif isinstance(obj, list):
+            for item in obj:
+                extract(item, arr)
+        return arr
+
+    values = extract(obj, arr)
     return values
 
 
