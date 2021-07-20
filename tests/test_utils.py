@@ -132,6 +132,10 @@ def test_json_chunk_extract():
     assert utils.json_chunk_extract(json, "title", "pytest")[0]["fontName"] == "Roboto"
 
 
+def test_json_chunk_key_extract():
+    assert utils.json_chunk_key_extract(json, "spec")[0]["chartId"] == 1234567
+
+
 def test_json_dict_extract():
     assert utils.json_dict_extract(json, ("title", "fontName")) == {"pytest": "Roboto"}
 
