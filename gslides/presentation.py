@@ -6,8 +6,12 @@ import logging
 import pprint
 from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
+import requests
+from IPython.display import Image
+
 from . import creds, package_font
 from .chart import Chart
+from .config import PRESENTATION_PARAMS
 from .table import Table
 from .utils import json_chunk_key_extract, optimize_size, validate_params_float
 
@@ -723,6 +727,49 @@ class Presentation:
             body={"requests": requests},
         ).execute()
         logger.info("Charts successfully updated")
+
+    def _validate_image_size(self, image_size):
+        if image_size not in PRESENTATION_PARAMS["data_label_placement"]["params"]:
+            raise ValueError(
+                f"{image_size} is not a valid parameter for image_size. "
+                f"Accepted parameters include"
+                f"{', '.join(PRESENTATION_PARAMS['data_label_placement']['params'])}. See"
+                f"{PRESENTATION_PARAMS['data_label_placement']['url']} for further documentation."
+            )
+
+    def show_slide(self, slide_id: str, image_size: str = "LARGE") -> Image:
+        self._validate_image_size(image_size)
+        service: Any = creds.slide_service
+        img_info = (
+            service.presentations()
+            .pages()
+            .getThumbnail(
+                presentationId=self.presentation_id,
+                pageObjectId=slide_id,
+                thumbnailProperties_thumbnailSize=image_size,
+            )
+            .execute()
+        )
+        return Image(requests.get(img_info["contentUrl"]).content)
+
+    def download_slide(
+        self, slide_id: str, path: str, image_size: str = "LARGE"
+    ) -> None:
+        self._validate_image_size(image_size)
+        service: Any = creds.slide_service
+        img_info = (
+            service.presentations()
+            .pages()
+            .getThumbnail(
+                presentationId=self.presentation_id,
+                pageObjectId=slide_id,
+                thumbnailProperties_thumbnailSize=image_size,
+            )
+            .execute()
+        )
+        with open(path, "wb") as f:
+            f.write(requests.get(img_info["contentUrl"]).content)
+        return None
 
     @property
     def get_method(self) -> str:
