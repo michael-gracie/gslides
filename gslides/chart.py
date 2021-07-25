@@ -743,7 +743,7 @@ class Chart:
                 )
             json["chart"]["spec"]["basicChart"]["series"].append(series_json)
         if self.stacking:
-            json["chart"]["spec"]["basicChart"]["stackedType"] = "STACKED"
+            json["chart"]["spec"]["basicChart"]["stackedType"] = self.stacking
         if self.x_min is not None:
             json["chart"]["spec"]["basicChart"]["axis"][0]["viewWindowOptions"][
                 "viewWindowMin"

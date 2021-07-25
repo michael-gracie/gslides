@@ -162,7 +162,7 @@ class AddSlide:
     ) -> None:
         """Constructor method"""
         self.presentation_id = presentation_id
-        self.objects = objects
+        self.objects = self._validate_objects(objects)
         self.layout = self._validate_layout(layout)
         self.insertion_index = insertion_index
         self.sl_id: str = ""
@@ -207,6 +207,23 @@ class AddSlide:
             )
         else:
             return layout
+
+    def _validate_objects(
+        self, objects: List[Union[Chart, Table]]
+    ) -> List[Union[Chart, Table]]:
+        """Validates that there is a list of objects
+
+        :param objects: List of :class:`Chart` or :class:`Table` objects
+        :type objects: list
+        :raises ValueError:
+        :return: The objects
+        :rtype: list
+
+        """
+        if type(objects) != list:
+            raise ValueError("Objects only accepts a list")
+        else:
+            return objects
 
     def render_json_create_slide(self) -> dict:
         """Renders the json to create the slide in Google slides.

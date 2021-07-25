@@ -24,3 +24,8 @@ Sizing
 ----------------------------------------
 
 Sizing is particularly difficult with tables and one needs to be thoughtful about the number of rows and width of columns that will be created. If the Google API returns an error around the minimum row / column width you can either reduce amount of data you are attempting to capture in the table or change the ``font_size`` setting.
+
+Custom column proportions
+----------------------------------------
+
+The ``table`` object will automatically calculate column proportions by finding the longest record in a given column and attempt to split the column proportions by each columns' longest record. While in many instances this results in a well proportioned table, in other cases a single column is allocated too much width. For this reason the user can specify custom column proportions, a list of floats that represent the % width of each column.
