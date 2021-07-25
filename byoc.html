@@ -135,7 +135,7 @@
         <div class="section" id="bring-your-own-credentials">
 <h1>Bring Your Own Credentials<a class="headerlink" href="#bring-your-own-credentials" title="Permalink to this headline">¶</a></h1>
 <p>In order to start using <code class="docutils literal notranslate"><span class="pre">gslides</span></code> you need to supply the package with Google API credentials. To set up a connection to a Google API, one must register an application with Google and make a decision whether they wish to utilize API keys, OAuth 2.0 client ID’s or service accounts.</p>
-<p>Below will walk you through how to set up a connection using OAuth 2.0 on local in a Jupyter Notebook.</p>
+<p>Below will walk you through how to set up a connection using OAuth 2.0 or a service account on local in a Jupyter Notebook.</p>
 <div class="section" id="running-on-local-with-a-jupyter-notebook">
 <h2>Running on local with a Jupyter notebook<a class="headerlink" href="#running-on-local-with-a-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
 <p>This documentation follow roughly the steps laid out by Google <a class="reference external" href="https://developers.google.com/slides/quickstart/python">here</a>.</p>
@@ -146,13 +146,18 @@
 <p>You will need to create a project with the Google Slides and Sheets API enabled</p>
 </div>
 <p><strong>2. Create credentials</strong></p>
+<p>You can either create credentials with OAuth or a service account. See commentary in <a class="reference internal" href="#service-account-or-oauth-2-0"><span class="std std-ref">Service account or OAuth 2.0?</span></a></p>
+<p><em>2a. Using OAuth</em></p>
 <p>Consult Google and follow this <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#configure_the_oauth_consent_screen">guide</a> to configure the OAuth consent screen. This is the screen that will appear when you attempt to use your credentials to retrieve a token.</p>
-<p>Next, create your credentials from the instructions <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#create_a_credential">here</a>. For simplicity, create a desktop application. Once finished, you’ll need to download the credentials <code class="docutils literal notranslate"><span class="pre">.json</span></code> file onto your local.</p>
+<p>Next, create your credentials from the instructions <a class="reference external" href="https://developers.google.com/workspace/guides/create-credentials#create_a_credential">here</a>. For simplicity, create a <code class="docutils literal notranslate"><span class="pre">Desktop</span> <span class="pre">app</span></code>. Once finished, you’ll need to download the credentials <code class="docutils literal notranslate"><span class="pre">.json</span></code> file onto your local.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Be sure not share your credentials with anyone. The file should not be pushed to Github.</p>
 </div>
+<p><em>2b. Using a service account</em></p>
+<p>To create a service account in your project navigate to <code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">Credentials</span> <span class="pre">--&gt;</span> <span class="pre">Create</span> <span class="pre">Credentials</span> <span class="pre">--&gt;</span> <span class="pre">Service</span> <span class="pre">Account</span></code>. Once you create the service account click into the account navigate to <code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">Keys</span> <span class="pre">--&gt;</span> <span class="pre">Add</span> <span class="pre">Key</span></code>. You will have automatically downloaded your new key onto local.</p>
 <p><strong>3. Launch a Jupyter notebook, get the token and load credentials</strong></p>
+<p><em>3b. Using OAuth</em></p>
 <p>Run the code below, replacing the necessary values to obtain the <code class="docutils literal notranslate"><span class="pre">creds</span></code> object. These are the credentials you pass to <code class="docutils literal notranslate"><span class="pre">gslides</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">from</span> <span class="nn">googleapiclient.discovery</span> <span class="kn">import</span> <span class="n">build</span>
@@ -184,10 +189,26 @@
 </pre></div>
 </div>
 <p>The first time you run this block, you will be prompted to allow access to Google slides &amp; sheets through your Google account.</p>
+<p><em>3b. Using a service account</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.oauth2</span> <span class="kn">import</span> <span class="n">service_account</span>
+
+<span class="n">SCOPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'https://www.googleapis.com/auth/presentations'</span><span class="p">,</span>
+         <span class="s1">'https://www.googleapis.com/auth/spreadsheets'</span><span class="p">]</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_file</span><span class="p">(</span>
+    <span class="s1">'&lt;PATH_TO_CREDS&gt;'</span><span class="p">)</span>
+
+<span class="n">creds</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">with_scopes</span><span class="p">(</span><span class="n">SCOPES</span><span class="p">)</span>
+</pre></div>
+</div>
 <p><strong>4. Initialize the credentials with gslides</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gslides</span><span class="o">.</span><span class="n">intialize_credentials</span><span class="p">(</span><span class="n">creds</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="service-account-or-oauth-2-0">
+<h2>Service account or OAuth 2.0?<a class="headerlink" href="#service-account-or-oauth-2-0" title="Permalink to this headline">¶</a></h2>
+<p>The key difference between the usage of a service account or OAuth 2.0 to use the google API is the google account that making the API requests. Using OAuth 2.0 <strong>the account you authorize as will be the account that makes the API requests</strong>. This means that any presentations or spreadsheets you create will show up in your own Google drive. If you leverage a service account the presentation or spreadsheet will be created by the service account, an account with the domain like so <code class="docutils literal notranslate"><span class="pre">@&lt;project&gt;.iam.gserviceaccount.com</span></code>. If you try to navigate to the presentation under your own gmail account you will not have access, this is because the service account is owner for that document. This doesn’t prevent you from leveraging <code class="docutils literal notranslate"><span class="pre">gslides</span></code> with a service account although. For any existing documents you would like to edit with <code class="docutils literal notranslate"><span class="pre">gslides</span></code> simply share the document with the service account email, setting the account as editor.</p>
 </div>
 </div>
 
@@ -247,6 +268,7 @@
             <ul>
 <li><a class="reference internal" href="#">Bring Your Own Credentials</a><ul>
 <li><a class="reference internal" href="#running-on-local-with-a-jupyter-notebook">Running on local with a Jupyter notebook</a></li>
+<li><a class="reference internal" href="#service-account-or-oauth-2-0">Service account or OAuth 2.0?</a></li>
 </ul>
 </li>
 </ul>

@@ -134,12 +134,15 @@
         </label>
         <h1>Source code for gslides.config</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">from</span> <span class="nn">google.oauth2.credentials</span> <span class="kn">import</span> <span class="n">Credentials</span>
 <span class="kn">from</span> <span class="nn">googleapiclient.discovery</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">build</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">CURR_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 
@@ -164,8 +167,12 @@
 
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crdtls</span> <span class="o">=</span> <span class="n">credentials</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Building sheets connection"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sht_srvc</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="s2">"sheets"</span><span class="p">,</span> <span class="s2">"v4"</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sld_srvc</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="s2">"slides"</span><span class="p">,</span> <span class="s2">"v1"</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Built sheets connection"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Building slides connection"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sld_srvc</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="s2">"slides"</span><span class="p">,</span> <span class="s2">"v1"</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Built slides connection"</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">sheet_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Resource</span><span class="p">:</span>

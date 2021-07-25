@@ -151,6 +151,10 @@
 <h2>Sizing<a class="headerlink" href="#sizing" title="Permalink to this headline">¶</a></h2>
 <p>Sizing is particularly difficult with tables and one needs to be thoughtful about the number of rows and width of columns that will be created. If the Google API returns an error around the minimum row / column width you can either reduce amount of data you are attempting to capture in the table or change the <code class="docutils literal notranslate"><span class="pre">font_size</span></code> setting.</p>
 </div>
+<div class="section" id="custom-column-proportions">
+<h2>Custom column proportions<a class="headerlink" href="#custom-column-proportions" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">table</span></code> object will automatically calculate column proportions by finding the longest record in a given column and attempt to split the column proportions by each columns’ longest record. While in many instances this results in a well proportioned table, in other cases a single column is allocated too much width. For this reason the user can specify custom column proportions, a list of floats that represent the % width of each column.</p>
+</div>
 </div>
 
       </article>
@@ -210,6 +214,7 @@
 <li><a class="reference internal" href="#">Tables</a><ul>
 <li><a class="reference internal" href="#styling">Styling</a></li>
 <li><a class="reference internal" href="#sizing">Sizing</a></li>
+<li><a class="reference internal" href="#custom-column-proportions">Custom column proportions</a></li>
 </ul>
 </li>
 </ul>

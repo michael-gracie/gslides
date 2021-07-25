@@ -138,6 +138,8 @@
 <span class="sd">Frame class</span>
 <span class="sd">"""</span>
 
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -151,6 +153,8 @@
     <span class="n">num_to_char</span><span class="p">,</span>
     <span class="n">validate_cell_name</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">TFrame</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"TFrame"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">"Frame"</span><span class="p">)</span>
 
@@ -217,12 +221,15 @@
         <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">start_row_index</span><span class="si">}</span><span class="s2">:"</span>
         <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">num_to_char</span><span class="p">(</span><span class="n">end_column_index</span><span class="p">)</span><span class="si">}{</span><span class="n">end_row_index</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Getting data from google sheets"</span><span class="p">)</span>
     <span class="n">output</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
         <span class="o">.</span><span class="n">values</span><span class="p">()</span>
         <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">spreadsheetId</span><span class="o">=</span><span class="n">spreadsheet_id</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
         <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
     <span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Successfully retreived data"</span><span class="p">)</span>
     <span class="k">if</span> <span class="s2">"values"</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="s2">"values"</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
@@ -330,12 +337,15 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">existing_data</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Create table will overwrite existing data"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Creating data in google sheets"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Request: </span><span class="si">{</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="p">(</span>
             <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
             <span class="o">.</span><span class="n">values</span><span class="p">()</span>
             <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span><span class="n">spreadsheetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="p">)</span>
             <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
         <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Successfully created data"</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div></div>
 
 
@@ -443,6 +453,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">end_column_index</span> <span class="o">=</span> <span class="n">end_column_index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end_row_index</span> <span class="o">=</span> <span class="n">end_row_index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="n">initialized</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">"""Prints class information.</span>
+
+<span class="sd">        :return: String with helpful class infromation</span>
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        """</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Frame</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">" - spreadsheet_id = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">" - sheet_id = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sheet_id</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">" - sheet_name = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sheet_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">" - anchor_cell = </span><span class="si">{</span><span class="n">num_to_char</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_column_index</span><span class="p">)</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">start_row_index</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">" - bottom_right_cell = '</span><span class="si">{</span><span class="n">num_to_char</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_column_index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">end_row_index</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">'"</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
 
 <div class="viewcode-block" id="Frame.create"><a class="viewcode-back" href="../../gslides.html#gslides.frame.Frame.create">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
@@ -596,14 +623,18 @@
 <span class="sd">        &gt;&gt;&gt; frame.format_frame({'column1': '0.0%'})</span>
 <span class="sd">        """</span>
         <span class="n">service</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">sheet_service</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_format_frame</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Formatting frame in google sheets"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Request: </span><span class="si">{</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">body</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="p">(</span>
             <span class="n">service</span><span class="o">.</span><span class="n">spreadsheets</span><span class="p">()</span>
             <span class="o">.</span><span class="n">batchUpdate</span><span class="p">(</span>
                 <span class="n">spreadsheetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spreadsheet_id</span><span class="p">,</span>
-                <span class="n">body</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">render_format_frame</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">),</span>
+                <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Successfully formatted frame"</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

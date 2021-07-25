@@ -184,8 +184,8 @@
 <span class="sd">    :type obj: dict</span>
 <span class="sd">    :param key: Key that corresponds to the dictionary to chunk</span>
 <span class="sd">    :type key: str</span>
-<span class="sd">    :param key: Val that corresponds to the dictionary to chunk</span>
-<span class="sd">    :type key: str, int, float</span>
+<span class="sd">    :param val: Val that corresponds to the dictionary to chunk</span>
+<span class="sd">    :type val: str, int, float</span>
 <span class="sd">    :return: List of chunks</span>
 <span class="sd">    :rtype: list</span>
 
@@ -206,6 +206,36 @@
         <span class="k">return</span> <span class="n">arr</span>
 
     <span class="n">values</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">values</span></div>
+
+
+<div class="viewcode-block" id="json_chunk_key_extract"><a class="viewcode-back" href="../../gslides.html#gslides.utils.json_chunk_key_extract">[docs]</a><span class="k">def</span> <span class="nf">json_chunk_key_extract</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="sd">"""Recursively fetch chunks from nested JSON based on a given key.</span>
+
+<span class="sd">    :param obj: JSON to search</span>
+<span class="sd">    :type obj: dict</span>
+<span class="sd">    :param key: Key that corresponds to the dictionary to chunk</span>
+<span class="sd">    :type key: str</span>
+<span class="sd">    :return: List of chunks</span>
+<span class="sd">    :rtype: list</span>
+
+<span class="sd">    """</span>
+    <span class="n">arr</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">extract</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">"""Recursively search for keys in JSON tree."""</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">extract</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+                <span class="n">extract</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arr</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">values</span></div>
 
 
@@ -379,7 +409,7 @@
 
 
 <div class="viewcode-block" id="clean_dtypes"><a class="viewcode-back" href="../../gslides.html#gslides.utils.clean_dtypes">[docs]</a><span class="k">def</span> <span class="nf">clean_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-    <span class="sd">"""Cleans the datatypes of an obersevation to either int, float or string</span>
+    <span class="sd">"""Cleans the datatypes of an obersevation to either int, float or string or None</span>
 
 <span class="sd">    :param x: Observation to clean</span>
 <span class="sd">    :type x: any</span>
@@ -393,6 +423,8 @@
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)]:</span>
         <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">missing</span><span class="o">.</span><span class="n">NAType</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">tslibs</span><span class="o">.</span><span class="n">nattype</span><span class="o">.</span><span class="n">NaTType</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2"> is not an accepted datatype. Type must conform to "</span>
@@ -452,6 +484,22 @@
                     <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">params</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="si">}</span><span class="s2"> is not a valid parameter for </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">. "</span>
                     <span class="sa">f</span><span class="s2">"Accepted values are any float between 0 and 1"</span>
                 <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="validate_series_columns"><a class="viewcode-back" href="../../gslides.html#gslides.utils.validate_series_columns">[docs]</a><span class="k">def</span> <span class="nf">validate_series_columns</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Validates that the series column is None or a list</span>
+
+<span class="sd">    :param params: Dictionary of parameters</span>
+<span class="sd">    :type params: dict</span>
+<span class="sd">    :raises ValueError:</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="s2">"series_columns"</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">params</span><span class="p">[</span><span class="s2">"series_columns"</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">"series_columns"</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">params</span><span class="p">[</span><span class="s1">'series_columns'</span><span class="p">]</span><span class="si">}</span><span class="s2"> is not a valid parameter for series_columns."</span>
+                <span class="sa">f</span><span class="s2">"Series columns only accepts a list or None."</span>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="validate_cell_name"><a class="viewcode-back" href="../../gslides.html#gslides.utils.validate_cell_name">[docs]</a><span class="k">def</span> <span class="nf">validate_cell_name</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

@@ -140,6 +140,14 @@
 <p>Taking an object oriented approach, <code class="docutils literal notranslate"><span class="pre">gslides</span></code> provides classes that represent objects in either Google sheets or Google slides to enable the user flexibility in terms of how there are creating their pipeline and executing their dependencies.</p>
 <p>The diagram provides a visual representation of the objects and methods available.</p>
 <img alt="_images/uml.png" src="_images/uml.png"/>
+<ul class="simple">
+<li><p><strong>Spreadsheet</strong> represents a google sheet</p></li>
+<li><p><strong>Frame</strong> represents a range of data within a google sheet</p></li>
+<li><p><a class="reference internal" href="chart.html"><span class="doc">Series</span></a> represents a series or multiple series in a chart</p></li>
+<li><p><a class="reference internal" href="chart.html"><span class="doc">Chart</span></a> represents a chart to be created in google sheets then moved to google slides</p></li>
+<li><p><a class="reference internal" href="table.html"><span class="doc">Table</span></a> represents a table to be created in google slides</p></li>
+<li><p><strong>Presentation</strong> represents a google slides presentation. See more info about the methods in <a class="reference internal" href="#presentation-methods"><span class="std std-ref">Presentation Methods</span></a></p></li>
+</ul>
 <p>The modularization of the pipeline allows the user to create new spreadsheets, sheets and presentations or simply get existing sheets and presentations. Additionally, if the user wants to only use a portion of the pipeline they can choose so.</p>
 </div>
 <div class="section" id="user-supplied-id-s">
@@ -157,6 +165,17 @@
 <p class="admonition-title">Note</p>
 <p>There is no restriction on utilizing the <code class="docutils literal notranslate"><span class="pre">create()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> classes. For <code class="docutils literal notranslate"><span class="pre">Chart</span></code>, the method will simply create a chart in Google sheets without optimizing the sizing of that chart for it’s destination slide. For <code class="docutils literal notranslate"><span class="pre">Table</span></code> it will create a table in Google slides.</p>
 </div>
+</div>
+</div>
+<div class="section" id="presentation-methods">
+<h2>Presentation Methods<a class="headerlink" href="#presentation-methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template">
+<h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">template()</span></code> method allows the user to template data into a given presentation. In your presentation create a placeholder for the text that you wish to be templated like so <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">template_var</span> <span class="pre">}}</span></code>. Pass a dictionary into the <code class="docutils literal notranslate"><span class="pre">template()</span></code> method with the key <code class="docutils literal notranslate"><span class="pre">template_var</span></code> and value for the text that you would like to inject. The function will replace all instances of that <code class="docutils literal notranslate"><span class="pre">template_var</span></code> with text in the presentation.</p>
+</div>
+<div class="section" id="update-charts">
+<h3>Update Charts<a class="headerlink" href="#update-charts" title="Permalink to this headline">¶</a></h3>
+<p>When you modify a chart in google sheets with additional data or update the styling the linked chart in a google slide deck will not update automatically. The <code class="docutils literal notranslate"><span class="pre">update_charts()</span></code> method finds all charts in a given presentation and updates them to match the google sheets version. This method is useful if you have an existing chart in a presentation and want to update the data but not recreate the chart. You can update the data in Google Sheets with the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object and then run the <code class="docutils literal notranslate"><span class="pre">update_charts()</span></code> method to reflect the new data in your existing chart.</p>
 </div>
 </div>
 </div>
@@ -220,6 +239,11 @@
 <li><a class="reference internal" href="#user-supplied-id-s">User supplied ID’s</a></li>
 <li><a class="reference internal" href="#initializing-classes">Initializing classes</a><ul>
 <li><a class="reference internal" href="#passing-chart-and-table-objects-to-presentation-add-slide">Passing <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects to <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#presentation-methods">Presentation Methods</a><ul>
+<li><a class="reference internal" href="#template">Template</a></li>
+<li><a class="reference internal" href="#update-charts">Update Charts</a></li>
 </ul>
 </li>
 </ul>
