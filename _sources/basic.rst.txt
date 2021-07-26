@@ -53,3 +53,8 @@ Update Charts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When you modify a chart in google sheets with additional data or update the styling the linked chart in a google slide deck will not update automatically. The ``update_charts()`` method finds all charts in a given presentation and updates them to match the google sheets version. This method is useful if you have an existing chart in a presentation and want to update the data but not recreate the chart. You can update the data in Google Sheets with the ``Frame`` object and then run the ``update_charts()`` method to reflect the new data in your existing chart.
+
+Show & Download Slide
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With the ``show_slide()`` and ``download_slide()`` method you can view any given slide in a presentation. This method allows users to easily inspect any slides that they have just created without having to navigate to the google slideshow. These two functions rely on google's keys for each slide. Simply call the ``Presentation.slide_ids`` property to retrieve an ordered list of these keys.

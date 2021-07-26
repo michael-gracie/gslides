@@ -1403,6 +1403,20 @@ in the API page size is currently not supported.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt id="gslides.presentation.Presentation.download_slide">
+<code class="sig-name descname"><span class="pre">download_slide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LARGE'</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.download_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.download_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads a given slide to a file in png format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slide_id</strong> (<em>str</em>) – The id of the slide to show</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to write png file to</p></li>
+<li><p><strong>image_size</strong> (<em>str</em>) – String to configure the image size</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="gslides.presentation.Presentation.get">
 <em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presentation_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">TPresentation</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class method that gets a presentation.</p>
@@ -1454,6 +1468,25 @@ in the API page size is currently not supported.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>slide_id</strong> (<em>str</em>) – The slide_id of the slide to delete</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.show_slide">
+<code class="sig-name descname"><span class="pre">show_slide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LARGE'</span></span></em><span class="sig-paren">)</span> → <span class="pre">IPython.core.display.Image</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.show_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.show_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a given slide in a Jupyter notebook.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slide_id</strong> (<em>str</em>) – The id of the slide to show</p></li>
+<li><p><strong>image_size</strong> (<em>str</em>) – String to configure the image size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ipython Image object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Image</p>
 </dd>
 </dl>
 </dd></dl>

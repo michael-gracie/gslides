@@ -28,4 +28,4 @@ Sizing is particularly difficult with tables and one needs to be thoughtful abou
 Custom column proportions
 ----------------------------------------
 
-The ``table`` object will automatically calculate column proportions by finding the longest record in a given column and attempt to split the column proportions by each columns' longest record. While in many instances this results in a well proportioned table, in other cases a single column is allocated too much width. For this reason the user can specify custom column proportions, a list of floats that represent the % width of each column. 
+The ``table`` object will automatically calculate column proportions by finding the longest record in a given column and attempt to split the column proportions by each columns' longest record. While in many instances this results in a well proportioned table, in other cases a single column is allocated too much width. For this reason the user can specify custom column proportions, a list of floats that represent the % width of each column.

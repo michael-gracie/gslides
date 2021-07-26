@@ -177,6 +177,10 @@
 <h3>Update Charts<a class="headerlink" href="#update-charts" title="Permalink to this headline">¶</a></h3>
 <p>When you modify a chart in google sheets with additional data or update the styling the linked chart in a google slide deck will not update automatically. The <code class="docutils literal notranslate"><span class="pre">update_charts()</span></code> method finds all charts in a given presentation and updates them to match the google sheets version. This method is useful if you have an existing chart in a presentation and want to update the data but not recreate the chart. You can update the data in Google Sheets with the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object and then run the <code class="docutils literal notranslate"><span class="pre">update_charts()</span></code> method to reflect the new data in your existing chart.</p>
 </div>
+<div class="section" id="show-download-slide">
+<h3>Show &amp; Download Slide<a class="headerlink" href="#show-download-slide" title="Permalink to this headline">¶</a></h3>
+<p>With the <code class="docutils literal notranslate"><span class="pre">show_slide()</span></code> and <code class="docutils literal notranslate"><span class="pre">download_slide()</span></code> method you can view any given slide in a presentation. This method allows users to easily inspect any slides that they have just created without having to navigate to the google slideshow. These two functions rely on google’s keys for each slide. Simply call the <code class="docutils literal notranslate"><span class="pre">Presentation.slide_ids</span></code> property to retrieve an ordered list of these keys.</p>
+</div>
 </div>
 </div>
 
@@ -244,6 +248,7 @@
 <li><a class="reference internal" href="#presentation-methods">Presentation Methods</a><ul>
 <li><a class="reference internal" href="#template">Template</a></li>
 <li><a class="reference internal" href="#update-charts">Update Charts</a></li>
+<li><a class="reference internal" href="#show-download-slide">Show &amp; Download Slide</a></li>
 </ul>
 </li>
 </ul>
