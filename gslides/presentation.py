@@ -2,16 +2,23 @@
 """
 Creates the slides and charts in Google slides
 """
-
+import logging
+import pprint
 from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
+
+import requests
+from IPython.display import Image
 
 from . import creds, package_font
 from .chart import Chart
+from .config import PRESENTATION_PARAMS
 from .table import Table
-from .utils import optimize_size, validate_params_float
+from .utils import json_chunk_key_extract, optimize_size, validate_params_float
 
 TLayout = TypeVar("TLayout", bound="Layout")
 TPresentation = TypeVar("TPresentation", bound="Presentation")
+
+logger = logging.getLogger(__name__)
 
 
 class Layout:
@@ -159,10 +166,11 @@ class AddSlide:
     ) -> None:
         """Constructor method"""
         self.presentation_id = presentation_id
-        self.objects = objects
+        self.objects = self._validate_objects(objects)
         self.layout = self._validate_layout(layout)
         self.insertion_index = insertion_index
         self.sl_id: str = ""
+        self.ch_ids: dict = {}
         self.sheet_executed = False
         self.slide_executed = False
         self.top_margin = top_margin
@@ -203,6 +211,23 @@ class AddSlide:
             )
         else:
             return layout
+
+    def _validate_objects(
+        self, objects: List[Union[Chart, Table]]
+    ) -> List[Union[Chart, Table]]:
+        """Validates that there is a list of objects
+
+        :param objects: List of :class:`Chart` or :class:`Table` objects
+        :type objects: list
+        :raises ValueError:
+        :return: The objects
+        :rtype: list
+
+        """
+        if type(objects) != list:
+            raise ValueError("Objects only accepts a list")
+        else:
+            return objects
 
     def render_json_create_slide(self) -> dict:
         """Renders the json to create the slide in Google slides.
@@ -382,6 +407,7 @@ class AddSlide:
     def _execute_create_slide(self) -> None:
         """Executes the create slides API call."""
         service: Any = creds.slide_service
+        logger.info("Creating slide")
         output = (
             service.presentations()
             .batchUpdate(
@@ -390,11 +416,15 @@ class AddSlide:
             )
             .execute()
         )
+        logger.info("Slide created successfully")
         self.sl_id = output["replies"][0]["createSlide"]["objectId"]
 
     def _execute_create_format_textboxes(self) -> None:
         """Executes the create & format textboxes slides API call."""
         service: Any = creds.slide_service
+        body = self.render_json_create_textboxes(self.sl_id)
+        logger.info("Executing textbox creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.presentations()
             .batchUpdate(
@@ -403,18 +433,21 @@ class AddSlide:
             )
             .execute()
         )
+        logger.info("Textboxes created successfully")
         self.title_bx_id = output["replies"][0]["createShape"]["objectId"]
         self.notes_bx_id = output["replies"][1]["createShape"]["objectId"]
+        body = self.render_json_format_textboxes(self.title_bx_id, self.notes_bx_id)
+        logger.info("Executing textbox creation")
+        logger.info(f"Request: {pprint.pformat(body)}")
         output = (
             service.presentations()
             .batchUpdate(
                 presentationId=self.presentation_id,
-                body=self.render_json_format_textboxes(
-                    self.title_bx_id, self.notes_bx_id
-                ),
+                body=body,
             )
             .execute()
         )
+        logger.info("Textboxes formatted successfully")
 
     def _execute_populate_objects(self) -> None:
         """Executes the population of objects on the slide"""
@@ -428,11 +461,17 @@ class AddSlide:
                         obj, self.layout_obj.object_size, translate_x, translate_y
                     )
                 )
-                (
+                logger.info("Populating charts in google slides")
+                logger.info(f"Request: {pprint.pformat(json)}")
+                output = (
                     service.presentations()
                     .batchUpdate(presentationId=self.presentation_id, body=json)
                     .execute()
                 )
+                self.ch_ids[
+                    output["replies"][0]["createSheetsChart"]["objectId"]
+                ] = obj.title
+                logger.info("Charts successfully populated")
             elif isinstance(obj, Table):
                 obj.create(
                     self.presentation_id,
@@ -464,11 +503,11 @@ class AddSlide:
                 obj.create((int(x_len), int(y_len)))
         self.sheet_executed = True
 
-    def execute(self) -> str:
+    def execute(self) -> Tuple[str, Dict[Any, Any]]:
         """Executes the sheets & slides API call."""
         self.execute_sheet()
         self.execute_slide()
-        return self.sl_id
+        return self.sl_id, self.ch_ids
 
 
 class Presentation:
@@ -482,6 +521,9 @@ class Presentation:
     :type pr_id: str
     :param sl_ids: A list of the slide ids
     :type sl_ids: list
+    :param ch_ids: A dictionary of the charts objects id's and their corresponding
+        title
+    :type ch_ids: dict
     :param page_size: Tuple of the width and height of the presentation in EMU
     :type page_size: tuple
     :param initialized: Whether to object has been initialized
@@ -493,6 +535,7 @@ class Presentation:
         name: str = "",
         pr_id: str = "",
         sl_ids: list = [],
+        ch_ids: dict = {},
         page_size: Tuple[int, int] = (9144000, 5143500),
         initialized: bool = False,
     ) -> None:
@@ -500,8 +543,19 @@ class Presentation:
         self.name = name
         self.pr_id = pr_id
         self.sl_ids = sl_ids
+        self.ch_ids = ch_ids
         self.page_size = page_size
         self.initialized = initialized
+
+    def __repr__(self) -> str:
+        """Prints class information.
+
+        :return: String with helpful class infromation
+        :rtype: str
+
+        """
+        output = f"Presentation\n" f" - presentation_id = {self.presentation_id}"
+        return output
 
     @classmethod
     def create(
@@ -518,13 +572,15 @@ class Presentation:
 
         """
         service: Any = creds.slide_service
+        logger.info("Creating presentation")
         output = service.presentations().create(body={"title": name}).execute()
         pr_id = output["presentationId"]
         service.presentations().batchUpdate(
             presentationId=output["presentationId"],
             body={"requests": [{"deleteObject": {"objectId": "p"}}]},
         ).execute()
-        return cls(name, pr_id, [], (9144000, 5143500), True)
+        logger.info("Presentation successfully created")
+        return cls(name, pr_id, [], {}, (9144000, 5143500), True)
 
     @classmethod
     def get(cls: Type[TPresentation], presentation_id: str) -> TPresentation:
@@ -537,7 +593,9 @@ class Presentation:
 
         """
         service: Any = creds.slide_service
+        logger.info("Retrieving presentation")
         output = service.presentations().get(presentationId=presentation_id).execute()
+        logger.info("Presentation successfully retrieved")
         name = output["title"]
         page_size = (
             output["pageSize"]["width"]["magnitude"],
@@ -547,7 +605,11 @@ class Presentation:
             sl_ids = [sl["objectId"] for sl in output["slides"]]
         else:
             sl_ids = []
-        return cls(name, presentation_id, sl_ids, page_size, True)
+        chart_ids = {}
+        charts = json_chunk_key_extract(output, "sheetsChart")
+        for chart in charts:
+            chart_ids[chart["objectId"]] = chart["title"]
+        return cls(name, presentation_id, sl_ids, chart_ids, page_size, True)
 
     def add_slide(
         self,
@@ -596,11 +658,12 @@ class Presentation:
             title,
             notes,
         )
-        output = sl.execute()
+        new_sl_id, new_ch_ids = sl.execute()
         if insertion_index is None:
-            self.sl_ids.append(output)
+            self.sl_ids.append(new_sl_id)
         else:
-            self.sl_ids.insert(insertion_index, output)
+            self.sl_ids.insert(insertion_index, new_sl_id)
+        self.ch_ids = {**self.ch_ids, **new_ch_ids}
 
     def rm_slide(self, slide_id: str) -> None:
         """Removes a slide based on a slide id.
@@ -609,14 +672,16 @@ class Presentation:
         :type slide_id: str
         """
         service: Any = creds.slide_service
+        logger.info("Deleting slide")
         service.presentations().batchUpdate(
             presentationId=self.presentation_id,
             body={"requests": [{"deleteObject": {"objectId": slide_id}}]},
         ).execute()
+        logger.info("Slide successfully deleted")
         self.sl_ids.remove(slide_id)
 
     def template(self, mapping: dict, slide_ids: list = []) -> None:
-        """Replaces all text encaspulated with `{{ <TEXT> }}` with input
+        """Replaces all text encaspulated with `{{ <TEXT> }}` with input.
 
         :param mapping: Dictionary mapping old text to new text
         :type mapping: dict
@@ -636,10 +701,100 @@ class Presentation:
             }
             requests.append(json)
         service: Any = creds.slide_service
+        logger.info("Templating data")
         service.presentations().batchUpdate(
             presentationId=self.presentation_id,
             body={"requests": requests},
         ).execute()
+        logger.info("Data successfully templated")
+
+    def update_charts(self) -> None:
+        """Updates all the charts in the slides deck with refreshed underlying
+        data.
+        """
+        requests = []
+        for key in self.chart_ids.keys():
+            json = {
+                "refreshSheetsChart": {
+                    "objectId": key,
+                }
+            }
+            requests.append(json)
+        service: Any = creds.slide_service
+        logger.info("Update charts")
+        service.presentations().batchUpdate(
+            presentationId=self.presentation_id,
+            body={"requests": requests},
+        ).execute()
+        logger.info("Charts successfully updated")
+
+    def _validate_image_size(self, image_size):
+        """Validate that the image size configuration is valid
+
+        :param image_size: String to configure the image size
+        :type image_size: str
+        :raises ValueError:
+        """
+        if image_size not in PRESENTATION_PARAMS["data_label_placement"]["params"]:
+            raise ValueError(
+                f"{image_size} is not a valid parameter for image_size. "
+                f"Accepted parameters include"
+                f"{', '.join(PRESENTATION_PARAMS['data_label_placement']['params'])}. See"
+                f"{PRESENTATION_PARAMS['data_label_placement']['url']} for further documentation."
+            )
+
+    def show_slide(self, slide_id: str, image_size: str = "LARGE") -> Image:
+        """Displays a given slide in a Jupyter notebook.
+
+        :param slide_id: The id of the slide to show
+        :type slide_id: str
+        :param image_size: String to configure the image size
+        :type image_size: str
+        :return: ipython Image object
+        :rtype: Image
+
+        """
+        self._validate_image_size(image_size)
+        service: Any = creds.slide_service
+        img_info = (
+            service.presentations()
+            .pages()
+            .getThumbnail(
+                presentationId=self.presentation_id,
+                pageObjectId=slide_id,
+                thumbnailProperties_thumbnailSize=image_size,
+            )
+            .execute()
+        )
+        return Image(requests.get(img_info["contentUrl"]).content)
+
+    def download_slide(
+        self, slide_id: str, path: str, image_size: str = "LARGE"
+    ) -> None:
+        """Downloads a given slide to a file in png format
+
+        :param slide_id: The id of the slide to show
+        :type slide_id: str
+        :param path: Path to write png file to
+        :type path: str
+        :param image_size: String to configure the image size
+        :type image_size: str
+        """
+        self._validate_image_size(image_size)
+        service: Any = creds.slide_service
+        img_info = (
+            service.presentations()
+            .pages()
+            .getThumbnail(
+                presentationId=self.presentation_id,
+                pageObjectId=slide_id,
+                thumbnailProperties_thumbnailSize=image_size,
+            )
+            .execute()
+        )
+        with open(path, "wb") as f:
+            f.write(requests.get(img_info["contentUrl"]).content)
+        return None
 
     @property
     def get_method(self) -> str:
@@ -671,11 +826,26 @@ class Presentation:
         """Returns the slide_ids of the created presentation.
 
         :raises RuntimeError: Must run the create or get method before passing the slides ids
-        :return: The presentation_id of the created presentation
+        :return: The slide ids of the created presentation
         :rtype: str
         """
         if self.initialized:
             return self.sl_ids
+        else:
+            raise RuntimeError(
+                "Must run the create or get method before passing the slide ids"
+            )
+
+    @property
+    def chart_ids(self) -> dict:
+        """Returns the chart_ids of the created presentation.
+
+        :raises RuntimeError: Must run the create or get method before passing the slides ids
+        :return: The chart ids of the created presentation
+        :rtype: dict
+        """
+        if self.initialized:
+            return self.ch_ids
         else:
             raise RuntimeError(
                 "Must run the create or get method before passing the slide ids"

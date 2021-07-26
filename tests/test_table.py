@@ -34,11 +34,15 @@ def test_df():
     return pd.DataFrame(columns=data[0], data=data[1:])
 
 
-class TestChart:
+class TestTable:
     def setup(self):
         self.object = Table(
             data=test_df(),
         )
+
+    def test_repr(self):
+        self.object.__repr__()
+        assert True
 
     def test_resolve_df(self):
         pd.testing.assert_frame_equal(self.object._resolve_df(test_df()), test_df())

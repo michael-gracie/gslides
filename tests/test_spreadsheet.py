@@ -121,6 +121,10 @@ class TestSpreadsheet:
             initialized=True,
         )
 
+    def test_repr(self):
+        self.object.__repr__()
+        assert True
+
     def test_create(self, monkeypatch):
         def mock_return(self, title, sheet_names):
             return ("abc123", [1234], True)

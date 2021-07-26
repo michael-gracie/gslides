@@ -128,6 +128,10 @@ class TestChart:
             legend_position="RIGHT_LEGEND",
         )
 
+    def test_repr(self):
+        self.object.__repr__()
+        assert True
+
     @pytest.mark.xfail(reason=RuntimeError)
     def test_chart_id(self):
         assert self.object.chart_id == None

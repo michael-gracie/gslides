@@ -49,8 +49,8 @@ def json_chunk_extract(
     :type obj: dict
     :param key: Key that corresponds to the dictionary to chunk
     :type key: str
-    :param key: Val that corresponds to the dictionary to chunk
-    :type key: str, int, float
+    :param val: Val that corresponds to the dictionary to chunk
+    :type val: str, int, float
     :return: List of chunks
     :rtype: list
 
@@ -71,6 +71,36 @@ def json_chunk_extract(
         return arr
 
     values = extract(obj, arr, val)
+    return values
+
+
+def json_chunk_key_extract(obj: Dict[str, Any], key: str) -> List:
+    """Recursively fetch chunks from nested JSON based on a given key.
+
+    :param obj: JSON to search
+    :type obj: dict
+    :param key: Key that corresponds to the dictionary to chunk
+    :type key: str
+    :return: List of chunks
+    :rtype: list
+
+    """
+    arr: List = []
+
+    def extract(obj: Dict[str, Any], arr: List) -> List:
+        """Recursively search for keys in JSON tree."""
+        if isinstance(obj, dict):
+            if key in obj.keys():
+                arr.append(obj)
+            else:
+                for k, v in obj.items():
+                    extract(v, arr)
+        elif isinstance(obj, list):
+            for item in obj:
+                extract(item, arr)
+        return arr
+
+    values = extract(obj, arr)
     return values
 
 
@@ -244,7 +274,7 @@ def clean_nan(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def clean_dtypes(x: Any) -> Union[str, float, int, np.int64, np.float64, None]:
-    """Cleans the datatypes of an obersevation to either int, float or string
+    """Cleans the datatypes of an obersevation to either int, float or string or None
 
     :param x: Observation to clean
     :type x: any
@@ -258,6 +288,8 @@ def clean_dtypes(x: Any) -> Union[str, float, int, np.int64, np.float64, None]:
         return float(str(x))
     elif type(x) in [str, int, float, np.int64, np.float64, type(None)]:
         return x
+    elif type(x) in [pd._libs.missing.NAType, pd._libs.tslibs.nattype.NaTType]:
+        return None
     else:
         raise TypeError(
             f"{type(x)} is not an accepted datatype. Type must conform to "
@@ -317,6 +349,22 @@ def validate_params_float(params: dict) -> None:
                     f"{params[var]} is not a valid parameter for {var}. "
                     f"Accepted values are any float between 0 and 1"
                 )
+
+
+def validate_series_columns(params: dict) -> None:
+    """Validates that the series column is None or a list
+
+    :param params: Dictionary of parameters
+    :type params: dict
+    :raises ValueError:
+
+    """
+    if "series_columns" in params.keys() and params["series_columns"]:
+        if type(params["series_columns"]) != list:
+            raise ValueError(
+                f"{params['series_columns']} is not a valid parameter for series_columns."
+                f"Series columns only accepts a list or None."
+            )
 
 
 def validate_cell_name(x: str) -> str:

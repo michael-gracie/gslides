@@ -132,6 +132,10 @@ def test_json_chunk_extract():
     assert utils.json_chunk_extract(json, "title", "pytest")[0]["fontName"] == "Roboto"
 
 
+def test_json_chunk_key_extract():
+    assert utils.json_chunk_key_extract(json, "spec")[0]["chartId"] == 1234567
+
+
 def test_json_dict_extract():
     assert utils.json_dict_extract(json, ("title", "fontName")) == {"pytest": "Roboto"}
 
@@ -249,6 +253,11 @@ def test_validate_params_int():
 @pytest.mark.xfail(reason=ValueError)
 def test_validate_params_int():
     utils.validate_params_int({"outlier_percentage": 1.5})
+
+
+@pytest.mark.xfail(reason=ValueError)
+def test_validate_series_columns():
+    utils.validate_series_columns("col")
 
 
 @pytest.mark.xfail(reason=ValueError)

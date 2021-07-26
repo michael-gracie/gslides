@@ -8,6 +8,12 @@ class MockService:
     def presentations(self, **kwargs):
         return self
 
+    def pages(self, **kwargs):
+        return self
+
+    def getThumbnail(self, **kwargs):
+        return self
+
     def batchUpdate(self, **kwargs):
         return self
 
@@ -206,8 +212,13 @@ class TestPresentation:
             name="test",
             pr_id="abcd",
             sl_ids=[1111, 2222, 3333],
+            ch_ids={"a1b2c3d4": "Test Chart"},
             initialized=True,
         )
+
+    def test_repr(self):
+        self.object.__repr__()
+        assert True
 
     def test_create(self, monkeypatch):
         def mock_service(self):
@@ -246,7 +257,7 @@ class TestPresentation:
 
     def test_add_slide(self, monkeypatch):
         def mock_return(self):
-            return 4444
+            return (4444, {"a1b2c3d4": "Test Chart"})
 
         monkeypatch.setattr(AddSlide, "execute", mock_return)
         self.object.add_slide(objects=[], layout=(1, 1))
@@ -278,8 +289,22 @@ class TestPresentation:
         self.object.template({"old": "new"})
         assert True
 
+    def test_update_charts(self, monkeypatch):
+        def mock_service(self):
+            return MockService()
+
+        monkeypatch.setattr(
+            "gslides.config.Creds.slide_service", property(mock_service)
+        )
+
+        self.object.update_charts()
+        assert True
+
     def test_presentation_id(self):
         assert self.object.presentation_id == "abcd"
 
-    def test_spreadsheet_id(self):
+    def test_slide_ids(self):
         assert self.object.slide_ids == [1111, 2222, 3333]
+
+    def test_chart_ids(self):
+        assert self.object.chart_ids == {"a1b2c3d4": "Test Chart"}

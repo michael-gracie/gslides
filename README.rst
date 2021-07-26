@@ -95,11 +95,20 @@ Below is an example that only showcases a simple workflow. Full discussion aroun
     notes = "Data from 1936"
   )
 
-**8. Navigate to the presentation**
+**8. Preview the slide you have just created in your notebook**
+
+.. code-block:: python
+
+  prs.show_slide(prs.slide_ids[-1])
 
 .. image:: img/usage.png
 
-`gslides` also supports basic templating functionality. See this `notebook <https://github.com/michael-gracie/gslides/blob/main/notebooks/usage.ipynb>`_ for an example.
+``gslides`` also supports basic templating functionality. See this `notebook <https://github.com/michael-gracie/gslides/blob/main/notebooks/usage.ipynb>`_ for an example.
+
+Advanced Usage
+----------------------
+
+Find this  `notebook <https://github.com/michael-gracie/gslides/blob/main/notebooks/advanced_usage.ipynb>`_ detailing advanced usage of ``gslides``.
 
 Developer Instructions
 ----------------------
