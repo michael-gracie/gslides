@@ -14,6 +14,9 @@ CURR_DIR = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(CURR_DIR, "config/chart_params.yaml"), "r") as f:
     CHART_PARAMS: Dict[str, Dict] = yaml.safe_load(f)
 
+with open(os.path.join(CURR_DIR, "config/presentation_params.yaml"), "r") as f:
+    PRESENTATION_PARAMS: Dict[str, Dict] = yaml.safe_load(f)
+
 
 class Creds:
     """The credentials object to build the connections to the APIs"""

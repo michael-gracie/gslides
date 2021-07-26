@@ -8,6 +8,12 @@ class MockService:
     def presentations(self, **kwargs):
         return self
 
+    def pages(self, **kwargs):
+        return self
+
+    def getThumbnail(self, **kwargs):
+        return self
+
     def batchUpdate(self, **kwargs):
         return self
 
