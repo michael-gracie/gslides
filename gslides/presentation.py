@@ -729,6 +729,12 @@ class Presentation:
         logger.info("Charts successfully updated")
 
     def _validate_image_size(self, image_size):
+        """Validate that the image size configuration is valid
+
+        :param image_size: String to configure the image size
+        :type image_size: str
+        :raises ValueError:
+        """
         if image_size not in PRESENTATION_PARAMS["data_label_placement"]["params"]:
             raise ValueError(
                 f"{image_size} is not a valid parameter for image_size. "
@@ -738,6 +744,16 @@ class Presentation:
             )
 
     def show_slide(self, slide_id: str, image_size: str = "LARGE") -> Image:
+        """Displays a given slide in a Jupyter notebook.
+
+        :param slide_id: The id of the slide to show
+        :type slide_id: str
+        :param image_size: String to configure the image size
+        :type image_size: str
+        :return: ipython Image object
+        :rtype: Image
+
+        """
         self._validate_image_size(image_size)
         service: Any = creds.slide_service
         img_info = (
@@ -755,6 +771,15 @@ class Presentation:
     def download_slide(
         self, slide_id: str, path: str, image_size: str = "LARGE"
     ) -> None:
+        """Downloads a given slide to a file in png format
+
+        :param slide_id: The id of the slide to show
+        :type slide_id: str
+        :param path: Path to write png file to
+        :type path: str
+        :param image_size: String to configure the image size
+        :type image_size: str
+        """
         self._validate_image_size(image_size)
         service: Any = creds.slide_service
         img_info = (
