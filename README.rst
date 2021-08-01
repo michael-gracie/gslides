@@ -31,7 +31,7 @@ Below is an example that only showcases a simple workflow. Full discussion aroun
       Series, Chart
   )
   from sklearn import datasets
-  gslides.intialize_credentials(creds) #BringYourOwnCredentials
+  gslides.initialize_credentials(creds) #BringYourOwnCredentials
 
 
 **2. Create a presentation**
