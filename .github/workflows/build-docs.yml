@@ -23,9 +23,8 @@ jobs:
         pip install -e .[dev]
 
     - name: Checkout gh-pages
-      uses: actions/checkout@v2
-      with:
-        ref: gh-pages
+      run: |
+        git checkout gh-phages
 
     - name: Setup git config
       run: |
@@ -39,9 +38,10 @@ jobs:
         git commit --no-verify -m 'cleaning docs'
         ls -a
 
-    - name: Checkout dev
-      run: |
-        git checkout dev
+    - name: Checkout gh-pages
+      uses: actions/checkout@v2
+      with:
+        ref: dev
 
     - name: Build docs
       run: |
@@ -49,8 +49,7 @@ jobs:
 
     - name: Checkout gh-pages part two
       run: |
-        git checkout gh-pages
-        ls -a
+        git checkout gh-phages
 
     - name: Updating gh-pages
       run: |
