@@ -22,45 +22,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install -e .[dev]
 
-    - name: Checkout gh-pages
-      run: |
-        git checkout gh-phages
-
-    - name: Setup git config
-      run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-
-    - name: Clean gh-pages
-      run: |
-        rm -r *
-        git add .
-        git commit --no-verify -m 'cleaning docs'
-        ls -a
-
-    - name: Checkout gh-pages
-      uses: actions/checkout@v2
-      with:
-        ref: dev
-
     - name: Build docs
       run: |
         make -C docs/ clean html
 
-    - name: Checkout gh-pages part two
+    - name: Commit documentation changes
       run: |
-        git checkout gh-phages
-
-    - name: Updating gh-pages
-      run: |
-        mv -v docs/_build/html/* .
-        rm -rf docs
-        ls -a
+        git clone https://github.com/michael-gracie/gslides.git --branch gh-pages --single-branch gh-pages
+        rm -rf gh-pages/
+        ls -a gh-pages/
+        cp -r docs/_build/html/* gh-pages/
+        cd gh-pages
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
         git add .
-        git commit --no-verify -m 'updated docs'
+        git commit -m "Updated documentation" -a || true
+        # The above command will fail if no changes were present, so we ignore
+        # the return code.
 
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.ACTIONS_TOKEN }}
         branch: gh-pages
+        directory: gh-pages
