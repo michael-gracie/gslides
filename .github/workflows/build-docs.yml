@@ -60,7 +60,6 @@ jobs:
         ls -a
         git add .
         git commit --no-verify -m 'updated docs'
-        git push
 
     - name: Push changes
       uses: ad-m/github-push-action@master
