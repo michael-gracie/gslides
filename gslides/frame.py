@@ -505,7 +505,7 @@ class Frame:
     def get_method(self) -> str:
         """Returns the corresponding get initialization method.
 
-        :return: Get intialization method
+        :return: Get initialization method
         :rtype: str
 
         """

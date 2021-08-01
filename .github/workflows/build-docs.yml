@@ -11,15 +11,59 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -e .[dev]
+
+    - name: Checkout gh-pages
+      uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+
+    - name: Setup git config
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+
+    - name: Clean gh-pages
+      run: |
+        rm -r *
+        git add .
+        git commit --no-verify -m 'cleaning docs'
+        ls -a
+
+    - name: Checkout gh-pages
+      uses: actions/checkout@v2
+      with:
+        ref: dev
+
     - name: Build docs
       run: |
         make -C docs/ clean html
-    - name: Move docs
+
+    - name: Checkout gh-pages part two
+      uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+
+    - name: Updating gh-pages
+      run: |
+        mv -v docs/_build/html/* .
+        rm -rf docs
+        ls -a
+        git add .
+        git commit --no-verify -m 'updated docs'
+        git push
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACTIONS_TOKEN }}
+        branch: gh-pages
