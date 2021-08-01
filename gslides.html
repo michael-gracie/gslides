@@ -1,0 +1,1722 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="gslides" href="modules.html" />
+
+    <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>gslides package - gslides 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="byoc.html">Bring Your Own Credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chart.html">Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">gslides package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="gslides-package">
+<h1>gslides package<a class="headerlink" href="#gslides-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gslides.chart">
+<span id="gslides-chart-module"></span><h2>gslides.chart module<a class="headerlink" href="#module-gslides.chart" title="Permalink to this headline">¶</a></h2>
+<p>Charts &amp; series class</p>
+<dl class="py class">
+<dt id="gslides.chart.Chart">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.chart.</span></code><code class="sig-name descname"><span class="pre">Chart</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#gslides.frame.Frame" title="gslides.frame.Frame"><span class="pre">gslides.frame.Frame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis_column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">series</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><span class="pre">gslides.chart.Series</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stacking</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_max</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis_format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis_format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/chart.html#Chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Chart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An object that configures the creation of a chart in Google sheets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.Frame</span></code>) – The data in Google sheets that will be plotted, a frame object</p></li>
+<li><p><strong>x_axis_column</strong> (<em>str</em>) – The name column that corresponds to the x-values.
+No parameter needed for a histogram.</p></li>
+<li><p><strong>series</strong> (list[<code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.addchart.series</span></code>]) – The <code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.addchart.series</span></code> objects to plot</p></li>
+<li><p><strong>stacking</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of stacking to plot,
+see gslides.config.CHART_PARAMS[‘stacking’] for accepted parameters</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – The title for the plot</p></li>
+<li><p><strong>x_axis_label</strong> (<em>str</em><em>, </em><em>optional</em>) – The x_axis_label for the plot</p></li>
+<li><p><strong>y_axis_label</strong> (<em>str</em><em>, </em><em>optional</em>) – The y_axis_label for the plot</p></li>
+<li><p><strong>x_min</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum value for the x axis</p></li>
+<li><p><strong>x_max</strong> (<em>float</em><em>, </em><em>optional</em>) – The maximum value for the x axis</p></li>
+<li><p><strong>y_min</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum value for the y axis</p></li>
+<li><p><strong>y_max</strong> (<em>float</em><em>, </em><em>optional</em>) – The maximum value for the y axis</p></li>
+<li><p><strong>x_axis_format</strong> (<em>str</em><em>, </em><em>optional</em>) – The format of the x axis labels. Either the values
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType</a>
+or patterns here
+<a class="reference external" href="https://developers.google.com/sheets/api/guides/formats">https://developers.google.com/sheets/api/guides/formats</a> are accepted</p></li>
+<li><p><strong>y_axis_format</strong> (<em>str</em><em>, </em><em>optional</em>) – The format of the y axis labels. Either the values
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormatType</a>
+or patterns here
+<a class="reference external" href="https://developers.google.com/sheets/api/guides/formats">https://developers.google.com/sheets/api/guides/formats</a> are accepted</p></li>
+<li><p><strong>palette</strong> (<em>str</em><em>, </em><em>optional</em>) – The palette to use to plot,
+see gslides.colors.base_palettes for accepted parameters</p></li>
+<li><p><strong>legend_position</strong> (<em>str</em><em>, </em><em>optional</em>) – The position of the legend to plot,
+see gslides.config.CHART_PARAMS[‘stacking’] for accepted parameters</p></li>
+<li><p><strong>size</strong> (<em>tuple</em><em>, </em><em>optional</em>) – A tuple for the width and length of the plot in pixels.
+The Google suggested size is 600 by 371 pixels.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.chart.Chart.chart_id">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">chart_id</span></code><a class="headerlink" href="#gslides.chart.Chart.chart_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the chart_id of the created chart.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Must run the execute method before passing the chart id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The chart_id of the created chart.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Chart.create">
+<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(600,</span> <span class="pre">371)</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/chart.html#Chart.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Chart.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the chart in Googe sheets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>tuple</em>) – Tuple of width and height in PX</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The json returned by the call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Chart.render_basic_chart_json">
+<code class="sig-name descname"><span class="pre">render_basic_chart_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/chart.html#Chart.render_basic_chart_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Chart.render_basic_chart_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json for the creation of a basic chart. See here
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec</a>
+for information about basic charts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>tuple</em>) – Tuple of width and height in PX</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json for the API call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Chart.render_histogram_chart_json">
+<code class="sig-name descname"><span class="pre">render_histogram_chart_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/chart.html#Chart.render_histogram_chart_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Chart.render_histogram_chart_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json for the creation of a basic chart. See here
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec</a>
+for information about basic charts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>tuple</em>) – Tuple of width and height in PX</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json for the API call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.chart.Series">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.chart.</span></code><code class="sig-name descname"><span class="pre">Series</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/chart.html#Series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parent class for all series configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<em>str</em>) – Type of series</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Dictionary of keyword arguments</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.area">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">area</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_style</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_width</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_enabled</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_enabled</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_placement</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">TSeries</span><a class="reference internal" href="_modules/gslides/chart.html#Series.area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>A area plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series_columns</strong> (<em>list</em><em>, </em><em>optional</em>) – The columns to plot. None or an empty list will
+plot all columns</p></li>
+<li><p><strong>line_style</strong> (<em>str</em><em>, </em><em>optional</em>) – The style of line to plot,
+see gslides.config.CHART_PARAMS[‘line_style’] for accepted parameters</p></li>
+<li><p><strong>line_width</strong> (<em>int</em><em>, </em><em>optional</em>) – The width of line to plot</p></li>
+<li><p><strong>point_enabled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean for whether the plot should include points</p></li>
+<li><p><strong>point_shape</strong> (<em>str</em><em>, </em><em>optional</em>) – The shape of point to plot,
+see gslides.config.CHART_PARAMS[‘point_shape’] for accepted parameters</p></li>
+<li><p><strong>point_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of point to plot</p></li>
+<li><p><strong>data_label_enabled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean for whether the plot should include data labels</p></li>
+<li><p><strong>data_label_placement</strong> (<em>str</em><em>, </em><em>optional</em>) – The placement of the data label to plot,
+see gslides.config.CHART_PARAMS[‘data_label_placement’] for accepted parameters</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – A color to override the existing palette. Parameters can either
+be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+for accepted named colors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.column">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">column</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_enabled</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_placement</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">TSeries</span><a class="reference internal" href="_modules/gslides/chart.html#Series.column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.column" title="Permalink to this definition">¶</a></dt>
+<dd><p>A column plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series_columns</strong> (<em>list</em><em>, </em><em>optional</em>) – The columns to plot. None or an empty list will
+plot all columns</p></li>
+<li><p><strong>data_label_enabled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean for whether the plot should include
+data labels</p></li>
+<li><p><strong>data_label_placement</strong> (<em>str</em><em>, </em><em>optional</em>) – The placement of the data label to plot,
+see gslides.config.CHART_PARAMS[‘data_label_placement’] for
+accepted parameters</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – A color to override the existing palette. Parameters can either
+be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+for accepted named colors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.histogram">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">histogram</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outlier_percentage</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">TSeries</span><a class="reference internal" href="_modules/gslides/chart.html#Series.histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>A histogram plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series_columns</strong> (<em>list</em><em>, </em><em>optional</em>) – The columns to plot. None or an empty list will
+plot all columns</p></li>
+<li><p><strong>bucket_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of the bucket</p></li>
+<li><p><strong>outlier_percentage</strong> (<em>float</em><em>, </em><em>optional</em>) – The percentile at which oberservations should
+be excluded</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – A color to override the existing palette. Parameters can either
+be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+for accepted named colors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.line">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">line</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_style</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_width</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_enabled</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_enabled</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_placement</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">TSeries</span><a class="reference internal" href="_modules/gslides/chart.html#Series.line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>A line plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series_columns</strong> (<em>list</em><em>, </em><em>optional</em>) – The columns to plot. None or an empty list will
+plot all columns</p></li>
+<li><p><strong>line_style</strong> (<em>str</em><em>, </em><em>optional</em>) – The style of line to plot, see
+gslides.config.CHART_PARAMS[‘line_style’] for accepted parameters</p></li>
+<li><p><strong>line_width</strong> (<em>int</em><em>, </em><em>optional</em>) – The width of line to plot</p></li>
+<li><p><strong>point_enabled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean for whether the plot should include points</p></li>
+<li><p><strong>point_shape</strong> (<em>str</em><em>, </em><em>optional</em>) – The shape of point to plot,
+see gslides.config.CHART_PARAMS[‘point_shape’] for accepted parameters</p></li>
+<li><p><strong>point_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of point to plot</p></li>
+<li><p><strong>data_label_enabled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean for whether the plot should include data labels</p></li>
+<li><p><strong>data_label_placement</strong> (<em>str</em><em>, </em><em>optional</em>) – The placement of the data label to plot,
+see gslides.config.CHART_PARAMS[‘data_label_placement’] for accepted parameters</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – A color to override the existing palette. Parameters can either
+be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+for accepted named colors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.render_basic_chart_json">
+<code class="sig-name descname"><span class="pre">render_basic_chart_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.colors.Palette" title="gslides.colors.Palette"><span class="pre">gslides.colors.Palette</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_row_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_row_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_column_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_column_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/chart.html#Series.render_basic_chart_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.render_basic_chart_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json for the creation of a basic chart. See here
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#BasicChartSpec">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#BasicChartSpec</a>
+for information about basic charts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>palette</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Palette</span></code>) – <code class="xref py py-class docutils literal notranslate"><span class="pre">Palette</span></code> object to control colors</p></li>
+<li><p><strong>sheet_id</strong> (<em>str</em>) – ID for the Google sheet.</p></li>
+<li><p><strong>start_row_index</strong> (<em>int</em>) – The starting index of the row</p></li>
+<li><p><strong>end_row_index</strong> (<em>int</em>) – The ending index of the row</p></li>
+<li><p><strong>start_column_index</strong> (<em>int</em>) – The starting index of the column</p></li>
+<li><p><strong>end_column_index</strong> (<em>int</em>) – The ending index of the column</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of series</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json for the API call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.render_histogram_chart_json">
+<code class="sig-name descname"><span class="pre">render_histogram_chart_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.colors.Palette" title="gslides.colors.Palette"><span class="pre">gslides.colors.Palette</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_row_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_row_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_column_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_column_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/chart.html#Series.render_histogram_chart_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.render_histogram_chart_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json for the creation of a basic chart. See here
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#histogramchartspec</a>
+for information about basic charts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>palette</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Palette</span></code>) – <code class="xref py py-class docutils literal notranslate"><span class="pre">Palette</span></code> object to control colors</p></li>
+<li><p><strong>sheet_id</strong> (<em>str</em>) – ID for the Google sheet.</p></li>
+<li><p><strong>start_row_index</strong> (<em>int</em>) – The starting index of the row</p></li>
+<li><p><strong>end_row_index</strong> (<em>int</em>) – The ending index of the row</p></li>
+<li><p><strong>start_column_index</strong> (<em>int</em>) – The starting index of the column</p></li>
+<li><p><strong>end_column_index</strong> (<em>int</em>) – The ending index of the column</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json for the API call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.chart.Series.scatter">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">scatter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_enabled</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_label_placement</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">TSeries</span><a class="reference internal" href="_modules/gslides/chart.html#Series.scatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.chart.Series.scatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A scatter plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series_columns</strong> (<em>list</em><em>, </em><em>optional</em>) – The columns to plot. None or an empty list will
+plot all columns</p></li>
+<li><p><strong>point_shape</strong> (<em>str</em><em>, </em><em>optional</em>) – The shape of point to plot,
+see gslides.config.CHART_PARAMS[‘point_shape’] for accepted parameters</p></li>
+<li><p><strong>point_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of point to plot</p></li>
+<li><p><strong>data_label_enabled</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean for whether the plot should include data labels</p></li>
+<li><p><strong>data_label_placement</strong> (<em>str</em><em>, </em><em>optional</em>) – The placement of the data label to plot,
+see gslides.config.CHART_PARAMS[‘data_label_placement’] for accepted parameters</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – A color to override the existing palette. Parameters can either
+be a hex-code or a named colored. see gslides.config.color_mapping.keys()
+for accepted named colors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.chart.Series" title="gslides.chart.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides.colors">
+<span id="gslides-colors-module"></span><h2>gslides.colors module<a class="headerlink" href="#module-gslides.colors" title="Permalink to this headline">¶</a></h2>
+<p>Manages the color configuration</p>
+<dl class="py class">
+<dt id="gslides.colors.Palette">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.colors.</span></code><code class="sig-name descname"><span class="pre">Palette</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/colors.html#Palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.colors.Palette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An iterator for a list of colors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>palette</strong> (<em>str</em>) – Name of a palette</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.colors.Palette.load_palette">
+<code class="sig-name descname"><span class="pre">load_palette</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/colors.html#Palette.load_palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.colors.Palette.load_palette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a given palette</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>palette</strong> (<em>str</em>) – Name of a palette</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.colors.translate_color">
+<code class="sig-prename descclassname"><span class="pre">gslides.colors.</span></code><code class="sig-name descname"><span class="pre">translate_color</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="reference internal" href="_modules/gslides/colors.html#translate_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.colors.translate_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a color from a named color to a hex code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>color</strong> (<em>str</em>) – Named color</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Hex code corresponding to the color</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides.config">
+<span id="gslides-config-module"></span><h2>gslides.config module<a class="headerlink" href="#module-gslides.config" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="gslides.config.Creds">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.config.</span></code><code class="sig-name descname"><span class="pre">Creds</span></code><a class="reference internal" href="_modules/gslides/config.html#Creds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.config.Creds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The credentials object to build the connections to the APIs</p>
+<dl class="py method">
+<dt id="gslides.config.Creds.set_credentials">
+<code class="sig-name descname"><span class="pre">set_credentials</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">credentials</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">google.oauth2.credentials.Credentials</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/config.html#Creds.set_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.config.Creds.set_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the credentials</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>credentials</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">google.oauth2.credentials.Credentials</span></code>) – <code class="xref py py-class docutils literal notranslate"><span class="pre">google.oauth2.credentials.Credentials</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.config.Creds.sheet_service">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">sheet_service</span></code><a class="headerlink" href="#gslides.config.Creds.sheet_service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the connects to the sheets API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Must run set_credentials before executing method</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>API connection</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">googleapiclient.discovery.Resource</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.config.Creds.slide_service">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">slide_service</span></code><a class="headerlink" href="#gslides.config.Creds.slide_service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the connects to the slides API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Must run set_credentials before executing method</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>API connection</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">googleapiclient.discovery.Resource</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.config.Font">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.config.</span></code><code class="sig-name descname"><span class="pre">Font</span></code><a class="reference internal" href="_modules/gslides/config.html#Font"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.config.Font" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The credentials object to build the connections to the APIs</p>
+<dl class="py method">
+<dt id="gslides.config.Font.set_font">
+<code class="sig-name descname"><span class="pre">set_font</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/config.html#Font.set_font"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.config.Font.set_font" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the font</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>font</strong> (<em>str</em>) – Font</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.config.PackagePalette">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.config.</span></code><code class="sig-name descname"><span class="pre">PackagePalette</span></code><a class="reference internal" href="_modules/gslides/config.html#PackagePalette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.config.PackagePalette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The credentials object to build the connections to the APIs</p>
+<dl class="py method">
+<dt id="gslides.config.PackagePalette.set_palette">
+<code class="sig-name descname"><span class="pre">set_palette</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/config.html#PackagePalette.set_palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.config.PackagePalette.set_palette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the palette</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>palette</strong> (<em>str</em>) – Palette</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides.utils">
+<span id="gslides-utils-module"></span><h2>gslides.utils module<a class="headerlink" href="#module-gslides.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="gslides.utils.black_or_white">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">black_or_white</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rgb</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#black_or_white"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.black_or_white" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines based on the luminosity of a color wether the text on top of
+that color should be black or white. See the following:
+<a class="reference external" href="https://en.wikipedia.org/wiki/Luminance_%28relative%29">https://en.wikipedia.org/wiki/Luminance_%28relative%29</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rgb</strong> (<em>tuple</em>) – The rgb values of the color</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Black or white rgb</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.cell_to_num">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">cell_to_num</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#cell_to_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.cell_to_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a cell to a row, column index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>str</em>) – Name of the cell (e.g. A2)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Row, column index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.char_to_num">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">char_to_num</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">int</span><a class="reference internal" href="_modules/gslides/utils.html#char_to_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.char_to_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a character to a number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>str</em>) – Character</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corresponding number</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.clean_dtypes">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">clean_dtypes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> → <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">numpy.int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#clean_dtypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.clean_dtypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleans the datatypes of an obersevation to either int, float or string or None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>any</em>) – Observation to clean</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Clean observation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str, float, int, np.int64, np.float64, None</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.clean_list_of_list">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">clean_list_of_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#clean_list_of_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.clean_list_of_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>In a list of list with different length lists, appends None values to equalize
+the length of each list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>list</em>) – List of lists</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of lists</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.clean_nan">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">clean_nan</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> → <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/gslides/utils.html#clean_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.clean_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces NaN’s in a pandas dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>) – <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.determine_col_proportion">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">determine_col_proportion</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> → <span class="pre">numpy.ndarray</span><a class="reference internal" href="_modules/gslides/utils.html#determine_col_proportion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.determine_col_proportion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the percent size of a column based on the length of observiations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – Dataframe that will become a table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of proportions</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.emu_to_px">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">emu_to_px</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> → <span class="pre">int</span><a class="reference internal" href="_modules/gslides/utils.html#emu_to_px"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.emu_to_px" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts EMU to pixels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>int</em>) – EMU</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pixels</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.hex_to_rgb">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">hex_to_rgb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#hex_to_rgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.hex_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a xexadecimal color code to r,g,b</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>str</em>) – Hexadecimal color code</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>R,G,B color code</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.json_chunk_extract">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">json_chunk_extract</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><a class="reference internal" href="_modules/gslides/utils.html#json_chunk_extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.json_chunk_extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively fetch chunks from nested JSON based on a given key, value pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>dict</em>) – JSON to search</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Key that corresponds to the dictionary to chunk</p></li>
+<li><p><strong>val</strong> (<em>str</em><em>, </em><em>int</em><em>, </em><em>float</em>) – Val that corresponds to the dictionary to chunk</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of chunks</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.json_chunk_key_extract">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">json_chunk_key_extract</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><a class="reference internal" href="_modules/gslides/utils.html#json_chunk_key_extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.json_chunk_key_extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively fetch chunks from nested JSON based on a given key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>dict</em>) – JSON to search</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Key that corresponds to the dictionary to chunk</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of chunks</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.json_dict_extract">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">json_dict_extract</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span></span></em><span class="sig-paren">)</span> → <span class="pre">Dict</span><a class="reference internal" href="_modules/gslides/utils.html#json_dict_extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.json_dict_extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively fetch chunks from nested JSON based on a given key, value pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>dict</em>) – JSON to search</p></li>
+<li><p><strong>keys</strong> (<em>tuple</em>) – Tuple of multiple keys to search for in dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary of values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.json_val_extract">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">json_val_extract</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#json_val_extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.json_val_extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively find values based on a given key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>dict</em>) – JSON to search</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Key that corresponds to the value to find</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Value to return</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.num_to_char">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">num_to_char</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="reference internal" href="_modules/gslides/utils.html#num_to_char"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.num_to_char" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a number to a character</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>int</em>) – Number</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corresponding character</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.optimize_size">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">optimize_size</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">222600</span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/utils.html#optimize_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.optimize_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes the size of a chart so that it matches the suggested area (222600 pixels)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_scale</strong> (<em>float</em>) – Scale of the x axis to y axis</p></li>
+<li><p><strong>area</strong> (<em>float</em><em>, </em><em>optional</em>) – Description of parameter <cite>area</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x and y length combination</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.validate_cell_name">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">validate_cell_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="reference internal" href="_modules/gslides/utils.html#validate_cell_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.validate_cell_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates that a cell name is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>str</em>) – Cell name</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Invalid cell name.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Cell name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.validate_hex_color_code">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">validate_hex_color_code</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="reference internal" href="_modules/gslides/utils.html#validate_hex_color_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.validate_hex_color_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short summary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>str</em>) – Hexadecimal color code</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Input a hexadecimal color code</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Hexadecimal color code</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.validate_params_float">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">validate_params_float</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/utils.html#validate_params_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.validate_params_float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the parameters for the chart based on the float value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – Dictionary of parameters</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.validate_params_int">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">validate_params_int</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/utils.html#validate_params_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.validate_params_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the parameters for the chart based on the integer value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – Dictionary of parameters</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.validate_params_list">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">validate_params_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/utils.html#validate_params_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.validate_params_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the parameters for the chart based on a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – Dictionary of parameters</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.utils.validate_series_columns">
+<code class="sig-prename descclassname"><span class="pre">gslides.utils.</span></code><code class="sig-name descname"><span class="pre">validate_series_columns</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/utils.html#validate_series_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.utils.validate_series_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates that the series column is None or a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – Dictionary of parameters</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides.frame">
+<span id="gslides-frame-module"></span><h2>gslides.frame module<a class="headerlink" href="#module-gslides.frame" title="Permalink to this headline">¶</a></h2>
+<p>Frame class</p>
+<dl class="py class">
+<dt id="gslides.frame.CreateFrame">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.frame.</span></code><code class="sig-name descname"><span class="pre">CreateFrame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spreadsheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor_cell</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'A1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/frame.html#CreateFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.CreateFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to create data in Google sheets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>) – Data to be created in Google sheets</p></li>
+<li><p><strong>spreadsheet_id</strong> (<em>str</em>) – The id associated with the spreadsheet</p></li>
+<li><p><strong>sheet_name</strong> (<em>str</em>) – The name associated with the sheet</p></li>
+<li><p><strong>start_row_index</strong> – The starting index of the row</p></li>
+<li><p><strong>overwrite_data</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the existing data</p></li>
+<li><p><strong>anchor_cell</strong> (<em>str</em><em>, </em><em>optional</em>) – The cell name (e.g. <cite>A5</cite>) that will correspond to the
+top left observation in the dataframe</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.frame.CreateFrame.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="reference internal" href="_modules/gslides/frame.html#CreateFrame.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.CreateFrame.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the API call</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether the function executed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.frame.CreateFrame.render_update_json">
+<code class="sig-name descname"><span class="pre">render_update_json</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/frame.html#CreateFrame.render_update_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.CreateFrame.render_update_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json to update the data in Google sheets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The json to do the update</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.frame.Frame">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.frame.</span></code><code class="sig-name descname"><span class="pre">Frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">df:</span> <span class="pre">pandas.core.frame.DataFrame</span> <span class="pre">=</span> <span class="pre">Empty</span> <span class="pre">DataFrame</span> <span class="pre">Columns:</span> <span class="pre">[]</span> <span class="pre">Index:</span> <span class="pre">[]</span></em>, <em class="sig-param"><span class="pre">spreadsheet_id:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">sheet_id:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">sheet_name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">start_column_index:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">start_row_index:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">end_column_index:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">end_row_index:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">initialized:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/frame.html#Frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.Frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An object that represents a table of data in Google sheets. Initialize the
+object through either the <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame.get</span> <span class="pre">or</span> <span class="pre">:class:`Frame.create</span></code> class method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – The title of the spreadsheet</p></li>
+<li><p><strong>sheet_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of the sheet</p></li>
+<li><p><strong>df</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, optional) – The dataframe</p></li>
+<li><p><strong>spreadsheet_id</strong> (<em>str</em><em>, </em><em>optional</em>) – The id of the spreadsheet</p></li>
+<li><p><strong>sheet_id</strong> (<em>int</em><em>, </em><em>optional</em>) – The id associated with the sheet</p></li>
+<li><p><strong>sheet_name</strong> – The name associated with the sheet</p></li>
+<li><p><strong>start_column_index</strong> (<em>int</em>) – The index of the starting column of the data</p></li>
+<li><p><strong>start_row_index</strong> (<em>int</em>) – The index of the starting row of the data</p></li>
+<li><p><strong>end_column_index</strong> (<em>int</em>) – The index of the ending column of the data</p></li>
+<li><p><strong>end_row_index</strong> (<em>int</em>) – The index of the ending row of the data</p></li>
+<li><p><strong>initialized</strong> (<em>bool</em><em>, </em><em>optional</em>) – A boolean whether the class has been initialized</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.frame.Frame.create">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spreadsheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor_cell</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'A1'</span></span></em><span class="sig-paren">)</span> → <span class="pre">TFrame</span><a class="reference internal" href="_modules/gslides/frame.html#Frame.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.Frame.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the table of data in Google sheets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>) – The dataframe</p></li>
+<li><p><strong>spreadsheet_id</strong> (<em>str</em>) – The id of the spreadsheet</p></li>
+<li><p><strong>sheet_id</strong> (<em>int</em>) – The id associated with the sheet</p></li>
+<li><p><strong>sheet_name</strong> (<em>str</em>) – The name associated with the sheet</p></li>
+<li><p><strong>overwrite_data</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the existing data</p></li>
+<li><p><strong>anchor_cell</strong> (<em>str</em>) – The cell name (e.g. <cite>A5</cite>) that will correspond to the
+top left observation in the dataframe</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.Frame</span></code> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.Frame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.frame.Frame.data">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">data</span></code><a class="headerlink" href="#gslides.frame.Frame.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <a class="reference internal" href="#gslides.frame.Frame" title="gslides.frame.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> object of the data</p>
+<p>:raises Must run the create or get method before passing the data
+:return: The <a class="reference internal" href="#gslides.frame.Frame" title="gslides.frame.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> object
+:rtype: <a class="reference internal" href="#gslides.frame.Frame" title="gslides.frame.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a></p>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.frame.Frame.format_frame">
+<code class="sig-name descname"><span class="pre">format_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_mapping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/frame.html#Frame.format_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.Frame.format_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats a column in Google sheets. See
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat</a>
+for accepted number types; either a type value or pattern is accepted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>column_mapping</strong> (<em>dict</em>) – A mapping of column name to number type</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame</span> <span class="o">=</span> <span class="n">Frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frame</span><span class="o">.</span><span class="n">format_frame</span><span class="p">({</span><span class="s1">'column1'</span><span class="p">:</span> <span class="s1">'0.0%'</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.frame.Frame.get">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spreadsheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor_cell</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_right_cell</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">TFrame</span><a class="reference internal" href="_modules/gslides/frame.html#Frame.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.Frame.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the table of data in Google sheets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spreadsheet_id</strong> (<em>str</em>) – The id of the spreadsheet</p></li>
+<li><p><strong>sheet_id</strong> (<em>int</em>) – The id associated with the sheet</p></li>
+<li><p><strong>sheet_name</strong> (<em>str</em>) – The name associated with the sheet</p></li>
+<li><p><strong>anchor_cell</strong> (<em>str</em>) – The cell name (e.g. <cite>A5</cite>) that will correspond to the
+top left observation in the dataframe</p></li>
+<li><p><strong>bottom_right_cell</strong> (<em>str</em>) – The cell name (e.g. <cite>B7</cite>) that will correspond
+to the bottom right observation in the dataframe</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.Frame</span></code> object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">gslides.Frame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.frame.Frame.get_method">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">get_method</span></code><a class="headerlink" href="#gslides.frame.Frame.get_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the corresponding get initialization method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Get intialization method</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.frame.Frame.render_format_frame">
+<code class="sig-name descname"><span class="pre">render_format_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_mapping</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/frame.html#Frame.render_format_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.Frame.render_format_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json to format a column in Google slides</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>column_mapping</strong> (<em>dict</em>) – A mapping of column name to number type</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>JSON for the api call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.frame.GetFrame">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.frame.</span></code><code class="sig-name descname"><span class="pre">GetFrame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spreadsheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor_cell</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_right_cell</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/frame.html#GetFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.GetFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to get data from Google sheets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spreadsheet_id</strong> (<em>str</em>) – The id associated with the spreadsheet</p></li>
+<li><p><strong>sheet_name</strong> (<em>str</em>) – The name associated with the sheet</p></li>
+<li><p><strong>anchor_cell</strong> (<em>str</em>) – The cell name (e.g. <cite>A5</cite>) that will correspond to the
+top left observation in the dataframe</p></li>
+<li><p><strong>bottom_right_cell</strong> (<em>str</em>) – The cell name (e.g. <cite>B10</cite>) that will correspond to the
+bottom right observation in the dataframe</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.frame.GetFrame.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="reference internal" href="_modules/gslides/frame.html#GetFrame.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.GetFrame.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the API call</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether the function executed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.frame.format_type">
+<code class="sig-prename descclassname"><span class="pre">gslides.frame.</span></code><code class="sig-name descname"><span class="pre">format_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/frame.html#format_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.format_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a specified number type and outputs the necessary json, controlling
+for the custom types. See the documentation here
+<a class="reference external" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#NumberFormat</a>
+for more information the formatting available. Either a type or pattern can
+be passed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>number_type</strong> (<em>str</em>) – A string specifying the format of the cell</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary providing the configuration</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.frame.get_sheet_data">
+<code class="sig-prename descclassname"><span class="pre">gslides.frame.</span></code><code class="sig-name descname"><span class="pre">get_sheet_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spreadsheet_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_column_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_row_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_column_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_row_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/frame.html#get_sheet_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.frame.get_sheet_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the data from a given groups of cells in a sheet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spreadsheet_id</strong> (<em>str</em>) – The id of the spreadsheet</p></li>
+<li><p><strong>sheet_name</strong> (<em>str</em>) – Sheet name to get data from</p></li>
+<li><p><strong>start_column_index</strong> (<em>int</em>) – The index of the starting column of the data</p></li>
+<li><p><strong>start_row_index</strong> (<em>int</em>) – The index of the starting row of the data</p></li>
+<li><p><strong>end_column_index</strong> (<em>int</em>) – The index of the ending column of the data</p></li>
+<li><p><strong>end_row_index</strong> (<em>int</em>) – The index of the ending row of the data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of lists capturing the data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides.presentation">
+<span id="gslides-presentation-module"></span><h2>gslides.presentation module<a class="headerlink" href="#module-gslides.presentation" title="Permalink to this headline">¶</a></h2>
+<p>Creates the slides and charts in Google slides</p>
+<dl class="py class">
+<dt id="gslides.presentation.AddSlide">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">AddSlide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presentation_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.chart.Chart" title="gslides.chart.Chart"><span class="pre">gslides.chart.Chart</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#gslides.table.Table" title="gslides.table.Table"><span class="pre">gslides.table.Table</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1017724</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">420575</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(9144000,</span> <span class="pre">5143500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Title</span> <span class="pre">placeholder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Notes</span> <span class="pre">placeholder'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class that adds a slide to the presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>presentation_id</strong> (<em>str</em>) – The presentation_id of the created presentation</p></li>
+<li><p><strong>objects</strong> (<em>list</em>) – List of <code class="xref py py-class docutils literal notranslate"><span class="pre">Chart</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code> objects</p></li>
+<li><p><strong>layout</strong> (<em>tuple</em>) – The layout of the chart objects in # of rows by # of columns</p></li>
+<li><p><strong>insertion_index</strong> (<em>int</em><em>, </em><em>optional</em>) – The slide index to insert new slide to.
+The lack of a parameter will insert the slide to the end of the presentation</p></li>
+<li><p><strong>top_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The top margin of the presentation in EMU</p></li>
+<li><p><strong>bottom_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The bottom margin of the presentation in EMU</p></li>
+<li><p><strong>left_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The left margin of the presentation in EMU</p></li>
+<li><p><strong>right_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The right margin of the presentation in EMU</p></li>
+<li><p><strong>page_size</strong> (<em>tuple</em>) – Tuple of the width and height of the presentation in EMU</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – The text for the title textbox</p></li>
+<li><p><strong>notes</strong> (<em>str</em><em>, </em><em>optional</em>) – The text for the notes textbox</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.execute">
+<code class="sig-name descname"><span class="pre">execute</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the sheets &amp; slides API call.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.execute_sheet">
+<code class="sig-name descname"><span class="pre">execute_sheet</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.execute_sheet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.execute_sheet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the sheets API call.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.execute_slide">
+<code class="sig-name descname"><span class="pre">execute_slide</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.execute_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.execute_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the slides API call.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.render_json_copy_chart">
+<code class="sig-name descname"><span class="pre">render_json_copy_chart</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chart</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#gslides.chart.Chart" title="gslides.chart.Chart"><span class="pre">gslides.chart.Chart</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate_x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate_y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.render_json_copy_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.render_json_copy_chart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json to copy the charts in Google slides.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chart</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Chart</span></code>) – The chart to copy</p></li>
+<li><p><strong>size</strong> (<em>tuple</em>) – Tuple of width and height in EMU</p></li>
+<li><p><strong>translate_x</strong> (<em>float</em>) – The number of EMU to translate the object by</p></li>
+<li><p><strong>translate_y</strong> (<em>float</em>) – The number of EMU to translate the object by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The json to do the update</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.render_json_create_slide">
+<code class="sig-name descname"><span class="pre">render_json_create_slide</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.render_json_create_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.render_json_create_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json to create the slide in Google slides.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The json to do the update</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.render_json_create_textboxes">
+<code class="sig-name descname"><span class="pre">render_json_create_textboxes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.render_json_create_textboxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.render_json_create_textboxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json to create the textboxes in Google slides.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>slide_id</strong> (<em>str</em>) – The slide_id of the slide to create textbox in</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The json to do the update</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.AddSlide.render_json_format_textboxes">
+<code class="sig-name descname"><span class="pre">render_json_format_textboxes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title_box_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes_box_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/presentation.html#AddSlide.render_json_format_textboxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.AddSlide.render_json_format_textboxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json to format the textboxes in Google slides.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title_box_id</strong> (<em>int</em>) – The id of the title box</p></li>
+<li><p><strong>notes_box_id</strong> (<em>int</em>) – The id of the notes box</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The json to do the update</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.presentation.Layout">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">Layout</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_border</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_border</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.02</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#Layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class that manages the layout of objects on a canvas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_length</strong> (<em>float</em>) – The width of the canvase</p></li>
+<li><p><strong>y_length</strong> (<em>float</em>) – The height of the canvase</p></li>
+<li><p><strong>layout</strong> (<em>tuple</em>) – The grid layout of objects on the canvase (rows x columns)</p></li>
+<li><p><strong>x_border</strong> (<em>float</em>) – The % margin for the x border</p></li>
+<li><p><strong>y_border</strong> (<em>float</em>) – The % margin for the y border</p></li>
+<li><p><strong>spacing</strong> (<em>float</em>) – The % spacing between objects</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.presentation.Layout.coord">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">coord</span></code><a class="headerlink" href="#gslides.presentation.Layout.coord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the row and column of the given index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Row index and column index</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="gslides.presentation.Presentation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.presentation.</span></code><code class="sig-name descname"><span class="pre">Presentation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pr_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sl_ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch_ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(9144000,</span> <span class="pre">5143500)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialized</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An object that represents a presentation in Google slides. Initialize the
+object through either the <a class="reference internal" href="#gslides.presentation.Presentation.get" title="gslides.presentation.Presentation.get"><code class="xref py py-class docutils literal notranslate"><span class="pre">Presentation.get</span></code></a> or
+<a class="reference internal" href="#gslides.presentation.Presentation.create" title="gslides.presentation.Presentation.create"><code class="xref py py-class docutils literal notranslate"><span class="pre">Presentation.create</span></code></a> class method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the presentation</p></li>
+<li><p><strong>pr_id</strong> (<em>str</em>) – The id of the presentation</p></li>
+<li><p><strong>sl_ids</strong> (<em>list</em>) – A list of the slide ids</p></li>
+<li><p><strong>ch_ids</strong> (<em>dict</em>) – A dictionary of the charts objects id’s and their corresponding
+title</p></li>
+<li><p><strong>page_size</strong> (<em>tuple</em>) – Tuple of the width and height of the presentation in EMU</p></li>
+<li><p><strong>initialized</strong> (<em>bool</em>) – Whether to object has been initialized</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.add_slide">
+<code class="sig-name descname"><span class="pre">add_slide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objects</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.chart.Chart" title="gslides.chart.Chart"><span class="pre">gslides.chart.Chart</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#gslides.table.Table" title="gslides.table.Table"><span class="pre">gslides.table.Table</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1017724</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">420575</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_margin</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Title</span> <span class="pre">placeholder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Notes</span> <span class="pre">placeholder'</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.add_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.add_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a slide to the presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objects</strong> (<em>list</em>) – List of <code class="xref py py-class docutils literal notranslate"><span class="pre">Chart</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code> objects</p></li>
+<li><p><strong>layout</strong> (<em>tuple</em>) – The layout of the chart objects in # of rows by # of columns</p></li>
+<li><p><strong>insertion_index</strong> (<em>int</em><em>, </em><em>optional</em>) – The slide index to insert new slide to.
+The lack of a parameter will insert the slide to the end of the presentation</p></li>
+<li><p><strong>top_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The top margin of the presentation in EMU</p></li>
+<li><p><strong>bottom_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The bottom margin of the presentation in EMU</p></li>
+<li><p><strong>left_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The left margin of the presentation in EMU</p></li>
+<li><p><strong>right_margin</strong> (<em>int</em><em>, </em><em>optional</em>) – The right margin of the presentation in EMU</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – The text for the title textbox</p></li>
+<li><p><strong>notes</strong> (<em>str</em><em>, </em><em>optional</em>) – The text for the notes textbox</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.chart_ids">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">chart_ids</span></code><a class="headerlink" href="#gslides.presentation.Presentation.chart_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the chart_ids of the created presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Must run the create or get method before passing the slides ids</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The chart ids of the created presentation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.create">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Untitled'</span></span></em><span class="sig-paren">)</span> → <span class="pre">TPresentation</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class method that creates a new presentation. To note, due to an issue
+in the API page size is currently not supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name of the presentation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A presentation object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.presentation.Presentation" title="gslides.presentation.Presentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Presentation</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.download_slide">
+<code class="sig-name descname"><span class="pre">download_slide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LARGE'</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.download_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.download_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads a given slide to a file in png format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slide_id</strong> (<em>str</em>) – The id of the slide to show</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to write png file to</p></li>
+<li><p><strong>image_size</strong> (<em>str</em>) – String to configure the image size</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.get">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presentation_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">TPresentation</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class method that gets a presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>presentation_id</strong> (<em>str</em>) – Id of the presentation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A presentation object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gslides.presentation.Presentation" title="gslides.presentation.Presentation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Presentation</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.get_method">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">get_method</span></code><a class="headerlink" href="#gslides.presentation.Presentation.get_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the corresponding get initialization method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Get intialization method</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.presentation_id">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">presentation_id</span></code><a class="headerlink" href="#gslides.presentation.Presentation.presentation_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the presentation_id of the created presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Must run the create or get method before passing the presentation id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The presentation_id of the created presentation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.rm_slide">
+<code class="sig-name descname"><span class="pre">rm_slide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.rm_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.rm_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a slide based on a slide id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>slide_id</strong> (<em>str</em>) – The slide_id of the slide to delete</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.show_slide">
+<code class="sig-name descname"><span class="pre">show_slide</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LARGE'</span></span></em><span class="sig-paren">)</span> → <span class="pre">IPython.core.display.Image</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.show_slide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.show_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a given slide in a Jupyter notebook.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slide_id</strong> (<em>str</em>) – The id of the slide to show</p></li>
+<li><p><strong>image_size</strong> (<em>str</em>) – String to configure the image size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ipython Image object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Image</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.slide_ids">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">slide_ids</span></code><a class="headerlink" href="#gslides.presentation.Presentation.slide_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the slide_ids of the created presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Must run the create or get method before passing the slides ids</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The slide ids of the created presentation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.template">
+<code class="sig-name descname"><span class="pre">template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slide_ids</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces all text encaspulated with <cite>{{ &lt;TEXT&gt; }}</cite> with input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mapping</strong> (<em>dict</em>) – Dictionary mapping old text to new text</p></li>
+<li><p><strong>slide_ids</strong> (<em>list</em><em>, </em><em>optional</em>) – The slides to apply template on. If none, then all slides
+will be considered.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.presentation.Presentation.update_charts">
+<code class="sig-name descname"><span class="pre">update_charts</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/presentation.html#Presentation.update_charts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.presentation.Presentation.update_charts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates all the charts in the slides deck with refreshed underlying
+data.</p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides.table">
+<span id="gslides-table-module"></span><h2>gslides.table module<a class="headerlink" href="#module-gslides.table" title="Permalink to this headline">¶</a></h2>
+<p>Creates the table in Google slides</p>
+<dl class="py class">
+<dt id="gslides.table.Table">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gslides.table.</span></code><code class="sig-name descname"><span class="pre">Table</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gslides.frame.Frame" title="gslides.frame.Frame"><span class="pre">gslides.frame.Frame</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stub</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_background_color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stub_background_color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_proportions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gslides/table.html#Table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.table.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class that creates a table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#gslides.frame.Frame" title="gslides.frame.Frame"><em>Frame</em></a><em> or </em><em>pd.DataFrame</em>) – Data to insert into the table</p></li>
+<li><p><strong>font_size</strong> (<em>int</em>) – Font size in the unit PT</p></li>
+<li><p><strong>header</strong> (<em>bool</em>) – Whether to enable formatting on the header row</p></li>
+<li><p><strong>stub</strong> (<em>bool</em>) – Whether to enable formatting on the stub (1st) column</p></li>
+<li><p><strong>header_background_color</strong> (<em>str</em>) – A color to set the header background.
+Parameters can either be a hex-code or a named color.
+See gslides.config.color_mapping.keys() for accepted named colors</p></li>
+<li><p><strong>stub_background_color</strong> (<em>str</em>) – A color to set the stub background.
+Parameters can either be a hex-code or a named color.
+See gslides.config.color_mapping.keys() for accepted named colors</p></li>
+<li><p><strong>column_proportions</strong> (<em>list of floats</em>) – A list of floats representing the proportion of each
+column</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="gslides.table.Table.create">
+<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presentation_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slide_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(3000000,</span> <span class="pre">3000000)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate_x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate_y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides/table.html#Table.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.table.Table.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the table in Google slides</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>presentation_id</strong> (<em>str</em>) – The presentation_id of the presentation to create
+to create table in</p></li>
+<li><p><strong>slide_id</strong> (<em>str</em>) – The slide_id of the slide to create table in</p></li>
+<li><p><strong>size</strong> (<em>tuple</em>) – Tuple of width and height in EMU</p></li>
+<li><p><strong>translate_x</strong> (<em>float</em>) – The number of EMU to translate the object by</p></li>
+<li><p><strong>translate_y</strong> (<em>float</em>) – The number of EMU to translate the object by</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.table.Table.render_create_table_json">
+<code class="sig-name descname"><span class="pre">render_create_table_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sl_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/gslides/table.html#Table.render_create_table_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.table.Table.render_create_table_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the create table json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sl_id</strong> (<em>str</em>) – Slide id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json for the API call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="gslides.table.Table.render_update_table_json">
+<code class="sig-name descname"><span class="pre">render_update_table_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tbl_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate_x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate_y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="reference internal" href="_modules/gslides/table.html#Table.render_update_table_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.table.Table.render_update_table_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the json for the update of table properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tbl_id</strong> (<em>str</em>) – Table id</p></li>
+<li><p><strong>size</strong> (<em>tuple</em>) – Tuple of width and height in EMU</p></li>
+<li><p><strong>translate_x</strong> (<em>float</em>) – The number of EMU to translate the object by</p></li>
+<li><p><strong>translate_y</strong> (<em>float</em>) – The number of EMU to translate the object by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>json for the API call</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="module-gslides">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gslides" title="Permalink to this headline">¶</a></h2>
+<p>Top-level package for gslides.</p>
+<dl class="py function">
+<dt id="gslides.initialize_credentials">
+<code class="sig-prename descclassname"><span class="pre">gslides.</span></code><code class="sig-name descname"><span class="pre">initialize_credentials</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">credentials</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">google.oauth2.credentials.Credentials</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides.html#initialize_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.initialize_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intializes credentials for all classes in the package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>credentials</strong> (<em>google.oauth2.credentialsCredentials</em>) – Credentials to build api connection</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.set_font">
+<code class="sig-prename descclassname"><span class="pre">gslides.</span></code><code class="sig-name descname"><span class="pre">set_font</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides.html#set_font"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.set_font" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the font for all objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>font</strong> (<em>str</em>) – Font</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="gslides.set_palette">
+<code class="sig-prename descclassname"><span class="pre">gslides.</span></code><code class="sig-name descname"><span class="pre">set_palette</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/gslides.html#set_palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gslides.set_palette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the palette for all charts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>palette</strong> (<em>str</em>) – The palette to use</p>
+</dd>
+</dl>
+</dd></dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="modules.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">gslides</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Michael Gracie
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/gslides.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">gslides package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-gslides.chart">gslides.chart module</a></li>
+<li><a class="reference internal" href="#module-gslides.colors">gslides.colors module</a></li>
+<li><a class="reference internal" href="#module-gslides.config">gslides.config module</a></li>
+<li><a class="reference internal" href="#module-gslides.utils">gslides.utils module</a></li>
+<li><a class="reference internal" href="#module-gslides.frame">gslides.frame module</a></li>
+<li><a class="reference internal" href="#module-gslides.presentation">gslides.presentation module</a></li>
+<li><a class="reference internal" href="#module-gslides.table">gslides.table module</a></li>
+<li><a class="reference internal" href="#module-gslides">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>
