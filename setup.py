@@ -42,7 +42,7 @@ with open("requirements.txt", "r") as f:
     INSTALL_REQUIRES = f.read().split("\n")
 
 EXTRAS_REQUIRE = {
-    "docs": ["sphinx", "sphinx_rtd_theme"],
+    "docs": ["sphinx", "sphinx_rtd_theme", "furo"],
     "test": ["coverage", "pytest", "pytest-cov", "pytest-pylint", "mypy"],
     "qa": [
         "pylint",
