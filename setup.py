@@ -9,7 +9,6 @@ import sys
 
 from setuptools import find_packages, setup
 
-
 # Pylint configuration
 PYLINTRC_FILE = "pylintrc"
 PYLINT_MINIMUM_SCORE = "9.0"
@@ -45,7 +44,15 @@ with open("requirements.txt", "r") as f:
 EXTRAS_REQUIRE = {
     "docs": ["sphinx", "sphinx_rtd_theme"],
     "test": ["coverage", "pytest", "pytest-cov", "pytest-pylint", "mypy"],
-    "qa": ["pylint", "pre-commit", "black", "isort", "mypy", "check-manifest"],
+    "qa": [
+        "pylint",
+        "pre-commit",
+        "black",
+        "isort",
+        "mypy",
+        "check-manifest",
+        "flake8",
+    ],
 }
 
 EXTRAS_REQUIRE["dev"] = (
