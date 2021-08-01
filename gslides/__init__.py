@@ -17,7 +17,7 @@ package_font = Font()
 package_palette = PackagePalette()
 
 
-def intialize_credentials(credentials: Optional[Credentials]) -> None:
+def initialize_credentials(credentials: Optional[Credentials]) -> None:
     """Intializes credentials for all classes in the package.
 
     :param credentials: Credentials to build api connection

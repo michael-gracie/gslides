@@ -90,7 +90,7 @@ The first time you run this block, you will be prompted to allow access to Googl
 
 .. code-block:: python
 
-  gslides.intialize_credentials(creds)
+  gslides.initialize_credentials(creds)
 
 
 Service account or OAuth 2.0?
