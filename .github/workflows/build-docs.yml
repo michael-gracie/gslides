@@ -39,10 +39,9 @@ jobs:
         git commit --no-verify -m 'cleaning docs'
         ls -a
 
-    - name: Checkout gh-pages
-      uses: actions/checkout@v2
-      with:
-        ref: dev
+    - name: Checkout dev
+      run: |
+        git checkout dev
 
     - name: Build docs
       run: |
