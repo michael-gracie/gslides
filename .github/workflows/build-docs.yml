@@ -1,4 +1,5 @@
-name: "Pull Request Docs Check"
+name: Build sphinx docs
+
 on:
   pull_request:
     branches: [ main ]
@@ -9,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build Sphinx
-    - uses: ammaraskar/sphinx-action@master
+      uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "docs/"
