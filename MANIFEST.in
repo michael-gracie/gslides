@@ -1,6 +1,7 @@
 include AUTHORS.rst
 include LICENSE
 include README.rst
+include CHANGELOG.rst
 include *.txt
 include gslides/config/*.yaml
 include .isort.cfg
