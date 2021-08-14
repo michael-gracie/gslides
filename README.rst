@@ -10,7 +10,7 @@ Quick Installation
 
 .. code-block:: bash
 
-  pip install git+https://github.com/michael-gracie/gslides.git
+  pip install gslides
 
 
 Usage
