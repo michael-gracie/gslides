@@ -23,6 +23,7 @@ PACKAGES = find_packages()
 META_PATH = os.path.join("gslides", "__init__.py")
 KEYWORDS = [""]
 AUTHOR = "Michael Gracie"
+AUTHOR_EMAIL = "12mpggslides@gmail.com"
 
 PROJECT_URLS = {
     "Documentation": "https://github.com/pages/michael-gracie/gslides/build/html/index.html",
@@ -88,6 +89,7 @@ def install_pkg():
         url="https://github.com/michael-gracie/gslides",
         project_urls=PROJECT_URLS,
         author=AUTHOR,
+        author_email=AUTHOR_EMAIL,
         license=LICENSE,
         python_requires=">=3.7.0",
         packages=PACKAGES,
