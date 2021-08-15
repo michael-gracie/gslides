@@ -108,7 +108,7 @@ Below is an example that only showcases a simple workflow. Full discussion aroun
 Advanced Usage
 ----------------------
 
-Find this  `notebook <https://github.com/michael-gracie/gslides/blob/main/notebooks/advanced_usage.ipynb>`_ detailing advanced usage of ``gslides``.
+Find this `Jupyter notebook <https://github.com/michael-gracie/gslides/blob/main/notebooks/advanced_usage.ipynb>`_ detailing advanced usage of ``gslides``.
 
 Developer Instructions
 ----------------------

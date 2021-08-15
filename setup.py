@@ -24,6 +24,7 @@ META_PATH = os.path.join("gslides", "__init__.py")
 KEYWORDS = [""]
 AUTHOR = "Michael Gracie"
 AUTHOR_EMAIL = "12mpggslides@gmail.com"
+LICENSE = "MIT License"
 
 PROJECT_URLS = {
     "Documentation": "https://github.com/pages/michael-gracie/gslides/build/html/index.html",
@@ -32,7 +33,7 @@ PROJECT_URLS = {
 }
 
 CLASSIFIERS = [
-    "Intended Audience :: Everyone",
+    "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
@@ -62,11 +63,10 @@ EXTRAS_REQUIRE["dev"] = (
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
+DESCRIPTION = "Wrapper around Google APIs to create charts in Google Slides with python"
+
 with open(os.path.join(HERE, "README.rst"), encoding="utf-8") as file_open:
     LONG_DESCRIPTION = file_open.read()
-
-with open(os.path.join(HERE, "LICENSE"), encoding="utf-8") as file_open:
-    LICENSE = file_open.read()
 
 ############
 # Installing
@@ -84,8 +84,9 @@ def install_pkg():
     setup(
         name=NAME,
         version="0.1.0",
-        description=LONG_DESCRIPTION,
+        description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
+        long_description_content_type="text/x-rst",
         url="https://github.com/michael-gracie/gslides",
         project_urls=PROJECT_URLS,
         author=AUTHOR,
