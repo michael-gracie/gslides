@@ -2,13 +2,14 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Charts &amp; Series" href="chart.html" /><link rel="prev" title="Bring Your Own Credentials" href="byoc.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Charts &amp; Series" href="chart.html" /><link rel="prev" title="Bring Your Own Credentials" href="byoc.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.11.beta42"/>
-        <title>Basic Usage - gslides 0.1.0 documentation</title>
+    <meta name="generator" content="sphinx-4.3.2, furo 2021.11.23"/>
+        <title>Basic Usage - gslides 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=197f00461d56902ea7ca048ec6e6ba026f62c97b" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
     
     
 
@@ -31,9 +32,11 @@
   
     }
   }
-</style>
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style></head>
   <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
@@ -120,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">gslides 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">gslides 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -172,7 +175,7 @@
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -187,10 +190,11 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <div class="section" id="basic-usage">
+        <article role="main">
+          <section id="basic-usage">
 <h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
 <p>The following page will provide an understanding around the class structure for <code class="docutils literal notranslate"><span class="pre">gslides</span></code>. To accompany this documentation, see an example of the usage of <code class="docutils literal notranslate"><span class="pre">gslides</span></code> in this <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/notebooks/usage.ipynb">notebook</a>.</p>
-<div class="section" id="data-flow">
+<section id="data-flow">
 <h2>Data Flow<a class="headerlink" href="#data-flow" title="Permalink to this headline">¶</a></h2>
 <p>Taking an object oriented approach, <code class="docutils literal notranslate"><span class="pre">gslides</span></code> provides classes that represent objects in either Google sheets or Google slides to enable the user flexibility in terms of how there are creating their pipeline and executing their dependencies.</p>
 <p>The diagram provides a visual representation of the objects and methods available.</p>
@@ -204,42 +208,43 @@
 <li><p><strong>Presentation</strong> represents a google slides presentation. See more info about the methods in <a class="reference internal" href="#presentation-methods"><span class="std std-ref">Presentation Methods</span></a></p></li>
 </ul>
 <p>The modularization of the pipeline allows the user to create new spreadsheets, sheets and presentations or simply get existing sheets and presentations. Additionally, if the user wants to only use a portion of the pipeline they can choose so.</p>
-</div>
-<div class="section" id="user-supplied-id-s">
+</section>
+<section id="user-supplied-id-s">
 <h2>User supplied ID’s<a class="headerlink" href="#user-supplied-id-s" title="Permalink to this headline">¶</a></h2>
 <p>From existing spreadsheets and presentations it is possible to retrieve <code class="docutils literal notranslate"><span class="pre">spreadsheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">sheet_id</span></code>, <code class="docutils literal notranslate"><span class="pre">presentation_id</span></code> through simply looking at a URL.</p>
 <img alt="_images/user_id.png" src="_images/user_id.png"/>
-</div>
-<div class="section" id="initializing-classes">
+</section>
+<section id="initializing-classes">
 <h2>Initializing classes<a class="headerlink" href="#initializing-classes" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Spreadsheet</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span></code> and <code class="docutils literal notranslate"><span class="pre">Presentation</span></code> objects are all initialized through either the <code class="docutils literal notranslate"><span class="pre">create()</span></code> or <code class="docutils literal notranslate"><span class="pre">get()</span></code> class method.</p>
-<div class="section" id="passing-chart-and-table-objects-to-presentation-add-slide">
+<section id="passing-chart-and-table-objects-to-presentation-add-slide">
 <h3>Passing <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects to <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code><a class="headerlink" href="#passing-chart-and-table-objects-to-presentation-add-slide" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects are unique in the fact that they don’t need to be created to be passed to the <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code> method. The layout and slide margin parameters set in the <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code> method will optimize the size of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects that are to be created. The <code class="docutils literal notranslate"><span class="pre">Presentation.add_slide()</span></code> method handles both the creation of the objects, creation of the slide and the copy of the objects all in one.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>There is no restriction on utilizing the <code class="docutils literal notranslate"><span class="pre">create()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Chart</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span></code> classes. For <code class="docutils literal notranslate"><span class="pre">Chart</span></code>, the method will simply create a chart in Google sheets without optimizing the sizing of that chart for it’s destination slide. For <code class="docutils literal notranslate"><span class="pre">Table</span></code> it will create a table in Google slides.</p>
 </div>
-</div>
-</div>
-<div class="section" id="presentation-methods">
+</section>
+</section>
+<section id="presentation-methods">
 <h2>Presentation Methods<a class="headerlink" href="#presentation-methods" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="template">
+<section id="template">
 <h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">template()</span></code> method allows the user to template data into a given presentation. In your presentation create a placeholder for the text that you wish to be templated like so <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">template_var</span> <span class="pre">}}</span></code>. Pass a dictionary into the <code class="docutils literal notranslate"><span class="pre">template()</span></code> method with the key <code class="docutils literal notranslate"><span class="pre">template_var</span></code> and value for the text that you would like to inject. The function will replace all instances of that <code class="docutils literal notranslate"><span class="pre">template_var</span></code> with text in the presentation.</p>
-</div>
-<div class="section" id="update-charts">
+</section>
+<section id="update-charts">
 <h3>Update Charts<a class="headerlink" href="#update-charts" title="Permalink to this headline">¶</a></h3>
 <p>When you modify a chart in google sheets with additional data or update the styling the linked chart in a google slide deck will not update automatically. The <code class="docutils literal notranslate"><span class="pre">update_charts()</span></code> method finds all charts in a given presentation and updates them to match the google sheets version. This method is useful if you have an existing chart in a presentation and want to update the data but not recreate the chart. You can update the data in Google Sheets with the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object and then run the <code class="docutils literal notranslate"><span class="pre">update_charts()</span></code> method to reflect the new data in your existing chart.</p>
-</div>
-<div class="section" id="show-download-slide">
+</section>
+<section id="show-download-slide">
 <h3>Show &amp; Download Slide<a class="headerlink" href="#show-download-slide" title="Permalink to this headline">¶</a></h3>
 <p>With the <code class="docutils literal notranslate"><span class="pre">show_slide()</span></code> and <code class="docutils literal notranslate"><span class="pre">download_slide()</span></code> method you can view any given slide in a presentation. This method allows users to easily inspect any slides that they have just created without having to navigate to the google slideshow. These two functions rely on google’s keys for each slide. Simply call the <code class="docutils literal notranslate"><span class="pre">Presentation.slide_ids</span></code> property to retrieve an ordered list of these keys.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -266,14 +271,10 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2021, Michael Gracie
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="_sources/basic.rst.txt"
+              Copyright &#169; 2021, Michael Gracie |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="_sources/basic.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -321,6 +322,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
+    <script src="_static/scripts/furo.js"></script>
     </body>
 </html>

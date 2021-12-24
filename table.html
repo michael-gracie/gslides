@@ -2,13 +2,14 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Styling" href="styling.html" /><link rel="prev" title="Charts &amp; Series" href="chart.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Styling" href="styling.html" /><link rel="prev" title="Charts &amp; Series" href="chart.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.11.beta42"/>
-        <title>Tables - gslides 0.1.0 documentation</title>
+    <meta name="generator" content="sphinx-4.3.2, furo 2021.11.23"/>
+        <title>Tables - gslides 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=197f00461d56902ea7ca048ec6e6ba026f62c97b" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
     
     
 
@@ -31,9 +32,11 @@
   
     }
   }
-</style>
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style></head>
   <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
@@ -120,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">gslides 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">gslides 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -172,7 +175,7 @@
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -187,10 +190,11 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <div class="section" id="tables">
+        <article role="main">
+          <section id="tables">
 <h1>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h1>
 <p>With <code class="docutils literal notranslate"><span class="pre">gslides</span></code> it’s possible to take either existing data in Google sheets or a pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and visualize it in Google slides.</p>
-<div class="section" id="styling">
+<section id="styling">
 <h2>Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h2>
 <p>The package allows the user to style the header row background and the stub column background as well.</p>
 <img alt="_images/table.png" src="_images/table.png"/>
@@ -201,18 +205,19 @@
 <span class="n">stub_background_color</span><span class="o">=</span> <span class="s2">"black"</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sizing">
+</section>
+<section id="sizing">
 <h2>Sizing<a class="headerlink" href="#sizing" title="Permalink to this headline">¶</a></h2>
 <p>Sizing is particularly difficult with tables and one needs to be thoughtful about the number of rows and width of columns that will be created. If the Google API returns an error around the minimum row / column width you can either reduce amount of data you are attempting to capture in the table or change the <code class="docutils literal notranslate"><span class="pre">font_size</span></code> setting.</p>
-</div>
-<div class="section" id="custom-column-proportions">
+</section>
+<section id="custom-column-proportions">
 <h2>Custom column proportions<a class="headerlink" href="#custom-column-proportions" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">table</span></code> object will automatically calculate column proportions by finding the longest record in a given column and attempt to split the column proportions by each columns’ longest record. While in many instances this results in a well proportioned table, in other cases a single column is allocated too much width. For this reason the user can specify custom column proportions, a list of floats that represent the % width of each column.</p>
-</div>
-</div>
+</section>
+</section>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -239,14 +244,10 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2021, Michael Gracie
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="_sources/table.rst.txt"
+              Copyright &#169; 2021, Michael Gracie |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="_sources/table.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -285,6 +286,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
+    <script src="_static/scripts/furo.js"></script>
     </body>
 </html>

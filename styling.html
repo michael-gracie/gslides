@@ -2,13 +2,14 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="gslides" href="modules.html" /><link rel="prev" title="Tables" href="table.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="gslides" href="modules.html" /><link rel="prev" title="Tables" href="table.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.11.beta42"/>
-        <title>Styling - gslides 0.1.0 documentation</title>
+    <meta name="generator" content="sphinx-4.3.2, furo 2021.11.23"/>
+        <title>Styling - gslides 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=197f00461d56902ea7ca048ec6e6ba026f62c97b" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
     
     
 
@@ -31,9 +32,11 @@
   
     }
   }
-</style>
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style></head>
   <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
@@ -120,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">gslides 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">gslides 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">gslides 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -172,7 +175,7 @@
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -187,27 +190,29 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <div class="section" id="styling">
+        <article role="main">
+          <section id="styling">
 <h1>Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="setting-font-palette">
+<section id="setting-font-palette">
 <h2>Setting font &amp; palette<a class="headerlink" href="#setting-font-palette" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to configure the font and palette at the package level. When one sets these configurations all future slides, chart and tables will inherit the set styling. To do so run the following</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gslides</span><span class="o">.</span><span class="n">set_font</span><span class="p">(</span><span class="s1">'Arial'</span><span class="p">)</span>
 <span class="n">gslides</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s1">'black'</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="available-palettes">
+</section>
+<section id="available-palettes">
 <h2>Available palettes<a class="headerlink" href="#available-palettes" title="Permalink to this headline">¶</a></h2>
 <p>Check out <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/gslides/config/base_palettes.yaml">here</a> for a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file containing the available palettes. If you wish to add a palette feel free to make a PR on the repo.</p>
-</div>
-<div class="section" id="using-custom-palettes">
+</section>
+<section id="using-custom-palettes">
 <h2>Using custom palettes<a class="headerlink" href="#using-custom-palettes" title="Permalink to this headline">¶</a></h2>
 <p>Users can load custom palettes by creating the following file <code class="docutils literal notranslate"><span class="pre">~/.gslides/custom_palettes.yaml</span></code>. The file should be formatted the same as <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/gslides/config/base_palettes.yaml">this</a> config file. The colors can be listed by either <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/gslides/config/color_mapping.yaml">name</a> or hex color code.</p>
-</div>
-</div>
+</section>
+</section>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -234,14 +239,10 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2021, Michael Gracie
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="_sources/styling.rst.txt"
+              Copyright &#169; 2021, Michael Gracie |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="_sources/styling.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -280,6 +281,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
+    <script src="_static/scripts/furo.js"></script>
     </body>
 </html>

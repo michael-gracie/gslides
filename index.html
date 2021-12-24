@@ -2,13 +2,14 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Bring Your Own Credentials" href="byoc.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Bring Your Own Credentials" href="byoc.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.11.beta42"/>
-        <title>gslides 0.1.0 documentation</title>
+    <meta name="generator" content="sphinx-4.3.2, furo 2021.11.23"/>
+        <title>gslides 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=197f00461d56902ea7ca048ec6e6ba026f62c97b" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
     
     
 
@@ -31,9 +32,11 @@
   
     }
   }
-</style>
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style></head>
   <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
@@ -120,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">gslides 0.1.0 documentation</div></a>
+      <a href="#"><div class="brand">gslides 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   
-  <span class="sidebar-brand-text">gslides 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">gslides 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -172,7 +175,7 @@
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -187,20 +190,21 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <div class="section" id="welcome-to-gslides-s-documentation">
+        <article role="main">
+          <section id="welcome-to-gslides-s-documentation">
 <h1>Welcome to gslides’s documentation!<a class="headerlink" href="#welcome-to-gslides-s-documentation" title="Permalink to this headline">¶</a></h1>
-</div>
-<div class="section" id="gslides-creating-charts-in-google-slides">
+</section>
+<section id="gslides-creating-charts-in-google-slides">
 <h1>gslides: Creating charts in Google slides<a class="headerlink" href="#gslides-creating-charts-in-google-slides" title="Permalink to this headline">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">gslides</span></code> is a Python package that helps analysts turn <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframes into Google slides &amp; sheets charts by configuring and executing Google API calls.</p>
 <p>The package provides a set of classes that enable the user full control over the creation of new visualizations through configurable parameters while eliminating the complexity of working directly with the Google API.</p>
-<div class="section" id="quick-installation">
+<section id="quick-installation">
 <h2>Quick Installation<a class="headerlink" href="#quick-installation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install gslides
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Below is an example that only showcases a simple workflow. Full discussion around features can be found in the docs.</p>
 <p><strong>1. Initialize package and connection</strong></p>
@@ -271,12 +275,12 @@
 </div>
 <img alt="_images/usage.png" src="_images/usage.png"/>
 <p><code class="docutils literal notranslate"><span class="pre">gslides</span></code> also supports basic templating functionality. See this <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/notebooks/usage.ipynb">notebook</a> for an example.</p>
-</div>
-<div class="section" id="advanced-usage">
+</section>
+<section id="advanced-usage">
 <h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline">¶</a></h2>
 <p>Find this <a class="reference external" href="https://github.com/michael-gracie/gslides/blob/main/notebooks/advanced_usage.ipynb">Jupyter notebook</a> detailing advanced usage of <code class="docutils literal notranslate"><span class="pre">gslides</span></code>.</p>
-</div>
-<div class="section" id="developer-instructions">
+</section>
+<section id="developer-instructions">
 <h2>Developer Instructions<a class="headerlink" href="#developer-instructions" title="Permalink to this headline">¶</a></h2>
 <p>To install the package with development dependencies run the command</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -e .<span class="o">[</span>dev<span class="o">]</span>
@@ -333,18 +337,19 @@
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
+</section>
+</section>
+<section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
+</section>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -361,14 +366,10 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2021, Michael Gracie
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="_sources/index.rst.txt"
+              Copyright &#169; 2021, Michael Gracie |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="_sources/index.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -410,6 +411,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
+    <script src="_static/scripts/furo.js"></script>
     </body>
 </html>
